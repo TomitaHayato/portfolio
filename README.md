@@ -116,3 +116,7 @@
 ■ 画面遷移図
 ---
 https://www.figma.com/design/X6Mja2mWYDEabwjW1LuxUn/MorningRoutineApp%3A-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=6N34SJa583IqJrfQ-0
+
+■ ER図
+---
+<img src="https://i.gyazo.com/c18b4a710afc088a1f6d19ec51e993a9.png">
