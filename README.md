@@ -119,4 +119,4 @@ https://www.figma.com/design/X6Mja2mWYDEabwjW1LuxUn/MorningRoutineApp%3A-%E7%94%
 
 ■ ER図
 ---
-<img src="https://i.gyazo.com/e53f8dc6d4e3613ce67afab2f10bafe6.png">
+<img src="https://i.gyazo.com/1ade12783ddf551cfd3868c67b538437.png">
