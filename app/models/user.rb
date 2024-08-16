@@ -9,4 +9,9 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   enum role: { admin: 0, general: 1 }
+
+  def initialize_user
+    role = "general"
+    complete_routines_count = 0
+  end
 end
