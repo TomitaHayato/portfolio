@@ -14,7 +14,7 @@
   <p class="my-5 text-center">
     ルーティン達成日数： <span class="text-xl"><%= current_user.complete_routines_count %></span>
   </p>
-  <%= link_to "プロフィールを編集", "#", class:"btn btn-accent flex w-1/4 mx-auto my-5" %>
+  <%= link_to "プロフィールを編集", edit_user_path(current_user), class:"btn btn-accent flex w-1/4 mx-auto my-5" %>
 </div>
 
 <div class="w-1/2 mx-auto">
