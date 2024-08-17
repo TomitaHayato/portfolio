@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "top_pages#index"
   resources :users, only: %i[ new create ]
+  resources :user_sessions, only: %i[ new create ]
 end
