@@ -9,7 +9,7 @@
 
     <div class="flex items-center ">
       <%= link_to "ログアウト", logout_path, class:"mx-2 btn btn-outline text-gray-500", data: { turbo_method: :delete } %>
-      <%= link_to "#" do %>
+      <%= link_to user_path(current_user) do %>
         <%= image_tag "user_icon.jpg", size:"50x50", class:"items-center mx-2" %>
       <% end %>
       <div class="dropdown dropdown-end mx-2">
