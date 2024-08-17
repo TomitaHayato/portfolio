@@ -1,2 +1,6 @@
-<h1>UserSessions#new</h1>
-<p>Find me in app/views/user_sessions/new.html.erb</p>
+<div class="text-center">
+  <h1 class="text-3xl mt-5 mb-15">ユーザーログイン</h1>
+  <%= render "form" %>
+  <%= link_to "キャンセル", root_path, class: "btn btn-outline btn-default mx-auto mb-5" %> <br>
+  <%= link_to "新規登録ページへ", new_user_path, class: "link link-info mx-auto" %>
+</div>
