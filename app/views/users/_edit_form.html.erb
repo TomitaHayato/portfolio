@@ -1,0 +1,13 @@
+<%= form_with model: user, class:"text-center", data: { turbo: false } do |f| %>
+  <div class="my-8">
+    <%= f.label :name, "ユーザー名" %>
+    <%= f.text_field :name, class:"input input-bordered", placeholder: "ユーザー名", value: user.name %>
+  </div>
+
+  <div class=" my-8 ">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, class:"input input-bordered", placeholder: "メールアドレス", value: user.email %>
+  </div>
+
+  <%= f.submit "更新", class:"btn btn-outline btn-accent mb-5 w-1/6" %>
+<% end %>
