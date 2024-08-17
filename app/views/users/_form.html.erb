@@ -1,0 +1,27 @@
+<%= form_with model:user, class:"text-center", data: { turbo: false } do |f| %>
+  <div class="mx-auto my-8">
+    <%= f.label :name, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
+      <%= f.text_field :name, class:"grow", placeholder: "ユーザー名" %>
+    <% end %>
+  </div>
+
+  <div class="mx-auto my-8">
+    <%= f.label :email, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
+      <%= f.email_field :email, class:"grow", placeholder: "メールアドレス" %>
+    <% end %>
+  </div>
+
+  <div class="mx-auto my-8">
+    <%= f.label :password, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
+      <%= f.password_field :password, class:"grow", placeholder: "パスワード" %>
+    <% end %>
+  </div>
+
+  <div class="mx-auto my-8">
+    <%= f.label :password_confirmation, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
+      <%= f.password_field :password_confirmation, class:"grow", placeholder: "パスワード確認" %>
+    <% end %>
+  </div>
+
+  <%= f.submit "登録", class:"btn btn-outline btn-accent mb-5 w-1/3" %>
+<% end %>
