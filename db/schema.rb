@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_16_121658) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_17_154342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "routines", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title", null: false
+    t.text "description"
+    t.time "start_time"
+    t.boolean "is_active", default: false
+    t.boolean "is_posted", default: false
+    t.integer "completed_count"
+    t.integer "copied_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_routines_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -26,4 +40,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_121658) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "routines", "users"
 end
