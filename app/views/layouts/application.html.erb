@@ -12,6 +12,7 @@
 
   <body>
     <%= render "shared/before_login_header" %>
+    <%= render "shared/flash" unless flash.empty? %>
     <%= yield %>
   </body>
 </html>

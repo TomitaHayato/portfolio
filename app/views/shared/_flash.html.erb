@@ -1,0 +1,3 @@
+<%= flash.each do |message_type, message| %>
+  <div class="<%= flash_type_class(message_type) %> items-center text-white px-4 w-full h-51"><%= message %></div>
+<% end %>
