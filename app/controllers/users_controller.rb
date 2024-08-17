@@ -5,10 +5,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_new_params)
-    @user = @user.initialize_user
+    @user.role = "general"
+    @user.complete_routines_count = 0
+
     if @user.save
       flash[:notice] = "ユーザーを新しく追加しました"
-      redirect_to login_path
+      redirect_to root_path
     else
       flash.now[:alert] = "ユーザーの作成に失敗しました"
       render :new
