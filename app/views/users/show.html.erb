@@ -1,7 +1,8 @@
 
 <h1 class="text-center my-10 items-center text-3xl">プロフィール</h1>
 
-<div class="w-1/2 mx-auto mt-20 border border-sky-300">
+<div class="w-1/2 mx-auto mt-10 border border-sky-300">
+  <%= image_tag "user_icon.jpg", size:"200x200", class:"items-center mx-auto my-5" %>
   <p class="my-5 text-center">
     ユーザー名：  <span class="text-xl"><%= current_user.name %></span>
   </p>
