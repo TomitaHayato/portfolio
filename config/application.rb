@@ -15,6 +15,11 @@ module App
       g.skip_routes true
       g.test_framework false
     end
+
+    #97 タイムゾーンを設定する
+    config.time_zone = "Tokyo"
+    config.active_record.default_timezone = :local
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
