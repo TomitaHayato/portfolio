@@ -1,0 +1,8 @@
+<div class="mt-5">
+  <%= link_to "ルーティンを作成する", new_routine_path, class:"btn btn-outline btn-success btn-md right-10 absolute " %>
+  <% if @routines.empty? %>
+    <p class="text-center">ルーティンを作成しましょう！！</p>
+  <% else %>
+    <%= render @routines %>
+  <% end %>
+</div>
