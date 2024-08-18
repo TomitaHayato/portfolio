@@ -1,2 +1,8 @@
-<h1>Routines#new</h1>
-<p>Find me in app/views/routines/new.html.erb</p>
+<h1 class="text-3xl mt-5 mb-15 text-center">ルーティン新規作成</h1>
+
+
+<div class="text-center">
+  <%= render "form", routine: @routine %>
+  <%= link_to "キャンセル", root_path, class: "btn btn-outline btn-default mx-auto mb-5" %> <br>
+  <%= link_to "ルーティン一覧ページへ", "#", class: "link link-info mx-auto" %>
+</div>
