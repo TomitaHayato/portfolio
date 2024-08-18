@@ -1,44 +1,43 @@
-<div class="border py-3 w-4/5">
+<div class="border border-amber-300 p-3 w-1/2 my-5 mx-auto bg-sky-100 bg-opacity-50">
 
-  <div class="flex justify-between items-center mb-5">
-    <h1 class="text-2xl"><%= routine.title %></h1>
-    <div class="gap-4 flex">
-      <%= link_to "詳細", "#", class: "btn btn-outline btn-info btn-sm" %>
-      <%= link_to "削除", "#", class: "btn btn-outline btn-default btn-sm" %>
+  <div class="flex justify-between items-center mb-5 mx-3">
+    <h1 class="text-3xl border-b border-cyan-300"><%= routine.title %></h1>
+    <div class="flex">
+      <%= link_to "詳細", "#", class: "btn btn-outline btn-info btn-md mx-3" %>
+      <%= link_to "削除", "#", class: "btn btn-outline btn-error btn-md" %>
     </div>
   </div>
 
-  <div class="mb-5">
+  <div class="mb-5 bg-white p-5">
     <p><%= routine.description %></p>
   </div>
   
-  <div class="flex gap-x-5 mb-5 items-center">
-    <p>"開始時間: #{<%= routine.start_time %>}"</p>
-    <p>"目安達成時間:"</p>
-    <p>"達成回数： #{<%= routine.completed_count %>}"</p>
+  <div class="mb-5 items-center">
+    <p>開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+    <p>目安達成時間:</p>
+    <p>達成回数： <%= routine.completed_count %></p>
   </div>
 
-  <div class="flex justify-between">
-    <details class="collapse bg-base-200">
-      <summary class="collapse-title text-xl font-medium">タスク一覧</summary>
-      <div class="collapse-content">
-        <p>タスク情報を表示</p>
-      </div>
-    </details>
-
-    <div class="flex gap-4">
+  <div class="flex justify-end mb-5">
+    <div class="flex">
       <% if routine.is_active? %>
-        <%= link_to "投稿済み", "#", class: "btn btn-outline btn-default btn-sm" %>
+        <%= link_to "投稿済み", "#", class: "btn btn-outline btn-default btn-md mx-3" %>
       <% else %>
-        <%= link_to "投稿する", "#", class: "btn btn-outline btn-info btn-sm" %>
+        <%= link_to "投稿する", "#", class: "btn btn-outline btn-info btn-md mx-3" %>
       <% end %>
 
       <% if routine.is_active? %>
-        <%= link_to "実践中", "#", class: "btn btn-outline btn-default btn-sm" %>
+        <%= link_to "実践中", "#", class: "btn btn-outline btn-default btn-md" %>
       <% else %>
-        <%= link_to "実践する", "#", class: "btn btn-outline btn-primary btn-sm" %>
+        <%= link_to "実践する", "#", class: "btn btn-outline btn-accent btn-md" %>
       <% end %>
     </div>
   </div>
+  <details class="collapse bg-white">
+    <summary class="collapse-title font-medium">タスク一覧</summary>
+    <div class="collapse-content">
+      <p>タスク情報を表示</p>
+    </div>
+  </details>
 
 </div>
