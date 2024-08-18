@@ -1,4 +1,9 @@
 class RoutinesController < ApplicationController
+
+  def index
+    @routines = current_user.routines.order(created_at: :desc)
+  end
+
   def new
     @routine = Routine.new
   end
