@@ -13,7 +13,7 @@ class RoutinesController < ApplicationController
     end
   end
 
-  provate
+  private
 
   def routine_params
     params.require(:routine).permit(:title, :description, :start_time, :completed_count, :copied_count)
