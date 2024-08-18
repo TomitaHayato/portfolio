@@ -1,4 +1,4 @@
-<%= form_with model: routine, class:"text-center", data: { turbo: false } do |f| %>
+<%= form_with model: routine, class:"text-center" do |f| %>
   <div class="mx-auto my-8">
     <%= f.label :title, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
       <%= f.text_field :title, class:"grow", placeholder: "タイトルを入力してください" %>
@@ -13,7 +13,7 @@
 
   <div class="mx-auto my-8">
     <%= f.label :start_time, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
-      <%= f.time_field :start_time, class:"grow", value: "06:30", min: "00:00", max: "23:59" %>
+      <%= f.time_field :start_time, class:"grow", placeholder: "06:30", min: "00:00", max: "23:59" %>
     <% end %>
   </div>
   <%= f.hidden_field :completed_count, value: "0" %>

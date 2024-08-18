@@ -1,4 +1,4 @@
-<%= form_with model: user, class:"text-center", data: { turbo: false } do |f| %>
+<%= form_with model: user, class:"text-center" do |f| %>
   <div class="my-8">
     <%= f.label :name, "ユーザー名" %>
     <%= f.text_field :name, class:"input input-bordered", placeholder: "ユーザー名", value: user.name %>
