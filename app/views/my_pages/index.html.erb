@@ -7,5 +7,13 @@
 </div>
 
 <div class="my-5">
-  <%= render "routine", routine: @routine %>
+  <% if @routine %>
+    <%= render "routine", routine: @routine %>
+  <% else %>
+    <div class="text-center items-center">
+      <%= link_to routines_path, class:"items-center btn bg-yellow-400" do %>
+        <p class="text-xl">ルーティンを実践中にしましょう！！</p>
+      <% end %>
+    </div>
+  <% end %>
 </div>
