@@ -4,7 +4,7 @@
     <h1 class="text-3xl border-b border-cyan-300"><%= routine.title %></h1>
     <div class="flex">
       <%= link_to "編集", edit_routine_path(routine), class: "btn btn-outline btn-success btn-md mr-3" %>
-      <%= link_to "詳細", "#", class: "btn btn-outline btn-info btn-md mr-3" %>
+      <%= link_to "詳細", routine_path(routine), class: "btn btn-outline btn-info btn-md mr-3" %>
       <%= link_to "削除", routine_path(routine), data: { turbo_method: :delete }, class: "btn btn-outline btn-error btn-md" %>
     </div>
   </div>
