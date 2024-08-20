@@ -1,5 +1,5 @@
 class RoutinesController < ApplicationController
-  before_action :set_routine, only: %i[ edit update ]
+  before_action :set_routine, only: %i[ edit update destroy ]
 
   def index
     @routines = current_user.routines.order(created_at: :desc)
@@ -28,6 +28,12 @@ class RoutinesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @routine.destroy!
+    flash[:alert] = "#{@routine.title}を削除しました"
+    redirect_to routines_path, status: :see_other
   end
 
   private
