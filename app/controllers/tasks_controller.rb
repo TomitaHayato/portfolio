@@ -3,10 +3,10 @@ class TasksController < ApplicationController
 
   def create
     @routine = current_user.routines.find(params[:routine_id])
-    @task = routine.tasks.new(task_params)
+    @task = @routine.tasks.new(task_params)
     if @task.save
       flash[:notice] = "タスクを追加しました"
-      redirect_to routine_path(routine)
+      redirect_to routine_path(@routine)
     else
       @tasks = routine.tasks.order(created_at: :desc)
       render template: "routines/show", status: :unprocessable_entity
@@ -20,9 +20,9 @@ class TasksController < ApplicationController
   end
 
   def params_time_to_second
-    hour = params[:task][:hour] * 3600
-    minute = params[:task][:minute] * 60
-    second = params[:task][:second]
+    hour = params[:task][:hour].to_i * 3600
+    minute = params[:task][:minute].to_i * 60
+    second = params[:task][:second].to_i
     params[:task][:estimated_time_in_second] = hour + minute + second
   end
 end
