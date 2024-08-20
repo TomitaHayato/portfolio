@@ -5,9 +5,10 @@ ruby "3.3.4"
 
 #9 tailswindを導入
 gem "cssbundling-rails"
-
 #16 ユーザー登録機能
 gem "sorcery"
+#47 タスクの並べ替え機能
+gem "acts_as_list"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
