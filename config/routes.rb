@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-  resources :routines
+  resources :routines do
+    resources :tasks, only: %i[ create ], shallow: true
+  end
+
   namespace :routines do
     resources :actives, only: %i[ update ], param: :routine_id
   end
