@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
 
   resources :routines, only: %i[ index new create edit update destroy ]
+  namespace :routines do
+    resources :actives, only: %i[ update ], param: :routine_id
+  end
 end
