@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-  resources :routines, only: %i[ index new create edit update destroy ]
+  resources :routines
   namespace :routines do
     resources :actives, only: %i[ update ], param: :routine_id
   end

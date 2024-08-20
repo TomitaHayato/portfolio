@@ -1,5 +1,5 @@
 class RoutinesController < ApplicationController
-  before_action :set_routine, only: %i[ edit update destroy ]
+  before_action :set_routine, only: %i[ show edit update destroy ]
 
   def index
     @routines = current_user.routines.order(created_at: :desc)
@@ -17,6 +17,9 @@ class RoutinesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
   end
 
   def edit; end
