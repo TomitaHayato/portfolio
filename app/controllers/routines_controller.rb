@@ -1,4 +1,5 @@
 class RoutinesController < ApplicationController
+  before_action :set_routine, only: %i[ edit update ]
 
   def index
     @routines = current_user.routines.order(created_at: :desc)
@@ -18,9 +19,24 @@ class RoutinesController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @routine.update(routine_params)
+      flash[:notice] = "更新しました"
+      redirect_to routines_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def routine_params
     params.require(:routine).permit(:title, :description, :start_time, :completed_count, :copied_count)
+  end
+
+  def set_routine
+    @routine = current_user.routines.find(params[:id])
   end
 end
