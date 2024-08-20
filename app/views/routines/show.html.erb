@@ -20,7 +20,7 @@
 
   
   <div class="text-center p-5 bg-gray-100">
-    <p class="mb-5">タスク情報を表示</p>
+    <%= render partial: "task", collection: @tasks %>
     <button class="btn bg-green-100 w-full text-center" onclick="task_form.showModal()">タスクを追加</button>
     <dialog id="task_form" class="modal">
       <div class="modal-box">

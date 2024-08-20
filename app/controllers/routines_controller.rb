@@ -21,6 +21,7 @@ class RoutinesController < ApplicationController
 
   def show
     @task = Task.new
+    @tasks = @routine.tasks
   end
 
   def edit; end
