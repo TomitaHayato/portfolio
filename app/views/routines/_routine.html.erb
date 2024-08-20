@@ -21,16 +21,16 @@
 
   <div class="flex justify-end mb-5">
     <div class="flex">
-      <% if routine.is_active? %>
+      <% if routine.is_posted? %>
         <%= link_to "投稿済み", "#", class: "btn btn-outline btn-default btn-md mx-3" %>
       <% else %>
         <%= link_to "投稿する", "#", class: "btn btn-outline btn-info btn-md mx-3" %>
       <% end %>
 
       <% if routine.is_active? %>
-        <%= link_to "実践中", "#", class: "btn btn-outline btn-default btn-md" %>
+        <%= link_to "実践中", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn btn-outline btn-default btn-md" %>
       <% else %>
-        <%= link_to "実践する", "#", class: "btn btn-outline btn-accent btn-md" %>
+        <%= link_to "実践する", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn btn-outline btn-accent btn-md" %>
       <% end %>
     </div>
   </div>
