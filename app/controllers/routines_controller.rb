@@ -32,6 +32,7 @@ class RoutinesController < ApplicationController
 
   def destroy
     @routine.destroy!
+    flash[:alert] = "#{@routine.title}を削除しました"
     redirect_to routines_path, status: :see_other
   end
 
