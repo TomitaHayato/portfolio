@@ -1,20 +1,21 @@
 class TasksController < ApplicationController
-  before_action :set_routine
   before_action :params_time_to_second
   
   def create
+    @routine = current_user.routines.find(params[:routine_id])
     @task = @routine.tasks.new(task_params)
     if @task.save
       flash[:notice] = "タスクを追加しました"
       redirect_to routine_path(@routine)
     else
-      @tasks = routine.tasks.order(created_at: :desc)
+      @tasks = @routine.tasks.order(created_at: :desc)
       render template: "routines/show", status: :unprocessable_entity
     end
   end
 
   def update
     @task = Task.find(params[:id])
+    @routine = @task.routine
     if @task.update(task_params)
       flash[:notice] = "taskを更新しました"
       redirect_to routine_path(@routine)
@@ -26,10 +27,6 @@ class TasksController < ApplicationController
 
   private
 
-  def set_routine
-    @routine = current_user.routines.find(params[:routine_id])
-  end
-
   def task_params
     params.require(:task).permit(:title, :estimated_time_in_second)
   end
@@ -39,5 +36,9 @@ class TasksController < ApplicationController
     minute = params[:task][:minute].to_i * 60
     second = params[:task][:second].to_i
     params[:task][:estimated_time_in_second] = hour + minute + second
+
+    params[:task].delete(:hour)
+    params[:task].delete(:minute)
+    params[:task].delete(:second)
   end
 end

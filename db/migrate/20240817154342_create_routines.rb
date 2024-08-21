@@ -4,11 +4,11 @@ class CreateRoutines < ActiveRecord::Migration[7.0]
       t.references :user, foreign_key: true
       t.string :title, null:false
       t.text :description
-      t.time :start_time
+      t.time :start_time, default: "07:00:00"
       t.boolean :is_active, default:false
       t.boolean :is_posted, default:false
-      t.integer :completed_count
-      t.integer :copied_count
+      t.integer :completed_count, default: 0
+      t.integer :copied_count, default: 0
 
       t.timestamps
     end
