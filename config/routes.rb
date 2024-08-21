@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
 
   resources :routines do
-    resources :tasks, only: %i[ create ], shallow: true
+    resources :tasks, only: %i[ create update ]
   end
 
   namespace :routines do
