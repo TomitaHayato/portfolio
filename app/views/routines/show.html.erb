@@ -17,12 +17,24 @@
     <p class="mr-5">達成回数： <%= @routine.completed_count %></p>
   </div>
 
-  <details class="collapse bg-white my-5">
-    <summary class="collapse-title font-medium">タスク一覧</summary>
-    <div class="collapse-content">
-      <p>タスク情報を表示</p>
-    </div>
-  </details>
+
+  
+  <div class="text-center p-5 bg-gray-100">
+    <%= render partial: "task", collection: @tasks %>
+    <button class="btn bg-green-100 w-full text-center" onclick="task_form.showModal()">タスクを追加</button>
+    <dialog id="task_form" class="modal">
+      <div class="modal-box">
+        <h1 class="text-center text-xl mb-10">タスク新規作成</h1>
+        <%= render "task_form", task: @task, routine: @routine %>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">閉じる</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+  </div>
+
 
 </div>
 
