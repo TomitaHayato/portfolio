@@ -21,6 +21,7 @@ class TasksController < ApplicationController
     else
       @tasks = @routine.tasks.order(created_at: :desc)
       render template: "routines/show", status: :unprocessable_entity
+    end
   end
 
   private
