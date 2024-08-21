@@ -18,11 +18,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_20_091606) do
     t.bigint "user_id"
     t.string "title", null: false
     t.text "description"
-    t.time "start_time"
+    t.time "start_time", default: "2000-01-01 07:00:00"
     t.boolean "is_active", default: false
     t.boolean "is_posted", default: false
-    t.integer "completed_count"
-    t.integer "copied_count"
+    t.integer "completed_count", default: 0
+    t.integer "copied_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_routines_on_user_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_20_091606) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "title", limit: 50, null: false
-    t.integer "estimated_time_in_second", null: false
+    t.integer "estimated_time_in_second", default: 60, null: false
     t.bigint "routine_id"
     t.integer "position"
     t.datetime "created_at", null: false

@@ -7,6 +7,7 @@
       <%= link_to "削除", routine_path(@routine), data: { turbo_method: :delete }, class: "btn btn-outline btn-error btn-md" %>
     </div>
   </div>
+
   <div class="my-5 bg-white p-2">
     <p class="py-1">説明文：</p>
     <p><%= @routine.description %></p>
@@ -20,12 +21,12 @@
 
   
   <div class="text-center p-5 bg-gray-100">
-    <%= render partial: "task", collection: @tasks %>
+    <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine } %>
     <button class="btn bg-green-100 w-full text-center" onclick="task_form.showModal()">タスクを追加</button>
     <dialog id="task_form" class="modal">
       <div class="modal-box">
         <h1 class="text-center text-xl mb-10">タスク新規作成</h1>
-        <%= render "task_form", task: @task, routine: @routine %>
+        <%= render "routines/task_form", task: @task, routine: @routine %>
         <div class="modal-action">
           <form method="dialog">
             <button class="btn">閉じる</button>

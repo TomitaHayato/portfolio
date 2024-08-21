@@ -13,7 +13,7 @@
 
   <div class="mx-auto my-8">
     <%= f.label :start_time, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
-      <%= f.time_field :start_time, class:"grow", placeholder: "06:30", min: "00:00", max: "23:59" %>
+      <%= f.time_field :start_time, class:"grow", min: "00:00", max: "23:59" %>
     <% end %>
   </div>
 
