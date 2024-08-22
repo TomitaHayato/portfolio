@@ -1,2 +1,8 @@
-<h1>Routines::Posts#index</h1>
-<p>Find me in app/views/routines/posts/index.html.erb</p>
+<div class="mt-5">
+  <%= link_to "ルーティンを投稿する", routines_path, class:"btn btn-outline btn-success btn-md right-10 absolute " %>
+  <% if @routines.empty? %>
+    <p class="text-center">現在、投稿はありません</p>
+  <% else %>
+    <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine %>
+  <% end %>
+</div>

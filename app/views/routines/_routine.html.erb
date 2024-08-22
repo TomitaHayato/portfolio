@@ -13,10 +13,10 @@
     <p><%= routine.description %></p>
   </div>
   
-  <div class="mb-5 items-center">
-    <p>開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
-    <p>目安達成時間:</p>
-    <p>達成回数： <%= routine.completed_count %></p>
+  <div class="mb-5 items-center flex">
+    <p class="mr-5 p-2 bg-gray-100">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+    <p class="mr-5 p-2 bg-gray-100">目安達成時間:</p>
+    <p class="mr-5 p-2 bg-gray-100">達成回数： <%= routine.completed_count %></p>
   </div>
 
   <div class="flex justify-end mb-5">
@@ -37,7 +37,7 @@
   <details class="collapse bg-white">
     <summary class="collapse-title font-medium">タスク一覧</summary>
     <div class="collapse-content">
-      <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
+      <%= render partial: "routines/task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
     </div>
   </details>
 

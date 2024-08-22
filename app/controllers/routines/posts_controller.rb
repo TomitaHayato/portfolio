@@ -1,6 +1,6 @@
 class Routines::PostsController < ApplicationController
   def index
-    @routines = Routine.includes(:tasks).posted
+    @routines = Routine.includes(:tasks, :user).posted
   end
 
   def update
