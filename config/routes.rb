@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   namespace :routines do
     resources :actives, only: %i[ update ], param: :routine_id
   end
+
+  namespace :tasks do
+    resources :move_heighers, only: %i[ update ], param: :task_id
+    resources :move_lowers, only: %i[ update ], param: :task_id
+  end
 end

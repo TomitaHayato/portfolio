@@ -21,7 +21,7 @@ class RoutinesController < ApplicationController
 
   def show
     @task = Task.new
-    @tasks = @routine.tasks
+    @tasks = @routine.tasks.order(position: :asc)
   end
 
   def edit; end
