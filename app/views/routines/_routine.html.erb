@@ -37,7 +37,7 @@
   <details class="collapse bg-white">
     <summary class="collapse-title font-medium">タスク一覧</summary>
     <div class="collapse-content">
-      <%= render partial: "task", collection: routine.tasks, locals: { routine: routine } %>
+      <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
     </div>
   </details>
 
