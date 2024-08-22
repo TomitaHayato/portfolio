@@ -17,18 +17,22 @@
       <%= link_to "削除", "#", class: "btn btn-outline text-red-300 btn-sm" %>
     </div>
   </div>
-
-  <div class="flex">
-    <p class="mr-3">目安時間：</p>
-    <p class="mx-2">
-      <%= task.estimated_time[:hour] %> h
-    </p>
-    <p class="mx-2">
-      <%= task.estimated_time[:minute] %> m
-    </p>
-    <p class="mx-2">
-      <%= task.estimated_time[:second] %> s
-    </p>
+  <div class="flex justify-between">
+    <div class="flex">
+      <p class="mr-1.5">目安時間：</p>
+      <p class="mx-1.5">
+        <%= task.estimated_time[:hour] %> h
+      </p>
+      <p class="mx-1.5">
+        <%= task.estimated_time[:minute] %> m
+      </p>
+      <p class="mx-1.5">
+        <%= task.estimated_time[:second] %> s
+      </p>
+    </div>
+    <span>
+      <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class:"btn btn-outline text-blue-200 btn-sm mr-3" %>
+      <%= link_to "↓", tasks_move_lower_path(task), data: { turbo_method: :patch }, class:"btn btn-outline text-blue-200 btn-sm mr-3" %>
+    </span>
   </div>
-
 </div>
