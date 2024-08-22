@@ -22,7 +22,7 @@
   <details class="collapse bg-white">
     <summary class="collapse-title font-medium">タスク一覧</summary>
     <div class="collapse-content">
-      <%= render partial: "task", collection: routine.tasks %>
+      <%= render partial: "task", collection: routine.tasks, locals: { routine: routine } %>
     </div>
   </details>
 
