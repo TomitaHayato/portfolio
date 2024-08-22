@@ -4,4 +4,6 @@ class Routine < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 500 }
+
+  scope :posted, -> { where(is_posted: true) }
 end

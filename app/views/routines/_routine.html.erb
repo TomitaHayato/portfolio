@@ -22,9 +22,9 @@
   <div class="flex justify-end mb-5">
     <div class="flex">
       <% if routine.is_posted? %>
-        <%= link_to "投稿済み", "#", class: "btn btn-outline btn-default btn-md mx-3" %>
+        <%= link_to "投稿済み", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn btn-outline btn-default btn-md mx-3" %>
       <% else %>
-        <%= link_to "投稿する", "#", class: "btn btn-outline btn-info btn-md mx-3" %>
+        <%= link_to "投稿する", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn btn-outline btn-info btn-md mx-3" %>
       <% end %>
 
       <% if routine.is_active? %>
