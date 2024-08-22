@@ -13,7 +13,7 @@ class RoutinesController < ApplicationController
     @routine = current_user.routines.new(routine_params)
     if @routine.save
       flash[:notice] = "新しくルーティンを作成しました"
-      redirect_to root_path
+      redirect_to routines_path
     else
       render :new, status: :unprocessable_entity
     end
