@@ -14,7 +14,7 @@
           </div>
         </div>
       </dialog>
-      <%= link_to "削除", "#", class: "btn btn-outline text-red-300 btn-sm" %>
+      <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn btn-outline text-red-300 btn-sm" %>
     </div>
   </div>
   <div class="flex justify-between">
