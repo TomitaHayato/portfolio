@@ -16,7 +16,7 @@
 
   <div class="text-center mb-5">
     <div class="text-center">
-        <%= link_to "スタート", "#", class: "btn bg-green-400 btn-lg mx-3" %>
+        <%= link_to "スタート", routine_plays_path(routine), data: { turbo_method: :post }, class: "btn bg-green-400 btn-lg mx-3" %>
     </div>
   </div>
   <details class="collapse bg-white">
