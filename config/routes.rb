@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :routines do
     resources :tasks, only: %i[ create update destroy ], shallow: true
+    resources :copies, only: %i[ create ], module: :routines
   end
 
   namespace :routines, path: 'routine' do
