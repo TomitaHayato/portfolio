@@ -12,11 +12,13 @@ Rails.application.routes.draw do
   resources :routines do
     resources :tasks, only: %i[ create update destroy ], shallow: true
     resources :copies, only: %i[ create ], module: :routines
+    resources :plays, only: %i[ create update show ], param: :routine_id, module: :routines, shallow: true
   end
 
   namespace :routines, path: 'routine' do
     resources :actives, only: %i[ update ], param: :routine_id
     resources :posts, only: %i[ index update ], param: :routine_id
+    
   end
 
   namespace :tasks do
