@@ -10,11 +10,11 @@
     <%= @task.title %>
   </h1>
 
-  <p class="text-2xl my-10 bg-white rounded-full w-1/2 mx-auto p-3">
-    <span class="text-3xl mr-3"><%= @task.estimated_time[:hour] %>h</span>
-    <span class="text-3xl mr-3"><%= @task.estimated_time[:minute] %>m</span>
-    <span class="text-3xl mr-3"><%= @task.estimated_time[:second] %>s</span>
-  </p>
+  <div class="text-2xl my-10 bg-white rounded-full w-1/2 mx-auto p-3 flex justify-center">
+    <p class="text-3xl mr-3"><span><%= @task.estimated_time[:hour] %></span>h</p>
+    <p class="text-3xl mr-3"><span><%= @task.estimated_time[:minute] %></span>m</p>
+    <p class="text-3xl mr-3"><span><%= @task.estimated_time[:second] %></span>s</p>
+  </div>
   
   <%= link_to "達成", play_path(@routine), data: { turbo_method: :patch }, class:"btn btn-lg bg-green-200 my-10 mx-3" %>
   <%= link_to "スキップ", play_path(@routine), data: { turbo_method: :patch }, class:"btn btn-lg bg-green-200 my-10 mx-3" %>
