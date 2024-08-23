@@ -6,4 +6,13 @@ class Routine < ApplicationRecord
   validates :description, length: { maximum: 500 }
 
   scope :posted, -> { where(is_posted: true) }
+
+  
+  def reset_status
+    self.is_active = false
+    self.is_posted = false
+    self.copied_count = 0
+    self.completed_count = 0
+    return self
+  end
 end

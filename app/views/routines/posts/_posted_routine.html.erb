@@ -3,7 +3,7 @@
   <div class="flex justify-between items-center mb-5 mx-3">
     <h1 class="text-3xl border-b border-cyan-300"><%= routine.title %></h1>
     <div class="flex">
-      <%= link_to "コピー", "#", class: "btn btn-outline btn-success btn-md mr-3" %>
+      <%= link_to "コピー", routine_copies_path(routine),data: { turbo_method: :post }, class: "btn btn-outline btn-success btn-md mr-3" %>
       <%= link_to "お気に入り", "#", class: "btn btn-outline btn-info btn-md mr-3" %>
       <%= link_to "いいね", "#", class: "btn btn-outline btn-error btn-md" %>
     </div>
