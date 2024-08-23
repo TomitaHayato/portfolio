@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   namespace :routines, path: 'routine' do
     resources :actives, only: %i[ update ], param: :routine_id
     resources :posts, only: %i[ index update ], param: :routine_id
-    
+    resources :finishes, only: %i[ index ]
   end
 
   namespace :tasks do

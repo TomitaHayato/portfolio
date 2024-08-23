@@ -18,7 +18,7 @@ class Routines::PlaysController < ApplicationController
     if session[:playing_task_num] >= @tasks.count
       @routine.completed_count += 1
       @routine.save!
-      redirect_to root_path, alert: "本当は違うページに遷移するンダゼェぇぇぇぇぇl"
+      redirect_to routines_finishes_path
     else
       redirect_to play_path(@routine)
     end
