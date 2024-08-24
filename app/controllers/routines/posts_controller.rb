@@ -1,6 +1,6 @@
 class Routines::PostsController < ApplicationController
   def index
-    @routines = Routine.includes(:tasks, :user).posted
+    @routines = Routine.includes(:tasks, :user).posted.order(posted_at: :desc)
   end
 
   def update
@@ -9,7 +9,7 @@ class Routines::PostsController < ApplicationController
       routine.update!(is_posted: false)
       redirect_to routines_path, notice: "ルーティンを非公開にしました"
     else
-      routine.update!(is_posted: true)
+      routine.update!(is_posted: true, posted_at: Time.current)
       redirect_to routines_path, notice: "ルーティンを投稿しました"
     end
   end
