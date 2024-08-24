@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_20_091606) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_24_074112) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_20_091606) do
     t.integer "copied_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "posted_at"
     t.index ["user_id"], name: "index_routines_on_user_id"
   end
 
