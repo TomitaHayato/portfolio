@@ -2,7 +2,7 @@
 <html data-theme="light">
   <head>
     <title>App</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -17,7 +17,10 @@
       <%= render "shared/before_login_header" %>
     <% end %>
 
-    <%= render "shared/flash" unless flash.empty? %>
-    <%= yield %>
+    <div class="mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border mx-auto">
+      <%= render "shared/flash" unless flash.empty? %>
+      <%= yield %>
+    </div>
+
   </body>
 </html>

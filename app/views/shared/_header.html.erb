@@ -1,33 +1,36 @@
 <header>
-  <div class="p-3 flex justify-between items-center bg-sky-100">
-    <%= link_to root_path, class:"btn btn-outline bg-white text-center text-black" do %>
-      <%= image_tag "logo.jpg", size:"40x40" %>
-      <p>
-        Morning Routine Hub
+  <div class="fixed top-0 z-10 w-full h-12 sm:h-16 md:h-20 lg:h-24 p-3 flex justify-between items-center bg-gradient-to-t from-sky-50 to-sky-200">
+    <%= link_to root_path, class:"btn btn-sm sm:btn-md lg:btn-lg w-28 sm:w-36 md:w-44 lg:w-48 btn-outline bg-white bg-opacity-30 text-green-600 hover:bg-green-500" do %>
+      <p class="flex items-center">
+        <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8 md:h-10 mr-1 sm:mr-2 md:mr-3" %>
+        <span class="text-xs sm:text-sm md:text-base">Morning Forest</span>
       </p>
     <% end %>
 
     <div class="flex items-center ">
-      <%= link_to "ログアウト", logout_path, class:"mx-2 btn btn-outline text-gray-500", data: { turbo_method: :delete } %>
-      <%= link_to user_path(current_user) do %>
-        <%= image_tag "user_icon.jpg", size:"50x50", class:"items-center mx-2" %>
+      <%= link_to "ログアウト", logout_path, class:"hidden md:btn md:btn-outline md:bg-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:btn-lg lg:mx-5", data: { turbo_method: :delete } %>
+      <%= link_to user_path(current_user), class: "hover:opacity-50 hover:border" do %>
+        <%= image_tag "user_icon.jpg", class:"items-center mx-3 rounded-lg size-8 md:size-12 lg:size-14 lg:mx-5" %>
       <% end %>
-      <div class="dropdown dropdown-end mx-2">
+      <div class="dropdown dropdown-end mx-3 lg:mx-5">
         <div tabindex="0">
-          <%= image_tag "menu.jpg", class:"items-center", size:"50x50" %>
+          <%= image_tag "menu.jpg", class:"items-center rounded-lg size-8 md:size-10 lg:size-12" %>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-green-100 rounded-box z-[1] w-52 p-2 shadow my-2 text-black">
+        <ul tabindex="0" class="dropdown-content menu bg-green-100 rounded-box z-10 p-2 shadow my-2 text-black w-40 md:w-48 lg:w-52">
           <li>
-            <%= link_to "ルーティンを作成する", new_routine_path, class:"text-center p-3 mb-2" %>
+            <%= link_to "ルーティンを作成する", new_routine_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
           <li>
-            <%= link_to "投稿一覧を見る", routines_posts_path, class:"text-center p-3 mb-2" %>
+            <%= link_to "投稿一覧を見る", routines_posts_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
           <li>
-            <%= link_to "マイページへ", "#", class:"text-center p-3 mb-2" %>
+            <%= link_to "マイページへ", root_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
           <li>
-            <%= link_to "退会する", "#", class:"text-center p-3 mb-2" %>
+            <%= link_to "ログアウト", logout_path, class:"p-3 mb-2 text-xs sm:text-sm md:hidden" %>
+          </li>
+          <li>
+            <%= link_to "退会する", "#", class:"text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
         </ul>
       </div>
