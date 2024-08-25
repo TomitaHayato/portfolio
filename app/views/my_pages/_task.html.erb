@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center mb-5 mx-3">
     <h1 class="text-sm border-b border-cyan-300 font-semibold sm:text-base md:text-lg lg:text-xl"><%= task.title %></h1>
     <div class="">
-      <button class="btn bg-green-400 btn-sm text-xs sm:btn-md sm:text-sm md:text-base lg:btn-lg lg:text-lg" onclick="document.querySelector('#edit_task_form_in_mypage_<%= task.id %>').showModal()">編集</button>
+      <button class="btn bg-green-300 btn-md text-sm md:text-base lg:btn-lg lg:text-lg" onclick="document.querySelector('#edit_task_form_in_mypage_<%= task.id %>').showModal()">編集</button>
       <dialog id="edit_task_form_in_mypage_<%= task.id %>" class="modal mx-auto">
         <div class="modal-box">
           <h1 class="text-center text-lg font-semibold mb-5 sm:text-xl md:text-2xl lg:text-3xl md:mb-10">タスク編集</h1>
