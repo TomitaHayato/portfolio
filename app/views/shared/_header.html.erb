@@ -8,26 +8,26 @@
     <% end %>
 
     <div class="flex items-center ">
-      <%= link_to "ログアウト", logout_path, class:"hidden md:btn md:btn-outline md:bg-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:btn-lg", data: { turbo_method: :delete } %>
+      <%= link_to "ログアウト", logout_path, class:"hidden md:btn md:btn-outline md:bg-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:btn-lg lg:mx-5", data: { turbo_method: :delete } %>
       <%= link_to user_path(current_user), class: "hover:opacity-50 hover:border" do %>
-        <%= image_tag "user_icon.jpg", class:"items-center mx-3 rounded-lg size-8 md:size-10 lg:size-12" %>
+        <%= image_tag "user_icon.jpg", class:"items-center mx-3 rounded-lg size-8 md:size-10 lg:size-14 lg:mx-5" %>
       <% end %>
-      <div class="dropdown dropdown-end mx-3">
+      <div class="dropdown dropdown-end mx-3 lg:mx-5">
         <div tabindex="0">
           <%= image_tag "menu.jpg", class:"items-center rounded-lg size-8 md:size-10 lg:size-12" %>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-green-100 rounded-box z-10 w-40 p-2 shadow my-2 text-black">
+        <ul tabindex="0" class="dropdown-content menu bg-green-100 rounded-box z-10 p-2 shadow my-2 text-black w-40 md:w-48 lg:w-52">
           <li>
-            <%= link_to "ルーティンを作成する", new_routine_path, class:"p-3 mb-2 text-xs" %>
+            <%= link_to "ルーティンを作成する", new_routine_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
           <li>
-            <%= link_to "投稿一覧を見る", routines_posts_path, class:"p-3 mb-2 text-xs" %>
+            <%= link_to "投稿一覧を見る", routines_posts_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
           <li>
-            <%= link_to "マイページへ", root_path, class:"p-3 mb-2 text-xs" %>
+            <%= link_to "マイページへ", root_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
           <li>
-            <%= link_to "退会する", "#", class:"text-red-400 p-3 mb-2 text-xs" %>
+            <%= link_to "退会する", "#", class:"text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
         </ul>
       </div>
