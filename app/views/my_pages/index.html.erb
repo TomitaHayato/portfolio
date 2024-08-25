@@ -1,12 +1,12 @@
 <div>
-  <h1 class="text-center text-3xl py-5">おはようございます！</h1>
+  <h1 class="text-center text-xl py-5 sm:text-2xl md:text-3xl lg:text-4xl xl:test-5xl">おはようございます！</h1>
 </div>
 <div class="text-center mx-auto">
-  <%= link_to "ルーティンを作成する", new_routine_path, class:"btn btn-outline btn-success btn-md  mx-2" %>
-  <%= link_to "ルーティン一覧", routines_path, class:"btn btn-outline btn-success btn-md mx-2" %>
+  <%= link_to "ルーティン作成", new_routine_path, class:"btn bg-cyan-100 btn-sm mx-1 text-xs w-1/3 min-h-10" %>
+  <%= link_to "ルーティン一覧", routines_path, class:"btn bg-cyan-100 btn-sm mx-1 text-xs w-1/3 min-h-10" %>
 </div>
 
-<div class="my-5">
+<div class="my-3">
   <% if @routine %>
     <%= render "routine", routine: @routine %>
   <% else %>
