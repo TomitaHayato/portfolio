@@ -1,13 +1,9 @@
 <%= form_with url: login_path, class:"text-center" do |f| %>
   <div class="my-8">
-    <%= f.label :email, class: "mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
-      <%= f.email_field :email, class:"grow", placeholder: "メールアドレス" %>
-    <% end %>
+    <%= f.email_field :email, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "メールアドレス" %>
   </div>
   <div class="my-8">
-    <%= f.label :password, class:"mx-auto flex items-center gap-2 input input-bordered w-1/3" do %>
-      <%= f.password_field :password, class:"grow", placeholder: "パスワード" %>
-    <% end %>
+    <%= f.password_field :password, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "パスワード" %>
   </div>
-  <%= f.submit "ログイン", class:"btn btn-outline btn-accent mb-5 w-1/3" %>
+  <%= f.submit "ログイン", class:"btn bg-emerald-400 mb-5 btn-md min-w-28 sm:text-lg sm:btn-lg sm:min-w-40 lg:min-w-60" %>
 <% end %>
