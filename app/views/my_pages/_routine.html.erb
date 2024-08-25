@@ -1,26 +1,27 @@
-<div class="border border-amber-300 p-3 w-1/2 my-5 mx-auto bg-sky-100 bg-opacity-50">
+<div class="p-3 my-5 mx-auto bg-amber-300 bg-opacity-60 sm:w-11/12 md:w-9/12">
 
-  <div class="flex justify-between items-center mb-5 mx-3">
-    <h1 class="text-3xl border-b border-cyan-300"><%= routine.title %></h1>
-    <div class="flex">
-      <%= link_to "編集", edit_routine_path(routine), class: "btn btn-outline btn-success btn-md mr-3" %>
-      <%= link_to "詳細", "#", class: "btn btn-outline btn-info btn-md mr-3" %>
+  <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
+    <div class="flex justify-end sm:order-last sm:ml-auto">
+      <%= link_to "編集", edit_routine_path(routine), class: "btn bg-green-300 btn-sm text-xs mr-3 sm:btn-md sm:text-sm sm:mr-5 md:text-base lg:text-lg lg:btn-lg" %>
+      <%= link_to "詳細", routine_path(routine), class: "btn bg-blue-200 btn-sm text-xs sm:btn-md sm:text-sm md:text-base lg:text-lg lg:btn-lg" %>
     </div>
+    <h1 class="break-words text-lg font-semibold border-b border-orange-200 my-2 sm:text-2xl md:text-3xl lg:text-4xl"><%= routine.title %></h1>
+
   </div>
   
-  <div class="mb-5 items-center">
-    <p>開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
-    <p>目安達成時間:</p>
-    <p>達成回数： <%= routine.completed_count %></p>
+  <div class="mb-5 items-center text-xs flex justify-between sm:justify-start sm:text-base sm:gap-5 md:text-lg lg:gap-10">
+    <p class="border-b border-orange-200">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+    <p class="border-b border-orange-200">目安達成時間:</p>
+    <p class="border-b border-orange-200">達成回数： <%= routine.completed_count %></p>
   </div>
 
   <div class="text-center mb-5">
     <div class="text-center">
-        <%= link_to "スタート", routine_plays_path(routine), data: { turbo_method: :post }, class: "btn bg-green-400 btn-lg mx-3" %>
+        <%= link_to "スタート", routine_plays_path(routine), data: { turbo_method: :post }, class: "btn rounded-full bg-green-300 btn-md hover:bg-green-500 sm:btn-lg md:text-xl md:btn-wide lg:h-24 lg:text-2xl" %>
     </div>
   </div>
-  <details class="collapse bg-white">
-    <summary class="collapse-title font-medium">タスク一覧</summary>
+  <details class="collapse bg-emerald-100 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
+    <summary class="collapse-title">タスク一覧</summary>
     <div class="collapse-content">
       <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
     </div>

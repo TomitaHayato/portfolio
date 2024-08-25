@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="light">
+<html data-theme="light" class="h-full">
   <head>
     <title>App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -10,17 +10,20 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="h-full">
     <% if current_user %>
       <%= render "shared/header" %>
     <% else %>
       <%= render "shared/before_login_header" %>
     <% end %>
 
-    <div class="mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border mx-auto">
-      <%= render "shared/flash" unless flash.empty? %>
-      <%= yield %>
+    <div class="h-full bg-[url('/assets/forest_morning.jpg')] bg-cover">
+      <div class="mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-gray-100 bg-opacity-80">
+        <%= render "shared/flash" unless flash.empty? %>
+        <%= yield %>
+      </div>
     </div>
+
 
   </body>
 </html>
