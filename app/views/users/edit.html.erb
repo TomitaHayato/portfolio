@@ -1,6 +1,6 @@
-<h1 class="text-center my-10 items-center text-3xl">プロフィール</h1>
+<h1 class="text-center my-10 text-xl font-semibold sm:text-3xl lg:text-4xl">プロフィール編集</h1>
 
 <div class="text-center">
   <%= render "edit_form", user: @user %>
-  <%= link_to "キャンセル", user_path(current_user), class: "btn btn-outline btn-default mx-auto mb-5" %> <br>
+  <%= link_to "キャンセル", user_path(current_user), class: "btn bg-gray-300 mx-auto mb-5 min-w-20 sm:text-lg sm:btn-lg sm:max-w-36" %> <br>
 </div>
