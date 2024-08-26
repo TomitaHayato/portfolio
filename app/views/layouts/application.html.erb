@@ -10,14 +10,14 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="h-full">
+  <body>
     <% if current_user %>
       <%= render "shared/header" %>
     <% else %>
       <%= render "shared/before_login_header" %>
     <% end %>
 
-    <div class="h-full bg-[url('forest_morning.jpg')] bg-cover md:bg-[url('forest_big.jpg')]">
+    <div class="bg-[url('forest_morning.jpg')] bg-cover md:bg-[url('forest_big.jpg')]">
       <div class="mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-gray-100 bg-opacity-80">
         <%= render "shared/flash" unless flash.empty? %>
         <%= yield %>
