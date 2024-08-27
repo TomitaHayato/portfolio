@@ -1,4 +1,4 @@
-<div class="p-3 my-5 mx-auto bg-amber-300 bg-opacity-60 sm:w-11/12 md:w-9/12">
+<div class="p-3 my-5 mx-auto bg-gradient-to-tl from-amber-200/60 to-amber-100/60 sm:w-11/12 md:w-9/12">
 
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
     <div class="flex justify-end sm:order-last sm:ml-auto">
@@ -26,5 +26,4 @@
       <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
     </div>
   </details>
-
 </div>

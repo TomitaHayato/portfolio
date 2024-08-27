@@ -1,22 +1,22 @@
-<div class="my-5 text-center rounded p-3">
-  <h1 class="text-2xl"><%= @routine.title %></h1>
-</div>
-
 <div class="border border-amber-300 p-3 mb-5 mx-auto bg-gradient-to-tl from-sky-100/70 to-sky-50/70 w-11/12 sm:w-9/12">
   <div class="text-start">
     <%= link_to "x", root_path, class:"btn btn-sm btn-error m-5 sm:btn-md sm:min-w-12 sm:text-lg" %>
   </div>
-    <div class="bg-gradient-to-tl from-yellow-300 to-amber-50 rounded-full p-3 flex flex-col justify-center w-52 h-52 mb-5 mx-auto sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-72 lg:h-72">
-      <div class="text-2xl text-center mx-auto">
-        <p class="items-center"><%= @task.title %></p>
-      </div>
 
-      <div id="countdown-zone" class="text-2xl mx-auto p-3 flex justify-center gap-3">
-        <p><span id="hour"><%= @task.estimated_time[:hour] %></span>h</p>
-        <p><span id="minute"><%= @task.estimated_time[:minute] %></span>m</p>
-        <p><span id="second"><%= @task.estimated_time[:second] %></span>s</p>
-      </div>
+  <div class="my-5 text-center rounded p-3">
+    <h1 class="text-2xl lg:text-3xl"><%= @routine.title %></h1>
+  </div>
+
+  <div class="bg-gradient-to-tl from-yellow-300 to-amber-50 rounded-full p-3 flex flex-col justify-center w-52 h-52 mb-5 mx-auto sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-72 lg:h-72">
+    <div class="text-2xl text-center mx-auto lg:text-4xl">
+      <p class="items-center"><%= @task.title %></p>
     </div>
+    <div id="countdown-zone" class="text-2xl mx-auto p-3 flex justify-center gap-3 lg:text-4xl">
+      <p><span id="hour"><%= @task.estimated_time[:hour] %></span>h</p>
+      <p><span id="minute"><%= @task.estimated_time[:minute] %></span>m</p>
+      <p><span id="second"><%= @task.estimated_time[:second] %></span>s</p>
+    </div>
+  </div>
 
   <div class="flex justify-center gap-2 sm:gap-5 md:flex-col">
     <%= link_to "達成", play_path(@routine), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-pink-200 to-pink-50 btn-sm text-xs w-1/3 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base md:w-40 md:mx-auto lg:text-lg lg:btn-lg lg:w-44" %>
