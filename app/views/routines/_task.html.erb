@@ -1,6 +1,6 @@
 <div class="border border-green-300 p-1 mb-3">
   <div class="flex justify-between items-center mb-5">
-    <h1 class="text-sm border-b border-cyan-300 font-semibold sm:text-base md:text-lg lg:text-xl"><%= task.title %></h1>
+    <h1 class="text-xs border-b border-cyan-300 font-semibold sm:text-sm md:text-base lg:text-lg"><%= task.title %></h1>
     <div class="flex-none">
       <button class="btn bg-gradient-to-tl from-green-300 to-green-100 border border-green-400 btn-sm min-h-10 text-sm md:text-base" onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()">編集</button>
       <dialog id="edit_task_form_<%= task.id %>" class="modal">
