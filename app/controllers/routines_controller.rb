@@ -2,7 +2,7 @@ class RoutinesController < ApplicationController
   before_action :set_routine, only: %i[ show edit update destroy ]
 
   def index
-    @routines = current_user.routines.includes(:tasks).order(created_at: :desc)
+    @routines = current_user.routines.includes(:tasks).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def new

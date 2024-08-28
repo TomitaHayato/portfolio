@@ -1,6 +1,6 @@
 class Routines::PostsController < ApplicationController
   def index
-    @routines = Routine.includes(:tasks, :user).posted.order(posted_at: :desc)
+    @routines = Routine.includes(:tasks, :user).posted.order(posted_at: :desc).page(params[:page]).per(5)
   end
 
   def update
