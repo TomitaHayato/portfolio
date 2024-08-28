@@ -12,6 +12,7 @@
       <%= link_to user_path(current_user), class: "hover:opacity-50 hover:border" do %>
         <%= image_tag "user_icon.jpg", class:"items-center mx-3 rounded-lg size-8 md:size-12 lg:size-14 lg:mx-5" %>
       <% end %>
+      
       <div class="dropdown dropdown-end mx-3 lg:mx-5">
         <div tabindex="0">
           <%= image_tag "menu.jpg", class:"items-center rounded-lg size-8 md:size-10 lg:size-12" %>
@@ -30,7 +31,7 @@
             <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 text-xs sm:text-sm md:hidden" %>
           </li>
           <li>
-            <%= link_to "退会する", "#", class:"text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
+            <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
           </li>
         </ul>
       </div>
