@@ -17,7 +17,7 @@
       <%= render "shared/before_login_header" %>
     <% end %>
 
-    <div class="min-h-screen bg-repeat-y bg-[url('morning_phone.jpg')]  lg:bg-[url('morning_pc.jpg')]">
+    <div class="<%= bg_image_class %>">
       <div class="mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-gray-100/80 min-h-screen">
         <%= render "shared/flash" unless flash.empty? %>
         <%= yield %>

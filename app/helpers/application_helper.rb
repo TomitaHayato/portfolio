@@ -6,4 +6,8 @@ module ApplicationHelper
     else "bg-yellow-300"
     end
   end
+
+  def bg_image_class
+   current_user ? "min-h-screen bg-repeat-y bg-[url('morning_phone.jpg')]  lg:bg-[url('morning_pc.jpg')]" : ""
+  end 
 end
