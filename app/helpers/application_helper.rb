@@ -6,4 +6,12 @@ module ApplicationHelper
     else "bg-yellow-300"
     end
   end
+
+  def bg_image_class
+   current_user ? "min-h-screen bg-repeat-y bg-[url('morning_phone.jpg')]  lg:bg-[url('morning_pc.jpg')]" : ""
+  end
+
+  def shallow_bg_class
+    request.path == root_path ? "mt-12 sm:mt-16 md:mt-20 lg:mt-24" : "mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen"
+  end
 end

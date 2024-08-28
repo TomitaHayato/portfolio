@@ -1,8 +1,8 @@
 <div class="border border-green-300 p-1 mb-3">
   <div class="flex justify-between items-center mb-5">
-    <h1 class="text-sm border-b border-cyan-300 font-semibold sm:text-base md:text-lg lg:text-xl"><%= task.title %></h1>
-    <div>
-      <button class="btn bg-gradient-to-tl from-green-300 to-green-100 border border-green-400 btn-sm min-h-10 text-sm md:text-base" onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()">編集</button>
+    <h1 class="text-xs border-b border-cyan-300 font-semibold sm:text-sm md:text-base lg:text-lg"><%= task.title %></h1>
+    <div class="flex-none">
+      <button class="min-h-10 btn bg-gradient-to-tl from-green-300 to-green-100 text-sm btn-sm sm:btn-md md:text-base" onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()">編集</button>
       <dialog id="edit_task_form_<%= task.id %>" class="modal">
         <div class="modal-box">
           <h1 class="text-center text-xl mb-10">タスク編集</h1>
@@ -14,7 +14,7 @@
           </div>
         </div>
       </dialog>
-      <%= link_to "削除", task_path(task), data: { turbo_method: :delete, turbo_confirm: '削除しますか？' }, class: "btn bg-gradient-to-tl from-red-600 to-red-200 border border-green-400 btn-sm min-h-10 text-sm md:text-base" %>
+      <%= link_to "削除", task_path(task), data: { turbo_method: :delete, turbo_confirm: '削除しますか？' }, class: "min-h-10 btn bg-gradient-to-tl from-red-600 to-red-200 text-sm btn-sm sm:btn-md md:text-base" %>
     </div>
   </div>
   <div class="text-xs items-center sm:text-sm sm:flex sm:justify-between md:text-md lg:text-lg">
