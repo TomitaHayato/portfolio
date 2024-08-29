@@ -1,4 +1,5 @@
 <%= form_with model:user, class:"text-center" do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="mx-auto my-8">
     <%= f.text_field :name, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "ユーザー名" %>
   </div>
