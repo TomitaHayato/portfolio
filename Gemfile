@@ -9,6 +9,8 @@ gem "cssbundling-rails"
 gem "sorcery"
 #47 タスクの並べ替え機能
 gem "acts_as_list"
+# ページネーション
+gem "kaminari"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"

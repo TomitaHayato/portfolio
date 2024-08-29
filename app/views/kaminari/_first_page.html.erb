@@ -1,0 +1,11 @@
+<%# Link to the "First" page
+  - available local variables
+    url:           url to the first page
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
+<span class="first">
+  <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, remote: remote, class: "text-sm hover:font-medium text-gray-800 font-light p-1.5 mr-1 border border-gray-400 rounded shadow bg-gradient-to-tl from-green-500 to-green-200 sm:p-2 sm:mr-2 sm:text-base lg:mr-3 lg:p-3 lg:text-lg" %>
+</span>

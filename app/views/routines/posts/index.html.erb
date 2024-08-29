@@ -7,4 +7,5 @@
   <% else %>
     <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine %>
   <% end %>
+  <div class="mx-auto"><%= paginate @routines %></div>
 </div>
