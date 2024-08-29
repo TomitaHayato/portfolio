@@ -7,5 +7,5 @@
     remote:        data-remote
 -%>
 <span class="last">
-  <%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, remote: remote, class: "text-sm hover:p-3 text-gray-800 font-light p-2 mx-2 border border-gray-400 rounded shadow bg-gradient-to-tl from-blue-500 to-blue-200 sm:text-base lg:text-lg" %>
+  <%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, remote: remote, class: "text-sm hover:font-medium text-gray-800 font-light p-1.5 border border-gray-400 rounded shadow bg-gradient-to-tl from-blue-500 to-blue-200 sm:p-2 sm:text-base lg:p-3 lg:text-lg" %>
 </span>
