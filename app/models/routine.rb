@@ -15,15 +15,15 @@ class Routine < ApplicationRecord
     return self
   end
 
-  def all_task_estimated_time
-    total_estimated_time_in_second = 0
-    if self.tasks.present?
-      self.tasks.each do |task|
-        total_estimated_time_in_second += task.estimated_time_in_second
-      end
-    end
-    total_estimated_time_in_second
-    # second_to_time_string(total_estimated_time_in_second)
+
+
+
+  def total_estimated_time
+    result = second_to_time_string(all_task_estimated_time)
+    result[:hour] = "0#{result[:hour]}" if result[:hour] < 10
+    result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
+    result[:second] = "0#{result[:second]}" if result[:second] < 10
+    return result
   end
 
   private
@@ -35,5 +35,15 @@ class Routine < ApplicationRecord
     time_in_second -= minute * 60
     second = time_in_second
     { hour: hour, minute: minute, second: second }
+  end
+
+  def all_task_estimated_time
+    total_estimated_time_in_second = 0
+    if self.tasks.present?
+      self.tasks.each do |task|
+        total_estimated_time_in_second += task.estimated_time_in_second
+      end
+    end
+    total_estimated_time_in_second
   end
 end
