@@ -11,6 +11,8 @@ gem "sorcery"
 gem "acts_as_list"
 # ページネーション
 gem "kaminari"
+# 日本語化
+gem 'rails-i18n'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
