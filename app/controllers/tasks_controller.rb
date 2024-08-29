@@ -10,16 +10,18 @@ class TasksController < ApplicationController
       redirect_to routine_path(@routine)
     else
       @tasks = @routine.tasks.order(created_at: :desc)
+      flash.now[:alert] = "タスクを追加できませんでした"
       render template: "routines/show", status: :unprocessable_entity
     end
   end
 
   def update
     if @task.update(task_params)
-      flash[:notice] = "taskを更新しました"
+      flash[:notice] = "タスクを更新しました"
       redirect_to routine_path(@routine)
     else
       @tasks = @routine.tasks.order(created_at: :desc)
+      flash.now[:alert] = "タスクを更新できませんでした。"
       render template: "routines/show", status: :unprocessable_entity
     end
   end

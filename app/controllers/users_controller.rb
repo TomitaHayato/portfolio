@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       flash.now[:alert] = "ユーザーの作成に失敗しました"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,12 +25,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
     if @user.update(user_edit_params)
       flash[:notice] = "プロフィールを更新しました"
       redirect_to user_path(current_user)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
