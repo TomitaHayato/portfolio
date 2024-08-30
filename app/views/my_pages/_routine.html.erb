@@ -15,15 +15,24 @@
     <p class="border-b border-orange-200">達成数： <%= routine.completed_count %></p>
   </div>
 
-  <div class="text-center mb-5">
+  <div class="text-center mb-16">
     <div class="text-center">
-        <%= link_to "スタート", routine_plays_path(routine), data: { turbo_method: :post }, class: "btn rounded-full  bg-gradient-to-tl from-green-400 to-emerald-100 hover:bg-green-500 w-32 h-32 sm:w-36 sm:h-36 sm:text-xl md:h-40 md:w-40 md:text-xl lg:h-44 lg:w-44 lg:text-2xl" %>
+      <% if routine.tasks.empty? %>
+        <div class="p-3 mx-auto bg-green-50/60 w-11/12 rounded-lg sm:p-5 lg:w-9/12 lg:p-10">
+          <p class="mb-3 font-medium text-sm sm:text-base md:text-lg lg:text-xl">タスクを追加しましょう！</p>
+          <%= link_to "タスク追加画面へ", routine_path(routine), class: "btn rounded-lg bg-gradient-to-tl from-cyan-300 to-cyan-50 text-sm lg:text-base lg:btn-wide" %>
+        </div>
+
+      <% else %>
+        <%= link_to "スタート", routine_plays_path(routine), data: { turbo_method: :post }, class: "btn rounded-full mb-5 bg-gradient-to-tl from-green-400 to-emerald-100 hover:bg-green-500 w-32 h-32 sm:w-36 sm:h-36 sm:text-xl md:h-40 md:w-40 md:text-xl lg:h-44 lg:w-44 lg:text-2xl" %>
+        <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
+          <summary class="collapse-title">タスク一覧</summary>
+          <div class="collapse-content">
+            <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
+          </div>
+        </details>
+      <% end %>
     </div>
   </div>
-  <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
-    <summary class="collapse-title">タスク一覧</summary>
-    <div class="collapse-content">
-      <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
-    </div>
-  </details>
+
 </div>
