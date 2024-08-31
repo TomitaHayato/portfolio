@@ -1,16 +1,16 @@
 class Routines::PlaysController < ApplicationController
-  before_action :block_if_no_session, only: %i[ show update ]
+  before_action :block_if_no_session, only: %i[show update]
   before_action :set_routine
-  before_action :arrange_tasks_by_position, only: %i[ show update ]
+  before_action :arrange_tasks_by_position, only: %i[show update]
   skip_before_action :playing_task_sesison_reset
+
+  def show
+    @task = @tasks[session[:playing_task_num]]
+  end
 
   def create
     session[:playing_task_num] = 0
     redirect_to play_path(@routine)
-  end
-
-  def show
-    @task = @tasks[ session[:playing_task_num] ]
   end
 
   def update
@@ -36,6 +36,6 @@ class Routines::PlaysController < ApplicationController
 
   # createアクションを介さないアクセスを拒否
   def block_if_no_session
-    redirect_to root_path, alert: "ページに遷移できませんでした" if session[:playing_task_num].nil?
+    redirect_to root_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
   end
 end

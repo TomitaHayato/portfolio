@@ -10,7 +10,7 @@ class Task < ApplicationRecord
     result[:hour] = "0#{result[:hour]}" if result[:hour] < 10
     result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
     result[:second] = "0#{result[:second]}" if result[:second] < 10
-    return result
+    result
   end
 
   private
@@ -21,6 +21,6 @@ class Task < ApplicationRecord
     minute = time_in_second / 60
     time_in_second -= minute * 60
     second = time_in_second
-    { hour: hour, minute: minute, second: second }
+    { hour:, minute:, second: }
   end
 end
