@@ -9,10 +9,21 @@
 
   </div>
   
-  <div class="mb-5 items-center text-xs flex justify-between sm:justify-start sm:text-base sm:gap-5 md:text-lg lg:gap-10">
-    <p class="border-b border-orange-200">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
-    <p class="border-b border-orange-200">目安時間:</p>
-    <p class="border-b border-orange-200">達成数： <%= routine.completed_count %></p>
+  <div class="mb-5 text-xs sm:flex sm:flex-row sm:justify-start sm:text-base sm:gap-5 md:text-lg lg:gap-10">
+    <p class="">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+    <p class="">
+      目安時間: 
+      <span>
+        <%= routine.total_estimated_time[:hour] %>h
+      </span>
+      <span>
+        <%= routine.total_estimated_time[:minute] %>m
+      </span>
+      <span>
+        <%= routine.total_estimated_time[:second] %>s
+      </span>
+    </p>
+    <p class="">達成数: <%= routine.completed_count %></p>
   </div>
 
   <div class="text-center mb-16">

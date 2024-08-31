@@ -7,33 +7,41 @@
       </p>
     <% end %>
 
-    <div class="flex items-center ">
+    <div class="flex items-center gap-3">
       <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"hidden md:btn md:btn-outline md:bg-gradient-to-tl md:from-gray-300 md:to-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:btn-lg lg:mx-5" %>
-      <%= link_to user_path(current_user), class: "hover:opacity-50 hover:border" do %>
-        <%= image_tag "user_icon.jpg", class:"items-center mx-3 rounded-lg size-8 md:size-12 lg:size-14 lg:mx-5" %>
+      <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none" do %>
+        <%= image_tag "user_icon.jpg", class:"items-center rounded-lg size-8 md:size-12 lg:size-14" %>
       <% end %>
-      
-      <div class="dropdown dropdown-end mx-3 lg:mx-5">
-        <div tabindex="0">
-          <%= image_tag "menu.jpg", class:"items-center rounded-lg size-8 md:size-10 lg:size-12" %>
+
+      <div class="drawer drawer-end mx-3 lg:mx-5">
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <!-- Page content here -->
+          <label for="my-drawer-4" class="drawer-button btn btn-sm bg-green-50 text-xl font-light sm:btn-md sm:text-3xl lg:size-14 lg:text-4xl">≡</label>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-green-100 rounded-box z-10 p-2 shadow my-2 text-black w-40 md:w-48 lg:w-52">
-          <li>
-            <%= link_to "ルーティンを作成する", new_routine_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
-          </li>
-          <li>
-            <%= link_to "投稿一覧を見る", routines_posts_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
-          </li>
-          <li>
-            <%= link_to "マイページへ", root_path, class:"p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
-          </li>
-          <li>
-            <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 text-xs sm:text-sm md:hidden" %>
-          </li>
-          <li>
-            <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
-          </li>
-        </ul>
+        <div class="drawer-side mt-12 sm:mt-16 md:mt-20 lg:mt-24">
+          <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+          <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52">
+            <li>
+              <%= link_to "ルーティンを作成する", new_routine_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
+            <li>
+              <%= link_to "ルーティン一覧へ", routines_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
+            <li>
+              <%= link_to "投稿一覧を見る", routines_posts_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
+            <li>
+              <%= link_to "マイページへ", root_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm md:hidden hover:opacity-50" %>
+            </li>
+            <li>
+              <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
