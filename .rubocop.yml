@@ -1,6 +1,15 @@
 require:
   - rubocop-performance
   - rubocop-rails
+# 1行の文字数に関する指摘を無効化
+Layout/LineLength:
+  Enabled: false
+# マジックコメント必須の指摘を無効化
+Style/FrozenStringLiteralComment:
+  Enabled: false
+# シンボルによる配列の%記法のチェック
+Style/SymbolArray:
+  Enabled: false
 AllCops:
   NewCops: enable
   # rubocopの対象外ファイル
