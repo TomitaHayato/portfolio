@@ -10,6 +10,6 @@ class Routines::FinishesController < ApplicationController
   private
 
   def block_if_no_session
-    redirect_to root_path, alert: "ページに遷移できませんでした" if session[:playing_task_num].nil?
+    redirect_to root_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
   end
 end

@@ -1,22 +1,8 @@
 class RoutinesController < ApplicationController
-  before_action :set_routine, only: %i[ show edit update destroy ]
+  before_action :set_routine, only: %i[show edit update destroy]
 
   def index
     @routines = current_user.routines.includes(:tasks).order(created_at: :desc).page(params[:page])
-  end
-
-  def new
-    @routine = Routine.new
-  end
-
-  def create
-    @routine = current_user.routines.new(routine_params)
-    if @routine.save
-      flash[:notice] = "新しくルーティンを作成しました"
-      redirect_to routines_path
-    else
-      render :new, status: :unprocessable_entity
-    end
   end
 
   def show
@@ -24,11 +10,25 @@ class RoutinesController < ApplicationController
     @tasks = @routine.tasks.order(position: :asc)
   end
 
+  def new
+    @routine = Routine.new
+  end
+
   def edit; end
+
+  def create
+    @routine = current_user.routines.new(routine_params)
+    if @routine.save
+      flash[:notice] = '新しくルーティンを作成しました'
+      redirect_to routines_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   def update
     if @routine.update(routine_params)
-      flash[:notice] = "更新しました"
+      flash[:notice] = '更新しました'
       redirect_to routine_path(@routine)
     else
       render :edit, status: :unprocessable_entity

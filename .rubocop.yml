@@ -1,14 +1,29 @@
 require:
   - rubocop-performance
   - rubocop-rails
-# 1行の文字数に関する指摘を無効化
+# 1行の文字数に関する指摘
 Layout/LineLength:
   Enabled: false
-# マジックコメント必須の指摘を無効化
+# マジックコメント必須の指摘
 Style/FrozenStringLiteralComment:
   Enabled: false
 # シンボルによる配列の%記法のチェック
 Style/SymbolArray:
+  Enabled: false
+# classの前に説明文の追加必須
+Style/Documentation:
+  Enabled: false
+# enumの記法チェック
+Rails/EnumSyntax:
+  Enabled: false
+# i18nを使用していない日本語表記チェック
+Rails/I18nLocaleTexts:
+  Enabled: false
+# メソッドの複雑さの許容範囲
+Metrics/AbcSize:
+  Max: 20
+# モジュールのネストした形式
+Style/ClassAndModuleChildren:
   Enabled: false
 AllCops:
   NewCops: enable

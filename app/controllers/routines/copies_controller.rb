@@ -22,12 +22,12 @@ class Routines::CopiesController < ApplicationController
   def copy_routine(routine_origin)
     routine_dup = routine_origin.dup.reset_status
     routine_dup.update!(user_id: current_user.id)
-    return routine_dup
+    routine_dup
   end
 
   def copy_tasks(routine_origin, routine_dup)
     routine_origin.tasks.each do |task|
-      task_dup = task.dup.update!(routine_id: routine_dup.id)
+      task.dup.update!(routine_id: routine_dup.id)
     end
   end
 end

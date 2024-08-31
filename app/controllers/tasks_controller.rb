@@ -1,28 +1,28 @@
 class TasksController < ApplicationController
-  before_action :params_time_to_second, only: %i[ create update ]
-  before_action :set_task_and_routine, only: %i[ update destroy ]
-  
+  before_action :params_time_to_second, only: %i[create update]
+  before_action :set_task_and_routine, only: %i[update destroy]
+
   def create
     @routine = current_user.routines.find(params[:routine_id])
     @task = @routine.tasks.new(task_params)
     if @task.save
-      flash[:notice] = "タスクを追加しました"
+      flash[:notice] = 'タスクを追加しました'
       redirect_to routine_path(@routine)
     else
       @tasks = @routine.tasks.order(created_at: :desc)
-      flash.now[:alert] = "タスクを追加できませんでした"
-      render template: "routines/show", status: :unprocessable_entity
+      flash.now[:alert] = 'タスクを追加できませんでした'
+      render template: 'routines/show', status: :unprocessable_entity
     end
   end
 
   def update
     if @task.update(task_params)
-      flash[:notice] = "タスクを更新しました"
+      flash[:notice] = 'タスクを更新しました'
       redirect_to routine_path(@routine)
     else
       @tasks = @routine.tasks.order(created_at: :desc)
-      flash.now[:alert] = "タスクを更新できませんでした。"
-      render template: "routines/show", status: :unprocessable_entity
+      flash.now[:alert] = 'タスクを更新できませんでした。'
+      render template: 'routines/show', status: :unprocessable_entity
     end
   end
 
@@ -44,13 +44,19 @@ class TasksController < ApplicationController
   end
 
   def params_time_to_second
-    hour = params[:task][:hour].to_i * 3600
-    minute = params[:task][:minute].to_i * 60
-    second = params[:task][:second].to_i
-    params[:task][:estimated_time_in_second] = hour + minute + second
+    params[:task][:estimated_time_in_second] = hour_to_second(params[:task][:hour]) + minute_to_second(params[:task][:minute]) + params[:task][:second].to_i
+    delete_time_params
+  end
 
-    params[:task].delete(:hour)
-    params[:task].delete(:minute)
-    params[:task].delete(:second)
+  def hour_to_second(hour)
+    hour.to_i * 3600
+  end
+
+  def minute_to_second(minute)
+    minute.to_i * 60
+  end
+
+  def delete_time_params
+    [:hour, :minute, :second].each { |key| params[:task].delete(key) }
   end
 end
