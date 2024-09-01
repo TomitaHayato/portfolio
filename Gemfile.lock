@@ -98,6 +98,11 @@ GEM
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
     erubi (1.13.0)
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
       logger
@@ -286,6 +291,9 @@ GEM
       bcrypt (~> 3.1)
       oauth (>= 0.6)
       oauth2 (~> 2.0)
+    spring (4.2.1)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -331,6 +339,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  factory_bot_rails
   jbuilder
   jsbundling-rails
   kaminari
@@ -344,6 +353,7 @@ DEPENDENCIES
   rubocop-rails
   selenium-webdriver
   sorcery
+  spring-commands-rspec
   sprockets-rails
   stimulus-rails
   turbo-rails
