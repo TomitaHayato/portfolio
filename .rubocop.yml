@@ -37,3 +37,4 @@ AllCops:
     - "vendor/**/*"
     - "config/environments/*"
     - "config/puma.rb"
+    - "spec/**/*"

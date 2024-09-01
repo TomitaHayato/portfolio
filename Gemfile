@@ -69,7 +69,8 @@ group :development, :test do
   # rspec: テスト用
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
-  
+  # テスト用のダミーデータを作成
+  gem 'faker'
 end
 
 group :development do
