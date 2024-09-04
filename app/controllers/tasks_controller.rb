@@ -7,7 +7,6 @@ class TasksController < ApplicationController
     @task = @routine.tasks.new(task_params)
     if @task.save
       flash.now[:notice] = 'タスクを追加しました'
-      @tasks = @routine.tasks.order(position: :asc)
     else
       @tasks = @routine.tasks.order(position: :asc)
       flash.now[:alert] = 'タスクを追加できませんでした'
