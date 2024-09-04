@@ -3,7 +3,13 @@ class Task < ApplicationRecord
   acts_as_list scope: :routine
 
   validates :title, presence: true, length: { maximum: 25 }
-  validates :estimated_time_in_second, presence: true
+  validates :estimated_time_in_second,
+    presence: true,
+    numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 1,
+      message: 'は1以上の整数を入力してください'
+    }
 
   def estimated_time
     result = second_to_time_string(estimated_time_in_second)
