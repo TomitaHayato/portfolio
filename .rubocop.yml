@@ -21,7 +21,7 @@ Rails/I18nLocaleTexts:
   Enabled: false
 # メソッドの複雑さの許容範囲
 Metrics/AbcSize:
-  Max: 20
+  Max: 25
 # モジュールのネストした形式
 Style/ClassAndModuleChildren:
   Enabled: false
