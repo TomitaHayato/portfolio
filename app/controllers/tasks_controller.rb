@@ -6,10 +6,9 @@ class TasksController < ApplicationController
     @routine = current_user.routines.find(params[:routine_id])
     @task = @routine.tasks.new(task_params)
     if @task.save
-      flash[:notice] = 'タスクを追加しました'
-      redirect_to routine_path(@routine)
+      flash.now[:notice] = 'タスクを追加しました'
     else
-      @tasks = @routine.tasks.order(created_at: :desc)
+      @tasks = @routine.tasks.order(position: :asc)
       flash.now[:alert] = 'タスクを追加できませんでした'
       render template: 'routines/show', status: :unprocessable_entity
     end
@@ -17,8 +16,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      flash[:notice] = 'タスクを更新しました'
-      redirect_to routine_path(@routine)
+      flash.now[:notice] = 'タスクを更新しました'
     else
       @tasks = @routine.tasks.order(created_at: :desc)
       flash.now[:alert] = 'タスクを更新できませんでした。'

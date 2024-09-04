@@ -1,4 +1,3 @@
-
 <div class="p-3 my-5 mx-auto bg-gradient-to-tl from-sky-100/70 to-sky-50/70 w-11/12 md:w-9/12">
   <%= link_to "一覧に戻る", routines_path, class:"btn text-sm mb-5 bg-gradient-to-tl from-gray-300 to-gray-100 btn-md sm:text-base sm:min-w-28 md:btn-lg md:mb-10" %>
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
@@ -29,26 +28,15 @@
     </p>
     <p>達成回数： <%= @routine.completed_count %></p>
   </div>
-
-
   
   <div class="text-center p-5 bg-gray-100">
-    <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine } %>
-    <button class="btn bg-gradient-to-tl from-emerald-200 to-emerald-50 w-full text-center" onclick="task_form.showModal()"><span class="text-blue-500">＋</span>タスクを追加</button>
-    <dialog id="task_form" class="modal">
-      <div class="modal-box">
-        <h1 class="text-center text-xl mb-10">タスク新規作成</h1>
-        <%= render "routines/task_form", task: @task, routine: @routine %>
-        <div class="modal-action">
-          <form method="dialog">
-            <button class="btn bg-gradient-to-tl from-gray-300 to-gray-100 btn-md">閉じる</button>
-          </form>
-        </div>
-      </div>
-    </dialog>
+    <div id="task_index">
+      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine } %>
+    </div>
+    <div id="add_task_btn">
+      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task } %>
+    </div>
   </div>
-
-
 </div>
 
 
