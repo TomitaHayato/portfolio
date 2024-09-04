@@ -19,7 +19,9 @@
 
     <div class="<%= bg_image_class %>">
       <div class="<%= shallow_bg_class %>">
-        <%= render "shared/flash" unless flash.empty? %>
+        <div id="flash">
+          <%= render "shared/flash" %>
+        </div>
         <%= yield %>
       </div>
     </div>
