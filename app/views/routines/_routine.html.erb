@@ -44,7 +44,7 @@
   </div>
   <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
     <summary class="collapse-title">タスク一覧</summary>
-    <ul class="collapse-content list-group" id="sortable-list">
+    <ul class="collapse-content">
       <%= render partial: "routines/task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
     </ul>
   </details>

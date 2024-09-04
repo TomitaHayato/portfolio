@@ -1,4 +1,4 @@
-<li id="task_<%= task.id %>" class="list-group-item">
+<li id="task_<%= task.id %>" class="list-group-item <%= task_arrange_class(routine) %>">
   <div class="border border-green-300 p-1 mb-3">
     <div class="flex justify-between items-center mb-5">
       <h1 class="text-xs border-b border-cyan-300 font-semibold sm:text-sm md:text-base lg:text-lg"><%= task.title %></h1>

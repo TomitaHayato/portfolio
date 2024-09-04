@@ -14,4 +14,8 @@ module ApplicationHelper
   def shallow_bg_class
     request.path == root_path ? 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24' : 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
   end
+
+  def task_arrange_class(routine)
+    request.path == routine_path(routine) ? 'hover:border-green-500 hover:border-2' : ''
+  end
 end

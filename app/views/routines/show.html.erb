@@ -30,9 +30,9 @@
   </div>
   
   <div class="text-center p-5 bg-gray-100">
-    <div id="task_index">
+    <ul class="list-group" id="task-index">
       <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine } %>
-    </div>
+    </ul>
     <div id="add_task_btn">
       <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task } %>
     </div>
