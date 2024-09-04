@@ -17,8 +17,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      flash[:notice] = 'タスクを更新しました'
-      redirect_to routine_path(@routine)
+      flash.now[:notice] = 'タスクを更新しました'
     else
       @tasks = @routine.tasks.order(created_at: :desc)
       flash.now[:alert] = 'タスクを更新できませんでした。'
