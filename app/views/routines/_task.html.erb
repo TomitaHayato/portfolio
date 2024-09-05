@@ -37,4 +37,11 @@
       </span>
     </div>
   </div>
+
+  <div class="hidden task-id"><%= task.id %></div>
+  <%= form_with url: tasks_sort_path(task), method: "patch" do |f| %>
+    <%= f.hidden_field :old_index, value: "", id: "form-old-index-#{task.id}" %>
+    <%= f.hidden_field :new_index, value: "", id: "form-new-index-#{task.id}" %>
+    <%= f.submit nil, class: "hidden", id: "sort-btn-#{task.id}" %>
+  <% end %>
 </li>
