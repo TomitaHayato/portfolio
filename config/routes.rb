@@ -26,5 +26,6 @@ Rails.application.routes.draw do
   namespace :tasks do
     resources :move_highers, only: %i[update], param: :task_id
     resources :move_lowers, only: %i[update], param: :task_id
+    resources :sorts, only: %i[update], param: :task_id
   end
 end
