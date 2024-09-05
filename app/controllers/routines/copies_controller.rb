@@ -27,7 +27,9 @@ class Routines::CopiesController < ApplicationController
 
   def copy_tasks(routine_origin, routine_dup)
     routine_origin.tasks.each do |task|
-      task.dup.update!(routine_id: routine_dup.id)
+      task_dup = task.dup
+      task_dup.update!(routine_id: routine_dup.id)
+      task_dup.insert_at(task.position)
     end
   end
 end
