@@ -10,14 +10,11 @@ document.addEventListener('turbo:load', function(event) {
       onUpdate: function (event) {
         const itemElement = event.item;
         const taskId = itemElement.querySelector('.task-id').textContent;
-        const oldIndex = event.oldIndex;
         const newIndex = event.newIndex;
 
-        const oldIndexForm = itemElement.querySelector(`#form-old-index-${taskId}`);
         const newIndexForm = itemElement.querySelector(`#form-new-index-${taskId}`);
         const submitBtn = itemElement.querySelector(`#sort-btn-${taskId}`);
 
-        oldIndexForm.value = oldIndex;
         newIndexForm.value = newIndex;
         submitBtn.click();
       }

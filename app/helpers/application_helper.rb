@@ -16,6 +16,6 @@ module ApplicationHelper
   end
 
   def task_arrange_class(routine)
-    request.path == routine_path(routine) ? 'hover:border-green-500 hover:border-2' : ''
+    request.path == routines_path ? '' : 'hover:bg-amber-100'
   end
 end
