@@ -18,4 +18,8 @@ module ApplicationHelper
   def task_arrange_class(routine)
     request.path == routines_path ? '' : 'hover:bg-amber-100'
   end
+
+  def task_form_id(task)
+    task.id.nil? ? "task-form-for-new" : "task-form-for-#{task.id}"
+  end
 end
