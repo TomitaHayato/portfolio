@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  include ApplicationHelper
+
   before_action :params_time_to_second, only: %i[create update]
   before_action :set_task_and_routine, only: %i[update destroy]
 
@@ -8,9 +10,7 @@ class TasksController < ApplicationController
     if @task.save
       flash.now[:notice] = 'タスクを追加しました'
     else
-      @tasks = @routine.tasks.order(position: :asc)
-      flash.now[:alert] = 'タスクを追加できませんでした'
-      render template: 'routines/show', status: :unprocessable_entity
+      render turbo_stream: turbo_stream.replace("#{task_form_id(@task)}", partial: "routines/task_form", locals: { task: @task, routine: @routine })
     end
   end
 
@@ -18,9 +18,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       flash.now[:notice] = 'タスクを更新しました'
     else
-      @tasks = @routine.tasks.order(created_at: :desc)
-      flash.now[:alert] = 'タスクを更新できませんでした。'
-      render template: 'routines/show', status: :unprocessable_entity
+      render turbo_stream: turbo_stream.replace("#{task_form_id(@task)}", partial: "routines/task_form", locals: { task: @task, routine: @routine })
     end
   end
 
