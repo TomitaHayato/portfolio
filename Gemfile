@@ -13,6 +13,8 @@ gem "acts_as_list"
 gem "kaminari"
 # 日本語化
 gem 'rails-i18n'
+# LINE-bot作成
+gem 'line-bot-api'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
