@@ -17,6 +17,8 @@ gem 'rails-i18n'
 gem 'line-bot-api'
 # 環境ごとの設定
 gem 'config'
+# redisをrailsアプリで操作
+gem 'redis'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
