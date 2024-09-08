@@ -21,6 +21,8 @@ module App
     config.active_record.default_timezone = :local
     # 日本語化
     config.i18n.default_locale = :ja
+    # sidekiqをactivejobで利用する
+    config.active_job.queue_adapter = :sidekiq
 
     # Configuration for the application, engines, and railties goes here.
     #
