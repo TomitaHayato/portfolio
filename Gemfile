@@ -15,6 +15,8 @@ gem "kaminari"
 gem 'rails-i18n'
 # LINE-bot作成
 gem 'line-bot-api'
+# 環境ごとの設定
+gem 'config'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
