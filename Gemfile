@@ -13,6 +13,15 @@ gem "acts_as_list"
 gem "kaminari"
 # 日本語化
 gem 'rails-i18n'
+# LINE-bot作成
+gem 'line-bot-api'
+# 環境ごとの設定
+gem 'config'
+# redisをrailsアプリで操作
+gem 'redis'
+# バックグラウンド処理
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"

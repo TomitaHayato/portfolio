@@ -1,0 +1,6 @@
+:scheduler:
+  :schedule:
+    access_rootpage_job:
+      cron: '*/1 * * * *'  # 1分ごとに実行
+      class: SetNotificationJob
+      queue: default
