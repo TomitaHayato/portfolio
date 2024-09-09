@@ -2,8 +2,6 @@ class LinebotsController < ApplicationController
   protect_from_forgery except: :create
   skip_before_action :require_login
 
-  OMAJINAI = /アブラカタブラ|チチンプイプイ|ヒラケゴマ/
-
   def create
     client = Line::Bot::Client.new do |config|
       config.channel_id = Rails.application.credentials.channel_id
