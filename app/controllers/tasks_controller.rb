@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     if @task.save
       flash.now[:notice] = 'タスクを追加しました'
     else
-      render turbo_stream: turbo_stream.replace("#{task_form_id(@task)}", partial: "routines/task_form", locals: { task: @task, routine: @routine })
+      render turbo_stream: turbo_stream.replace(task_form_id(@task).to_s, partial: 'routines/task_form', locals: { task: @task, routine: @routine })
     end
   end
 
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       flash.now[:notice] = 'タスクを更新しました'
     else
-      render turbo_stream: turbo_stream.replace("#{task_form_id(@task)}", partial: "routines/task_form", locals: { task: @task, routine: @routine })
+      render turbo_stream: turbo_stream.replace(task_form_id(@task).to_s, partial: 'routines/task_form', locals: { task: @task, routine: @routine })
     end
   end
 

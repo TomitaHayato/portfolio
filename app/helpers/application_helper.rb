@@ -15,11 +15,11 @@ module ApplicationHelper
     request.path == root_path ? 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24' : 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
   end
 
-  def task_arrange_class(routine)
+  def task_arrange_class
     request.path == routines_path ? '' : 'hover:bg-amber-100'
   end
 
   def task_form_id(task)
-    task.id.nil? ? "task-form-for-new" : "task-form-for-#{task.id}"
+    task.id.nil? ? 'task-form-for-new' : "task-form-for-#{task.id}"
   end
 end
