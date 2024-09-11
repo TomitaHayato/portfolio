@@ -2,8 +2,8 @@
   <%= render partial: 'shared/flash' %>
 <% end %>
 <%= turbo_stream.append "task-index" do %>
-  <%= render partial: 'routines/task', locals: { routine: @routine, task: @task } %>
+  <%= render partial: 'routines/task', locals: { routine: @routine, task: @task, tags: Tag.all } %>
 <% end %>
 <%= turbo_stream.update "add_task_btn" do %>
-  <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @routine.tasks.new } %>
+  <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @routine.tasks.new, tags: Tag.all } %>
 <% end %>

@@ -7,7 +7,7 @@ class RoutinesController < ApplicationController
 
   def show
     @task = Task.new
-    @tasks = @routine.tasks.order(position: :asc)
+    @tasks = @routine.tasks.includes(:tags).order(position: :asc)
   end
 
   def new

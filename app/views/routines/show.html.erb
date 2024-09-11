@@ -30,11 +30,13 @@
   </div>
   
   <div class="text-center p-5 bg-gray-100">
+    <!-- タスク一覧を表示 -->
     <ul class="list-group" id="task-index">
-      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine } %>
+      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine, tags: Tag.all } %>
     </ul>
+    <!-- タスク追加ボタンを表示 -->
     <div id="add_task_btn">
-      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task } %>
+      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task, tags: Tag.all } %>
     </div>
   </div>
 </div>

@@ -2,5 +2,5 @@
   <%= render partial: 'shared/flash' %>
 <% end %>
 <%= turbo_stream.update "task_#{@task.id}" do %>
-  <%= render partial: 'routines/task', locals: { routine: @routine, task: @task } %>
+  <%= render partial: 'routines/task', locals: { routine: @routine, task: @task, tags: Tag.all } %>
 <% end %>
