@@ -31,9 +31,9 @@ class LinebotsController < ApplicationController
   def parse_message_type(event)
     case event.type
     when Line::Bot::Event::MessageType::Text
-      "ルーティンを始めましょう！ #{my_pages_url}"   # ユーザーが投稿したものがテキストメッセージだった場合に返す値
+      "ルーティンを始めましょう！ #{my_pages_url}" # ユーザーが投稿したものがテキストメッセージだった場合に返す値
     else
-      'Thanks!!'             # ユーザーが投稿したものがテキストメッセージ以外だった場合に返す値
+      'Thanks!!' # ユーザーが投稿したものがテキストメッセージ以外だった場合に返す値
     end
   end
 end
