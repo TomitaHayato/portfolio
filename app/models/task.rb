@@ -1,5 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :routine
+  has_many :tags, through: :task_tags
+  has_many :task_tags, dependent: :destroy
+
   acts_as_list scope: :routine
 
   validates :title, presence: true, length: { maximum: 25 }
