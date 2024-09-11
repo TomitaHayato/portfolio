@@ -52,7 +52,7 @@ class TasksController < ApplicationController
 
   # 元々セットされていたが今回選択されていなかったタグを削除
   def delete_tags_from_task(task, tag_ids)
-    return if tag_ids.nil?
+    tag_ids = [] if tag_ids.nil?
     tag_ids = tag_ids.map{ |tag_id| tag_id.to_i }
     task.tags.each{ |tag| task.tags.destroy(tag) unless tag_ids.include?(tag) }
   end
