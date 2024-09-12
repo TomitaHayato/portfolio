@@ -13,5 +13,11 @@
       <%= task.estimated_time[:second] %> s
     </p>
   </div>
+  
+  <div class="flex flex-wrap items-center gap-1 my-1 text-xs sm:text-sm md:text-md md:gap-3 lg:text-lg">
+    <% task.tags.each do |tag| %>
+      <p class="rounded-lg p-1 bg-amber-200 flex-none"><%= tag.name %></p>
+    <% end %>
+  </div>
 
 </div>
