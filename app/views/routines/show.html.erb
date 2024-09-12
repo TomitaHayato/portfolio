@@ -32,11 +32,11 @@
   <div class="text-center p-5 bg-gray-100">
     <!-- タスク一覧を表示 -->
     <ul class="list-group" id="task-index">
-      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine, tags: Tag.all } %>
+      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine, tags: Tag.includes(:tasks).all } %>
     </ul>
     <!-- タスク追加ボタンを表示 -->
     <div id="add_task_btn">
-      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task, tags: Tag.all } %>
+      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task, tags: Tag.includes(:tasks).all } %>
     </div>
   </div>
 </div>
