@@ -1,20 +1,6 @@
 <div class="border border-green-200 p-1 mb-3">
   <div class="flex justify-between gap-2 items-center mb-5 mx-3">
     <h1 class="text-sm border-b border-cyan-300 font-semibold sm:text-base md:text-lg lg:text-xl"><%= task.title %></h1>
-    <div class="flex-none">
-      <button class="min-h-10 btn bg-gradient-to-tl from-green-300 to-green-100 text-sm btn-sm sm:btn-md md:text-base" onclick="document.querySelector('#edit_task_form_in_mypage_<%= task.id %>').showModal()">編集</button>
-      <dialog id="edit_task_form_in_mypage_<%= task.id %>" class="modal mx-auto">
-        <div class="modal-box">
-          <h1 class="text-center text-lg font-semibold mb-5 sm:text-xl md:text-2xl lg:text-3xl md:mb-10">タスク編集</h1>
-          <%= render partial: "routines/task_form", locals: { task: task, routine: routine } %>
-          <div class="modal-action">
-            <form method="dialog">
-              <button class="btn btn-sm bg-gray-200 text-sm border min-h-12 sm:btn-md sm:text-base md:min-h-16 lg:text-lg lg:btn-lg">キャンセル</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
-    </div>
   </div>
   <div class="flex text-xs sm:text-sm md:text-md lg:text-lg">
     <p class="font-medium mr-1">目安時間：</p>
@@ -27,6 +13,11 @@
     <p class="mx-1">
       <%= task.estimated_time[:second] %> s
     </p>
+  </div>
+  <div class="flex items-center gap-3 my-1 text-xs sm:text-sm md:text-md lg:text-lg">
+    <% task.tags.each do |tag| %>
+      <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag.name %></p>
+    <% end %>
   </div>
 
 </div>

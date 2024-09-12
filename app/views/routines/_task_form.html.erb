@@ -18,6 +18,17 @@
       </div>
     </div>
 
+    <div class="flex flex-wrap gap-4">
+      <% tags.each do |tag| %>
+        <div class="flex-none">
+          <%= f.label "tag_ids_#{tag.id}" do %>
+            <%= f.check_box :tag_ids, { multiple: true, include_hidden: false }, tag.id, tag.is_on_task?(task) %>
+            <%= tag.name %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
     <%= f.submit nil, class:"btn bg-gradient-to-tl from-green-300 to-green-100 mb-5 btn-md min-w-28 mx-auto sm:btn-lg sm:text-lg lg:min-w-64 lg-text-xl" %>
   <% end %>
 </div>

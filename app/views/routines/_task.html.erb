@@ -7,7 +7,7 @@
         <dialog id="edit_task_form_<%= task.id %>" class="modal">
           <div class="modal-box">
             <h1 class="text-center text-xl mb-10">タスク編集</h1>
-            <%= render partial: "routines/task_form", locals: { task: task, routine: routine } %>
+            <%= render partial: "routines/task_form", locals: { task: task, routine: routine, tags: tags } %>
             <div class="modal-action">
               <form method="dialog">
                 <button class="btn">キャンセル</button>
@@ -35,6 +35,11 @@
         <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-blue-300 to-blue-100 btn-sm sm:min-w-12 lg:btn-md lg:text-lg" %>
         <%= link_to "↓", tasks_move_lower_path(task), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-blue-300 to-blue-100 btn-sm sm:min-w-12 lg:btn-md lg:text-lg" %>
       </span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1 my-1 text-xs sm:text-sm md:text-md md:gap-3 lg:text-lg">
+      <% task.tags.each do |tag| %>
+        <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 flex-none"><%= tag.name %></p>
+      <% end %>
     </div>
   </div>
 

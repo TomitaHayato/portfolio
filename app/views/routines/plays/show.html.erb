@@ -7,6 +7,12 @@
     <h1 class="text-2xl lg:text-3xl"><%= @routine.title %></h1>
   </div>
 
+  <div class="flex flex-wrap justify-center items-center gap-1 mb-3 text-sm sm:text-md md:text-lg md:gap-3 lg:text-xl">
+    <% @task.tags.each do |tag| %>
+      <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 flex-none md:p-3"><%= tag.name %></p>
+    <% end %>
+  </div>
+
   <div class="bg-gradient-to-tl from-yellow-300 to-amber-50 rounded-full p-3 flex flex-col justify-center w-52 h-52 mb-5 mx-auto sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-72 lg:h-72">
     <div class="text-lg text-center mx-auto lg:text-2xl">
       <p class="items-center"><%= @task.title %></p>

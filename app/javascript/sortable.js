@@ -7,6 +7,7 @@ document.addEventListener('turbo:load', function(event) {
       forceFallback: true,
       fallbackClass: 'sortable-fallback',
       direction: 'vertical',
+      delay: 100,
       onUpdate: function (event) {
         const itemElement = event.item;
         const taskId = itemElement.querySelector('.task-id').textContent;

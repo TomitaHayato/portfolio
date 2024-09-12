@@ -39,7 +39,7 @@
         <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
           <summary class="collapse-title">タスク一覧</summary>
           <div class="collapse-content">
-            <%= render partial: "task", collection: routine.tasks.order(position: :asc), locals: { routine: routine } %>
+            <%= render partial: "task", collection: routine.tasks.includes(:tags).order(position: :asc), locals: { routine: routine } %>
           </div>
         </details>
       <% end %>
