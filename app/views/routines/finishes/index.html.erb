@@ -9,15 +9,18 @@
     <%= link_to "マイページへ", root_path, class: "btn bg-gradient-to-tl from-pink-300 to-pink-100 btn-sm text-xs min-h-10 sm:min-w-32 sm:min-h-12 md:text-sm md:min-w-36 md:mx-auto lg:text-lg lg:btn-lg lg:w-44" %>
   </div>
 
-  <div class="bg-gradient-to-tl from-yellow-300/80 to-yellow-100/60 rounded-full p-3 flex flex-col gap-1 justify-center w-52 h-52 mb-5 mx-auto sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-96 lg:h-96">
+  <div class="bg-gradient-to-tl from-pink-200/80 to-pink-50 rounded-lg p-3 flex flex-col gap-1 justify-center mb-5 mx-auto">
     <div class="mx-auto my-3">
-      <p class="text-sm font-semibold sm:text-base md:text-lg">獲得経験値:</p>
+      <p class="text-base font-semibold sm:text-lg md:text-xl">獲得経験値:</p>
       <% @tag_point_hash.each do |name, point| %>
-        <p><%= name %>: <span class="text-blue-500 text-sm font-bold md:text-md md:text-lg"><%= point %></span></p>
+        <p class="my-1 md:my-3">
+          <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 text-sm md:text-md md:text-lg"><%= name %></span>
+          <span class="text-blue-500 text-sm font-bold md:text-md md:text-lg"><%= point %></span>
+        </p>
       <% end %>
     </div>
-    <p class="font-semibold text-sm text-center mx-auto md:text-base">
-      あなたのルーティン達成数<br>
+    <p class="mx-auto text-center">
+      <span class="text-base font-semibold sm:text-lg md:text-xl">ルーティン達成数</span><br>
       <span class="text-blue-500 text-base font-bold sm:text-lg md:text-xl"><%= current_user.complete_routines_count %></span>
     </p>
   </div>
