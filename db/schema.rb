@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_11_081633) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_13_081027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_11_081633) do
     t.index ["routine_id"], name: "index_tasks_on_routine_id"
   end
 
+  create_table "user_tag_experiences", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "tag_id"
+    t.integer "experience_point", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_user_tag_experiences_on_tag_id"
+    t.index ["user_id"], name: "index_user_tag_experiences_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -71,4 +81,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_11_081633) do
   add_foreign_key "task_tags", "tags"
   add_foreign_key "task_tags", "tasks"
   add_foreign_key "tasks", "routines"
+  add_foreign_key "user_tag_experiences", "tags"
+  add_foreign_key "user_tag_experiences", "users"
 end

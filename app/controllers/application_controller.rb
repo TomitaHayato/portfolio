@@ -11,5 +11,6 @@ class ApplicationController < ActionController::Base
 
   def playing_task_sesison_reset
     session[:playing_task_num] = nil if session[:playing_task_num]
+    session[:experiene_log] = nil if session[:experiene_log]
   end
 end

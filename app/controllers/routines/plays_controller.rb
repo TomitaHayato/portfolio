@@ -9,12 +9,14 @@ class Routines::PlaysController < ApplicationController
   end
 
   def create
-    session[:playing_task_num] = 0
+    session[:playing_task_num] = 0 # 次に実行するtaskの順番を管理
+    session[:experience_log] = Hash.new # どのタグの経験値をどのくらい獲得したのかを管理
     redirect_to play_path(@routine)
   end
 
   def update
     session[:playing_task_num] += 1
+    session[:experience_log] = set_experience_log(session[:experience_log], params[:tag_ids]) if params[:tag_ids]
     if session[:playing_task_num] >= @tasks.count
       @routine.completed_count += 1
       @routine.save!
@@ -37,5 +39,14 @@ class Routines::PlaysController < ApplicationController
   # createアクションを介さないアクセスを拒否
   def block_if_no_session
     redirect_to root_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
+  end
+
+  # タグidと達成した回数を経験値管理ハッシュに格納する
+  def set_experience_log(experience_log, tag_ids)
+    tag_ids.each do |tag_id|
+      experience_log[tag_id] ||= 0
+      experience_log[tag_id] += 1
+    end
+    experience_log
   end
 end

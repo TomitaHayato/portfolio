@@ -6,6 +6,7 @@
   <%= link_to "ルーティン一覧", routines_path, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 btn-sm text-xs w-1/3 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base md:w-40 lg:text-lg lg:btn-lg lg:w-44" %>
 </div>
 
+<!-- 実践中のルーティン表示 -->
 <div class="my-3">
   <% if @routine %>
     <%= render "routine", routine: @routine %>
@@ -16,4 +17,41 @@
       <% end %>
     </div>
   <% end %>
+</div>
+
+<!-- 経験値表示 -->
+<div class="p-3 mt-20 mx-auto bg-gradient-to-tl from-emerald-200/60 to-emerald-100/60 sm:w-11/12 md:w-9/12">
+  <h2 class="my-3 font-bold lg:text-xl">獲得した経験値</h2>
+
+  <!-- 全期間の経験値表示 -->
+  <div class="p-3 border border-gray-400">
+    <h3 class="my-1 lg:text-lg">全期間</h3>
+    <% @experience_data_all.each do |tag_name, experience_point| %>
+      <li class="items-center my-2">
+        <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
+        <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
+      </li>
+    <% end %>
+  </div>
+
+  <div class="p-3 border border-gray-400">
+    <h3 class="my-1 lg:text-lg">1ヶ月間</h3>
+    <% @experience_data_month.each do |tag_name, experience_point| %>
+      <li class="items-center my-2">
+        <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
+        <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
+      </li>
+    <% end %>
+  </div>
+
+  <div class="p-3 border border-gray-400">
+    <h3 class="my-1 lg:text-lg">1週間</h3>
+    <% @experience_data_week.each do |tag_name, experience_point| %>
+      <li class="items-center my-2">
+        <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
+        <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
+      </li>
+    <% end %>
+  </div>
+
 </div>
