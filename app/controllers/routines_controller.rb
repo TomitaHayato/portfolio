@@ -37,8 +37,11 @@ class RoutinesController < ApplicationController
 
   def destroy
     @routine.destroy!
+    from_path = params[:from_path] # 遷移元のパス、どのページから削除したのかを判別する
     flash[:alert] = "#{@routine.title}を削除しました"
-    redirect_to routines_path, status: :see_other
+
+    # 「詳細ページから削除した場合」または「ルーティンを削除したことでユーザーに属するルーティンが0個になった場合」は一覧画面にリダイレクト
+    redirect_to routines_path, status: :see_other if from_path == routine_path(@routine) || current_user.routines.empty?
   end
 
   private

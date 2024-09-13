@@ -1,52 +1,50 @@
-<div class="border border-amber-300 p-3 my-5 mx-auto bg-gradient-to-tl from-amber-200/70 to-yellow-50/70 sm:w-11/12 md:w-9/12">
+<div id="routine-<%= routine.id %>">
+  <div class="border border-amber-300 p-3 my-5 mx-auto bg-gradient-to-tl from-amber-200/70 to-yellow-50/70 sm:w-11/12 md:w-9/12">
 
-  <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
-    <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
-      <%= link_to "編集", edit_routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-green-300 to-green-100 text-sm btn-sm sm:btn-md md:text-base" %>
-      <%= link_to "詳細", routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-blue-300 to-blue-100 text-sm btn-sm sm:btn-md md:text-base" %>
-      <%= link_to "削除", routine_path(routine), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: "min-h-10 btn bg-gradient-to-tl from-red-600 to-red-200 text-sm btn-sm sm:btn-md md:text-base" %>
+    <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
+      <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
+        <%= link_to "編集", edit_routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-green-300 to-green-100 text-sm btn-sm sm:btn-md md:text-base" %>
+        <%= link_to "詳細", routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-blue-300 to-blue-100 text-sm btn-sm sm:btn-md md:text-base" %>
+        <%= link_to "削除", routine_path(routine), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: "min-h-10 btn bg-gradient-to-tl from-red-600 to-red-200 text-sm btn-sm sm:btn-md md:text-base" %>
+      </div>
+      <h1 class="break-words text-xl font-semibold border-b border-orange-200 my-2 sm:text-2xl md:text-3xl lg:text-4xl"><%= routine.title %></h1>
     </div>
-    <h1 class="break-words text-xl font-semibold border-b border-orange-200 my-2 sm:text-2xl md:text-3xl lg:text-4xl"><%= routine.title %></h1>
-  </div>
 
-  <div class="mb-5 mx-auto bg-gray-100/80 p-3 sm:p-5">
-    <p><%= routine.description %></p>
-  </div>
-  
-  <div class="mb-5 text-xs flex justify-between sm:justify-start sm:gap-5 sm:text-sm sm:mx-3 lg:text-base lg:gap-10">
-    <p class="border-b border-orange-200">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
-    <p class="border-b border-orange-200">
-      目安時間：
-      <span>
-        <%= routine.total_estimated_time[:hour] %> h
-      </span>
-      <span>
-        <%= routine.total_estimated_time[:minute] %> m
-      </span>
-      <span>
-        <%= routine.total_estimated_time[:second] %> s
-      </span>
-    </p>
-    <p class="border-b border-orange-200">達成数： <%= routine.completed_count %></p>
-  </div>
+    <div class="mb-5 mx-auto bg-gray-100/80 p-3 sm:p-5">
+      <p><%= routine.description %></p>
+    </div>
 
-  <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
-    <% if routine.is_posted? %>
-      <%= link_to "投稿済み", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-gray-300 to-gray-100 border-pink-300 text-sm md:text-base" %>
-    <% else %>
-      <%= link_to "投稿する", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base" %>
-    <% end %>
-    <% if routine.is_active? %>
-      <%= link_to "実践中", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-gray-300 to-gray-100 border border-pink-300 text-sm md:text-base" %>
-    <% else %>
-      <%= link_to "実践する", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base" %>
-    <% end %>
-  </div>
-  <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
-    <summary class="collapse-title">タスク一覧</summary>
-    <ul class="collapse-content">
-      <%= render partial: "routines/task", collection: routine.tasks.includes(:tags).order(position: :asc), locals: { routine: routine, tags: Tag.includes(:tasks).all } %>
-    </ul>
-  </details>
+    <div class="mb-5 text-xs flex justify-between sm:justify-start sm:gap-5 sm:text-sm sm:mx-3 lg:text-base lg:gap-10">
+      <p class="border-b border-orange-200">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+      <p class="border-b border-orange-200">
+        目安時間：
+        <span>
+          <%= routine.total_estimated_time[:hour] %> h
+        </span>
+        <span>
+          <%= routine.total_estimated_time[:minute] %> m
+        </span>
+        <span>
+          <%= routine.total_estimated_time[:second] %> s
+        </span>
+      </p>
+      <p class="border-b border-orange-200">達成数： <%= routine.completed_count %></p>
+    </div>
 
+    <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
+      <div id="routine-post-btn-<%= routine.id %>">
+        <%= render "routines/routine_post_btn", routine: routine %>
+      </div>
+      <div id="routine-active-btn-<%= routine.id %>">
+        <%= render "routines/routine_active_btn", routine: routine %>
+      </div>
+    </div>
+    <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
+      <summary class="collapse-title">タスク一覧</summary>
+      <ul class="collapse-content">
+        <%= render partial: "routines/task", collection: routine.tasks.includes(:tags).order(position: :asc), locals: { routine: routine, tags: Tag.includes(:tasks).all } %>
+      </ul>
+    </details>
+
+  </div>
 </div>

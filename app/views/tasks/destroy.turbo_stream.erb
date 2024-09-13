@@ -1,6 +1,7 @@
 <%= turbo_stream.update "flash" do %>
   <%= render partial: 'shared/flash' %>
 <% end %>
-<%= turbo_stream.replace "task_#{@task.id}" do %>
+
+<%= turbo_stream.remove "task_#{@task.id}" do %>
   <%= render partial: 'routines/task', locals: { routine: @routine, task: @task, tags: Tag.includes(:tasks).all } %>
 <% end %>
