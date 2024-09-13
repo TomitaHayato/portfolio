@@ -37,11 +37,9 @@
       <% else %>
         <%= link_to "投稿する", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base" %>
       <% end %>
-      <% if routine.is_active? %>
-        <%= link_to "実践中", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-gray-300 to-gray-100 border border-pink-300 text-sm md:text-base" %>
-      <% else %>
-        <%= link_to "実践する", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base" %>
-      <% end %>
+      <div id="routine-active-btn-<%= routine.id %>">
+        <%= render "routines/routine_active_btn", routine: routine %>
+      </div>
     </div>
     <details class="collapse bg-gradient-to-tl from-teal-200 to-teal-50 border border-green-200 items-center text-sm sm:text-base lg:text-lg">
       <summary class="collapse-title">タスク一覧</summary>

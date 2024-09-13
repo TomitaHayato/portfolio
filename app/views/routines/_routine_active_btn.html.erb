@@ -1,0 +1,5 @@
+<% if routine.is_active? %>
+  <p class="btn bg-gradient-to-tl from-gray-300 to-gray-100 border border-pink-300 text-sm md:text-base">実践中</p>
+<% else %>
+  <%= link_to "実践する", routines_active_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base" %>
+<% end %>

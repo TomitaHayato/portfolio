@@ -1,0 +1,9 @@
+<%= turbo_stream.update "routine-active-btn-#{@routine.id}" do %>
+  <%= render partial: 'routines/routine_active_btn', locals: { routine: @routine } %>
+<% end %>
+
+<% if @routine_active_now %>
+  <%= turbo_stream.update "routine-active-btn-#{@routine_active_now.id}" do %>
+    <%= render partial: 'routines/routine_active_btn', locals: { routine: @routine_active_now } %>
+  <% end %>
+<% end %>
