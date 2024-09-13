@@ -32,11 +32,9 @@
     </div>
 
     <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
-      <% if routine.is_posted? %>
-        <%= link_to "投稿済み", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-gray-300 to-gray-100 border-pink-300 text-sm md:text-base" %>
-      <% else %>
-        <%= link_to "投稿する", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base" %>
-      <% end %>
+      <div id="routine-post-btn-<%= routine.id %>">
+        <%= render "routines/routine_post_btn", routine: routine %>
+      </div>
       <div id="routine-active-btn-<%= routine.id %>">
         <%= render "routines/routine_active_btn", routine: routine %>
       </div>

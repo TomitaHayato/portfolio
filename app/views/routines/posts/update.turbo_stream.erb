@@ -1,6 +1,6 @@
 <%= turbo_stream.update "flash" do %>
   <%= render partial: 'shared/flash' %>
 <% end %>
-<%= turbo_stream.update "routine-#{@routine.id}" do %>
-  <%= render partial: 'routines/routine', locals: { routine: @routine, task: @task, tags: Tag.includes(:tasks).all } %>
+<%= turbo_stream.update "routine-post-btn-#{@routine.id}" do %>
+  <%= render partial: 'routines/routine_post_btn', locals: { routine: @routine } %>
 <% end %>

@@ -4,7 +4,7 @@ class Routines::PostsController < ApplicationController
   end
 
   def update
-    @routine = current_user.routines.includes(:tasks).find(params[:routine_id])
+    @routine = current_user.routines.find(params[:routine_id])
     if @routine.is_posted?
       @routine.update!(is_posted: false)
       flash.now[:notice] = 'ルーティンを非公開にしました'
