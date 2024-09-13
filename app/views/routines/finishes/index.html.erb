@@ -1,16 +1,24 @@
 <div class="p-3 my-10 mx-auto w-11/12 sm:w-9/12">
 
   <div class="my-5 text-center rounded p-3">
-    <h1 class="text-lg font-semibold lg:text-3xl">ルーティンを達成しました！</h1>
-  </div>
-  <div class="bg-gradient-to-tl from-yellow-300/80 to-yellow-100/60 rounded-full p-3 flex flex-col gap-3 justify-center w-52 h-52 mb-5 mx-auto sm:gap-5 sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-96 lg:h-96 lg:gap-8">
+    <h1 class="my-3 text-lg font-semibold lg:text-3xl">ルーティンを達成しました！</h1>
     <h1 class="text-xl text-center mx-auto sm:text-2xl lg:text-3xl">素敵な一日を!!</h1>
-    <p class="text-sm text-center mx-auto md:text-base">
-      ルーティン達成数：
+  </div>
+
+  <div class="text-center my-3">
+    <%= link_to "マイページへ", root_path, class: "btn bg-gradient-to-tl from-pink-300 to-pink-100 btn-sm text-xs min-h-10 sm:min-w-32 sm:min-h-12 md:text-sm md:min-w-36 md:mx-auto lg:text-lg lg:btn-lg lg:w-44" %>
+  </div>
+
+  <div class="bg-gradient-to-tl from-yellow-300/80 to-yellow-100/60 rounded-full p-3 flex flex-col gap-1 justify-center w-52 h-52 mb-5 mx-auto sm:w-56 sm:h-56 md:w-60 md:h-60 lg:w-96 lg:h-96">
+    <div class="mx-auto my-3">
+      <p class="text-sm font-semibold sm:text-base md:text-lg">獲得経験値:</p>
+      <% @tag_point_hash.each do |name, point| %>
+        <p><%= name %>: <span class="text-blue-500 text-sm font-bold md:text-md md:text-lg"><%= point %></span></p>
+      <% end %>
+    </div>
+    <p class="font-semibold text-sm text-center mx-auto md:text-base">
+      あなたのルーティン達成数<br>
       <span class="text-blue-500 text-base font-bold sm:text-lg md:text-xl"><%= current_user.complete_routines_count %></span>
     </p>
-    <div class="text-center">
-      <%= link_to "マイページへ", root_path, class: "btn bg-gradient-to-tl from-pink-300 to-pink-100 btn-sm text-xs min-h-10 sm:min-w-32 sm:min-h-12 md:text-sm md:min-w-36 md:mx-auto lg:text-lg lg:btn-lg lg:w-44" %>
-    </div>
   </div>
 </div>
