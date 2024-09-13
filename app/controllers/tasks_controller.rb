@@ -17,7 +17,6 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      p task_params
       delete_tags_from_task(@task, task_params[:tag_ids])
       set_tags_on_task(@task, task_params[:tag_ids])
       flash.now[:notice] = 'タスクを更新しました'
@@ -29,7 +28,6 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy!
     flash[:notice] = "タスクを削除しました。(タスク名：#{@task.title})"
-    redirect_to routine_path(@routine), status: :see_other
   end
 
   private
