@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_13_081027) do
   create_table "user_tag_experiences", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "tag_id"
-    t.integer "experience_point", default: 1, null: false
+    t.integer "experience_point", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_user_tag_experiences_on_tag_id"
