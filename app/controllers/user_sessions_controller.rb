@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     @user = login(params[:email], params[:password])
     if @user
       flash[:notice] = 'ログインしました！'
-      redirect_to root_path
+      redirect_to my_pages_path
     else
       render :new
     end
