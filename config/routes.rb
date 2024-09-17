@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :actives, only: %i[update], param: :routine_id
     resources :posts, only: %i[index update], param: :routine_id
     resources :finishes, only: %i[index]
+    resources :likes, only: %i[create destroy], param: :routine_id
   end
 
   namespace :tasks do

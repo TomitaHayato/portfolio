@@ -1,10 +1,11 @@
 <div class="border border-amber-300 p-3 my-5 mx-auto bg-gradient-to-tl from-amber-200/70 to-yellow-50/70 sm:w-11/12 md:w-9/12">
 
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
-    <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
+    <div class="flex justify-end gap-1 items-center mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
+      <span id="routine-like-btn-<%= routine.id %>">
+        <%= render "routines/posts/routine_like_btn", routine: routine, liked_routine_ids: liked_routine_ids %>
+      </span>
       <%= link_to "コピー", routine_copies_path(routine),data: { turbo_method: :post }, class: "min-h-10 btn bg-gradient-to-tl from-teal-300 to-teal-100 text-sm btn-sm sm:btn-md md:text-base" %>
-      <%= link_to "☆", "#", class: "hidden min-h-10 btn bg-gradient-to-tl from-yellow-200 to-yellow-100 text-sm btn-sm sm:btn-md md:text-base" %>
-      <%= link_to "いいね", "#", class: "hidden min-h-10 btn bg-gradient-to-tl from-pink-200 to-pink-100 text-sm btn-sm sm:btn-md md:text-base" %>
     </div>
     <h1 class="break-words text-xl font-semibold my-2 sm:text-2xl md:text-3xl lg:text-4xl"><%= routine.title %></h1>
   </div>
