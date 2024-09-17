@@ -16,6 +16,6 @@ class Routines::LikesController < ApplicationController
   private
 
   def set_routine
-    @routine = current_user.routines.find(params[:routine_id])
+    @routine = Routine.find(params[:routine_id])
   end
 end
