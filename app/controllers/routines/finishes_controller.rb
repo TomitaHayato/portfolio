@@ -12,7 +12,7 @@ class Routines::FinishesController < ApplicationController
   private
 
   def block_if_no_session
-    redirect_to root_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
+    redirect_to my_pages_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
   end
 
   # 獲得した経験値情報から、UserTagExperiencesテーブルに情報を追加していく

@@ -38,7 +38,7 @@ class Routines::PlaysController < ApplicationController
 
   # createアクションを介さないアクセスを拒否
   def block_if_no_session
-    redirect_to root_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
+    redirect_to my_pages_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
   end
 
   # タグidと達成した回数を経験値管理ハッシュに格納する

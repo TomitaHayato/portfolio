@@ -1,9 +1,15 @@
 <%= turbo_stream.update "flash" do %>
   <%= render partial: 'shared/flash' %>
 <% end %>
+
 <%= turbo_stream.append "task-index" do %>
   <%= render partial: 'routines/task', locals: { routine: @routine, task: @task, tags: Tag.includes(:tasks).all } %>
 <% end %>
+
 <%= turbo_stream.update "add_task_btn" do %>
-  <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @routine.tasks.new, tags: Tag.includes(:tasks).all } %>
+  <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: Task.new, tags: Tag.includes(:tasks).all } %>
+<% end %>
+
+<%= turbo_stream.update "total-estimated-time-for-routine-#{@routine.id}" do %>
+  <%= render partial: 'routines/routine_total_estimated_time', locals: { routine: @routine } %>
 <% end %>

@@ -11,6 +11,8 @@ module ApplicationHelper
     current_user ? "min-h-screen bg-repeat-y bg-[url('morning_phone.jpg')]  lg:bg-[url('morning_pc.jpg')]" : ''
   end
 
+  # 表示されているページがトップページかどうかでクラスを変更する
+  # 背景画像のデザインに関するクラス
   def shallow_bg_class
     request.path == root_path ? 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24' : 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
   end
@@ -21,5 +23,10 @@ module ApplicationHelper
 
   def task_form_id(task)
     task.id.nil? ? 'task-form-for-new' : "task-form-for-#{task.id}"
+  end
+
+  # ログインしているか否かでルートページへのパスを返す
+  def root_page
+    current_user ? my_pages_path : root_path
   end
 end
