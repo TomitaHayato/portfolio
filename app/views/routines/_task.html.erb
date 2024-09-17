@@ -15,7 +15,7 @@
             </div>
           </div>
         </dialog>
-        <%= link_to "削除", task_path(task), data: { turbo_method: :delete, turbo_confirm: '削除しますか？' }, class: "btn bg-gradient-to-tl from-red-600 to-red-200 hover:opacity-50 text-xs btn-sm sm:btn-md md:text-base" %>
+        <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn bg-gradient-to-tl from-red-600 to-red-200 hover:opacity-50 text-xs btn-sm sm:btn-md md:text-base" %>
       </div>
     </div>
     <div class="text-xs items-center sm:text-sm sm:flex sm:justify-between md:text-md lg:text-lg">

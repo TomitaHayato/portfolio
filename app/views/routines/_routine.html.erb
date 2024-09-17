@@ -15,20 +15,11 @@
     </div>
 
     <div class="mb-5 text-xs flex justify-between sm:justify-start sm:gap-5 sm:text-sm sm:mx-3 lg:text-base lg:gap-10">
-      <p class="border-b border-orange-200">開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
-      <p class="border-b border-orange-200">
-        目安時間：
-        <span>
-          <%= routine.total_estimated_time[:hour] %> h
-        </span>
-        <span>
-          <%= routine.total_estimated_time[:minute] %> m
-        </span>
-        <span>
-          <%= routine.total_estimated_time[:second] %> s
-        </span>
-      </p>
-      <p class="border-b border-orange-200">達成数： <%= routine.completed_count %></p>
+      <p>開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+      <div id="total-estimated-time-for-routine-<%= routine.id %>">
+        <%= render "routines/routine_total_estimated_time", routine: routine %>
+      </div>
+      <p>達成数： <%= routine.completed_count %></p>
     </div>
 
     <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
