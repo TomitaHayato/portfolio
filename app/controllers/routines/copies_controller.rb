@@ -26,10 +26,28 @@ class Routines::CopiesController < ApplicationController
   end
 
   def copy_tasks(routine_origin, routine_dup)
-    routine_origin.tasks.each do |task|
-      task_dup = task.dup
+    routine_origin.tasks.includes(:tags).each do |task_origin|
+      task_dup = task_origin.dup
       task_dup.update!(routine_id: routine_dup.id)
-      task_dup.insert_at(task.position)
+      task_dup.insert_at(task_origin.position)
+      copy_tags(task_origin, task_dup)
+    end
+  end
+
+  # コピー元のTaskについたtagをコピー先にも紐付ける
+  # task_dupはDBに保存されている必要がある
+  def copy_tags(task_origin, task_dup)
+    TaskTag.insert_all(copy_task_tag_info(task_origin, task_dup)) unless task_origin.tags.empty?
+    task_dup
+  end
+
+  # TaskTagsテーブルに保存する情報をもつ配列を作成する
+  def copy_task_tag_info(task_origin, task_dup)
+    copied_task_tag_info = task_origin.tag_ids.map do |tag_id|
+      {
+        tag_id: tag_id,
+        task_id: task_dup.id
+      }
     end
   end
 end
