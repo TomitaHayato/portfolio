@@ -1,6 +1,8 @@
 class Routine < ApplicationRecord
   belongs_to :user
   has_many :tasks, -> { order(position: :asc) }, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 500 }
