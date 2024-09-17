@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :routines, dependent: :destroy
   has_many :user_tag_experiences, dependent: :destroy
   has_many :tags, through: :user_tag_experiences
+  has_many :likes, dependent: :destroy
+  has_many :liked_routines, through: :likes, source: :routine
 
   validates :password, length: { minimum: 4 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }

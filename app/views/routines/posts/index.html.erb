@@ -5,7 +5,7 @@
   <% if @routines.empty? %>
     <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">現在、投稿はありません</p>
   <% else %>
-    <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine %>
+    <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine, locals:{ liked_routine_ids: @liked_routine_ids } %>
   <% end %>
   <div class="mx-auto"><%= paginate @routines %></div>
 </div>

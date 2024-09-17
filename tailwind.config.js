@@ -1,5 +1,12 @@
+const { iconsPlugin, getIconCollections } = require("@egoist/tailwindcss-icons")
+
 module.exports = {
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    iconsPlugin({
+      collections: getIconCollections(["uiw"]),
+    })
+  ],
   content: [
     './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',
