@@ -55,7 +55,7 @@
  </tr>
  <tr>
   <td>
-   <img src="https://i.gyazo.com/ce696306166335fa9be59b377e89cd27.jpg" width="480">
+   <img src="https://i.gyazo.com/ce696306166335fa9be59b377e89cd27.jpg">
   </td>
   <td><img src="https://i.gyazo.com/0ec85cd25c7af877b78d0cade2ef0b87.gif" width="480"></td>
  </tr>
