@@ -1,9 +1,50 @@
 name: RspecTest
 on: push
 jobs:
-  test:
+  rspec-test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
-      - uses: actions/checkout@v4
-      - run: bundle install
-      - run: bundle exec rspec
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          bundler-cache: true
+      
+      - name: Cache Node
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node-${{ runner.os }}-
+      
+
+      - name: Bundler and Gem Install
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Database Create
+        run: bundle exec rails db:create RAILS_ENV=test
+      
+      - name: Database Migration
+        run: bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run Rspec
+        run: bundle exec rspec
+
