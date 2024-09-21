@@ -1,0 +1,61 @@
+name: RspecTest
+on: pull_request
+jobs:
+  rspec-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.4
+          bundler-cache: true
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+      
+      - name: Cache Node
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node-${{ runner.os }}-
+      
+      - name: Yarn Install
+        run: |
+          yarn -v
+          node -v
+          yarn install
+
+      - name: Bundler and Gem Install
+        run: |
+          gem install bundler -v '2.5.17'
+          bundle install
+
+      - name: Database Create
+        run: bundle exec rails db:create RAILS_ENV=test
+      
+      - name: Database Migration
+        run: bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run Rspec
+        run: bundle exec rspec
+
