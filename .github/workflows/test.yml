@@ -29,8 +29,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.17.0
-          yarn-version: '1.22.22'
+          node-version-file: 'package.json'
       
       - name: Cache Node
         uses: actions/cache@v4
