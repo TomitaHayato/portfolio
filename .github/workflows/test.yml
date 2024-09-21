@@ -34,6 +34,10 @@ jobs:
           restore-keys: |
             node-${{ runner.os }}-
       
+      - name: Yarn Install
+        run: |
+          yarn -v
+          yarn install
 
       - name: Bundler and Gem Install
         run: |
