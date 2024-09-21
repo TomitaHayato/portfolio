@@ -23,6 +23,7 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
+          ruby-version: '3.3.4'
           bundler-cache: true
       
       - name: Cache Node
@@ -36,7 +37,7 @@ jobs:
 
       - name: Bundler and Gem Install
         run: |
-          gem install bundler
+          gem install bundler -v '2.5.17'
           bundle install
 
       - name: Database Create
