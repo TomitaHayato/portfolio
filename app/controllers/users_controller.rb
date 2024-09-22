@@ -14,8 +14,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_new_params)
     if @user.save
+      auto_login(@user)
       flash[:notice] = 'ユーザーを新しく追加しました'
-      redirect_to login_path
+      redirect_to my_pages_path
     else
       flash.now[:alert] = 'ユーザーの作成に失敗しました'
       render :new, status: :unprocessable_entity
