@@ -4,6 +4,7 @@
     <div class="max-w-md">
       <h1 class="mb-5 text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-green-500 md:text-6xl">Morning<br>Forest</h1>
       <p class="text-gray-600 sm:text-lg md:text-xl mx-10">モーニングルーティンを作成・共有して、最高の朝を目指しましょう！</p>
+      <%= link_to 'Login with LINE', auth_at_provider_path(:provider => :line), class: "btn btn-primary" %>
     </div>
   </div>
 
