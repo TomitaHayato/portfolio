@@ -17,6 +17,7 @@ Rails.application.config.sorcery.configure do |config|
   # コールバックIDを設定
   config.line.callback_url = Settings.sorcery[:line_callback_url]
   config.line.scope = 'profile'
+  config.line.user_info_mapping = {name: 'displayName', email: 'userId'}
 
   # -- core --
   # What controller action to call for non-authenticated users. You can also
@@ -252,6 +253,7 @@ Rails.application.config.sorcery.configure do |config|
   # config.battlenet.scope = 'openid'
   # --- user config ---
   config.user_config do |user|
+    user.authentications_class = Authentication
     # -- core --
     # Specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
