@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   end
 
   post 'oauth/callback' => 'oauths#callback'
-  get 'oauth/callback' => 'oauths#callback' # for use with Github, Facebook
+  get 'oauth/callback' => 'oauths#callback'
   get 'oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
+
+  get 'terms', to: 'static_pages#terms'
+  get 'policy', to: 'static_pages#policy'
 end

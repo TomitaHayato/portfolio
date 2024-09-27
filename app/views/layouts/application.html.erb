@@ -15,20 +15,23 @@
 
   <body class="h-full">
     <% if current_user %>
-      <%= render "shared/header" %>
+      <%= render 'shared/header' %>
     <% else %>
-      <%= render "shared/before_login_header" %>
+      <%= render 'shared/before_login_header' %>
     <% end %>
 
     <div class="<%= bg_image_class %>">
       <div class="<%= shallow_bg_class %>">
         <div id="flash">
-          <%= render "shared/flash" %>
+          <%= render 'shared/flash' %>
         </div>
         <%= yield %>
       </div>
     </div>
+
+    <%= render 'shared/footer' %>
   </body>
+
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
