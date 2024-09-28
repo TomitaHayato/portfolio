@@ -14,7 +14,14 @@ module ApplicationHelper
   # 表示されているページがトップページかどうかでクラスを変更する
   # 背景画像のデザインに関するクラス
   def shallow_bg_class
-    request.path == root_path ? 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24' : 'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
+    case request.path
+    when root_path
+      'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24'
+    when policy_path, terms_path
+      'mt-12 sm:mt-16 md:mt-20 lg:mt-24'
+    else
+      'pb-16 mt-12 sm:mt-16 md:mt-20 lg:mt-24 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
+    end
   end
 
   def task_arrange_class
