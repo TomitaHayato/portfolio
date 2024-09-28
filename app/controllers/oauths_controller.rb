@@ -11,7 +11,7 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if @user = login_from(provider)
-      redirect_to my_pages_path, :notice => "ログインしました！"
+      redirect_to user_path(@user), :notice => "ログインしました！ メールアドレスの編集を行なってください"
     else
       begin
         @user = create_from(provider)
@@ -23,7 +23,7 @@ class OauthsController < ApplicationController
 
         reset_session
         auto_login(@user)
-        redirect_to root_path, :notice => "Logged in from #{provider.titleize}!"
+        redirect_to user_path(@user), :notice => "ログインしました！ メールアドレスの編集を行なってください"
       rescue
         redirect_to root_path, :alert => "Failed to login from #{provider.titleize}!"
       end
