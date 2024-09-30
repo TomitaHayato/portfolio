@@ -1,8 +1,8 @@
 class LinebotsController < ApplicationController
-  protect_from_forgery except: :create
+  protect_from_forgery except: :callback
   skip_before_action :require_login
 
-  def create
+  def callback
     client = Line::Bot::Client.new do |config|
       config.channel_id = Rails.application.credentials.channel_id
       config.channel_secret = Rails.application.credentials.channel_secret
@@ -28,12 +28,13 @@ class LinebotsController < ApplicationController
 
   private
 
+  # ユーザーがテキストメッセージを送信した場合のみ、応答を返す
   def parse_message_type(event)
-    case event.type
-    when Line::Bot::Event::MessageType::Text
-      "ルーティンを始めましょう！ #{my_pages_url}" # ユーザーが投稿したものがテキストメッセージだった場合に返す値
+    return '(^ ^)' unless event.type == Line::Bot::Event::MessageType::Text
+    if event.message['text'] == 'ActiveJob-開始時間通知'
+      "おはようございます！！\n朝のルーティンを始めましょう！！\n#{my_pages_url}"
     else
-      'Thanks!!' # ユーザーが投稿したものがテキストメッセージ以外だった場合に返す値
+      "メッセージをありがとう！！\nルーティン開始時間になったら通知を送るよ！"
     end
   end
 end
