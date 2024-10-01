@@ -17,6 +17,7 @@ Rails.application.config.sorcery.configure do |config|
   # コールバックIDを設定
   config.line.callback_url = Settings.sorcery[:line_callback_url]
   config.line.scope = 'profile'
+  config.line.bot_prompt = 'aggressive' # LINEログイン時に公式アカウントを友だち追加
   config.line.user_info_mapping = {name: 'displayName', email: 'userId'}
 
   # -- core --
