@@ -2,18 +2,18 @@ class SetNotificationJob < ApplicationJob
   queue_as :default
 
   def perform()
-    # Do something later
+    time_now = Time.current
     User.includes(:routines).each do |user|
       active_routine = user.routines.find_by(is_active: true)
-      p "#{active_routine}は#{user.name}のルーティン"
-      perform_line_notification_job(active_routine, user) if active_routine
+      perform_line_notification_job(active_routine, user, time_now) if active_routine
     end
   end
 
   private
 
-  def perform_line_notification_job(routine, user)
-    if routine.start_time.strftime('%H:%M') == Time.current.strftime('%H:%M')
+  def perform_line_notification_job(routine, user, time_now)
+    if routine.start_time.strftime('%H:%M') == time_now.strftime('%H:%M')
+      p "#{routine}は#{user.name}のルーティン"
       LineNotificationJob.perform_later(user.id)
     end
   end
