@@ -1,2 +1,4 @@
 sorcery:
   line_callback_url: 'https://morning-forest.com/oauth/callback?provider=line'
+url:
+  host: 'https://morning-forest.com'
