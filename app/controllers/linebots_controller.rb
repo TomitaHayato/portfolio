@@ -31,10 +31,6 @@ class LinebotsController < ApplicationController
   # ユーザーがテキストメッセージを送信した場合のみ、応答を返す
   def parse_message_type(event)
     return '(^ ^)' unless event.type == Line::Bot::Event::MessageType::Text
-    if event.message['text'] == 'ActiveJob-開始時間通知'
-      "おはようございます！！\n朝のルーティンを始めましょう！！\n#{my_pages_url}"
-    else
-      "メッセージをありがとう！！\nルーティン開始時間になったら通知を送るよ！"
-    end
+    "メッセージをありがとう！！\nルーティン開始時間になったら通知を送るよ！\n#{my_pages_url}"
   end
 end
