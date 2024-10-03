@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -37,4 +39,10 @@ Rails.application.routes.draw do
 
   get 'terms', to: 'static_pages#terms'
   get 'policy', to: 'static_pages#policy'
+
+  Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
+    user == Rails.application.credentials.dig(:sidekiq, :user) &&
+    password == Rails.application.credentials.dig(:sidekiq, :password)
+  end
+  mount Sidekiq::Web, at: '/sidekiq'
 end
