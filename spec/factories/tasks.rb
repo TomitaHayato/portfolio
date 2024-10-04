@@ -15,6 +15,7 @@ require 'faker'
 FactoryBot.define do
   factory :task do
     title { Faker::Lorem.characters(number: 25) }
+    association :routine
 
     trait :nil_title_estimated_time do
       title { nil }

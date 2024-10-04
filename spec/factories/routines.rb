@@ -8,8 +8,9 @@ FactoryBot.define do
   factory :routine do
     title { Faker::Lorem.characters(number: 50) }
     description { Faker::Lorem.characters(number: 500) }
+    association :user
 
-    trait :no_title do
+    trait :nil_title do
       title { nil }
     end
 
