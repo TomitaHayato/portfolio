@@ -36,4 +36,54 @@ RSpec.describe Routine, type: :model do
       expect(Routine.posted).to match_array(posted_routines)
     end
   end
+
+  describe 'モデルインスタンスメソッドの処理確認' do
+    describe 'reset_statusメソッド' do
+      it 'reset_statusメソッドを使用すると、is_active, is_posted, completed_count, copied_countカラムの値が初期化される' do
+        routine = build(:routine, :active_posted_counted)
+        routine_reseted = routine.reset_status
+        expect(routine_reseted).to have_attributes(is_active: false, is_posted: false, completed_count: 0, copied_count: 0)
+      end
+    end
+
+    describe 'total_estimated_timeメソッド' do
+      context 'タスクが存在しない場合' do
+        it 'total_estimated_timeメソッドの返り値が"00"になる' do
+          routine = create(:routine)
+          total_estimated_time_result = routine.total_estimated_time
+          expect(total_estimated_time_result[:hour]).to eq '00'
+          expect(total_estimated_time_result[:minute]).to eq '00'
+          expect(total_estimated_time_result[:second]).to eq '00'
+        end
+      end
+      
+      context 'HH:MM:SSの各値が1桁の場合' do
+        it 'total_estimated_timeメソッドの返り値が、Routineモデルインスタンスに属する全Taskの目安時間の合計になる' do
+          routine = create(:routine)
+          task1 = create(:task, routine: routine, estimated_time_in_second: 3661)
+          task2 = create(:task, routine: routine, estimated_time_in_second: 3661)
+          task_of_another_routine = create(:task, estimated_time_in_second: 3661)
+          
+          total_estimated_time_result = routine.total_estimated_time
+          expect(total_estimated_time_result[:hour]).to eq '02'
+          expect(total_estimated_time_result[:minute]).to eq '02'
+          expect(total_estimated_time_result[:second]).to eq '02'
+        end
+      end
+
+      context 'HH:MM:SSの各値が2桁の場合' do
+        it 'total_estimated_timeメソッドの返り値が、Routineモデルインスタンスに属する全Taskの目安時間の合計になる' do
+          routine = create(:routine)
+          task1 = create(:task, routine: routine, estimated_time_in_second: 36610)
+          task2 = create(:task, routine: routine, estimated_time_in_second: 36610)
+          task_of_another_routine = create(:task, estimated_time_in_second: 36610)
+          
+          total_estimated_time_result = routine.total_estimated_time
+          expect(total_estimated_time_result[:hour]).to eq 20
+          expect(total_estimated_time_result[:minute]).to eq 20
+          expect(total_estimated_time_result[:second]).to eq 20
+        end
+      end
+    end
+  end
 end

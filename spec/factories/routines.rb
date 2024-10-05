@@ -18,5 +18,12 @@ FactoryBot.define do
       title { Faker::Lorem.characters(number: 51) }
       description { Faker::Lorem.characters(number: 501) }
     end
+
+    trait :active_posted_counted do
+      is_active { true }
+      is_posted { true }
+      completed_count { 1 }
+      copied_count { 1 }
+    end
   end
 end
