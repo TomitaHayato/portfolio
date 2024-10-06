@@ -2,7 +2,8 @@ class RoutinesController < ApplicationController
   before_action :set_routine, only: %i[show edit update destroy]
 
   def index
-    @routines = current_user.routines.includes(:tasks).order(created_at: :desc).page(params[:page])
+    @routines = current_user.routines.search(params[:user_words]).includes(:tasks).order(created_at: :desc).page(params[:page])
+    @user_words = params[:user_words]
   end
 
   def show

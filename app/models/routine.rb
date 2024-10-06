@@ -25,6 +25,21 @@ class Routine < ApplicationRecord
     result
   end
 
+  # 検索処理：routineタイトルと説明文で部分検索
+  def self.search(user_word)
+    return all unless user_word
+
+    user_words = user_word.split(' ')
+
+    search_query = user_words.map{ '(title LIKE ? OR description LIKE ?)' }.join(' AND ')
+    like_values = []
+    user_words.each do |word|
+      2.times{ like_values << "%#{word}%" }
+    end
+    
+    where(search_query, *like_values)
+  end
+
   private
 
   def second_to_time_string(time_in_second)
