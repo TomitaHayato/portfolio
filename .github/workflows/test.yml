@@ -1,5 +1,5 @@
 name: RspecTest
-on: pull_request
+on: push
 jobs:
   rspec-test:
     runs-on: ubuntu-latest

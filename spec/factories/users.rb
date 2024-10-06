@@ -7,6 +7,7 @@ FactoryBot.define do
     password              { Faker::Alphanumeric.alphanumeric(number: 4) }
     password_confirmation { password }
 
+    # passwordとpassword_confirmationが一致しないパターン
     trait :no_match_password_confirmation do
       password_confirmation { Faker::Alphanumeric.alphanumeric(number: 5) }
     end
