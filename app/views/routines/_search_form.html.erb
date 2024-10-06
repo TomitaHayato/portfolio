@@ -1,8 +1,14 @@
 <div class="my-3">
   <%= form_with url: request.path, method: :get do |f| %>
-    <div class="flex justify-center">
-      <%= f.text_field :user_words, placeholder: '検索ワード 空白で区切ると複数指定できます', value: user_words, class:"input input-bordered w-8/12 text-xs" %>
-      <%= f.submit '検索', class: "btn btn-primary text-xs" %>
+    <div class="flex justify-center mx-auto w-9/12">
+      <label class="input input-sm input-bordered flex items-center gap-2 text-sm px-1.5 grow sm:px-2 sm:input-md lg:px-3 lg:text-base">
+        <%= f.text_field :user_words, placeholder: '検索ワード', value: user_words, class:"form-input grow" %>
+        <button type="button" class="reset-button">
+          <i class="i-uiw-circle-close-o w-5 h-5 block text-gray-500 active:w-[20px] active:h-[20px]"></i>
+        </button>
+      </label>
+
+      <%= f.submit '検索', class: "btn btn-sm btn-primary text-sm block sm:btn-md" %>
     </div>
   <% end %>
 </div>
