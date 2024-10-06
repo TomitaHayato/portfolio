@@ -2,8 +2,11 @@
   <div class="text-end">
     <%= link_to "ルーティンを投稿する", routines_path, class:"btn bg-gradient-to-tl from-green-400 to-green-100 btn-md max-w-24 text-xs p-2 mr-2 sm:mr-5 sm:text-sm sm:max-w-40 md:max-w-48 md:mr-10 lg:btn-lg lg:max-w-60 lg:text-lg" %>
   </div>
+
+  <%= render 'routines/search_form', user_words: @user_words %>
+
   <% if @routines.empty? %>
-    <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">現在、投稿はありません</p>
+    <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">投稿はありません</p>
   <% else %>
     <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine, locals:{ liked_routine_ids: @liked_routine_ids } %>
   <% end %>
