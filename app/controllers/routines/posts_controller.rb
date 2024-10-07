@@ -3,7 +3,7 @@ class Routines::PostsController < ApplicationController
 
   def index
     @user_words = params[:user_words]
-    @routines = Routine.search(@user_words).includes(:tasks, :user).posted.sort_posted(@column, @direction).page(params[:page])
+    @routines = Routine.search(@user_words).includes({ tasks: :tags }, :user).posted.sort_posted(@column, @direction).page(params[:page])
     @liked_routine_ids = current_user.liked_routine_ids
   end
 
