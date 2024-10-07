@@ -1,8 +1,9 @@
 class RoutinesController < ApplicationController
   before_action :set_routine, only: %i[show edit update destroy]
+  before_action :set_order_query, only: %i[index]
 
   def index
-    @routines = current_user.routines.search(params[:user_words]).includes(:tasks).order(created_at: :desc).page(params[:page])
+    @routines = current_user.routines.search(params[:user_words]).includes(:tasks).sort_routine(@column, @direction).page(params[:page])
     @user_words = params[:user_words]
   end
 
@@ -46,6 +47,12 @@ class RoutinesController < ApplicationController
   end
 
   private
+
+  def set_order_query
+    @column = params[:column]
+    @direction = params[:direction]
+    @order_list = [['作成日', nil], ['達成数', 'completed_count']]
+  end
 
   def routine_params
     params.require(:routine).permit(:title, :description, :start_time)
