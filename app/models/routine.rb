@@ -40,6 +40,22 @@ class Routine < ApplicationRecord
     where(search_query, *like_values)
   end
 
+  # 投稿の並べ替え処理
+  def self.sort_posted(column, direction)
+    column = "posted_at" if column.blank? 
+    direction = "desc" if direction.blank? 
+    
+    order_by(column, direction)
+  end
+
+  # ルーティン一覧の並べ替え
+  def self.sort_routine(column, direction)
+    column = "created_at" if column.blank? 
+    direction = "desc" if direction.blank? 
+
+    order_by(column, direction)
+  end
+
   private
 
   def second_to_time_string(time_in_second)
@@ -59,5 +75,12 @@ class Routine < ApplicationRecord
       end
     end
     total_estimated_time_in_second
+  end
+
+  def self.order_by(column, direction)
+    column_sym = column.to_sym
+    direction_sym = direction.to_sym
+
+    order(column_sym => direction_sym)
   end
 end
