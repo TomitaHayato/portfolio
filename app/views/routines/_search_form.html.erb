@@ -7,8 +7,12 @@
           <i class="i-uiw-circle-close-o w-5 h-5 block text-gray-500 active:w-[20px] active:h-[20px]"></i>
         </button>
       </label>
-
       <%= f.submit '検索', class: "btn btn-sm btn-primary text-sm block sm:btn-md" %>
+    </div>
+
+    <div class="w-9/12 mx-auto my-3">
+      <%= f.select :column, @order_list, { selected: @column }, class: "select select-bordered select-sm" %>
+      <%= f.select :direction, [['降順', nil], ['昇順', 'asc']], { selected: @direction }, class: "select select-bordered select-sm" %>
     </div>
   <% end %>
 </div>
