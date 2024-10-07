@@ -3,7 +3,8 @@ class RoutinesController < ApplicationController
   before_action :set_order_query, only: %i[index]
 
   def index
-    @routines = current_user.routines.search(params[:user_words]).includes(:tasks).sort_routine(@column, @direction).page(params[:page])
+    @tags = Tag.includes(:tasks).all
+    @routines = current_user.routines.search(params[:user_words]).includes(tasks: :tags).sort_routine(@column, @direction).page(params[:page])
     @user_words = params[:user_words]
   end
 

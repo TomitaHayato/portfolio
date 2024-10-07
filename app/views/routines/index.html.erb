@@ -10,7 +10,7 @@
       <%= @user_words.nil? ? "ルーティンがありません<br>ルーティンを作成しましょう！！" : "一致するルーティンはありません" %>
     </p>
   <% else %>
-    <%= render @routines %>
+    <%= render @routines, tags: @tags %>
   <% end %>
   
   <%= paginate @routines %>
