@@ -8,6 +8,11 @@ class Routine < ApplicationRecord
   validates :description, length: { maximum: 500 }
 
   scope :posted, -> { where(is_posted: true) }
+  scope :unposted, -> { where(is_posted: false) }
+  scope :my_post, ->(user_id)  { where(user_id: user_id) }
+  scope :official, ->{ joins(:user).where(users: { role: 'admin' }) }
+  scope :general, -> { joins(:user).where(users: { role: 'general' }) }
+  scope :liked, ->(user_id) { joins(:likes).where(likes: { user_id: user_id }) }
 
   def reset_status
     self.is_active = false
@@ -23,6 +28,58 @@ class Routine < ApplicationRecord
     result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
     result[:second] = "0#{result[:second]}" if result[:second] < 10
     result
+  end
+
+  # 検索処理：routineタイトルと説明文で部分検索
+  def self.search(user_word)
+    return all unless user_word
+
+    user_words = user_word.split(' ')
+
+    search_query = user_words.map{ '(title LIKE ? OR description LIKE ?)' }.join(' AND ')
+    like_values = []
+    user_words.each do |word|
+      2.times{ like_values << "%#{word}%" }
+    end
+    
+    where(search_query, *like_values)
+  end
+
+  # 絞り込み処理
+  # 公式のみ、一般のみ、お気に入りのみ
+  def self.custom_filter(filter_target, login_user_id)
+    return all if filter_target.blank?
+    
+    case filter_target
+    when 'liked'
+      liked(login_user_id)
+    when 'official'
+      official
+    when 'general'
+      general
+    when 'my_post'
+      my_post(login_user_id)
+    when 'posted'
+      posted
+    when 'unposted'
+      unposted
+    end
+  end
+  
+  # 投稿の並べ替え処理
+  def self.sort_posted(column, direction)
+    column = "posted_at" if column.blank? 
+    direction = "desc" if direction.blank? 
+    
+    order_by(column, direction)
+  end
+
+  # ルーティン一覧の並べ替え
+  def self.sort_routine(column, direction)
+    column = "created_at" if column.blank? 
+    direction = "desc" if direction.blank? 
+
+    order_by(column, direction)
   end
 
   private
@@ -44,5 +101,12 @@ class Routine < ApplicationRecord
       end
     end
     total_estimated_time_in_second
+  end
+
+  def self.order_by(column, direction)
+    column_sym = column.to_sym
+    direction_sym = direction.to_sym
+
+    order(column_sym => direction_sym)
   end
 end

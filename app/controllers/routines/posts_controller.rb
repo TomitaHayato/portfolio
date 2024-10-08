@@ -1,6 +1,10 @@
 class Routines::PostsController < ApplicationController
+  before_action :set_order_query, only: %i[index]
+  before_action :set_filter_target, only: %i[index]
+
   def index
-    @routines = Routine.includes(:tasks, :user).posted.order(posted_at: :desc).page(params[:page])
+    @user_words = params[:user_words]
+    @routines = Routine.search(@user_words).custom_filter(@filter_target, current_user.id).includes({ tasks: :tags }, :user).posted.sort_posted(@column, @direction).page(params[:page])
     @liked_routine_ids = current_user.liked_routine_ids
   end
 
@@ -13,5 +17,18 @@ class Routines::PostsController < ApplicationController
       @routine.update!(is_posted: true, posted_at: Time.current)
       flash.now[:notice] = 'ルーティンを投稿しました'
     end
+  end
+
+  private
+
+  def set_order_query
+    @column = params[:column]
+    @direction = params[:direction]
+    @order_list = [['投稿日', nil], ['コピー数', 'copied_count']]
+  end
+
+  def set_filter_target
+    @filter_target = params[:filter_target]
+    @filter_options = [['すべて', nil], ['自分の投稿', 'my_post'], ['お気に入り', 'liked'], ['公式の投稿', 'official'], ['ユーザーの投稿', 'general']]
   end
 end
