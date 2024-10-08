@@ -47,4 +47,6 @@ Rails.application.routes.draw do
     password == Rails.application.credentials.dig(:sidekiq, :password)
   end
   mount Sidekiq::Web, at: '/sidekiq'
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
