@@ -1,0 +1,13 @@
+<div>
+  <h3>パスワードリセット申請</h3>
+  <%= form_with url: password_resets_path do |f| %>
+    <div class="">
+      <div>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+      <%= f.submit '申請' %>
+    </div>
+
+  <% end %>
+</div>

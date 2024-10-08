@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ('/')
   root 'top_pages#index'
   resources :users, only: %i[new create show edit update]
-  resources :password_resets, only: [:create, :edit, :update]
+  resources :password_resets, only: %i[new create edit update]
   resources :my_pages, only: %i[index]
 
   get 'login', to: 'user_sessions#new'

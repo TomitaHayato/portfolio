@@ -1,6 +1,8 @@
 class PasswordResetsController < ApplicationController
   skip_before_action :require_login
 
+  def new; end
+  
   # パスワードリセットのリクエスト。
   # ユーザーがリセットパスワードフォームにメールアドレスを入力して送信したときにここにきます。
   def create 
