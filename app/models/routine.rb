@@ -8,13 +8,17 @@ class Routine < ApplicationRecord
   validates :description, length: { maximum: 500 }
 
   scope :posted, -> { where(is_posted: true) }
+  scope :unposted, -> { where(is_posted: false) }
+  scope :my_post, ->(user_id)  { where(user_id: user_id) }
+  scope :official, ->{ joins(:user).where(users: { role: 'admin' }) }
+  scope :general, -> { joins(:user).where(users: { role: 'general' }) }
+  scope :liked, ->(user_id) { joins(:likes).where(likes: { user_id: user_id }) }
 
   def reset_status
     self.is_active = false
     self.is_posted = false
     self.copied_count = 0
     self.completed_count = 0
-    self
   end
 
   def total_estimated_time
@@ -40,6 +44,27 @@ class Routine < ApplicationRecord
     where(search_query, *like_values)
   end
 
+  # 絞り込み処理
+  # 公式のみ、一般のみ、お気に入りのみ
+  def self.custom_filter(filter_target, login_user_id)
+    return all if filter_target.blank?
+    
+    case filter_target
+    when 'liked'
+      liked(login_user_id)
+    when 'official'
+      official
+    when 'general'
+      general
+    when 'my_post'
+      my_post(login_user_id)
+    when 'posted'
+      posted
+    when 'unposted'
+      unposted
+    end
+  end
+  
   # 投稿の並べ替え処理
   def self.sort_posted(column, direction)
     column = "posted_at" if column.blank? 
