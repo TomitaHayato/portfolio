@@ -14,10 +14,10 @@
     "@hotwired/turbo-rails": "^8.0.5",
     "@iconify/json": "^2.2.249",
     "autoprefixer": "^10.4.20",
-    "daisyui": "^4.12.10",
+    "daisyui": "^4.12.12",
     "postcss": "^8.4.41",
     "sortablejs": "^1.15.3",
-    "tailwindcss": "^3.4.10"
+    "tailwindcss": "^3.4.13"
   },
   "engines": {
     "node": "20.17.0",
