@@ -167,6 +167,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
+    mutex_m (0.2.0)
     net-http (0.4.1)
       uri
     net-imap (0.4.14)
@@ -376,6 +377,7 @@ DEPENDENCIES
   jsbundling-rails
   kaminari
   line-bot-api
+  mutex_m
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.4)

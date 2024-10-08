@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.3.4"
 
+# 警告メッセージを消す
+gem 'mutex_m'
 #9 tailswindを導入
 gem "cssbundling-rails"
 #16 ユーザー登録機能
