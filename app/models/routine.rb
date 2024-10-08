@@ -19,6 +19,7 @@ class Routine < ApplicationRecord
     self.is_posted = false
     self.copied_count = 0
     self.completed_count = 0
+    self
   end
 
   def total_estimated_time
