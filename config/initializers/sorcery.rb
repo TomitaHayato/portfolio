@@ -8,6 +8,7 @@ Rails.application.config.sorcery.submodules = [:external, :reset_password]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
+  # ------------- LINEログイン ----------------------------
   # 外部認証のプロバイダーにLineを追加
   config.external_providers = %i[line]
 
@@ -414,7 +415,7 @@ Rails.application.config.sorcery.configure do |config|
     # Password reset mailer class.
     # Default: `nil`
     #
-    # user.reset_password_mailer =
+    user.reset_password_mailer = UserMailer
 
     # Reset password email method on your mailer class.
     # Default: `:reset_password_email`
