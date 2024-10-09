@@ -1,22 +1,27 @@
-<div>
-  <h3>パスワード再設定</h3>
-  <%= form_with model: @user, url: password_reset_path(@token) do |f| %>
+<div class="">
+  <h1 class="text-xl font-semibold pt-5 mt-5 mb-5 text-center sm:text-3xl lg:text-4xl">パスワードリセット申請</h1>
+  <%= form_with model: @user, url: password_reset_path(@token), class:"text-center" do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div>
-     	<%= f.label :email %>
-      <%= @user.email %>
-    </div>
- 
-    <div>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+      <div class="mx-auto my-5">
+       	<%= f.label :email, class: "mb-1 lg:text-lg" %>
+        <p class="font-semibold md:text-lg">
+          <%= @user.email %>
+        </p>
+      </div>
+    
+      <div class="mx-auto my-5">
+        <%= f.label :password, '新しいパスワード', class: "mb-1 lg:text-lg" %>
+        <%= f.password_field :password, class: "block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2" %>
+      </div>
+
+      <div class="mx-auto my-5">
+        <%= f.label :password_confirmation, '新しいパスワード（確認）', class: "mb-1 lg:text-lg" %>
+        <%= f.password_field :password_confirmation, class: "block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2" %>
+      </div>
+
+      <%= f.submit '変更する', class: "btn bg-gradient-to-tl from-sky-600 to-sky-200 mb-5 btn-md min-w-20 sm:text-lg sm:btn-lg sm:min-w-32 lg:min-w-40 hover:opacity-80" %>
     </div>
 
-    <div>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-
-    <%= f.submit 'リセット' %>
   <% end %>
 </div>
