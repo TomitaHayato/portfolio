@@ -18,4 +18,32 @@ class User < ApplicationRecord
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
   enum role: { admin: 0, general: 1 }
+
+  # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
+  def reward_get_check
+    locked_rewards = Reward.not_for_user(self.id) # レシーバが取得していない報酬データを取得
+    p "-------#{Reward.not_for_user(self.id).size}------"
+    locked_rewards.each do |reward|
+      reward_condition = reward.condition
+      rewards << reward if self.send(reward_condition.to_sym)
+    end
+  end
+
+  private
+
+  def completed_routine_1?
+    complete_routines_count >= 1
+  end
+
+  def completed_routines_3?
+    complete_routines_count >= 3
+  end
+
+  def get_experiences_10?
+    user_tag_experiences.total_experience_points >= 10
+  end
+
+  def post_routine_1?
+    routines.posted.size >= 1
+  end
 end
