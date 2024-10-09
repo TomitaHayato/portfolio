@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   # Defines the root path route ('/')
   root 'top_pages#index'
   resources :users, only: %i[new create show edit update]
+  resources :password_resets, only: %i[new create edit update]
   resources :my_pages, only: %i[index]
+
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
@@ -45,4 +47,6 @@ Rails.application.routes.draw do
     password == Rails.application.credentials.dig(:sidekiq, :password)
   end
   mount Sidekiq::Web, at: '/sidekiq'
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

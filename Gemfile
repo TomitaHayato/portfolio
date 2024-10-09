@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.3.4"
 
+# 警告メッセージを消す
+gem 'mutex_m'
 #9 tailswindを導入
 gem "cssbundling-rails"
 #16 ユーザー登録機能
@@ -83,6 +85,9 @@ group :development, :test do
 end
 
 group :development do
+  # パスワードリセット
+  gem 'letter_opener_web', '~> 3.0'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   # rspec

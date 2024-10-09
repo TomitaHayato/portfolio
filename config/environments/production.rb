@@ -62,7 +62,20 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "app_production"
 
+  # -------------- Action Mailer ------------------------
+  config.action_mailer.default_url_options = { protocol: 'https', host: Settings.url.host_domain}
   config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port: 587,
+    address:"smtp.gmail.com", # GmailのSTMPサーバのアドレス
+    domain: 'gmail.com', #Gmailを使う場合
+    user_name: Rails.application.credentials.gmail[:user], #Gmailアカウントのメールアドレス
+    password: Rails.application.credentials.gmail[:password], #Gmailで設定したアプリパスワード
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
