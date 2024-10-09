@@ -6,9 +6,5 @@ class Reward < ApplicationRecord
   validates :condition, presence: true
 
   scope :for_user, ->(user_id) { joins(:user_rewards).where(user_rewards: { user_id: user_id }) }
-  scope :not_for_user, ->(user_id) {
-    left_outer_joins(:user_rewards)
-      .where(user_rewards: { user_id: nil })
-      .or(where.not(user_rewards: { user_id: user_id }))
-  }
+  scope :not_for_user, ->(user) { where.not(id: user.reward_ids) }
 end
