@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_08_170650) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_09_114035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_08_170650) do
     t.index ["routine_id"], name: "index_likes_on_routine_id"
     t.index ["user_id", "routine_id"], name: "index_likes_on_user_id_and_routine_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "codition", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "routines", force: :cascade do |t|
@@ -74,6 +81,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_08_170650) do
     t.index ["routine_id"], name: "index_tasks_on_routine_id"
   end
 
+  create_table "user_rewards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "reward_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_id"], name: "index_user_rewards_on_reward_id"
+    t.index ["user_id", "reward_id"], name: "index_user_rewards_on_user_id_and_reward_id", unique: true
+    t.index ["user_id"], name: "index_user_rewards_on_user_id"
+  end
+
   create_table "user_tag_experiences", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "tag_id"
@@ -107,6 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_08_170650) do
   add_foreign_key "task_tags", "tags"
   add_foreign_key "task_tags", "tasks"
   add_foreign_key "tasks", "routines"
+  add_foreign_key "user_rewards", "rewards"
+  add_foreign_key "user_rewards", "users"
   add_foreign_key "user_tag_experiences", "tags"
   add_foreign_key "user_tag_experiences", "users"
 end
