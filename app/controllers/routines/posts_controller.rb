@@ -6,6 +6,7 @@ class Routines::PostsController < ApplicationController
     @user_words = params[:user_words]
     @routines = Routine.search(@user_words).custom_filter(@filter_target, current_user.id).includes({ tasks: :tags }, :user).posted.sort_posted(@column, @direction).page(params[:page])
     @liked_routine_ids = current_user.liked_routine_ids
+    @auto_complete_list = (Routine.posted.pluck(:title) + Routine.posted.pluck(:description).reject(&:blank?)).uniq
   end
 
   def update

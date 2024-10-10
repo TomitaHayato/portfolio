@@ -7,6 +7,7 @@ class RoutinesController < ApplicationController
     @tags = Tag.includes(:tasks).all
     @routines = current_user.routines.search(params[:user_words]).custom_filter(@filter_target, current_user.id).includes(tasks: :tags).sort_routine(@column, @direction).page(params[:page])
     @user_words = params[:user_words]
+    @auto_complete_list = (current_user.routines.pluck(:title) + current_user.routines.pluck(:description).reject(&:blank?)).uniq
   end
 
   def show
