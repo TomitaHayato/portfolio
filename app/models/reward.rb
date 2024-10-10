@@ -1,4 +1,6 @@
 class Reward < ApplicationRecord
+  mount_uploader :image, RewardImageUploader
+
   has_many :user_rewards, dependent: :destroy
   has_many :users, through: :user_rewards
 
