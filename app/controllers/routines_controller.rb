@@ -34,7 +34,7 @@ class RoutinesController < ApplicationController
   def update
     if @routine.update(routine_params)
       flash[:notice] = '更新しました'
-      redirect_to routine_path(@routine)
+      redirect_to request.referer || routine_path(@routine)
     else
       render :edit, status: :unprocessable_entity
     end
