@@ -36,7 +36,7 @@ class Routine < ApplicationRecord
 
     user_words = user_word.split(' ')
 
-    search_query = user_words.map{ '(title LIKE ? OR description LIKE ?)' }.join(' AND ')
+    search_query = user_words.map{ '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ')
     like_values = []
     user_words.each do |word|
       2.times{ like_values << "%#{word}%" }
