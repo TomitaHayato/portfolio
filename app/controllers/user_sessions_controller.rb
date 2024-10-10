@@ -9,7 +9,8 @@ class UserSessionsController < ApplicationController
       flash[:notice] = 'ログインしました！'
       redirect_to my_pages_path
     else
-      render :new
+      flash.now[:alert] = 'ログインできませんでした。'
+      render :new, status: :unprocessable_entity
     end
   end
 
