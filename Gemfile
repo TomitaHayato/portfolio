@@ -27,6 +27,8 @@ gem 'sidekiq-scheduler'
 # s3と接続する
 gem "aws-sdk-s3"
 gem 'fog-aws'
+# 画像ファイル
+gem 'carrierwave', '~> 3.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
