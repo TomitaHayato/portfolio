@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
-  enum role: { admin: 0, general: 1 }
+  enum role: { admin: 0, general: 1, guest: 2 }
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
   def reward_get_check

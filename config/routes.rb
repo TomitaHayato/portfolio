@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   resources :my_pages, only: %i[index]
   resources :rewards, only: %i[index]
 
-  get 'login', to: 'user_sessions#new'
-  post 'login', to: 'user_sessions#create'
-  delete 'logout', to: 'user_sessions#destroy'
-  post 'linebot/callback', to: 'linebots#callback'
+  get    'login',            to: 'user_sessions#new'
+  post   'login',            to: 'user_sessions#create'
+  delete 'logout',           to: 'user_sessions#destroy'
+  post   'guest_login',      to: 'guest_logins#create'
+  post   'linebot/callback', to: 'linebots#callback'
 
   resources :routines do
     resources :tasks, only: %i[create update destroy], shallow: true
