@@ -7,7 +7,7 @@
   
   <% if @routines.empty? %>
     <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">
-      <%= @user_words.nil? ? "ルーティンがありません<br>ルーティンを作成しましょう！！" : "一致するルーティンはありません" %>
+      <%= @user_words.nil? ? "ルーティンがありません\nルーティンを作成しましょう！！" : "一致するルーティンはありません" %>
     </p>
   <% else %>
     <%= render @routines, tags: @tags %>
