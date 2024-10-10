@@ -2,8 +2,10 @@
   <h1 class="text-center text-xl py-5 sm:text-2xl md:text-3xl lg:text-4xl xl:test-5xl">おはようございます！<br><span class="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500"><%= current_user.name %></span>さん</h1>
 </div>
 <div class="flex justify-center gap-2 sm:gap-4 md:gap-8">
-  <%= link_to "ルーティン作成", new_routine_path, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 btn-sm text-xs w-1/3 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base md:w-40 lg:text-lg lg:btn-lg lg:w-44" %>
-  <%= link_to "ルーティン一覧", routines_path, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 btn-sm text-xs w-1/3 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base md:w-40 lg:text-lg lg:btn-lg lg:w-44" %>
+  <%= link_to raw("ルーティン<br>作成"),   new_routine_path,    class:"btn bg-gradient-to-tl from-cyan-300  to-cyan-100  btn-sm text-xs w-1/3 min-w-24 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base lg:min-h-16 lg:text-lg" %>
+  <%= link_to raw("ルーティン<br>一覧"),   routines_path,       class:"btn bg-gradient-to-tl from-cyan-300  to-cyan-100  btn-sm text-xs w-1/3 min-w-24 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base lg:min-h-16 lg:text-lg" %>
+  <%= link_to "投稿一覧",                 routines_posts_path, class:"btn bg-gradient-to-tl from-amber-300 to-amber-100 btn-sm text-xs w-1/3 min-w-24 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base lg:min-h-16 lg:text-lg items-center justify-center hidden sm:flex" %>
+  <%= link_to "称号一覧",                 rewards_path,        class:"btn bg-gradient-to-tl from-pink-200 to-yellow-100 btn-sm text-xs w-1/3 min-w-24 min-h-10 sm:w-36 sm:btn-md sm:text-sm md:text-base lg:min-h-16 lg:text-lg items-center justify-center hidden lg:flex" %>
 </div>
 
 <!-- 実践中のルーティン表示 -->

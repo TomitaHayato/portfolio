@@ -8,9 +8,29 @@
     <% end %>
 
     <div class="flex items-center">
-      <%= link_to "ログイン", login_path, class:"mx-1 btn bg-gradient-to-tl from-emerald-300 to-emerald-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3" %>
-      <%= link_to "新規登録", new_user_path, class:"mx-1 btn bg-gradient-to-tl from-cyan-400 to-cyan-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3" %>
-      <%= link_to "お試し", guest_login_path, data: { turbo_method: :post }, class:"mx-1 btn bg-gradient-to-tl from-pink-400 to-pink-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3" %>
+      <%= link_to "ログイン", login_path,                                      class: "mx-1 btn bg-gradient-to-tl from-emerald-300 to-emerald-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3 flex" %>
+      <%= link_to "新規登録", new_user_path,                                   class: "mx-1 btn bg-gradient-to-tl from-cyan-400    to-cyan-100    btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3 hidden sm:flex" %>
+      <%= link_to "お試し",   guest_login_path, data: { turbo_method: :post }, class: "mx-1 btn bg-gradient-to-tl from-pink-400    to-pink-100    btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3 hidden sm:flex" %>
+      <div class="drawer drawer-end mx-3 lg:mx-5 sm:hidden">
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <label for="my-drawer-4" class="drawer-button btn btn-sm bg-green-50 text-xl font-light sm:btn-md sm:text-3xl lg:size-14 lg:text-4xl">≡</label>
+        </div>
+        <div class="drawer-side mt-12 sm:mt-16 md:mt-20 lg:mt-24">
+          <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+          <ul class="menu text-base-content w-4/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52">
+            <li>
+              <%= link_to "新規登録",       new_routine_path,                                class:"m-1 btn bg-gradient-to-tl from-cyan-300 to-cyan-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3" %>
+            </li>
+            <li>
+              <%= link_to "ログイン",       login_path,                                      class:"m-1 btn bg-gradient-to-tl from-emerald-300 to-emerald-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3" %>
+            </li>
+            <li>
+              <%= link_to "お試し利用", guest_login_path, data: { turbo_method: :post }, class:"m-1 btn bg-gradient-to-tl from-pink-300 to-pink-100 btn-sm text-xs font-normal hover:opacity-60 sm:btn-md sm:mx-2 md:mx-3" %>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </header>
