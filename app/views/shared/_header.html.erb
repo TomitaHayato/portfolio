@@ -22,22 +22,22 @@
           <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
           <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52">
             <li>
-              <%= link_to "ルーティンを作成する", new_routine_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              <%= link_to "ルーティンを作成する", new_routine_path,                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
             <li>
-              <%= link_to "ルーティン一覧へ", routines_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              <%= link_to "ルーティン一覧へ", routines_path,                          class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
             <li>
-              <%= link_to "投稿一覧を見る", routines_posts_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              <%= link_to "投稿一覧を見る", routines_posts_path,                      class:"p-3 mb-2 bg-gradient-to-tl from-amber-300 to-amber-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
             <li>
-              <%= link_to "マイページへ", my_pages_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              <%= link_to "マイページへ", my_pages_path,                              class:"p-3 mb-2 bg-gradient-to-tl from-green-300 to-cyan-300 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
             <li>
-              <%= link_to "称号一覧", rewards_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              <%= link_to "称号一覧", rewards_path,                                   class:"p-3 mb-2 bg-gradient-to-tl from-pink-200 to-yellow-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
             <li>
-              <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm md:hidden hover:opacity-50" %>
+              <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm hover:opacity-50" %>
             </li>
             <li>
               <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>

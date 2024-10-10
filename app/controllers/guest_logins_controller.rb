@@ -1,6 +1,6 @@
 class GuestLoginsController < ApplicationController
   skip_before_action :require_login
-  
+
   def create
     random_value = SecureRandom.alphanumeric(10)
     user = User.create!(
@@ -11,7 +11,8 @@ class GuestLoginsController < ApplicationController
       role: "guest"
     )
     login(user.email, random_value)
-    flash[:notice] = 'ゲストログインしました'
+    flash[:danger] = "ゲストログインしました。"
+    flash[:danger2] = "ゲスト様はログアウトするとデータが削除されますのでご注意ください"
     redirect_to my_pages_path
   end
 end

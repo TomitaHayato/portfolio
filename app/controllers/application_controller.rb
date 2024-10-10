@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
     session[:playing_task_num] = nil if session[:playing_task_num]
     session[:experiene_log] = nil if session[:experiene_log]
   end
+
+  def guest_block
+    if current_user.guest?
+      flash[:danger] = 'ゲストユーザー様はご利用できません'
+      redirect_to request.referer || my_pages_path
+    end
+  end
 end

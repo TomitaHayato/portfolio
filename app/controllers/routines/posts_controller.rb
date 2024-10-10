@@ -1,6 +1,7 @@
 class Routines::PostsController < ApplicationController
   before_action :set_order_query, only: %i[index]
   before_action :set_filter_target, only: %i[index]
+  before_action :guest_block, only: %i[update]
 
   def index
     @user_words = params[:user_words]
