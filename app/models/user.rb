@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   authenticates_with_sorcery!
   has_many :routines, dependent: :destroy
   has_many :user_tag_experiences, dependent: :destroy
@@ -8,6 +10,7 @@ class User < ApplicationRecord
   has_many :authentications, :dependent => :destroy
   has_many :user_rewards, dependent: :destroy
   has_many :rewards, through: :user_rewards
+  
   accepts_nested_attributes_for :authentications
 
   validates :password, length: { minimum: 4 }, if: -> { new_record? || changes[:crypted_password] }
