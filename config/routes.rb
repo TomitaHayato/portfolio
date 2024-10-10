@@ -50,4 +50,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq'
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  namespace :admin do
+    get 'login' => 'user_sessions#new', :as => :login
+    post 'login' => "user_sessions#create"
+    resources :rewards, only: %i[index edit update]
+    root 'dashboard#index'
+  end
 end

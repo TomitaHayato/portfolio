@@ -1,0 +1,31 @@
+<header>
+  <div class="fixed top-0 z-50 w-full h-12 sm:h-16 md:h-20 lg:h-24 p-3 flex justify-between items-center bg-gradient-to-t from-sky-50 to-sky-200">
+    <%= link_to "#", class:"btn btn-sm sm:btn-md lg:btn-lg w-28 sm:w-36 md:w-44 lg:w-48 btn-outline bg-white bg-opacity-30 text-green-600 hover:bg-green-500" do %>
+      <p class="flex items-center">
+        <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8 md:h-10 mr-1 sm:mr-2 md:mr-3" %>
+        <span class="text-xs sm:text-sm md:text-base">Morning Forest</span>
+      </p>
+    <% end %>
+
+    <div class="flex items-center gap-3">
+
+      <div class="drawer drawer-end mx-3 lg:mx-5">
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <label for="my-drawer-4" class="drawer-button btn btn-sm bg-green-50 text-xl font-light sm:btn-md sm:text-3xl lg:size-14 lg:text-4xl">≡</label>
+        </div>
+        <div class="drawer-side mt-12 sm:mt-16 md:mt-20 lg:mt-24">
+          <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+          <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52">
+            <li>
+              <%= link_to "ルーティンを作成する", "#", class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
+            <li>
+              <%= link_to  "Reward一覧画面", admin_rewards_path, class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

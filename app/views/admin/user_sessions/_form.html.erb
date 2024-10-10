@@ -1,0 +1,9 @@
+<%= form_with url: "#", class:"text-center" do |f| %>
+  <div class="my-8">
+    <%= f.email_field :email, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "メールアドレス" %>
+  </div>
+  <div class="my-8">
+    <%= f.password_field :password, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "パスワード" %>
+  </div>
+  <%= f.submit "ログイン", class:"btn bg-gradient-to-tl from-emerald-400 to-emerald-100 mb-5 btn-md min-w-28 sm:text-lg sm:btn-lg sm:min-w-40 lg:min-w-60" %>
+<% end %>
