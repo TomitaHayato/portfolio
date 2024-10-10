@@ -1,0 +1,13 @@
+<div class="m-1 sm:m-3">
+  <div class="card bg-base-100 shadow-xl">
+    <figure class="px-1 pt-1">
+      <% if reward.image.url %>
+        <%= image_tag reward.image.url, size: '200x200' %>
+      <% end %> 
+    </figure>
+    <div class="card-body items-center text-center p-2">
+      <h2 class="card-title bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-green-500"><%= reward.name %></h2>
+      <%= link_to "編集", edit_admin_reward_path(reward), class: "btn btn-success btn-outline" %>
+    </div>
+  </div>
+</div>

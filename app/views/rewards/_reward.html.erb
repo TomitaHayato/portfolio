@@ -1,0 +1,7 @@
+<div class="m-1 sm:m-3">
+  <% if reward.users.include?(current_user) %>
+    <%= render 'rewards/reward_card', reward: reward %>
+  <% else %>
+    <%= render 'rewards/description', reward: reward %>
+  <% end %>
+</div>

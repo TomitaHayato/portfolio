@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create show edit update]
   resources :password_resets, only: %i[new create edit update]
   resources :my_pages, only: %i[index]
+  resources :rewards, only: %i[index]
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
@@ -49,4 +50,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq'
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  namespace :admin do
+    get 'login' => 'user_sessions#new', :as => :login
+    post 'login' => "user_sessions#create"
+    resources :rewards, only: %i[index edit update]
+    root 'dashboard#index'
+  end
 end
