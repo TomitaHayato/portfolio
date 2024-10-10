@@ -150,6 +150,23 @@
  </tr>
 </table>
 
+<table>
+ <tr>
+  <th>LINE通知機能</th>
+  <th></th>
+ </tr>
+ <tr>
+  <td>
+   <img src="https://i.gyazo.com/4aab4be182eef3fbd95752f1f014f1c8.png" width="480">
+  </td>
+  <td><img src="" width="480"></td>
+ </tr>
+ <tr>
+  <td>実践中のルーティンの開始時間になると、LINEに通知がきます</td>
+  <td></td>
+ </tr>
+</table>
+
 ■ ユーザー層について
 ---
 - 朝が苦手な方、起きてから行動するまでの時間を無駄に過ごしてしまっていると感じる方
