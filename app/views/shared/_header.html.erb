@@ -1,5 +1,5 @@
 <header>
-  <div class="fixed top-0 z-50 w-full h-12 sm:h-16 md:h-20 lg:h-24 p-3 flex justify-between items-center bg-gradient-to-t from-sky-50 to-sky-200">
+  <div class="fixed top-0 z-50 w-full h-12 sm:h-16 md:h-20 p-3 flex justify-between items-center bg-gradient-to-t from-sky-50 to-sky-200">
     <%= link_to root_page, class:"btn btn-sm sm:btn-md lg:btn-lg w-28 sm:w-36 md:w-44 lg:w-48 btn-outline bg-white bg-opacity-30 text-green-600 hover:bg-green-500" do %>
       <p class="flex items-center">
         <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8 md:h-10 mr-1 sm:mr-2 md:mr-3" %>
@@ -8,7 +8,7 @@
     <% end %>
 
     <div class="flex items-center gap-3">
-      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"hidden md:btn md:btn-outline md:bg-gradient-to-tl md:from-gray-300 md:to-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:btn-lg lg:mx-5" %>
+      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"hidden md:btn md:btn-outline md:bg-gradient-to-tl md:from-gray-300 md:to-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:mx-5" %>
       <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none" do %>
         <%= image_tag "user_icon.jpg", class:"items-center rounded-lg size-8 md:size-12 lg:size-14" %>
       <% end %>

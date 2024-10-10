@@ -17,13 +17,12 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
-  enum role: { admin: 0, general: 1 }
+  enum role: { admin: 0, general: 1, guest: 2 }
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
   def reward_get_check
     change_flag = false
     locked_rewards = Reward.not_for_user(self) # レシーバが取得していない報酬データを取得
-    p "-------#{Reward.not_for_user(self).size}------"
     locked_rewards.each do |reward|
       reward_condition = reward.condition
       if self.send(reward_condition.to_sym)
