@@ -19,6 +19,7 @@ document.addEventListener('turbo:load', function(event) {
   searchForm.addEventListener('input', function(event) {
     // まず、選択肢欄を空にする
     optionsZone.innerHTML = '';
+    if (searchForm.value === '') return;
 
     // 検索ワード候補をHTMLに追加
     let user_word = searchForm.value
