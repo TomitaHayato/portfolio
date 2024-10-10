@@ -6,7 +6,7 @@ class MyPagesController < ApplicationController
     @experience_data_week = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag).recent_one_week)
     # p "all:#{@experience_data_all} month#{@experience_data_month} week#{@experience_data_week}"
 
-    current_user.reward_get_check
+    flash.now[:notice] = '新たな称号を獲得しました！' if current_user.reward_get_check
   end
 
   private

@@ -21,12 +21,17 @@ class User < ApplicationRecord
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
   def reward_get_check
+    change_flag = false
     locked_rewards = Reward.not_for_user(self) # レシーバが取得していない報酬データを取得
     p "-------#{Reward.not_for_user(self).size}------"
     locked_rewards.each do |reward|
       reward_condition = reward.condition
-      rewards << reward if self.send(reward_condition.to_sym)
+      if self.send(reward_condition.to_sym)
+        rewards << reward
+        change_flag = true
+      end
     end
+    change_flag
   end
 
   private
