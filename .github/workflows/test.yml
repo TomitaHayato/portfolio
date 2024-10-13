@@ -63,7 +63,7 @@ jobs:
         run: yarn build:css
 
       - name: Build Javascript
-        run: yarn build:css
+        run: yarn build
 
       - name: Run Rspec
         run: bundle exec rspec
