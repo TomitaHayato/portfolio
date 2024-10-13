@@ -62,6 +62,9 @@ jobs:
       - name: Build CSS
         run: yarn build:css
 
+      - name: Build Javascript
+        run: yarn build:css
+
       - name: Run Rspec
         run: bundle exec rspec
 
