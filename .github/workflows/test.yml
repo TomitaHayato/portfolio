@@ -59,6 +59,9 @@ jobs:
       - name: Database Migration
         run: bundle exec rails db:migrate RAILS_ENV=test
 
+      - name: Build CSS
+        run: yarn build:css
+
       - name: Run Rspec
         run: bundle exec rspec
 
