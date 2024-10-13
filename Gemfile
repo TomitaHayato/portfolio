@@ -5,6 +5,7 @@ ruby "3.3.4"
 
 # 警告メッセージを消す
 gem 'mutex_m'
+gem 'drb'
 #9 tailswindを導入
 gem "cssbundling-rails"
 #16 ユーザー登録機能

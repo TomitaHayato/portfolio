@@ -55,7 +55,7 @@ RSpec.configure do |config|
   
   # --------- System Specで使用するドライバの設定 ------------------
   config.before(:each, type: :system, js: true) do
-    driven_by :remote_chrome,
+    driven_by :remote_chrome
   end
   # -------------------------------------------------------------
 
