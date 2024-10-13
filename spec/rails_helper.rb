@@ -6,6 +6,28 @@ require_relative '../config/environment'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rspec'
+require 'selenium-webdriver'
+
+# --------- System Specで使用するドライバの作成 ------------------
+Capybara.register_driver :remote_chrome do |app|
+  url = Settings.selenium.url
+
+  options = Selenium::WebDriver::Chrome::Options.new
+	options.add_argument('--headless')
+	options.add_argument('--disable-gpu')
+	options.add_argument('--no-sandbox')
+	options.add_argument('--disable-dev-shm-usage')
+	options.add_argument('--window-size=1920,1080')
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: url,
+    capabilities: options
+  )
+end
+# -------------------------------------------------------------
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -30,6 +52,13 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  
+  # --------- System Specで使用するドライバの設定 ------------------
+  config.before(:each, type: :system, js: true) do
+    driven_by :remote_chrome,
+  end
+  # -------------------------------------------------------------
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = Rails.root.join('spec/fixtures')
 
