@@ -9,6 +9,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
 # --------- System Specで使用するドライバの作成 ------------------
 Capybara.register_driver :remote_chrome do |app|
   url = Settings.selenium.url
@@ -54,8 +56,11 @@ end
 RSpec.configure do |config|
   
   # --------- System Specで使用するドライバの設定 ------------------
-  config.before(:each, type: :system, js: true) do
+  config.before(:each, type: :system) do
     driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 4444
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
   # -------------------------------------------------------------
 

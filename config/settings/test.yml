@@ -1,4 +1,4 @@
 sorcery:
   line_callback_url: 'https://7b24-133-200-130-0.ngrok-free.app/oauth/callback?provider=line'
 selenium:
-  url: "http://localhost:4444/wd/hub"
+  url: "http://selenium:4444/wd/hub"
