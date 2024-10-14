@@ -17,8 +17,8 @@ RSpec.describe "LoginPages", type: :system do
     let(:password_form) { find('#password') }
     let(:submit_btn) { find('input[type="submit"]') }
 
-    context 'フォームに不正な値を入力' do
-      it 'フォームに情報を入力してログインできる' do
+    context 'フォームに正常値を入力' do
+      it 'ログインできる' do
         email_form.fill_in with: user.email
         password_form.fill_in with: 'password'
         submit_btn.click
@@ -44,7 +44,7 @@ RSpec.describe "LoginPages", type: :system do
       end
 
       it 'LINEログインボタンが表示されている' do
-        expect(page).to have_selector('#line_login_btn')
+        expect(page).to have_selector('#line-login-btn')
       end
 
       it 'キャンセルでroot_pathに戻る' do
