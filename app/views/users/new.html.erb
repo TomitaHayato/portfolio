@@ -4,7 +4,7 @@
   <%= render "form", user:@user %>
   <%= link_to "キャンセル", my_pages_path, class: "btn bg-gradient-to-tl from-gray-400 to-gray-100 mx-auto mb-5 min-w-20 sm:text-lg sm:btn-lg sm:max-w-36" %>
   <div class="mb-5 flex justify-center">
-    <%= link_to auth_at_provider_path(:provider => :line), class:"hover:opacity-90 active:opacity-70" do %>
+    <%= link_to auth_at_provider_path(:provider => :line), class:"hover:opacity-90 active:opacity-70", id: "line-login-btn" do %>
       <%= image_tag 'line_login_btn.png'%>
     <% end %>
   </div>

@@ -18,5 +18,10 @@ FactoryBot.define do
       password              { nil }
       password_confirmation { nil }
     end
+
+    trait :for_system_spec do
+      password              { 'password' }
+      password_confirmation { password }
+    end
   end
 end

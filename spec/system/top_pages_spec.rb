@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "TopPages", type: :system do
-  let!(:user) { create(:user) }
 
-  describe 'トップページ（root_path）のUI' do
+  describe 'トップページ（root_path）に関するテスト' do
     context 'ユーザーログイン前' do
       before do
         visit root_path
