@@ -1,5 +1,9 @@
 version: "3"
 services:
+  selenium:
+    image: selenium/standalone-chromium:latest
+    ports:
+      - "4444:4444"
   db:
     image: postgres
     platform: linux/amd64
@@ -34,8 +38,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
-      - redis      
-
+      - redis
+      - selenium
 volumes:
   postgres_data:
   bundle_data:

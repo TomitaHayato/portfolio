@@ -15,7 +15,10 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-
+      selenium:
+        image: selenium/standalone-chrome
+        ports:
+          - 4444:4444
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,6 +58,12 @@ jobs:
       
       - name: Database Migration
         run: bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Build CSS
+        run: yarn build:css
+
+      - name: Build Javascript
+        run: yarn build
 
       - name: Run Rspec
         run: bundle exec rspec

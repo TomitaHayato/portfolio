@@ -5,6 +5,7 @@ ruby "3.3.4"
 
 # 警告メッセージを消す
 gem 'mutex_m'
+gem 'drb'
 #9 tailswindを導入
 gem "cssbundling-rails"
 #16 ユーザー登録機能
@@ -85,6 +86,8 @@ group :development, :test do
   # rspec: テスト用
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
+  gem "capybara"
+  gem "selenium-webdriver"
   # テスト用のダミーデータを作成
   gem 'faker'
 end
@@ -107,7 +110,4 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-
 end
