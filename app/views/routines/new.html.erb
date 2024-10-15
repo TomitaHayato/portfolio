@@ -1,7 +1,7 @@
-<h1 class="text-lg mt-5 mb-5 text-center font-semibold sm:text-2xl md:text-3xl lg:text-4xl">ルーティン新規作成</h1>
+<h1 class="text-base my-3 text-center font-semibold sm:text-lg md:my-5 md:text-xl lg:text-3xl">ルーティン新規作成</h1>
 
 <div class="text-center">
   <%= render "form", routine: @routine %>
-  <%= link_to "キャンセル", my_pages_path, class: "btn bg-gradient-to-tl from-gray-300 to-gray-200 mx-auto mb-5 btn-md text-sm min-w-28 sm:btn-lg sm:text-base lg:text-lg lg:btn-wide" %> <br>
-  <%= link_to "My ルーティンページへ", routines_path, class: "link text-blue-600 mx-auto text-base sm:text-lg lg:text-xl" %>
+  <%= link_to "キャンセル", request.referer || my_pages_path, class: "mb-3 btn bg-gradient-to-tl from-gray-300 to-gray-100 w-4/12 text-xs btn-sm min-h-10 sm:btn-md sm:text-sm lg:text-base hover:from-gray-100 hover:to-gray-100 hover:text-gray-600" %> <br>
+  <%= link_to "Myルーティン一覧へ", routines_path, class: "link text-blue-600 mx-auto text-base sm:text-lg lg:text-xl" %>
 </div>
