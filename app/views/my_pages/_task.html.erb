@@ -14,9 +14,9 @@
       <%= task.estimated_time[:second] %> s
     </p>
   </div>
-  <div class="flex items-center gap-3 my-1 text-xs md:text-sm">
+  <div class="flex flex-wrap items-center gap-1 my-1 md:gap-3">
     <% task.tags.each do |tag| %>
-      <p class="bg-gradient-to-tl from-amber-300 to-amber-100 rounded-lg p-1 md:px-2"><%= tag.name %></p>
+      <p class="bg-gradient-to-tl from-amber-300 to-amber-100 rounded-lg p-1 md:px-2 text-xs md:text-sm"><%= tag.name %></p>
     <% end %>
   </div>
 
