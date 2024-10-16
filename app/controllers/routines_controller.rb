@@ -23,9 +23,10 @@ class RoutinesController < ApplicationController
 
   def create
     @routine = current_user.routines.new(routine_params)
+    @routine.is_active = true if current_user.routines.size == 1
+
     if @routine.save
-      flash[:notice] = '新しくルーティンを作成しました'
-      redirect_to routines_path
+      redirect_to routine_path(@routine), notice: '作成したルーティンにタスクを追加しましょう！'
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,8 +34,7 @@ class RoutinesController < ApplicationController
 
   def update
     if @routine.update(routine_params)
-      flash[:notice] = '更新しました'
-      redirect_to request.referer || routine_path(@routine)
+      redirect_to routine_path(@routine), notice: 'ルーティンを更新しました'
     else
       render :edit, status: :unprocessable_entity
     end

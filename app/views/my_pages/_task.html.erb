@@ -1,8 +1,8 @@
-<div class="border border-green-200 p-1 mb-3">
-  <div class="flex justify-between gap-2 items-center mb-5 mx-3">
-    <h1 class="text-sm border-b border-cyan-300 font-semibold sm:text-base md:text-lg lg:text-xl"><%= task.title %></h1>
+<div class="border border-gray-400 rounded-lg p-1 mt-3 px-3">
+  <div class="flex justify-between gap-2 items-center">
+    <h1 class="text-xs font-semibold sm:text-sm md:text-base lg:text-lg"><%= task.title %></h1>
   </div>
-  <div class="flex text-xs sm:text-sm md:text-md lg:text-lg">
+  <div class="flex text-gray-600 text-xs md:text-base">
     <p class="font-medium mr-1">目安時間：</p>
     <p class="mx-1">
       <%= task.estimated_time[:hour] %> h
@@ -14,9 +14,9 @@
       <%= task.estimated_time[:second] %> s
     </p>
   </div>
-  <div class="flex items-center gap-3 my-1 text-xs sm:text-sm md:text-md lg:text-lg">
+  <div class="flex flex-wrap items-center gap-1 my-1 md:gap-3">
     <% task.tags.each do |tag| %>
-      <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag.name %></p>
+      <p class="bg-gradient-to-tl from-amber-300 to-amber-100 rounded-lg p-1 md:px-2 text-xs md:text-sm"><%= tag.name %></p>
     <% end %>
   </div>
 

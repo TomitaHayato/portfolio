@@ -18,6 +18,7 @@
         <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn bg-gradient-to-tl from-red-600 to-red-200 hover:opacity-50 text-xs btn-sm sm:btn-md md:text-base" %>
       </div>
     </div>
+
     <div class="text-xs items-center sm:text-sm sm:flex sm:justify-between md:text-md lg:text-lg">
       <div class="flex justify-start">
         <p class="mr-1">目安時間：</p>
@@ -31,16 +32,19 @@
           <%= task.estimated_time[:second] %> s
         </p>
       </div>
+
       <% if request.path == routine_path(routine) %>
         <span class="flex justify-end mt-3 gap-1 sm:mt-0 sm:gap-3">
           <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-blue-300 to-blue-100 btn-sm sm:min-w-12 lg:btn-md lg:text-lg" %>
           <%= link_to "↓", tasks_move_lower_path(task), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-blue-300 to-blue-100 btn-sm sm:min-w-12 lg:btn-md lg:text-lg" %>
         </span>
       <% end %>
+    
     </div>
-    <div class="flex flex-wrap items-center gap-1 my-1 text-xs sm:text-sm md:text-md md:gap-3 lg:text-lg">
+
+    <div class="flex flex-wrap items-center gap-1 my-1 md:gap-3">
       <% task.tags.each do |tag| %>
-        <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 flex-none"><%= tag.name %></p>
+        <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 flex-none text-xs md:text-sm"><%= tag.name %></p>
       <% end %>
     </div>
   </div>

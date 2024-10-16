@@ -1,16 +1,20 @@
-<%= form_with model: routine, class:"text-center" do |f| %>
+<%= form_with model: routine do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="mx-auto my-8">
-    <%= f.text_field :title, class:"input input-bordered w-10/12 sm:text-lg lg:w-8/12 lg:min-h-16", placeholder: "タイトルを入力してください" %>
+
+  <div class="my-3">
+    <p class="font-semibold text-xs sm:text-sm md:text-base">タイトル（必須）</p>
+    <%= f.text_field :title, class:"input input-bordered h-8 p-1 w-8/12 text-xs sm:text-sm lg:p-2 lg:text-base lg:min-h-12", placeholder: "タイトル（必須）" %>
   </div>
 
-  <div class="mx-auto my-8">
-    <%= f.text_area :description, class:"textarea textarea-bordered w-10/12 min-h-10 sm:text-lg sm:min-h-32 lg:w-8/12", placeholder: "説明文を入力してください" %>
+  <div class="my-3">
+    <p class="font-semibold text-xs sm:text-sm md:text-base">説明文</p>
+    <%= f.text_area :description, class:"mx-auto textarea textarea-bordered w-8/12 text-xs min-h-16 p-1 sm:text-sm sm:min-h-32 lg:p-2 lg:text-base", placeholder: "説明文（任意）" %>
   </div>
 
-  <div class="mx-auto my-8">
-    <%= f.time_field :start_time, class:"input input-bordered w-8/12 text-lg text-center md:min-h-16 md:text-xl", min: "00:00", max: "23:59" %>
+  <div class="my-3">
+    <p class="font-semibold text-xs sm:text-sm md:text-base">開始時間</p>
+    <%= f.time_field :start_time, class: "mx-auto input input-bordered w-8/12 h-8 text-sm text-center lg:text-lg lg:min-h-12 lg:p-2", min: "00:00", max: "23:59" %>
   </div>
 
-  <%= f.submit nil, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 mb-5 w-6/12 text-base btn-md sm:btn-lg sm:text-lg lg:text-xl" %>
+  <%= f.submit nil, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 my-3 w-4/12 text-xs btn-sm min-h-10 sm:btn-md sm:text-sm lg:text-base hover:from-cyan-100 hover:to-cyan-100 hover:text-gray-600" %>
 <% end %>
