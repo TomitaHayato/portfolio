@@ -103,4 +103,5 @@ RSpec.configure do |config|
 
   # spec/support/配下で定義したモジュールをインクルード
   config.include LoginSupport
+  config.include RequireLoginSupport
 end
