@@ -58,9 +58,9 @@ RSpec.describe "ShowEditUsers", type: :system do
 
       describe '編集フォームに関するテスト' do
         let!(:avatar_form) { find('#user_avatar') }
-        let!(:name_form) { find('#user_name') }
-        let!(:email_form) { find('#user_email') }
-        let!(:submit_btn) { find('input[type="submit"]') }
+        let!(:name_form)   { find('#user_name') }
+        let!(:email_form)  { find('#user_email') }
+        let!(:submit_btn)  { find('input[type="submit"]') }
 
         it 'フォームが正しく表示されている' do
           expect(page).to have_selector("[id = 'preview avatar-#{user.id}']")
