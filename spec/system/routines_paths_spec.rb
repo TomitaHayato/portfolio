@@ -102,33 +102,53 @@ RSpec.describe "RoutinesPaths", type: :system, js: true do
         expect(search_form.value).to eq routine.description
       end
 
-      it 'ルーティンを絞り込める' do
+      describe 'ルーティンを絞り込める' do
+        before do
+          click_on "routine-post-btn-#{routine.id}"
+        end
 
-        p '投稿済み'
-        click_on "#active-btn-#{routine.id}"
-        select '投稿済み', from: 'filter_target'
-        click_on '検索'
-        expect(page).to have_selector("#routine-index-page")
-        expect(page).to have_selector("#routine-#{routine.id}")
-        expect(page).not_to have_selector("#routine-#{routine2.id}")
+        it '投稿済み' do
+          select '投稿済み', from: 'filter_target'
+          click_on '検索'
+          expect(page).to have_selector("#routine-index-page")
+          expect(page).to have_selector("#routine-#{routine.id}")
+          expect(page).not_to have_selector("#routine-#{routine2.id}")
+        end
         
-        p '未投稿のみ'
-        select '未投稿', from: 'filter_target'
-        click_on '検索'
-        expect(page).to have_selector("#routine-index-page")
-        expect(page).not_to have_selector("#routine-#{routine.id}")
-        expect(page).to have_selector("#routine-#{routine2.id}")
+        it '未投稿のみ' do
+          select '未投稿', from: 'filter_target'
+          click_on '検索'
+          expect(page).to have_selector("#routine-index-page")
+          expect(page).not_to have_selector("#routine-#{routine.id}")
+          expect(page).to have_selector("#routine-#{routine2.id}")
+        end
 
-        p 'すべて'
-        select '未投稿', from: 'filter_target'
-        click_on '検索'
-        expect(page).to have_selector("#routine-index-page")
-        expect(page).to have_selector("#routine-#{routine.id}")
-        expect(page).to have_selector("#routine-#{routine2.id}")
-      end
+        it 'すべて' do
+          select '投稿済み', from: 'filter_target'
+          click_on '検索'
+          sleep 1
+          
+          select 'すべて', from: 'filter_target'
+          click_on '検索'
+          expect(page).to have_selector("#routine-index-page")
+          expect(page).to have_selector("#routine-#{routine.id}")
+          expect(page).to have_selector("#routine-#{routine2.id}")
+        end
 
-      it 'ルーティンの並べ替えができる' do
-        p 未実装
+        it '検索と絞り込みを同時に適用できる' do
+          search_form = find('#user_words')
+          search_form.set('ルーティン2')
+          select '投稿済み', from: 'filter_target'
+          click_on '検索'
+          expect(page).to have_selector("#routine-index-page")
+          expect(page).not_to have_selector("#routine-#{routine.id}")
+          expect(page).not_to have_selector("#routine-#{routine2.id}")
+          select 'すべて', from: 'filter_target'
+          click_on '検索'
+          expect(page).to have_selector("#routine-index-page")
+          expect(page).not_to have_selector("#routine-#{routine.id}")
+          expect(page).to have_selector("#routine-#{routine2.id}")
+        end
       end
 
       it '検索のオートコンプリート機能を使える' do
