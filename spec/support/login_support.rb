@@ -5,7 +5,7 @@ module LoginSupport
     fill_in 'email', with: user.email
     fill_in 'password', with: 'password'
     find('input[type="submit"]').click
-    
-    sleep 1
+
+    sleep 0.15
   end
 end

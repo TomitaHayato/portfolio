@@ -126,8 +126,8 @@ RSpec.describe "RoutinesPaths", type: :system, js: true do
         it 'すべて' do
           select '投稿済み', from: 'filter_target'
           click_on '検索'
-          sleep 1
-          
+          sleep 0.1
+
           select 'すべて', from: 'filter_target'
           click_on '検索'
           expect(page).to have_selector("#routine-index-page")

@@ -32,7 +32,7 @@ RSpec.describe "EditRoutines", type: :system do
         description_form.set('new_説明文')
         start_time_form.set('10:30')
         submit_btn.click
-        sleep 1
+        sleep 0.1
 
         expect(page).to have_current_path(routine_path(routine))
         expect(page).to have_content('ルーティンを更新しました')

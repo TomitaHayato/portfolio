@@ -32,7 +32,7 @@ RSpec.describe "NewRoutinesPaths", type: :system do
           description_form.set('説明文1')
           start_time_form.set('07:00')
           submit_btn.click
-          sleep 1
+          sleep 0.1
 
           expect(page).to have_current_path(routine_path(user.routines.last))
           expect(page).to have_content('作成したルーティンにタスクを追加しましょう！')
@@ -43,7 +43,7 @@ RSpec.describe "NewRoutinesPaths", type: :system do
       context '不正な値を入力' do
         it '作成に失敗 => ルーティン作成ページに遷移' do
           submit_btn.click
-          sleep 1
+          sleep 0.1
 
           expect(page).to have_current_path(new_routine_path)
           expect(page).to have_selector('h1', text: 'ルーティン新規作成')
@@ -52,7 +52,7 @@ RSpec.describe "NewRoutinesPaths", type: :system do
         end
       end
     end
-    
+
     describe 'フォーム以外の要素' do
       it '「キャンセル」でマイページに遷移' do
         click_on 'キャンセル'

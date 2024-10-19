@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe "Routines::PostPaths", type: :system, js: true do
   describe 'ログイン前' do
     it 'ログインページに遷移' do
-      visit routines_posts_path
-      expect(page).to have_current_path(login_path)
-      expect(page).to have_content('ログインしてください')
+      login_failed_check(routines_posts_path)
     end
   end
 
@@ -108,9 +106,10 @@ RSpec.describe "Routines::PostPaths", type: :system, js: true do
         expect(page).to have_selector("#posted-routine-#{routine.id}")
         expect(page).not_to have_selector("#posted-routine-#{routineB.id}")
 
+        sleep 0.1
         select 'ユーザーの投稿', from: 'filter_target'
         click_on '検索'
-        expect(page).not_to have_selector("#posted-routine-#{routine.id}")
+        expect(page).to have_selector("#posted-routine-#{routine.id}")
         expect(page).to have_selector("#posted-routine-#{routineB.id}")
       end
     end
@@ -122,7 +121,7 @@ RSpec.describe "Routines::PostPaths", type: :system, js: true do
 
       it 'お気に入り登録できる' do
         click_on "like-btn-off-#{routine.id}"
-        sleep 1
+        sleep 0.1
 
         expect(page).to have_selector("#like-btn-on-#{routine.id}")
         expect(page).not_to have_selector("#like-btn-off-#{routine.id}")

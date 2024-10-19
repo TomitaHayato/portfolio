@@ -75,7 +75,7 @@ RSpec.describe "ShowRoutines", type: :system do
           find("input[id='task_tag_ids_#{tag1.id}']").click
           find("input[id='task_tag_ids_#{tag2.id}']").click
           click_on '登録する'
-          sleep 1
+          sleep 0.1
 
           expect(page).to have_current_path(routine_path(routine))
           expect(page).to have_selector("#task_#{routine.tasks.last.id}")
@@ -91,7 +91,7 @@ RSpec.describe "ShowRoutines", type: :system do
           minute_form.set('00')
           second_form.set('00')
           click_on '登録する'
-          sleep 1
+          sleep 0.1
 
           expect(page).to have_current_path(routine_path(routine))
           expect(page).to have_content('入力エラー')
@@ -120,7 +120,7 @@ RSpec.describe "ShowRoutines", type: :system do
           find("input[id='task_tag_ids_#{tag1.id}']").click
           find("input[id='task_tag_ids_#{tag2.id}']").click
           click_on '更新する'
-          sleep 1
+          sleep 0.1
 
           expect(page).to have_current_path(routine_path(routine))
           expect(page).to have_selector("#task_#{task.id}")
