@@ -13,7 +13,8 @@ RSpec.describe "Rewards", type: :system, js: true do
     let!(:task)     { create(:task, routine: routine) }
     let!(:tag)      { create(:tag) }
     let!(:task_tag) { create(:task_tag, task: task, tag: tag) }
-    let!(:rewards)  { Reward.all }
+    let!(:rewards)  { Reward.all.size }
+    let!(:users)    { User.all }
 
 
     before do
@@ -31,6 +32,9 @@ RSpec.describe "Rewards", type: :system, js: true do
     describe '各称号の獲得処理' do
       it 'はじまりの一歩！' do
         p rewards
+        p users
+        p Reward.all
+        p User.all
         user.update!(complete_routines_count: 1)
         sleep 0.5
 
