@@ -8,14 +8,38 @@ RSpec.describe "Rewards", type: :system, js: true do
   end
 
   context 'ログイン後' do
+    before do
+      Reward.create!(
+        name: "はじまりの一歩！",
+        condition: "completed_routine_1?",
+        description: "ルーティンを1回クリアする"
+      )
+    
+      Reward.create!(
+        name: "小さな達成者",
+        condition: "completed_routines_3?",
+        description: "ルーティンを3回クリアする"
+      )
+    
+      Reward.create!(
+        name: "若葉の成長",
+        condition: "get_experiences_10?",
+        description: "経験値を10獲得する"
+      )
+    
+      Reward.create!(
+        name: "朝の森の案内人",
+        condition: "post_routine_1?",
+        description: "ルーティンを1つ投稿する"
+      )
+    end
+
     let!(:user)     { create(:user, :for_system_spec) }
     let!(:routine)  { create(:routine, user: user, is_active: true) }
     let!(:task)     { create(:task, routine: routine) }
     let!(:tag)      { create(:tag) }
     let!(:task_tag) { create(:task_tag, task: task, tag: tag) }
-    let!(:rewards)  { Reward.all.size }
-    let!(:users)    { User.all }
-
+    let!(:rewards)  { Reward.all }
 
     before do
       login_as(user)
@@ -31,12 +55,9 @@ RSpec.describe "Rewards", type: :system, js: true do
 
     describe '各称号の獲得処理' do
       it 'はじまりの一歩！' do
-        p rewards
-        p users
-        p Reward.all
-        p User.all
         user.update!(complete_routines_count: 1)
         sleep 0.5
+        p rewards.size
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
