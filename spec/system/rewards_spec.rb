@@ -45,8 +45,6 @@ RSpec.describe "Rewards", type: :system, js: true do
         UserTagExperience.create!(user_id: user.id, tag_id: tag.id, experience_point: 10)
         sleep 0.5
 
-        user.reload
-        p user.user_tag_experiences
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
 
@@ -58,9 +56,6 @@ RSpec.describe "Rewards", type: :system, js: true do
         user.update!(complete_routines_count: 3)
         sleep 0.5
 
-        p user.complete_routines_count
-        user.reload
-        p user.complete_routines_count
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
 
