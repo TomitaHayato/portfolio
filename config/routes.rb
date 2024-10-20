@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   end
   mount Sidekiq::Web, at: '/sidekiq'
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" unless Rails.env.production?
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   namespace :admin do
     get 'login' => 'user_sessions#new', :as => :login
