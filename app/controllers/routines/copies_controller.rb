@@ -1,4 +1,6 @@
 class Routines::CopiesController < ApplicationController
+  before_action :guest_block, only: %i[create]
+  
   def create
     # コピーされた数を+1する
     routine_origin = Routine.includes(:tasks).find(params[:routine_id])
