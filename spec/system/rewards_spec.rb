@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Rewards", type: :system do
+RSpec.describe "Rewards", type: :system, js: true do
   context 'ログイン前' do
     it 'トップページに遷移' do
       login_failed_check(rewards_path)
@@ -31,7 +31,7 @@ RSpec.describe "Rewards", type: :system do
     describe '各称号の獲得処理' do
       it 'はじまりの一歩！' do
         user.update!(complete_routines_count: 1)
-        sleep 0.25
+        sleep 0.5
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
@@ -42,7 +42,7 @@ RSpec.describe "Rewards", type: :system do
 
       it '若葉の成長' do
         UserTagExperience.create!(user_id: user.id, tag_id: tag.id, experience_point: 10)
-        sleep 0.25
+        sleep 0.5
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
@@ -53,7 +53,7 @@ RSpec.describe "Rewards", type: :system do
 
       it '小さな達成者' do
         user.update!(complete_routines_count: 3)
-        sleep 0.25
+        sleep 15
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
@@ -64,7 +64,7 @@ RSpec.describe "Rewards", type: :system do
 
       it '朝の森の案内人' do
         routine.update!(is_posted: true)
-        sleep 0.25
+        sleep 0.5
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
