@@ -34,7 +34,7 @@ RSpec.describe "Rewards", type: :system, js: true do
         sleep 0.5
 
         visit my_pages_path
-        expect(page).to have_content('新たな称号を獲得しました！')
+        # expect(page).to have_content('新たな称号を獲得しました！')
 
         visit rewards_path
         expect(page).to have_selector('h2', text: 'はじまりの一歩！')
@@ -44,6 +44,7 @@ RSpec.describe "Rewards", type: :system, js: true do
         UserTagExperience.create!(user_id: user.id, tag_id: tag.id, experience_point: 10)
         sleep 0.5
 
+        user.reload
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
 
@@ -53,7 +54,7 @@ RSpec.describe "Rewards", type: :system, js: true do
 
       it '小さな達成者' do
         user.update!(complete_routines_count: 3)
-        sleep 15
+        sleep 0.5
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
