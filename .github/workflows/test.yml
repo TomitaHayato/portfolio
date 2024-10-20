@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres
+        image: "postgres"
         env:
           POSTGRES_PASSWORD: password
         options: >-
@@ -16,7 +16,7 @@ jobs:
         ports:
           - 5432:5432
       selenium:
-        image: selenium/standalone-chrome
+        image: "selenium/standalone-chrome"
         ports:
           - 4444:4444
     steps:
@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: node-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          key:  node-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             node-${{ runner.os }}-
       
@@ -54,17 +54,20 @@ jobs:
           bundle install
 
       - name: Database Create
-        run: bundle exec rails db:create RAILS_ENV=test
+        run:  bundle exec rails db:create RAILS_ENV=test
       
       - name: Database Migration
-        run: bundle exec rails db:migrate RAILS_ENV=test
+        run:  bundle exec rails db:migrate RAILS_ENV=test
+      
+      - name: Database Seed
+        run:  bundle exec rails db:seed
 
       - name: Build CSS
-        run: yarn build:css
+        run:  yarn build:css
 
       - name: Build Javascript
-        run: yarn build
+        run:  yarn build
 
       - name: Run Rspec
-        run: bundle exec rspec
+        run:  bundle exec rspec
 
