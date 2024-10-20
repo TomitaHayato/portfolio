@@ -54,13 +54,13 @@ jobs:
           bundle install
 
       - name: Database Create
-        run:  bundle exec rails db:create RAILS_ENV=test
+        run:  RAILS_ENV=test bundle exec rails db:create
       
       - name: Database Migration
-        run:  bundle exec rails db:migrate RAILS_ENV=test
+        run:  RAILS_ENV=test bundle exec rails db:migrate
       
       - name: Database Seed
-        run:  bundle exec rails db:seed RAILS_ENV=test
+        run:  RAILS_ENV=test bundle exec rails db:seed
 
       - name: Build CSS
         run:  yarn build:css
