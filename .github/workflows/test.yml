@@ -69,5 +69,5 @@ jobs:
         run:  yarn build
 
       - name: Run Rspec
-        run:  bundle exec rspec RAILS_ENV=test
+        run:  RAILS_ENV=test bundle exec rspec
 
