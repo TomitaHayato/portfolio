@@ -30,11 +30,12 @@ RSpec.describe "Rewards", type: :system, js: true do
 
     describe '各称号の獲得処理' do
       it 'はじまりの一歩！' do
+        p rewards
         user.update!(complete_routines_count: 1)
         sleep 0.5
 
         visit my_pages_path
-        # expect(page).to have_content('新たな称号を獲得しました！')
+        expect(page).to have_content('新たな称号を獲得しました！')
 
         visit rewards_path
         expect(page).to have_selector('h2', text: 'はじまりの一歩！')
@@ -45,6 +46,7 @@ RSpec.describe "Rewards", type: :system, js: true do
         sleep 0.5
 
         user.reload
+        p user.user_tag_experiences
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
 
@@ -56,6 +58,9 @@ RSpec.describe "Rewards", type: :system, js: true do
         user.update!(complete_routines_count: 3)
         sleep 0.5
 
+        p user.complete_routines_count
+        user.reload
+        p user.complete_routines_count
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
 
