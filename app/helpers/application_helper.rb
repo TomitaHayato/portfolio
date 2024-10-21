@@ -16,11 +16,11 @@ module ApplicationHelper
   def shallow_bg_class
     case request.path
     when root_path
-      'pb-16 mt-12 sm:mt-16 md:mt-20'
+      'pb-16 mt-12 sm:mt-14 md:mt-16'
     when policy_path, terms_path
-      'mt-12 sm:mt-16 md:mt-20'
+      'mt-12 sm:mt-14 md:mt-16'
     else
-      'pb-16 mt-12 sm:mt-16 md:mt-20 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
+      'pb-16 mt-12 sm:mt-14 md:mt-16 w-4/5 border h-full mx-auto bg-blue-100/80 min-h-screen'
     end
   end
 
