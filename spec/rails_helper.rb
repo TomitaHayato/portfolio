@@ -9,7 +9,10 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
+# spec/support/配下のファイルを読み込み
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+
 
 # --------- System Specで使用するドライバの作成 ------------------
 Capybara.register_driver :remote_chrome do |app|
@@ -97,4 +100,8 @@ RSpec.configure do |config|
 
   # FactoryBotのメソッドをモジュール名なしで使用可能
   config.include FactoryBot::Syntax::Methods
+
+  # spec/support/配下で定義したモジュールをインクルード
+  config.include LoginSupport
+  config.include RequireLoginSupport
 end

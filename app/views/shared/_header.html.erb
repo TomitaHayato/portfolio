@@ -9,7 +9,7 @@
 
     <div class="flex items-center gap-3">
       <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"hidden md:btn md:btn-outline md:bg-gradient-to-tl md:from-gray-300 md:to-gray-100 hover:bg-gray-500 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:mx-5" %>
-      <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none" do %>
+      <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none", id: "user-icon-btn" do %>
         <%= image_tag "user_icon.jpg", class:"items-center rounded-lg size-8 md:size-12 lg:size-14" %>
       <% end %>
 

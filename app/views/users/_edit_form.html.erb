@@ -2,9 +2,9 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="my-8 text-center">
-    <%= image_tag user.avatar.url, class: 'rounded-circle my-2 mx-auto', id: 'preview', size: '200x200' %>
+    <%= image_tag user.avatar.url, class: 'rounded-circle my-2 mx-auto', id: "preview avatar-#{user.id}", size: '200x200' %>
     <%= f.label :avatar, "アイコン", class: "block font-semibold mb-2 sm:text-lg" %>
-    <%= f.file_field :avatar, class: "block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "ユーザー名"%>
+    <%= f.file_field :avatar, class: "block input input-bordered mx-auto text-sm w-8/12 lg:w-1/2", placeholder: "ユーザー名"%>
     <%= f.hidden_field :avatar_cache %>
   </div>
 
