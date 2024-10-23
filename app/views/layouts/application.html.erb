@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html data-theme="light" class="h-full">
+
   <head>
     <%= favicon_link_tag 'favicon.jpg', type: 'image/jpg' %>
     <title>Morning Forest</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <%= render "layouts/ogp" %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <link rel="manifest" href="/manifest.json">
