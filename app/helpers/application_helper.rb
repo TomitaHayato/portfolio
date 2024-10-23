@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def task_form_id(task)
-    task.id.nil? ? 'task-form-for-new' : "task-form-for-#{task.id}"
+    task.id.nil? ? 'new' : "#{task.id}"
   end
 
   # ログインしているか否かでルートページへのパスを返す

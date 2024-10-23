@@ -11,7 +11,7 @@ class TasksController < ApplicationController
       set_tags_on_task(@task, task_params[:tag_ids])
       flash.now[:notice] = 'タスクを追加しました'
     else
-      render turbo_stream: turbo_stream.replace(task_form_id(@task).to_s, partial: 'routines/task_form', locals: { task: @task, routine: @routine, tags: Tag.includes(:tasks).all })
+      render turbo_stream: turbo_stream.replace("task-form-for-#{task_form_id(task)}", partial: 'routines/task_form', locals: { task: @task, routine: @routine, tags: Tag.includes(:tasks).all })
     end
   end
 
@@ -21,7 +21,7 @@ class TasksController < ApplicationController
       set_tags_on_task(@task, task_params[:tag_ids])
       flash.now[:notice] = 'タスクを更新しました'
     else
-      render turbo_stream: turbo_stream.replace(task_form_id(@task).to_s, partial: 'routines/task_form', locals: { task: @task, routine: @routine, tags: Tag.includes(:tasks).all })
+      render turbo_stream: turbo_stream.replace("task-form-for-#{task_form_id(task)}", partial: 'routines/task_form', locals: { task: @task, routine: @routine, tags: Tag.includes(:tasks).all })
     end
   end
 
