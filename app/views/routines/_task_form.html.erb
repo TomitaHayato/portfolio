@@ -1,9 +1,22 @@
-<div id="<%= task_form_id(task) %>">
+<div id="task-form-for-<%= task_form_id(task) %>">
   <%= form_with model: task, url: task.new_record? ? routine_tasks_path(routine) : task_path(task), class: "text-center" do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <div class="mb-5 md:mb-10">
-      <%= f.label :title, "タイトル:", class: "mb-2 font-medium text-lg sm:text-xl md:font-semibold" %><br>
-      <%= f.text_field :title, class:"min-h-10 w-10/12 p-2 mx-auto border border-gray-300 hover:border-gray-500 rounded-lg md:text-xl" %>
+
+    <div class="mb-5 md:mb-10" id="<%= task_form_id(task) %>">
+      <%= f.label :title,
+                  "タイトル:",
+                  class: "mb-2 font-medium text-lg sm:text-xl md:font-semibold"
+      %>
+      <br>
+
+      <%= f.text_field :title,
+          class: "min-h-10 w-10/12 p-2 mx-auto border border-gray-300 rounded-lg
+                  md:text-xl hover:border-gray-500"
+      %>
+
+      <!-- オートコンプリート -->
+      <div class="w-10/12 mx-auto max-h-40 overflow-y-auto" id="task-title-options-zone-<%= task_form_id(task) %>">
+      </div>
     </div>
 
     <div class="mb-5 md:mb-10">

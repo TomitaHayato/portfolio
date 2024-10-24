@@ -22,9 +22,9 @@ document.addEventListener('turbo:load', function(event) {
     if (searchForm.value === '') return;
 
     // 検索ワード候補をHTMLに追加
-    let user_word = searchForm.value
+    let userWord = searchForm.value
     for (let option of options) {
-      if (option.textContent.includes(user_word)) { //　選択肢が検索ワードを含むかどうか
+      if (option.textContent.includes(userWord)) { //　選択肢が検索ワードを含むかどうか
         appendOption(option.textContent); // 検索フォームの下に検索項目候補の要素を追加する
       }
     }

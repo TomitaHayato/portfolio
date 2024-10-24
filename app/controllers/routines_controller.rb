@@ -13,6 +13,7 @@ class RoutinesController < ApplicationController
   def show
     @task = Task.new
     @tasks = @routine.tasks.includes(:tags).order(position: :asc)
+    @all_task_names = set_all_tasks_names
   end
 
   def new
@@ -68,5 +69,16 @@ class RoutinesController < ApplicationController
 
   def set_routine
     @routine = current_user.routines.find(params[:id])
+  end
+
+  # ユーザーが作成した全タスクのtitle一覧を取得
+  def set_all_tasks_names
+    all_task_names = []
+
+    current_user.routines.includes(:tasks).each do |routine|
+      all_task_names.concat routine.tasks.pluck(:title)
+    end
+
+    all_task_names.uniq
   end
 end
