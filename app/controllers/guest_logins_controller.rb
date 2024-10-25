@@ -12,7 +12,6 @@ class GuestLoginsController < ApplicationController
     )
     login(user.email, random_value)
     flash[:danger] = "ゲストログインしました。"
-    flash[:danger2] = "ゲスト様はログアウトするとデータが削除されますのでご注意ください"
     redirect_to my_pages_path
   end
 end
