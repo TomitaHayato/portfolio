@@ -1,4 +1,18 @@
-<h1 class="text-xl font-semibold my-5 text-center sm:text-3xl lg:text-4xl">プロフィール</h1>
+<div class="sm:flex sm:justify-between mt-3 sm:my-5 mx-5 sm:mx-7">
+  <div class="flex sm:basis-3/12">
+    <%= link_to "<< マイページ", my_pages_path,
+      class: "btn text-xs bg-gradient-to-tl from-green-500 to-green-500 btn-sm min-h-9 mb-3
+              sm:min-w-28 sm:text-sm lg:btn-md
+              hover:from-gray-300 hover:to-gray-300 hover:scale-105"
+    %>
+  </div>
+
+  <h1 class="sm:basis-6/12 text-xl font-semibold text-center sm:text-3xl lg:text-4xl">プロフィール</h1>
+
+  <div class="sm:basis-3/12"></div>
+</div>
+
+
 
 <div class="bg-gradient-to-tl from-cyan-200/60 to-cyan-0/60 rounded-lg w-11/12 mx-auto p-5 border border-sky-300 sm:w-9/12 sm:p-10 lg:w-8/12">
   <%= image_tag current_user.avatar.url, class: 'rounded-circle my-2 mx-auto', size: '200x200', id: "avatar-#{current_user.id}" %>
@@ -21,9 +35,5 @@
 
   <div class="text-center">
     <%= link_to "プロフィールを編集", edit_user_path(current_user), class: "btn bg-gradient-to-tl from-emerald-400 to-emerald-100 mb-5 btn-md min-w-28 md:text-lg md::btn-lg md:min-h-16 sm:min-w-40" %>
-  </div>
-
-  <div class="text-center">
-    <%= link_to "戻る", my_pages_path, class:"btn bg-gradient-to-tl from-gray-400 to-gray-100 mx-auto min-w-20 md:text-lg md:btn-lg sm:max-w-36" %>
   </div>
 </div>
