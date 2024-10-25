@@ -1,6 +1,9 @@
 <div class="p-3 my-5 mx-auto bg-gradient-to-tl from-sky-100/70 to-sky-50/70 w-11/12 md:w-9/12">
 
-  <%= link_to "一覧に戻る", routines_path, class:"btn text-sm mb-5 bg-gradient-to-tl from-gray-300 to-gray-100 btn-md sm:text-base sm:min-w-28 md:btn-lg md:mb-10" %>
+  <%= link_to "一覧に戻る", routines_path,
+    class: "btn text-sm mb-5 bg-gradient-to-tl from-gray-300 to-gray-100 btn-md 
+            sm:text-base sm:min-w-28 md:mb-10"
+  %>
   
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
     <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
@@ -16,11 +19,20 @@
   </div>
 
   <div class="mb-5 mx-3 text-sm flex flex-col gap-2 sm:flex-row sm:justify-between sm:justify-start sm:mx-5 sm:gap-5 lg:text-base lg:gap-10 lg:mx-16">
-    <p>開始時間: <%= @routine.start_time.strftime("%H:%M") if @routine.start_time %></p>
+    <div>
+      <p>開始時間</p>
+      <%= @routine.start_time.strftime("%H:%M") if @routine.start_time %>
+      （<%= I18n.t("activerecord.attributes.routine/notification.#{@routine.notification}") %>）
+    </div>
+    
     <div id="total-estimated-time-for-routine-<%= @routine.id %>">
       <%= render "routines/routine_total_estimated_time", routine: @routine %>
     </div>
-    <p>達成回数： <%= @routine.completed_count %></p>
+
+    <div>
+      <p>達成回数</p>
+      <%= @routine.completed_count %>
+    </div>
   </div>
   
   <div class="text-center p-5 bg-gray-100">

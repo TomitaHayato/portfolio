@@ -15,11 +15,18 @@
     </div>
 
     <div class="mb-5 text-xs flex justify-between sm:justify-start sm:gap-5 sm:text-sm sm:mx-3 lg:text-base lg:gap-10">
-      <p>開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
+      <div>
+        <p>開始時間</p>
+        <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
+      </div>
+
       <div id="total-estimated-time-for-routine-<%= routine.id %>">
         <%= render "routines/routine_total_estimated_time", routine: routine %>
       </div>
-      <p>達成数： <%= routine.completed_count %></p>
+      <div>
+        <p>達成数</p>
+        <%= routine.completed_count %>
+      </div>
     </div>
 
     <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
@@ -30,6 +37,7 @@
         <%= render "routines/routine_active_btn", routine: routine %>
       </div>
     </div>
+    
     <details class="collapse bg-gradient-to-tl from-teal-100 to-teal-50 items-center text-sm sm:text-base lg:text-lg">
       <summary class="collapse-title" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
       <ul class="collapse-content">

@@ -18,7 +18,7 @@
 
   <div class="my-3">
     <p class="font-semibold text-xs sm:text-sm md:text-base">通知</p>
-    <%= f.select :notification, [['通知しない', 'no'], ['LINE (LINEログインした方のみ有効)', 'line']], { selected: routine.notification }, class: "mx-auto select select-bordered w-8/12 text-sm text-center min-h-6 h-8 lg:text-lg lg:p-2 lg:min-h-12" %>
+    <%= f.select :notification, [['通知オフ', 'no'], ['LINE (LINEログインした方のみ有効)', 'line']], { selected: routine.notification }, class: "mx-auto select select-bordered w-8/12 text-sm text-center min-h-6 h-8 lg:text-lg lg:p-2 lg:min-h-12" %>
   </div>
 
   <%= f.submit nil, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 my-3 w-4/12 text-xs btn-sm min-h-10 sm:btn-md sm:text-sm lg:text-base hover:from-cyan-100 hover:to-cyan-100 hover:text-gray-600" %>
