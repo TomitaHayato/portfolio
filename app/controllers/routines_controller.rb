@@ -13,6 +13,7 @@ class RoutinesController < ApplicationController
   def show
     @task = Task.new
     @tasks = @routine.tasks.includes(:tags).order(position: :asc)
+    @tags = Tag.includes(:tasks)
     @all_task_names = set_all_tasks_names
   end
 

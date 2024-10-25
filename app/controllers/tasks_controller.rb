@@ -7,26 +7,31 @@ class TasksController < ApplicationController
   def create
     @routine = current_user.routines.find(params[:routine_id])
     @task = @routine.tasks.new(task_params)
+    @tags = Tag.includes(:tasks)
     if @task.save
       set_tags_on_task(@task, task_params[:tag_ids])
       flash.now[:notice] = 'タスクを追加しました'
     else
-      render turbo_stream: turbo_stream.replace("task-form-for-#{task_form_id(task)}", partial: 'routines/task_form', locals: { task: @task, routine: @routine, tags: Tag.includes(:tasks).all })
+      @form_id = task_form_id(@task)
+      render 'tasks/error'
     end
   end
 
   def update
+    @tags = Tag.includes(:tasks)
     if @task.update(task_params)
       delete_tags_from_task(@task, task_params[:tag_ids])
       set_tags_on_task(@task, task_params[:tag_ids])
       flash.now[:notice] = 'タスクを更新しました'
     else
-      render turbo_stream: turbo_stream.replace("task-form-for-#{task_form_id(task)}", partial: 'routines/task_form', locals: { task: @task, routine: @routine, tags: Tag.includes(:tasks).all })
+      @form_id = task_form_id(@task)
+      render 'tasks/error'
     end
   end
 
   def destroy
     @task.destroy!
+    @tags = Tag.includes(:tasks)
     flash[:notice] = "タスクを削除しました。(タスク名：#{@task.title})"
   end
 

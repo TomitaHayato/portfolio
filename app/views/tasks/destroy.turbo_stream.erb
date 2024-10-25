@@ -3,7 +3,7 @@
 <% end %>
 
 <%= turbo_stream.remove "task_#{@task.id}" do %>
-  <%= render partial: 'routines/task', locals: { routine: @routine, task: @task, tags: Tag.includes(:tasks).all } %>
+  <%= render partial: 'routines/task', locals: { routine: @routine, task: @task, tags: @tags } %>
 <% end %>
 
 <%= turbo_stream.update "total-estimated-time-for-routine-#{@routine.id}" do %>

@@ -28,16 +28,17 @@
     <!-- タスク オートコンプリート -->
     <%= select_tag 'auto_complete',
       options_for_select(@all_task_names),
-      class: "hidden"
+      class: "hidden",
+      id: "all-task-names" 
     %>
     
     <!-- タスク一覧を表示 -->
     <ul class="list-group" id="task-index">
-      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine, tags: Tag.includes(:tasks).all } %>
+      <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine, tags: @tags } %>
     </ul>
     <!-- タスク追加ボタンを表示 -->
     <div id="add_task_btn">
-      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task, tags: Tag.includes(:tasks).all } %>
+      <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task, tags: @tags } %>
     </div>
   </div>
 </div>

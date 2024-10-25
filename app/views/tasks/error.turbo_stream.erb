@@ -1,0 +1,6 @@
+<!-- フォームを置き換え -->
+<%= turbo_stream.replace "task-form-for-#{@form_id}" do %>
+  <%= render partial: 'routines/task_form',
+             locals:  { task: @task, routine: @routine, tags: @tags }
+  %>
+<% end %>
