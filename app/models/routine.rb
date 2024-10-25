@@ -7,6 +7,8 @@ class Routine < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 500 }
 
+  enum notification: { no: 0, line: 1 }
+
   scope :posted, -> { where(is_posted: true) }
   scope :unposted, -> { where(is_posted: false) }
   scope :my_post, ->(user_id)  { where(user_id: user_id) }
