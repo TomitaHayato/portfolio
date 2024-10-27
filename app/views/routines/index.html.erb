@@ -1,6 +1,14 @@
-<div class="mt-5" id="routine-index-page">
-  <div class="text-end">
-    <%= link_to "ルーティンを作成する", new_routine_path, class:"btn bg-gradient-to-tl from-green-400 to-green-100 btn-md max-w-24 text-xs p-2 mr-2 sm:mr-5 sm:text-sm sm:max-w-40 md:max-w-48 md:mr-10 lg:btn-lg lg:max-w-60 lg:text-lg" %>
+<div id="routine-index-page" class="mt-5">
+
+  <div class="flex justify-between items-stretch px-2 mx-auto my-3 text-sm sm:w-9/12 md:text-lg">
+    <div class="basis-1/2 flex">
+      <%= link_to "←マイページ", my_pages_path, class: "text-green-600 hover:text-blue-400 hover:scale-110" %>
+    </div>
+
+    <div class="basis-1/2 flex justify-end gap-4">
+      <%= link_to "新規作成→", new_routine_path,    class: "text-green-600 hover:text-blue-400 hover:scale-110" %>
+      <%= link_to "投稿一覧→", routines_posts_path, class: "text-green-600 hover:text-blue-400 hover:scale-110" %>
+    </div>
   </div>
 
   <%= render 'routines/search_form', user_words: @user_words %>
