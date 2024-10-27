@@ -9,7 +9,13 @@
       <% unless request.path == routines_path %>
         <!- タスクの編集/削除ボタン（ルーティン一覧では表示しない） -->
         <div class="flex-none">
-          <button class="btn bg-gradient-to-tl from-green-300 hover:opacity-50 to-green-100 text-xs btn-sm sm:btn-md md:text-base" onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()" id="edit_task_btn_<%= task.id %>">編集</button>
+          <button class="btn-sm-custom bg-gradient-to-tl from-green-300 to-green-100"
+                  onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()"
+                  id="edit_task_btn_<%= task.id %>"
+          >
+            編集
+          </button>
+          
           <dialog id="edit_task_form_<%= task.id %>" class="modal">
             <div class="modal-box">
               <h1 class="text-center text-xl mb-10">タスク編集</h1>
