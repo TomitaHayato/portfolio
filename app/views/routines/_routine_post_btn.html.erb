@@ -1,5 +1,11 @@
 <% if routine.is_posted? %>
-  <%= link_to "投稿済み", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-gray-300 to-gray-100 border-pink-300 text-sm md:text-base", id: "routine-unpost-btn-#{routine.id}" %>
+  <%= link_to "投稿済", routines_post_path(routine), data: { turbo_method: :patch },
+    class: "bg-gradient-to-tl from-gray-300 to-gray-100 border-pink-300 btn-md-custom",
+    id: "routine-unpost-btn-#{routine.id}"
+    %>
 <% else %>
-  <%= link_to "投稿する", routines_post_path(routine), data: { turbo_method: :patch }, class: "btn bg-gradient-to-tl from-green-300 to-green-100 text-sm md:text-base", id: "routine-post-btn-#{routine.id}" %>
+  <%= link_to "投稿する", routines_post_path(routine), data: { turbo_method: :patch },
+    class: "bg-gradient-to-tl from-green-300 to-green-100 btn-md-custom",
+    id: "routine-post-btn-#{routine.id}"
+  %>
 <% end %>

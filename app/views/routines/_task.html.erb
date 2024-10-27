@@ -9,7 +9,7 @@
       <% unless request.path == routines_path %>
         <!- タスクの編集/削除ボタン（ルーティン一覧では表示しない） -->
         <div class="flex-none">
-          <button class="btn-sm-custom bg-gradient-to-tl from-green-300 to-green-100"
+          <button class="btn-sm-custom btn-edit-custom"
                   onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()"
                   id="edit_task_btn_<%= task.id %>"
           >
@@ -28,7 +28,7 @@
             </div>
           </dialog>
 
-          <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn bg-gradient-to-tl from-red-600 to-red-200 hover:opacity-50 text-xs btn-sm sm:btn-md md:text-base", id: "task-delete-btn-#{task.id}" %>
+          <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn-sm-custom btn-delete-custom", id: "task-delete-btn-#{task.id}" %>
         </div>
       <% end %>
 

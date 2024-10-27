@@ -1,12 +1,6 @@
-<div>
-  <p class="font-semibold">目安時間</p>
-  <span>
-    <%= routine.total_estimated_time[:hour] %> h
-  </span>
-  <span>
-    <%= routine.total_estimated_time[:minute] %> m
-  </span>
-  <span>
-    <%= routine.total_estimated_time[:second] %> s
-  </span>
-</div>
+<p>
+  <span class="font-semibold">目安時間：</span><span><%= routine.total_estimated_time[:hour]  %>h</span>
+                                             <span><%= routine.total_estimated_time[:minute] %>m</span>
+                                             <span><%= routine.total_estimated_time[:second] %>s</span>
+</p>
+
