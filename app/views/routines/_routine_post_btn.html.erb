@@ -1,6 +1,6 @@
 <% if routine.is_posted? %>
   <%= link_to "投稿済", routines_post_path(routine), data: { turbo_method: :patch },
-    class: "bg-gradient-to-tl from-gray-300 to-gray-100 border-pink-300 btn-md-custom",
+    class: "bg-gradient-to-tl from-gray-300 to-gray-100 border-green-300 btn-md-custom",
     id: "routine-unpost-btn-#{routine.id}"
     %>
 <% else %>

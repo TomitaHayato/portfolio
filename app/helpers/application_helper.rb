@@ -7,6 +7,7 @@ module ApplicationHelper
     end
   end
 
+  # ----------- CSSクラスに関するヘルパー ---------------------------------------------
   def bg_image_class
     current_user ? "min-h-screen bg-repeat-y bg-[url('morning_phone.jpg')]  lg:bg-[url('morning_pc.jpg')]" : ''
   end
@@ -28,6 +29,7 @@ module ApplicationHelper
   def task_arrange_class
     request.path == routines_path ? '' : 'hover:bg-amber-100'
   end
+  # --------------------------------------------------------
 
   def task_form_id(task)
     task.id.nil? ? 'new' : "#{task.id}"
