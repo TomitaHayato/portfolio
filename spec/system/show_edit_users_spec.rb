@@ -37,7 +37,7 @@ RSpec.describe "ShowEditUsers", type: :system do
       end
 
       it '「戻る」でマイページに遷移できる' do
-        find("a[href='#{my_pages_path}']").click
+        click_on "←マイページ"
         expect(page).to have_current_path(my_pages_path)
       end
     end
