@@ -39,7 +39,7 @@ RSpec.describe "ShowRoutines", type: :system do
     end
 
     it 'ルーティン一覧画面に遷移できる' do
-      find("a[href='#{routines_path}']")click
+      click_on "←ルーティン一覧"
       expect(page).to have_current_path(routines_path)
     end
 
