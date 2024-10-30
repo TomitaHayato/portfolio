@@ -1,22 +1,37 @@
 <li id="task_<%= task.id %>" class="list-group-item <%= task_arrange_class %>">
   <div class="border border-green-300 p-1 mb-3">
     <div class="flex justify-between items-center mb-5">
-      <h1 class="text-xs border-b border-cyan-300 font-semibold sm:text-sm md:text-base lg:text-lg"><%= task.title %></h1>
-      <div class="flex-none">
-        <button class="btn bg-gradient-to-tl from-green-300 hover:opacity-50 to-green-100 text-xs btn-sm sm:btn-md md:text-base" onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()" id="edit_task_btn_<%= task.id %>">編集</button>
-        <dialog id="edit_task_form_<%= task.id %>" class="modal">
-          <div class="modal-box">
-            <h1 class="text-center text-xl mb-10">タスク編集</h1>
-            <%= render partial: "routines/task_form", locals: { task: task, routine: routine, tags: tags } %>
-            <div class="modal-action">
-              <form method="dialog">
-                <button class="btn">キャンセル</button>
-              </form>
+
+      <h1 class="text-xs border-b border-cyan-300 font-semibold sm:text-sm md:text-base lg:text-lg">
+        <%= task.title %>
+      </h1>
+
+      <% unless request.path == routines_path %>
+        <!- タスクの編集/削除ボタン（ルーティン一覧では表示しない） -->
+        <div class="flex-none">
+          <button class="btn-sm-custom btn-edit-custom"
+                  onclick="document.querySelector('#edit_task_form_<%= task.id %>').showModal()"
+                  id="edit_task_btn_<%= task.id %>"
+          >
+            編集
+          </button>
+          
+          <dialog id="edit_task_form_<%= task.id %>" class="modal">
+            <div class="modal-box">
+              <h1 class="text-center text-xl mb-10">タスク編集</h1>
+              <%= render partial: "routines/task_form", locals: { task: task, routine: routine, tags: tags } %>
+              <div class="modal-action">
+                <form method="dialog">
+                  <button class="btn">キャンセル</button>
+                </form>
+              </div>
             </div>
-          </div>
-        </dialog>
-        <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn bg-gradient-to-tl from-red-600 to-red-200 hover:opacity-50 text-xs btn-sm sm:btn-md md:text-base", id: "task-delete-btn-#{task.id}" %>
-      </div>
+          </dialog>
+
+          <%= link_to "削除", task_path(task), data: { turbo_method: :delete }, class: "btn-sm-custom btn-delete-custom", id: "task-delete-btn-#{task.id}" %>
+        </div>
+      <% end %>
+
     </div>
 
     <div class="text-xs items-center sm:text-sm sm:flex sm:justify-between md:text-md lg:text-lg">

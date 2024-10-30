@@ -1,0 +1,38 @@
+.btn-sm-custom {
+  @apply btn text-xs btn-sm h-8 shadow-sm
+         md:text-sm 
+         hover:scale-105;
+}
+
+.btn-md-custom {
+  @apply btn text-xs btn-sm h-8 shadow-md
+         sm:h-10 md:text-sm 
+         hover:scale-105;
+}
+
+.btn-edit-custom {
+  @apply bg-gradient-to-tl from-green-300 to-green-100
+         hover:from-green-300 hover:to-green-300;
+}
+
+.btn-delete-custom {
+  @apply bg-gradient-to-tl from-red-400 to-red-200
+         hover:from-red-400 hover:to-red-400;
+}
+
+.btn-show-custom {
+  @apply bg-gradient-to-tl from-blue-300 to-blue-100
+         hover:from-blue-300 hover:to-blue-300;
+}
+
+.text-title-custom {
+  @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg lg:text-xl;
+}
+
+.text-plane-custom {
+  @apply text-xs md:text-sm;
+}
+
+.scroll-container-custom {
+  @apply max-h-screen overflow-scroll;
+}

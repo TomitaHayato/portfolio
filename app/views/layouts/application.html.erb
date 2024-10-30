@@ -18,6 +18,8 @@
   </head>
 
   <body class="h-full">
+
+    <!-- Header -->
     <% if current_user %>
       <%= render 'shared/header' %>
     <% else %>
@@ -26,13 +28,18 @@
 
     <div class="<%= bg_image_class %>">
       <div class="<%= shallow_bg_class %>">
+        <!-- Flashメッセージ -->
         <div id="flash">
           <%= render 'shared/flash' %>
         </div>
+
+        <!-- Main Content -->
         <%= yield %>
+
       </div>
     </div>
 
+    <!-- Footer -->
     <%= render 'shared/footer' %>
   </body>
 

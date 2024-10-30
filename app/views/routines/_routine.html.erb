@@ -1,37 +1,57 @@
 <div id="routine-<%= routine.id %>">
-  <div class="border border-amber-300 p-3 my-5 mx-auto bg-gradient-to-tl from-amber-200/70 to-yellow-50/70 sm:w-11/12 md:w-9/12">
+  <div class="border border-green-400 rounded-lg p-3 my-5 mx-auto bg-green-100 w-11/12 md:w-9/12">
 
-    <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
-      <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
-        <%= link_to "編集", edit_routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-green-300 to-green-100 text-sm btn-sm sm:btn-md md:text-base",                                                                                   id: "edit-routine-btn-#{routine.id}" %>
-        <%= link_to "詳細", routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-blue-300 to-blue-100 text-sm btn-sm sm:btn-md md:text-base",                                                                                          id: "show-routine-btn-#{routine.id}" %>
-        <%= link_to "削除", routine_path(routine), data: { turbo_method: :delete, turbo_confirm: "#{routine.title}を削除してもよろしいですか？" }, class: "min-h-10 btn bg-gradient-to-tl from-red-600 to-red-200 text-sm btn-sm sm:btn-md md:text-base", id: "delete-routine-btn-#{routine.id}" %>
+    <div class="items-center mb-3 sm:flex sm:justify-between sm:flex-wrap-reverse">
+      <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3">
+        <%= link_to "編集", edit_routine_path(routine), class: "btn-sm-custom btn-edit-custom",   id: "edit-routine-btn-#{routine.id}" %>
+        <%= link_to "詳細", routine_path(routine),      class: "btn-sm-custom btn-show-custom",   id: "show-routine-btn-#{routine.id}" %>
+        <%= link_to "削除", routine_path(routine),      class: "btn-sm-custom btn-delete-custom", id: "delete-routine-btn-#{routine.id}",
+                                                        data: { turbo_method: :delete, turbo_confirm: "#{routine.title}を削除してもよろしいですか？" }
+        %>
       </div>
-      <h1 class="break-words text-xl font-semibold border-b border-orange-200 my-2 sm:text-2xl md:text-3xl lg:text-4xl"><%= routine.title %></h1>
+
+      <!-- タイトル -->
+      <h1 class="text-title-custom"><%= routine.title %></h1>
     </div>
 
-    <div class="mb-5 mx-auto bg-gray-100/80 p-3 sm:p-5">
-      <p><%= routine.description %></p>
+    <!-- 説明文 (あれば表示) -->
+    <% if routine.description.present? %>
+      <div class="mb-3 border-gray-500 rounded-xl py-2 px-3 text-plane-custom">
+        <p><%= routine.description %></p>
+      </div>
+    <% end %>
+
+    <div class="flex justify-between mb-3">
+      <!-- 開始時間など -->
+      <div class="flex flex-col gap-2 sm:gap-1 text-plane-custom">
+        <p>
+          <span class="font-semibold">開始時間：</span><%= routine.start_time.strftime("%H:%M") if routine.start_time %>
+        </p>
+
+        <div id="total-estimated-time-for-routine-<%= routine.id %>">
+          <%= render "routines/routine_total_estimated_time", routine: routine %>
+        </div>
+
+        <p>
+          <span class="font-semibold">達成数　：</span><%= routine.completed_count %>
+        </p>
+      </div>
+
+      <!-- 投稿/実践ボタン -->
+      <div class="flex flex-col gap-2 sm:gap-1 sm:flex-row">
+        <div id="routine-post-btn-<%= routine.id %>">
+          <%= render "routines/routine_post_btn", routine: routine %>
+        </div>
+
+        <div id="routine-active-btn-<%= routine.id %>">
+          <%= render "routines/routine_active_btn", routine: routine %>
+        </div>
+      </div>
     </div>
 
-    <div class="mb-5 text-xs flex justify-between sm:justify-start sm:gap-5 sm:text-sm sm:mx-3 lg:text-base lg:gap-10">
-      <p>開始時間: <%= routine.start_time.strftime("%H:%M") if routine.start_time %></p>
-      <div id="total-estimated-time-for-routine-<%= routine.id %>">
-        <%= render "routines/routine_total_estimated_time", routine: routine %>
-      </div>
-      <p>達成数： <%= routine.completed_count %></p>
-    </div>
-
-    <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
-      <div id="routine-post-btn-<%= routine.id %>">
-        <%= render "routines/routine_post_btn", routine: routine %>
-      </div>
-      <div id="routine-active-btn-<%= routine.id %>">
-        <%= render "routines/routine_active_btn", routine: routine %>
-      </div>
-    </div>
-    <details class="collapse bg-gradient-to-tl from-teal-100 to-teal-50 items-center text-sm sm:text-base lg:text-lg">
-      <summary class="collapse-title" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
+    <!--タスク一覧-->
+    <details class="collapse collapse-plus shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50 hover:to-teal-100">
+      <summary class="collapse-title font-semibold min-h-1 p-[0.8rem] text-plane-custom" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
       <ul class="collapse-content">
         <%= render partial: "routines/task", collection: routine.tasks.includes(:tags), locals: { routine: routine, tags: tags } %>
       </ul>
