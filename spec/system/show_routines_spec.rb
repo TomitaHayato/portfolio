@@ -39,8 +39,13 @@ RSpec.describe "ShowRoutines", type: :system do
     end
 
     it 'ルーティン一覧画面に遷移できる' do
-      click_on '一覧に戻る'
+      find("a[href='#{routines_path}']")click
       expect(page).to have_current_path(routines_path)
+    end
+
+    it 'マイページに遷移できる' do
+      find("a[href='#{my_pages_path}']")click
+      expect(page).to have_current_path(my_pages_path)
     end
 
     describe 'Taskの作成処理', js: true do

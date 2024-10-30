@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "RoutinesPaths", type: :system, js: true do
+RSpec.describe "Routines#index", type: :system, js: true do
   let!(:user)           { create(:user, :for_system_spec) }
   let!(:user_other)     { create(:user, :for_system_spec) }
   let!(:routine)        { create(:routine, user: user, title: 'ルーティン1') }
@@ -35,7 +35,7 @@ RSpec.describe "RoutinesPaths", type: :system, js: true do
     end
 
     it 'ルーティン作成画面に遷移できる' do
-      click_on 'ルーティンを作成する'
+      find("a[href='#{new_routine_path}']").click
       expect(page).to have_current_path(new_routine_path)
     end
 
