@@ -44,7 +44,7 @@ RSpec.describe "ShowRoutines", type: :system do
     end
 
     it 'マイページに遷移できる' do
-      find("a[href='#{my_pages_path}']")click
+      click_on "←マイページ"
       expect(page).to have_current_path(my_pages_path)
     end
 
