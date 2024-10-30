@@ -36,3 +36,16 @@
 .scroll-container-custom {
   @apply max-h-screen overflow-scroll;
 }
+
+.tasks-collapse-custom {
+  @apply shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50
+         hover:to-teal-100;
+}
+
+.tasks-collapse-title-custom {
+  @apply collapse-title font-semibold min-h-1 p-[0.8rem];
+}
+
+.routine-zone-custom {
+  @apply border border-green-400 bg-green-100 rounded-lg;
+}

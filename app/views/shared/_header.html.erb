@@ -1,7 +1,7 @@
 <header id="logged-in-header">
   <div class="fixed top-0 z-50 w-full h-12 sm:h-14 md:h-16 p-3 flex justify-between items-center bg-gradient-to-t from-green-200 to-green-300">
 
-    <%= link_to root_page, class:"btn btn-sm border-none shadow-none w-28 sm:w-36 sm:h-10 md:w-44 md:h-12 bg-inherit bg-opacity-30 text-green-600 hover:bg-green-100" do %>
+    <%= link_to root_page, class:"btn btn-sm border-none shadow-none w-28 sm:w-36 sm:h-10 md:w-44 md:h-12 bg-inherit bg-opacity-30 text-green-600 hover:bg-green-100", id: "logo-btn" do %>
       <p class="flex items-center">
         <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8 md:h-10" %>
         <span class="text-xs leading-[0.8rem] sm:text-sm sm:leading-[0.9rem] md:text-base md:leading-[1.3rem]">Morning Forest</span>
@@ -9,20 +9,22 @@
     <% end %>
 
     <div class="flex items-center gap-3">
-      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"hidden md:btn md:btn-outline md:bg-gradient-to-tl md:from-gray-300 md:to-gray-100 md:text-gray-500 mx-3 max-w-32 lg:max-w-40 lg:mx-5 hover:text-black hover:from-gray-300 hover:to-gray-300" %>
 
       <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none", id: "user-icon-btn" do %>
         <%= image_tag "user_icon.jpg", class:"items-center rounded-lg size-8 sm:size-10 md:size-12" %>
       <% end %>
 
       <div class="drawer drawer-end mx-3 lg:mx-5">
-        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content">
-          <label for="my-drawer-4" class="drawer-button btn btn-sm bg-green-50 text-xl font-light sm:h-10 sm:w-10 sm:text-3xl md:size-12">≡</label>
+          <label for="my-drawer" class="drawer-button btn btn-sm bg-green-50 text-xl font-light sm:h-10 sm:w-10 sm:text-3xl md:size-12">≡</label>
         </div>
         <div class="drawer-side mt-12 sm:mt-14 md:mt-16">
-          <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-          <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52">
+          <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+          <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52" id="drawer-menu">
+            <li>
+              <%= link_to "マイページへ", my_pages_path,                              class:"p-3 mb-2 bg-gradient-to-tl from-green-300 to-cyan-300 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+            </li>
             <li>
               <%= link_to "ルーティンを作成する", new_routine_path,                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
@@ -31,9 +33,6 @@
             </li>
             <li>
               <%= link_to "投稿一覧を見る", routines_posts_path,                      class:"p-3 mb-2 bg-gradient-to-tl from-amber-300 to-amber-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "マイページへ", my_pages_path,                              class:"p-3 mb-2 bg-gradient-to-tl from-green-300 to-cyan-300 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
             </li>
             <li>
               <%= link_to "称号一覧", rewards_path,                                   class:"p-3 mb-2 bg-gradient-to-tl from-pink-200 to-yellow-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>

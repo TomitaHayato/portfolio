@@ -1,5 +1,5 @@
 <div id="routine-<%= routine.id %>">
-  <div class="border border-green-400 rounded-lg p-3 my-5 mx-auto bg-green-100 w-11/12 md:w-9/12">
+  <div class="routine-zone-custom p-3 my-5 mx-auto w-11/12 md:w-9/12">
 
     <div class="items-center mb-3 sm:flex sm:justify-between sm:flex-wrap-reverse">
       <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3">
@@ -50,8 +50,8 @@
     </div>
 
     <!--タスク一覧-->
-    <details class="collapse collapse-plus shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50 hover:to-teal-100">
-      <summary class="collapse-title font-semibold min-h-1 p-[0.8rem] text-plane-custom" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
+    <details class="tasks-collapse-custom collapse collapse-plus">
+      <summary class="tasks-collapse-title-custom text-plane-custom" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
       <ul class="collapse-content">
         <%= render partial: "routines/task", collection: routine.tasks.includes(:tags), locals: { routine: routine, tags: tags } %>
       </ul>
