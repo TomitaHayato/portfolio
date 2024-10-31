@@ -1,25 +1,28 @@
 <header id="logged-in-header">
-  <div class="fixed top-0 z-50 w-full h-12 sm:h-14 md:h-16 p-3 flex justify-between items-center bg-gradient-to-t from-green-200 to-green-300">
+  <div class="fixed top-0 z-50 w-full h-9 sm:h-10 lg:h-12 p-1 flex justify-between items-center bg-gradient-to-t from-green-200 to-green-300">
 
     <%= link_to root_page, class:"btn btn-sm border-none shadow-none w-28 sm:w-36 sm:h-10 md:w-44 md:h-12 bg-inherit bg-opacity-30 text-green-600 hover:bg-green-100", id: "logo-btn" do %>
-      <p class="flex items-center">
-        <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8 md:h-10" %>
-        <span class="text-xs leading-[0.8rem] sm:text-sm sm:leading-[0.9rem] md:text-base md:leading-[1.3rem]">Morning Forest</span>
+      <p class="flex items-center gap-1">
+        <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8" %>
+        <span class="text-xs leading-[0.8rem] md:text-sm md:leading-[1rem]">Morning<br>Forest</span>
       </p>
     <% end %>
 
     <div class="flex items-center gap-3">
-
+      <!-- ユーザーアイコン -->
       <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none", id: "user-icon-btn" do %>
-        <%= image_tag "user_icon.jpg", class:"items-center rounded-lg size-8 sm:size-10 md:size-12" %>
+        <%= image_tag "user_icon.jpg", class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9" %>
       <% end %>
 
       <div class="drawer drawer-end mx-3 lg:mx-5">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content">
-          <label for="my-drawer" class="drawer-button btn btn-sm bg-green-50 text-xl font-light sm:h-10 sm:w-10 sm:text-3xl md:size-12">≡</label>
+
+        <div class="drawer-content flex items-center">
+          <label for="my-drawer" class="drawer-button btn btn-sm bg-white text-gray-600 text-lg leading-none font-light p-0 min-h-0 h-7 w-7 shadow-md sm:h-8 sm:w-8 lg:h-9 lg:w-9 lg:text-2xl">≡</label>
         </div>
-        <div class="drawer-side mt-12 sm:mt-14 md:mt-16">
+
+        <!-- Drawerで表示される部分 -->
+        <div class="drawer-side mt-9 sm:mt-10 md:mt-12">
           <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
           <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52" id="drawer-menu">
             <li>
