@@ -49,3 +49,8 @@
 .routine-zone-custom {
   @apply border border-green-400 bg-green-100 rounded-lg;
 }
+
+.nav-menu-custom {
+  @apply py-1 grow text-center hover:font-semibold hover:border active:scale-90
+         text-sm lg:text-base text-green-500;
+}

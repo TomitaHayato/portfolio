@@ -1,5 +1,23 @@
-<div class="">
-  <div>
+<div class="w-10/12 mx-auto">
+  <div class="flex items-center justify-between lg:justify-start h-full">
+    <%= link_to my_pages_path, class: "nav-menu-custom" do %>
+      マイページ
+    <% end %>
 
+    <%= link_to routines_path, class: "nav-menu-custom" do %>
+      My ルーティン
+    <% end %>
+    
+    <%= link_to routines_posts_path, class: "nav-menu-custom" do %>
+      投稿を見る
+    <% end %>
+    
+    <%= link_to rewards_path, class: "nav-menu-custom" do %>
+      称号一覧
+    <% end %>
+    
+    <%= link_to user_path(current_user), class: "nav-menu-custom" do %>
+      プロフィール
+    <% end %>
   </div>
 </div>

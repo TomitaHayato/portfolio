@@ -1,54 +1,67 @@
-<header id="logged-in-header">
-  <div class="fixed top-0 z-50 w-full h-9 sm:h-10 lg:h-12 p-1 flex justify-between items-center bg-gradient-to-t from-green-200 to-green-300">
+<header id="logged-in-header" class="mb-9 sm:mb-[4.5rem] lg:mb-[5.5rem]">
 
-    <%= link_to root_page, class:"btn btn-sm border-none shadow-none w-28 sm:w-36 sm:h-10 md:w-44 md:h-12 bg-inherit bg-opacity-30 text-green-600 hover:bg-green-100", id: "logo-btn" do %>
-      <p class="flex items-center gap-1">
-        <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8" %>
-        <span class="text-xs leading-[0.8rem] md:text-sm md:leading-[1rem]">Morning<br>Forest</span>
-      </p>
-    <% end %>
+  <div class="flex flex-col fixed top-0 z-50 w-full h-9 sm:h-[4.5rem] lg:h-[5.5rem]">
+    
+    <!-- ヘッダー -->
+    <div class="flex justify-between items-center
+                bg-gradient-to-t from-green-200 to-green-400
+                w-full h-9 sm:h-10 lg:h-12"
+    >
 
-    <div class="flex items-center gap-3">
-      <!-- ユーザーアイコン -->
-      <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none", id: "user-icon-btn" do %>
-        <%= image_tag "user_icon.jpg", class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9" %>
+      <%= link_to root_page, class:"btn btn-sm border-none shadow-none w-28 sm:w-36 sm:h-10 md:w-44 md:h-12 bg-inherit bg-opacity-30 text-green-600 hover:bg-green-100", id: "logo-btn" do %>
+        <p class="flex items-center gap-1">
+          <%= image_tag "logo.jpg", class: "rounded h-6 sm:h-8" %>
+          <span class="text-xs leading-[0.8rem] md:text-sm md:leading-[1rem]">Morning<br>Forest</span>
+        </p>
       <% end %>
 
-      <div class="drawer drawer-end mx-3 lg:mx-5">
-        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="flex items-center gap-3">
+        <!-- ユーザーアイコン -->
+        <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none", id: "user-icon-btn" do %>
+          <%= image_tag "user_icon.jpg", class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9" %>
+        <% end %>
 
-        <div class="drawer-content flex items-center">
-          <label for="my-drawer" class="drawer-button btn btn-sm bg-white text-gray-600 text-lg leading-none font-light p-0 min-h-0 h-7 w-7 shadow-md sm:h-8 sm:w-8 lg:h-9 lg:w-9 lg:text-2xl">≡</label>
-        </div>
+        <div class="drawer drawer-end mx-3 lg:mx-5">
+          <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
-        <!-- Drawerで表示される部分 -->
-        <div class="drawer-side mt-9 sm:mt-10 md:mt-12">
-          <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-          <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52" id="drawer-menu">
-            <li>
-              <%= link_to "マイページへ", my_pages_path,                              class:"p-3 mb-2 bg-gradient-to-tl from-green-300 to-cyan-300 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "ルーティンを作成する", new_routine_path,                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "My ルーティン", routines_path,                            class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "投稿一覧を見る", routines_posts_path,                      class:"p-3 mb-2 bg-gradient-to-tl from-amber-300 to-amber-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "称号一覧", rewards_path,                                   class:"p-3 mb-2 bg-gradient-to-tl from-pink-200 to-yellow-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm hover:opacity-50" %>
-            </li>
-            <li>
-              <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
-            </li>
-          </ul>
+          <div class="drawer-content flex items-center">
+            <label for="my-drawer" class="drawer-button btn btn-sm bg-white text-gray-600 text-lg leading-none font-light p-0 min-h-0 h-7 w-7 shadow-md sm:h-8 sm:w-8 lg:h-9 lg:w-9 lg:text-2xl">≡</label>
+          </div>
+
+          <!-- Drawerで表示される部分 -->
+          <div class="drawer-side mt-9 sm:mt-10 md:mt-12">
+            <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+            <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52" id="drawer-menu">
+              <li>
+                <%= link_to "マイページへ", my_pages_path,                              class:"p-3 mb-2 bg-gradient-to-tl from-green-300 to-cyan-300 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "ルーティンを作成する", new_routine_path,                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "My ルーティン", routines_path,                            class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "投稿一覧を見る", routines_posts_path,                      class:"p-3 mb-2 bg-gradient-to-tl from-amber-300 to-amber-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "称号一覧", rewards_path,                                   class:"p-3 mb-2 bg-gradient-to-tl from-pink-200 to-yellow-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- メニューバー -->
+    <div class="hidden w-full bg-green-50 sm:flex sm:h-9 lg:h-10">
+      <%= render 'shared/nav_menu' %>
     </div>
   </div>
 </header>
