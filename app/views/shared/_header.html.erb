@@ -53,6 +53,12 @@
               <li>
                 <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
               </li>
+              <li>
+                <%= link_to "利用規約", terms_path, data: { turbo_method: :delete },            class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50" %>
+              </li>
+              <li>
+                <%= link_to "プライバシーポリシー", policy_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50" %>
+              </li>
             </ul>
           </div>
         </div>

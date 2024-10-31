@@ -1,0 +1,26 @@
+<div class="btm-nav btm-nav-sm sm:hidden"">
+  <%= link_to my_pages_path do %>
+    <span class="i-uiw-home size-5"></span>
+    <span class="text-[0.5rem]">マイページ</span>
+  <% end %>
+
+  <%= link_to routines_path do %>
+    <span class="i-uiw-dashboard size-5"></span>
+    <span class="text-[0.5rem]">My Routines</span>
+  <% end %>
+
+  <%= link_to new_routine_path do %>
+    <span class="i-uiw-plus size-5"></span>
+    <span class="text-[0.5rem]">新規作成</span>
+  <% end %>
+
+  <%= link_to routines_posts_path do %>
+    <span class="i-uiw-search size-5"></span>
+    <span class="text-[0.5rem]">投稿一覧</span>
+  <% end %>
+
+  <%= link_to user_path(current_user) do %>
+    <span class="i-uiw-user size-5"></span>
+    <span class="text-[0.5rem]">プロフィール</span>
+  <% end %>
+</div>
