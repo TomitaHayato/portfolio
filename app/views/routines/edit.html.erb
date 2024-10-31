@@ -1,3 +1,24 @@
+<!-- パンくず -->
+<div class="breadcrumbs-container-custom">
+  <ul>
+    <li class="link-text-custom">
+      <%= link_to 'マイページ', my_pages_path %>
+    </li>
+
+    <li class="link-text-custom">
+      <%= link_to 'My ルーティン', routines_path %>
+    </li>
+
+    <li class="link-text-custom">
+      <%= link_to '詳細', routine_path(@routine) %>
+    </li>
+
+    <li>
+      <span class="current-page-text-custom">編集</span>
+    </li>
+  </ul>
+</div>
+
 <h1 class="text-base my-3 text-center font-semibold sm:text-lg md:my-5 md:text-xl lg:text-3xl">ルーティン編集</h1>
 
 <div class="text-center">

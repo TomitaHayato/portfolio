@@ -19,7 +19,7 @@ module ApplicationHelper
     when root_path, policy_path, terms_path
       return ''
     else
-      return 'h-full mx-auto bg-green-50/90 min-h-screen w-11/12 sm:w-4/5'
+      return 'pb-16 pt-1 h-full mx-auto bg-green-50/90 min-h-screen w-11/12 sm:w-4/5'
     end
   end
 

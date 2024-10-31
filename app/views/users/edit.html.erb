@@ -1,3 +1,20 @@
+<!-- パンくず -->
+<div class="breadcrumbs-container-custom">
+  <ul>
+    <li class="link-text-custom">
+      <%= link_to 'マイページ', my_pages_path %>
+    </li>
+
+    <li class="link-text-custom">
+      <%= link_to 'プロフィール', user_path(current_user) %>
+    </li>
+
+    <li>
+      <span class="current-page-text-custom">編集</span>
+    </li>
+  </ul>
+</div>
+
 <div class="sm:flex sm:justify-between mt-3 mb-10 sm:mt-5 mx-5 sm:mx-7">
   <div class="flex sm:basis-3/12">
     <%= link_to "<< 戻る", user_path(current_user),
