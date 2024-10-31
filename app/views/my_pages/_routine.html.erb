@@ -1,15 +1,22 @@
-<div class="p-3 my-3 mx-auto bg-gradient-to-tl from-yellow-100/80 to-white/90 rounded-lg sm:w-11/12 md:w-9/12">
+<div class="routine-zone-custom p-3 my-3 mx-auto rounded-xl sm:w-11/12 md:w-9/12" id="routine-field">
 
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
     <div class="flex justify-end gap-3 flex-none sm:order-last sm:ml-auto">
-      <%= link_to "編集", edit_routine_path(routine), class: "min-h-10 btn bg-gradient-to-tl from-green-300 to-green-100 text-sm btn-sm sm:btn-md md:text-base hover:from-green-100 hover:to-green-100 hover:text-gray-600" %>
-      <%= link_to "詳細", routine_path(routine),      class: "min-h-10 btn bg-gradient-to-tl from-blue-300  to-blue-100  text-sm btn-sm sm:btn-md md:text-base hover:from-blue-100  hover:to-blue-100  hover:text-gray-600" %>
+      <%= link_to "編集", edit_routine_path(routine), class: "btn-edit-custom btn-md-custom mb-1" %>
+      <%= link_to "詳細", routine_path(routine),      class: "btn-show-custom btn-md-custom mb-1" %>
     </div>
 
-    <h1 class="break-words text-lg font-semibold my-2 sm:text-xl md:text-2xl lg:text-3xl"><%= routine.title %></h1>
+    <h1 class="text-title-custom"><%= routine.title %></h1>
   </div>
+
+  <!-- 説明文 (あれば表示) -->
+  <% if routine.description.present? %>
+    <div class="mb-3 border-gray-500 rounded-xl py-2 px-3 text-plane-custom">
+      <p><%= routine.description %></p>
+    </div>
+  <% end %>
   
-  <div class="mb-5 text-xs text-gray-600 sm:flex sm:flex-row sm:justify-start sm:text-base sm:gap-5 md:text-lg lg:gap-10">
+  <div class="mb-5 text-xs text-gray-600 sm:flex sm:flex-row sm:justify-start sm:text-sm sm:gap-5 md:text-base lg:gap-10">
     <p class="">
       <span class="font-semibold">開始: </span>
       <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
@@ -44,10 +51,16 @@
         </div>
 
       <% else %>
-        <%= link_to "スタート", routine_plays_path(routine), data: { turbo_method: :post }, class: "btn rounded-full mb-5 bg-gradient-to-tl from-green-400 to-green-100 hover:from-green-400 hover:to-green-400 hover:shadow-lg w-32 h-16 sm:w-36 sm:h-20 sm:text-lg md:w-40 md:h-24 md:text-xl lg:w-44 lg:h-28" %>
 
-        <details class="collapse collapse-arrow bg-gradient-to-tl from-cyan-200 to-cyan-50 text-sm sm:text-base lg:text-lg">
-          <summary class="collapse-title hover:bg-cyan-200 hover:font-medium">タスク 一覧</summary>
+        <%= link_to "スタート", routine_plays_path(routine),
+          data: { turbo_method: :post },
+          class:  "btn rounded-full mb-5 bg-gradient-to-tl from-green-400 to-green-200  shadow-lg
+                  hover:from-green-400 hover:to-green-400 hover:shadow-lg w-32 h-16 
+                  sm:w-36 sm:h-20 sm:text-lg md:w-40 md:h-24 md:text-xl lg:w-44 lg:h-28"
+        %>
+
+        <details class="tasks-collapse-custom collapse collapse-plus">
+          <summary class="tasks-collapse-title-custom text-plane-custom" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
           <div class="collapse-content">
             <%= render partial: "task", collection: routine.tasks.includes(:tags).order(position: :asc), locals: { routine: routine } %>
           </div>

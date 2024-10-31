@@ -9,24 +9,26 @@ class Routine < ApplicationRecord
 
   enum notification: { no: 0, line: 1 }
 
-  scope :posted, -> { where(is_posted: true) }
-  scope :unposted, -> { where(is_posted: false) }
-  scope :my_post, ->(user_id)  { where(user_id: user_id) }
-  scope :official, ->{ joins(:user).where(users: { role: 'admin' }) }
-  scope :general, -> { joins(:user).where(users: { role: 'general' }) }
-  scope :liked, ->(user_id) { joins(:likes).where(likes: { user_id: user_id }) }
+  scope :posted,   ->           { where(is_posted: true) }
+  scope :unposted, ->           { where(is_posted: false) }
+  scope :my_post,  ->(user_id)  { where(user_id: user_id) }
+  scope :official, ->           { joins(:user).where(users: { role: 'admin' }) }
+  scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
+  scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: user_id }) }
 
+  # ルーティンをコピーする際、ルーティン情報をリセットする処理
   def reset_status
-    self.is_active = false
-    self.is_posted = false
-    self.copied_count = 0
+    self.is_active       = false
+    self.is_posted       = false
+    self.copied_count    = 0
     self.completed_count = 0
+    self.notification    = 'no'
     self
   end
 
   def total_estimated_time
-    result = second_to_time_string(all_task_estimated_time)
-    result[:hour] = "0#{result[:hour]}" if result[:hour] < 10
+    result          = second_to_time_string(all_task_estimated_time)
+    result[:hour]   = "0#{result[:hour]}" if result[:hour] < 10
     result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
     result[:second] = "0#{result[:second]}" if result[:second] < 10
     result
@@ -89,9 +91,12 @@ class Routine < ApplicationRecord
   def second_to_time_string(time_in_second)
     hour = time_in_second / 3600
     time_in_second -= hour * 3600
+
     minute = time_in_second / 60
     time_in_second -= minute * 60
+
     second = time_in_second
+
     { hour:, minute:, second: }
   end
 

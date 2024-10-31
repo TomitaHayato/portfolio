@@ -7,7 +7,6 @@ RSpec.describe "GuestLogins", type: :system do
     sleep 0.25
 
     @user = User.last
-    p "ユーザーは#{@user.name}です"
   end
 
   it 'ゲストログインできる' do
@@ -51,6 +50,7 @@ RSpec.describe "GuestLogins", type: :system do
 
   describe 'ログアウト処理' do
     it 'ログアウトすると、ユーザー情報がDBから削除される' do
+      find('label', text: '≡').click
       click_on 'ログアウト'
       sleep 0.25
 

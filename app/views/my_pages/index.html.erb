@@ -27,30 +27,30 @@
   <h2 class="my-3 font-bold lg:text-xl">獲得した経験値</h2>
 
   <!-- 全期間の経験値表示 -->
-  <div class="p-3 border border-gray-400">
+  <div class="p-3 border border-gray-400" id="user-xp-total">
     <h3 class="my-1 lg:text-lg">全期間</h3>
     <% @experience_data_all.each do |tag_name, experience_point| %>
-      <li class="items-center my-2">
+      <li class="items-center my-2" id="tag-total-xp-<%= tag_name %>">
         <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
         <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
       </li>
     <% end %>
   </div>
 
-  <div class="p-3 border border-gray-400">
+  <div class="p-3 border border-gray-400" id="user-xp-monthly">
     <h3 class="my-1 lg:text-lg">1ヶ月間</h3>
     <% @experience_data_month.each do |tag_name, experience_point| %>
-      <li class="items-center my-2">
+      <li class="items-center my-2" id="tag-monthly-xp-<%= tag_name %>">
         <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
         <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
       </li>
     <% end %>
   </div>
 
-  <div class="p-3 border border-gray-400">
+  <div class="p-3 border border-gray-400" id="user-xp-weekly">
     <h3 class="my-1 lg:text-lg">1週間</h3>
     <% @experience_data_week.each do |tag_name, experience_point| %>
-      <li class="items-center my-2">
+      <li class="items-center my-2" id="tag-weekly-xp-<%= tag_name %>">
         <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
         <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
       </li>
