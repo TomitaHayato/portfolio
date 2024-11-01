@@ -42,7 +42,9 @@
     <!-- Footer -->
     <%= render 'shared/footer' %>
 
-    <%= render 'shared/nav_bottom' %>
+    <% if current_user %>
+      <%= render 'shared/nav_bottom' %>
+    <% end %>
   </body>
 
   <script>

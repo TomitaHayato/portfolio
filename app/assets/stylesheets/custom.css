@@ -26,11 +26,15 @@
 }
 
 .text-title-custom {
-  @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg lg:text-xl;
+  @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg;
+}
+
+.routine-description-custom {
+  @apply border-gray-500 rounded-xl py-2 px-3;
 }
 
 .text-plane-custom {
-  @apply text-xs md:text-sm;
+  @apply text-xs md:text-sm text-gray-800;
 }
 
 .scroll-container-custom {
@@ -47,8 +51,13 @@
 }
 
 .routine-zone-custom {
-  @apply border border-green-400 bg-green-100 rounded-lg;
+  @apply border border-green-400 bg-green-50 rounded-lg;
 }
+
+.posted-routine-zone-custom {
+  @apply border border-sky-400 bg-green-50 rounded-lg;
+}
+
 
 .nav-menu-custom {
   @apply py-1 grow text-center hover:font-semibold hover:border active:scale-90
@@ -69,4 +78,8 @@
 
 .page-title-custom {
   @apply text-base text-center font-semibold sm:text-lg md:text-xl lg:text-3xl mb-3 md:mb-5;
+}
+
+.icon-size-custom {
+  @apply size-4 sm:size-5;
 }

@@ -1,10 +1,13 @@
 <% if liked_routine_ids.include?(routine.id) %>
+  <!-- ON -->
   <%= link_to routines_like_path(routine), data: { turbo_method: :delete }, class: "p-2 flex justify-center items-center", id: "like-btn-on-#{routine.id}" do %>
-    <span class="i-uiw-star-on bg-pink-400 w-6 h-6"></span>
+    <span class="i-uiw-star-on bg-pink-400 icon-size-custom"></span>
   <% end %>
+
 <% else %>
+  <!-- Off -->
   <%= link_to routines_likes_path(routine_id: routine.id), data:{ turbo_method: :post }, class: "p-2 flex justify-center items-center", id: "like-btn-off-#{routine.id}" do %>
-    <span class="i-uiw-star-off w-6 h-6"></span>
+    <span class="i-uiw-star-off icon-size-custom"></span>
   <% end %>
 <% end %>
 
