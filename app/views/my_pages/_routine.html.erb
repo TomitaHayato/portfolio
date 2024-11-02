@@ -11,12 +11,12 @@
 
   <!-- 説明文 (あれば表示) -->
   <% if routine.description.present? %>
-    <div class="mb-3 border-gray-500 rounded-xl py-2 px-3 text-plane-custom">
+    <div class="mb-3 py-2 px-3 text-plane-custom">
       <p><%= routine.description %></p>
     </div>
   <% end %>
   
-  <div class="mb-5 text-xs text-gray-600 sm:flex sm:flex-row sm:justify-start sm:text-sm sm:gap-5 md:text-base lg:gap-10">
+  <div class="mb-5 text-md-custom sm:flex sm:flex-row sm:justify-start sm:gap-5 lg:gap-10">
     <p class="">
       <span class="font-semibold">開始: </span>
       <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
