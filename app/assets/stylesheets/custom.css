@@ -29,12 +29,16 @@
   @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg;
 }
 
-.routine-description-custom {
-  @apply border-gray-500 rounded-xl py-2 px-3;
-}
-
 .text-plane-custom {
   @apply text-xs md:text-sm text-gray-800;
+}
+
+.text-sm-custom {
+  @apply text-[0.5rem] md:text-xs;
+}
+
+.routine-description-custom {
+  @apply border-gray-500 rounded-xl py-2 px-3;
 }
 
 .scroll-container-custom {
@@ -42,12 +46,15 @@
 }
 
 .tasks-collapse-custom {
-  @apply shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50
-         hover:to-teal-100;
+  @apply shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50;
 }
 
 .tasks-collapse-title-custom {
   @apply collapse-title font-semibold min-h-1 p-[0.8rem];
+}
+
+.task-zone-custom {
+  @apply border border-inherit shadow-md rounded-lg p-1 px-3;
 }
 
 .routine-zone-custom {
@@ -58,6 +65,9 @@
   @apply border border-sky-400 bg-green-50 rounded-lg;
 }
 
+.tag-zone-custom {
+  @apply bg-gradient-to-tl from-amber-300 to-amber-100 rounded-lg font-[550] text-blue-500 py-0.5 px-1 md:px-2;
+}
 
 .nav-menu-custom {
   @apply py-1 grow text-center hover:font-semibold hover:border active:scale-90

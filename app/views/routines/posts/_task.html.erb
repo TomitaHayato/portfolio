@@ -1,8 +1,15 @@
-<div class="border border-green-300 p-1 mb-3">
-  <h1 class="text-sm mb-2 font-semibold sm:text-base md:text-lg lg:text-xl"><%= task.title %></h1>
+<div class="mb-3 task-zone-custom">
+  <h1 class="mb-2 text-plane-custom font-semibold"><%= task.title %></h1>
 
-  <div class="text-xs items-center flex gap-1 justify-start sm:text-sm am:gap-3 md:text-md lg:text-lg">
-    <p>目安時間：</p>
+  <div class="flex flex-wrap items-center gap-1 mb-2 md:gap-3">
+    <% task.tags.each do |tag| %>
+      <p class="flex-none tag-zone-custom text-sm-custom">
+        <%= tag.name %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="text-sm-custom items-center flex gap-1 justify-start am:gap-3">
     <p>
       <%= task.estimated_time[:hour] %> h
     </p>
@@ -13,11 +20,4 @@
       <%= task.estimated_time[:second] %> s
     </p>
   </div>
-
-  <div class="flex flex-wrap items-center gap-1 my-1 md:gap-3">
-    <% task.tags.each do |tag| %>
-      <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 flex-none text-xs md:text-sm"><%= tag.name %></p>
-    <% end %>
-  </div>
-
 </div>
