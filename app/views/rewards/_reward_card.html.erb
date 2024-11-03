@@ -1,10 +1,24 @@
-<div class="card bg-base-100 shadow-xl" id="reward-card-<%= reward.id %>">
+<div class="card bg-base-100 shadow-md" id="reward-card-<%= reward.id %>">
   <figure class="px-1 pt-1">
     <% if reward.image.url %>
-      <%= image_tag reward.image.url, size: '200x200' %>
+      <button onclick="document.getElementById('reward-image-<%=reward.id%>').showModal()">
+        <%= image_tag reward.image.url, size: '200x200' %>
+      </button>
     <% end %> 
   </figure>
+
   <div class="card-body items-center text-center p-2">
-    <h2 class="card-title bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-green-500"><%= reward.name %></h2>
+    <h2 class="text-reward-custom text-lg-custom"><%= reward.name %></h2>
   </div>
+
+  <!-- 画像クリックで表示されるモーダル -->
+  <dialog id="reward-image-<%=reward.id%>" class="modal w-10/12 mx-auto">
+    <div class="modal-box flex justify-center">
+      <%= image_tag reward.image.url, class: "w-10/12" %>
+    </div>
+
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
 </div>

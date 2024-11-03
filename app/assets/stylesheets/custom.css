@@ -50,6 +50,14 @@
   @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg;
 }
 
+.text-lg-custom {
+  @apply  text-xs sm:text-sm md:text-base lg:text-lg font-semibold;
+}
+
+.text-reward-custom {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-green-500;
+}
+
 .text-plane-custom {
   @apply text-xs md:text-sm text-gray-800;
 }
