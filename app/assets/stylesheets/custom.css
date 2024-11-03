@@ -161,6 +161,10 @@
   @apply radio radio-success radio-xs sm:radio-sm; 
 }
 
+.sort-box-custom {
+  @apply select select-bordered select-xs md:select-sm;
+}
+
 .countdown-custom{
   @apply text-blue-600;
 }

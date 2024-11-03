@@ -15,15 +15,18 @@
       <div id="search-options">
       </div>
 
-      <div class="flex justify-start my-2">
-        <div class="mr-5 text-sm md:text-base">
+      <div class="flex justify-start gap-2 my-2">
+        <div class="text-plane-custom">
           <p>並び替え</p>
-          <%= f.select :column, @order_list, { selected: @column }, class: "sort-select-box select select-bordered select-sm text-sm" %>
-          <%= f.select :direction, [['降順', nil], ['昇順', 'asc']], { selected: @direction }, class: "sort-select-box select select-bordered select-sm text-sm" %>
+          <div class="flex flex-wrap gap-1">
+            <%= f.select :column, @order_list, { selected: @column }, class: "sort-select-box sort-box-custom" %>
+            <%= f.select :direction, [['降順', nil], ['昇順', 'asc']], { selected: @direction }, class: "sort-select-box sort-box-custom" %>
+          </div>
+
         </div>
-        <div class="text-sm md:text-base">
+        <div class="text-plane-custom">
           <p>絞り込み</p>
-          <%= f.select :filter_target, @filter_options, { selected: @filter_target }, class: "sort-select-box select select-bordered select-sm text-sm" %>
+          <%= f.select :filter_target, @filter_options, { selected: @filter_target }, class: "sort-select-box sort-box-custom" %>
         </div>
       </div>
     </div>
