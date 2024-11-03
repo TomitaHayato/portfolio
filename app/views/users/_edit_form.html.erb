@@ -1,22 +1,22 @@
-<%= form_with model: user, class:"text-center" do |f| %>
+<%= form_with model: user, class:"text-center mb-3" do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="my-8 text-center">
-    <%= image_tag user.avatar.url, class: 'rounded-circle my-2 mx-auto', id: "preview avatar-#{user.id}", size: '200x200' %>
-    <%= f.label :avatar, "アイコン", class: "block font-semibold mb-2 sm:text-lg" %>
-    <%= f.file_field :avatar, class: "block input input-bordered mx-auto text-sm w-8/12 lg:w-1/2", placeholder: "ユーザー名"%>
+  <div class="mb-3 text-center">
+    <%= image_tag user.avatar.url, class: 'rounded-circle mb-3 mx-auto size-[150px]', id: "preview" %>
+    <%= f.label :avatar, "アイコン", class: "mb-2 text-plane-custom font-semibold" %>
+    <%= f.file_field :avatar, class: "block file-input file-input-xs md:file-input-sm file-input-bordered file-input-success mx-auto text-sm w-8/12 lg:w-1/2 hover:scale-105", placeholder: "ユーザー名"%>
     <%= f.hidden_field :avatar_cache %>
   </div>
 
-  <div class="my-8">
-    <%= f.label :name, "ユーザー名", class: "block font-semibold mb-2 sm:text-lg" %>
-    <%= f.text_field :name, class: "block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "ユーザー名"%>
+  <div class="mb-3">
+    <%= f.label :name, "ユーザー名", class: "mb-2 text-plane-custom font-semibold" %>
+    <%= f.text_field :name, class: "block input-form-custom mx-auto min-w-60 sm:min-w-80 lg:min-w-[500px]", placeholder: "ユーザー名"%>
   </div>
 
-  <div class=" my-8 ">
-    <%= f.label :email, "メールアドレス", class: "block font-semibold mb-2 sm:text-lg" %>
-    <%= f.email_field :email, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "メールアドレス" %>
+  <div class=" mb-3">
+    <%= f.label :email, "メールアドレス", class: "mb-2 text-plane-custom font-semibold" %>
+    <%= f.email_field :email, class:"block input-form-custom mx-auto min-w-60 sm:min-w-80 lg:min-w-[500px]", placeholder: "メールアドレス" %>
   </div>
 
-  <%= f.submit nil, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 mb-5 btn-md min-w-28 sm:text-lg sm:btn-lg sm:min-w-40 lg:min-w-60" %>
+  <%= f.submit nil, class:"btn-xl-custom btn-create-custom" %>
 <% end %>

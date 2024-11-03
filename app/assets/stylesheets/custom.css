@@ -15,6 +15,16 @@
           hover:scale-105;
 }
 
+.btn-cansel-custom {
+  @apply  bg-gradient-to-tl from-gray-300 to-gray-100
+          hover:from-gray-300 hover:to-gray-300;
+}
+
+.btn-create-custom {
+  @apply  bg-gradient-to-tl from-cyan-300 to-cyan-100
+          hover:from-cyan-300 hover:to-cyan-300;
+}
+
 .btn-edit-custom {
   @apply bg-gradient-to-tl from-green-300 to-green-100
          hover:from-green-300 hover:to-green-300;

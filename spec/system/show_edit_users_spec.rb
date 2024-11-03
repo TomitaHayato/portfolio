@@ -21,7 +21,7 @@ RSpec.describe "ShowEditUsers", type: :system do
         expect(page).to have_current_path(user_path(user))
         expect(page).to have_content(user.name)
         expect(page).to have_content(user.email)
-        expect(page).to have_selector("#avatar-#{user.id}")
+        expect(page).to have_selector("#preview")
       end
 
       it '他のユーザーのプロフィール画面にアクセスできない' do
@@ -63,7 +63,7 @@ RSpec.describe "ShowEditUsers", type: :system do
         let!(:submit_btn)  { find('input[type="submit"]') }
 
         it 'フォームが正しく表示されている' do
-          expect(page).to have_selector("[id = 'preview avatar-#{user.id}']")
+          expect(page).to have_selector("[id = 'preview']")
 
           expect(page).to have_selector('#user_avatar')
           expect(page).to have_selector('#user_name')

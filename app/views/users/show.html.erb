@@ -10,42 +10,29 @@
   </ul>
 </div>
 
-<div class="sm:flex sm:justify-between mt-3 sm:my-5 mx-5 sm:mx-7">
-  <div class="flex sm:basis-3/12">
-    <%= link_to "←マイページ", my_pages_path,
-      class: "btn text-xs bg-gradient-to-tl from-green-500 to-green-500 btn-sm min-h-9 mb-3
-              sm:min-w-28 sm:text-sm lg:btn-md
-              hover:from-gray-300 hover:to-gray-300 hover:scale-105"
-    %>
-  </div>
+<h1 class="page-title-custom">プロフィール</h1>
 
-  <h1 class="sm:basis-6/12 text-xl font-semibold text-center sm:text-3xl lg:text-4xl">プロフィール</h1>
-
-  <div class="sm:basis-3/12"></div>
-</div>
-
-
-
-<div class="bg-gradient-to-tl from-cyan-200/60 to-cyan-0/60 rounded-lg w-11/12 mx-auto p-5 border border-sky-300 sm:w-9/12 sm:p-10 lg:w-8/12">
-  <%= image_tag current_user.avatar.url, class: 'rounded-circle my-2 mx-auto', size: '200x200', id: "avatar-#{current_user.id}" %>
-  <div class="sm:text-lg md:text-xl">
-    <div class="my-5 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
+<div class="bg-white/40 rounded-lg w-11/12 mx-auto px-5 py-1 border border-sky-300 sm:w-9/12 sm:px-10 lg:w-8/12">
+  <%= image_tag current_user.avatar.url, class: 'rounded-circle mb-3 mx-auto', size: '200x200', id: "avatar-#{current_user.id}" %>
+  
+  <div class="text-plane-custom">
+    <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
       <p class="flex-none font-medium">名前:</p>
       <p class="break-all md:font-semibold"><%= current_user.name %></p>
     </div>
 
-    <div class="my-5 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
+    <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
       <p class="flex-none font-medium">メール:</p>
       <p class="break-all md:font-semibold"><%= current_user.email %></p>
     </div>
 
-    <div class="my-5 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
+    <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
       <p class="flex-none font-medium">ルーティン達成回数:</p>
       <p class="font-semibold"><%= current_user.complete_routines_count %></p>
     </div>
   </div>
 
-  <div class="text-center">
-    <%= link_to "プロフィールを編集", edit_user_path(current_user), class: "btn bg-gradient-to-tl from-emerald-400 to-emerald-100 mb-5 btn-md min-w-28 md:text-lg md::btn-lg md:min-h-16 sm:min-w-40" %>
+  <div class="text-center mb-3">
+    <%= link_to "プロフィールを編集", edit_user_path(current_user), class: "btn-md-custom btn-edit-custom" %>
   </div>
 </div>
