@@ -3,22 +3,21 @@
     <%= link_to "×", my_pages_path, class:"btn-sm-custom btn-delete-custom" %>
   </div>
 
-  <div class="text-center mx-auto">
-    <h1 class="page-title-custom mb-3"><%= @task.title %></h1>
-  </div>
- 
-  <!-- タグ -->
-  <div class="mb-3 flex flex-wrap justify-center items-center gap-1 md:gap-3 w-9/12 sm:10/12 mx-auto">
-    <% @task.tags.each do |tag| %>
-      <p class="tag-zone-lg-custom flex-none"><%= tag.name %></p>
-    <% end %>
-  </div>
+  <%= turbo_frame_tag 'routine-plays-view' do %>
+    <div class="text-center mx-auto">
+      <h1 class="page-title-custom mb-3"><%= @task.title %></h1>
+    </div>
   
-  <!-- カウントダウン -->
-  <div class="bg-gradient-to-tl from-yellow-400/60 to-yellow-100/60 rounded-full flex justify-center items-center w-40 h-40 mb-3 mx-auto sm:w-44 sm:h-44 lg:w-48 lg:h-48">  
+    <!-- タグ -->
+    <div class="mb-3 flex flex-wrap justify-center items-center gap-1 md:gap-3 w-9/12 sm:10/12 mx-auto">
+      <% @task.tags.each do |tag| %>
+        <p class="tag-zone-lg-custom flex-none"><%= tag.name %></p>
+      <% end %>
+    </div>
+    
+    <!-- カウントダウン --> 
     <div class="countdown-circle-custom">
       <div id="countdown-field" class="text-xl-custom mx-auto p-3 flex justify-center gap-1">
-
         <!-- カウントダウン処理時に、@task.estimated_time_in_secondをJSで取得するために必要 -->
         <span class="hidden" id="task-estimated-time">
           <%= @task.estimated_time_in_second %>
@@ -27,23 +26,20 @@
         <div id="countdown-display">
           <!-- JSで HH:MM:SS を表示 -->
         </div>
-
       </div>
     </div>
-  </div>
 
+    <div class="flex justify-center gap-2 mx-auto flex-col w-4/12">
+      <%= link_to "達成", play_path(@routine, tag_ids: @task.tag_ids),
+          data: @turbo_setting,
+          class: "btn-xl-custom btn-next-custom"
+      %>
 
-  <div class="flex justify-center gap-2 mx-auto flex-col w-4/12">
-    <%= link_to "達成", play_path(@routine, tag_ids: @task.tag_ids),
-        data: { turbo_method: :patch },
-        class: "btn-xl-custom btn-next-custom"
-    %>
-
-    <%= link_to "スキップ", play_path(@routine),
-        data: { turbo_method: :patch },
-        class: "btn-xl-custom btn-skip-custom"
-    %>
-  </div>
-
+      <%= link_to "スキップ", play_path(@routine),
+          data: @turbo_setting,
+          class: "btn-xl-custom btn-skip-custom"
+      %>
+    </div>
+  <% end %>
 </div>
 

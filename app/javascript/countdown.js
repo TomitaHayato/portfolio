@@ -1,4 +1,4 @@
-document.addEventListener('turbo:load', function(event) {
+function countdownStart() {
   // このページにアクセスした時刻を記録 => 1秒ごとに現在時刻を取得し、アクセス時の時刻との差分(=経過時間)をtaskのtimeから引く
   const countdownDisplay = document.querySelector('#countdown-display');
   if (!countdownDisplay) return;
@@ -92,4 +92,12 @@ document.addEventListener('turbo:load', function(event) {
   document.addEventListener('turbo:before-visit', function () {
     clearInterval(setIntervalId);
   });
+}
+
+document.addEventListener('turbo:load', function(event) {
+  countdownStart();
+});
+
+document.addEventListener('turbo:frame-load', function(event) {
+  countdownStart();
 });
