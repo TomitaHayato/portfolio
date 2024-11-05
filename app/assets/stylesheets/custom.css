@@ -187,3 +187,10 @@
   @apply text-blue-600;
 }
 
+.countdown-circle-custom {
+  @apply  bg-gradient-to-tl from-yellow-400/60 to-yellow-100/60
+          flex justify-center items-center
+          rounded-full mb-3 mx-auto
+          w-40 h-40 sm:w-44 sm:h-44 lg:w-48 lg:h-48;
+}
+

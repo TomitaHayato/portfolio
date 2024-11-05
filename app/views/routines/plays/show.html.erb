@@ -1,16 +1,10 @@
 <div class="px-3 py-5 mx-auto bg-white w-11/12 sm:w-9/12">
-  <div class="flex ">
-    <div class="text-start">
-      <%= link_to "×", my_pages_path, class:"btn-sm-custom btn-delete-custom" %>
-    </div>
+  <div class="text-start">
+    <%= link_to "×", my_pages_path, class:"btn-sm-custom btn-delete-custom" %>
+  </div>
 
-    <div class="text-center mx-auto">
-      <h1 class="page-title-custom mb-3"><%= @task.title %></h1>
-    </div>
-
-    <div class="invisible">
-      <span class:"btn-sm-custom btn-delete-custom">×</span>
-    </div>
+  <div class="text-center mx-auto">
+    <h1 class="page-title-custom mb-3"><%= @task.title %></h1>
   </div>
  
   <!-- タグ -->
@@ -19,24 +13,25 @@
       <p class="tag-zone-lg-custom flex-none"><%= tag.name %></p>
     <% end %>
   </div>
+  
+  <!-- カウントダウン -->
+  <div class="bg-gradient-to-tl from-yellow-400/60 to-yellow-100/60 rounded-full flex justify-center items-center w-40 h-40 mb-3 mx-auto sm:w-44 sm:h-44 lg:w-48 lg:h-48">  
+    <div class="countdown-circle-custom">
+      <div id="countdown-field" class="text-xl-custom mx-auto p-3 flex justify-center gap-1">
 
-  <div class="bg-gradient-to-tl from-yellow-400/60 to-yellow-100/60 rounded-full flex justify-center items-center w-40 h-40 mb-3 mx-auto sm:w-44 sm:h-44 lg:w-48 lg:h-48">
-    <div id="countdown-zone" class="text-xl-custom mx-auto p-3 flex justify-center gap-1">
-      <p>
-        <span id="hour" class="countdown-custom"><%= @task.estimated_time[:hour] %></span>
-        :
-      </p>
+        <!-- カウントダウン処理時に、@task.estimated_time_in_secondをJSで取得するために必要 -->
+        <span class="hidden" id="task-estimated-time">
+          <%= @task.estimated_time_in_second %>
+        </span>
 
-      <p>
-        <span id="minute" class="countdown-custom"><%= @task.estimated_time[:minute] %></span>
-        :
-      </p>
-      
-      <p>
-        <span id="second" class="countdown-custom"><%= @task.estimated_time[:second] %></span>
-      </p>
+        <div id="countdown-display">
+          <!-- JSで HH:MM:SS を表示 -->
+        </div>
+
+      </div>
     </div>
   </div>
+
 
   <div class="flex justify-center gap-2 mx-auto flex-col w-4/12">
     <%= link_to "達成", play_path(@routine, tag_ids: @task.tag_ids),
@@ -49,4 +44,6 @@
         class: "btn-xl-custom btn-skip-custom"
     %>
   </div>
+
 </div>
+
