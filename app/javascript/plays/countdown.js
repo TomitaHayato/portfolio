@@ -1,4 +1,4 @@
-function countdownStart() {
+export function countdownStart() {
   // このページにアクセスした時刻を記録 => 1秒ごとに現在時刻を取得し、アクセス時の時刻との差分(=経過時間)をtaskのtimeから引く
   const countdownDisplay = document.querySelector('#countdown-display');
   if (!countdownDisplay) return;
@@ -62,7 +62,7 @@ function countdownStart() {
     const passedSec = Math.round(
                                   (timeNow.getTime() - startTime.getTime()) / 1000
                                 );
-    console.log(passedSec);
+    //console.log(passedSec);
     return passedSec;
   }
 
@@ -81,6 +81,7 @@ function countdownStart() {
   function countdown() {
     const taskLimitSecNow = calTaskLimitSec(taskLimitSec, startTime);
     createTaskLimitStr(taskLimitSecNow);
+
     if(taskLimitSecNow === 0) { clearInterval(setIntervalId); }
   }
 
@@ -89,15 +90,13 @@ function countdownStart() {
 
   const setIntervalId =  setInterval(countdown, 1000);
 
+  // 他のページに遷移 => カウントダウン処理終了
   document.addEventListener('turbo:before-visit', function () {
     clearInterval(setIntervalId);
   });
+
+  // turbo-frameで遷移前 => 遷移前のカウントダウン処理終了
+  document.addEventListener('turbo:before-fetch-request', function () {
+    clearInterval(setIntervalId);
+  });
 }
-
-document.addEventListener('turbo:load', function(event) {
-  countdownStart();
-});
-
-document.addEventListener('turbo:frame-load', function(event) {
-  countdownStart();
-});

@@ -1,9 +1,21 @@
 <div class="px-3 py-5 mx-auto bg-white w-11/12 sm:w-9/12">
-  <div class="text-start">
-    <%= link_to "×", my_pages_path, class:"btn-sm-custom btn-delete-custom" %>
+  <div class="flex mb-3">
+    <div class="text-start">
+      <%= link_to "×", my_pages_path, class:"btn-sm-custom btn-delete-custom" %>
+    </div>
+
+    <div class="overflow-x-auto mx-auto">
+      <ul class="steps gap-1">
+        <%= render partial: 'routines/plays/step', collection: @tasks, as: :task %>
+      </ul>
+    </div>
   </div>
 
   <%= turbo_frame_tag 'routine-plays-view' do %>
+
+    <!-- 表示中タスクのpositionの値 jsで受け取る用 -->
+    <div id="task-position-deliver" data-task-position="<%= @task.position %>"></div>
+
     <div class="text-center mx-auto">
       <h1 class="page-title-custom mb-3"><%= @task.title %></h1>
     </div>

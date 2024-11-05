@@ -6,6 +6,7 @@ class Routines::PlaysController < ApplicationController
 
   def show
     @task = @tasks[session[:playing_task_num]]
+    
     # 最後のタスクの場合、turbo-frameリクエストを無効化
     @turbo_setting = { turbo_method: :patch }
     @turbo_setting[:turbo_frame] = '_top' if session[:playing_task_num] == (@tasks.count - 1)
