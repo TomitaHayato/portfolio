@@ -35,33 +35,35 @@ RSpec.describe "Routines::Plays", type: :system, js: true do
     end
     
     it '正常にページが表示される' do
-      expect(page).to have_current_path(play_path(routine))
-      expect(page).to have_selector('h1', text: routine.title)
-      expect(page).to have_selector('p',  text: task1.title)
-      expect(page).not_to have_selector('p',  text: task2.title)
-      expect(page).to have_selector('#countdown-zone')
+      expect(page).to     have_current_path(play_path(routine))
+
+      expect(page).to     have_selector('h1',  text: task1.title)
+      expect(page).not_to have_selector('h1',  text: task2.title)
+      expect(page).to     have_selector('#countdown-field')
     end
 
     it '「達成」を押すと次のタスクに遷移する' do
       click_on '達成'
+
       expect(page).to have_current_path(play_path(routine))
-      expect(page).to have_selector('h1', text: routine.title)
-      expect(page).not_to have_selector('p',  text: task1.title)
-      expect(page).to have_selector('p',  text: task2.title)
-      expect(page).to have_selector('#countdown-zone')
+
+      expect(page).not_to have_selector('h1',  text: task1.title)
+      expect(page).to     have_selector('h1',  text: task2.title)
+      expect(page).to     have_selector('#countdown-field')
     end
 
     it '「達成」を押すと次のタスクに遷移する' do
       click_on 'スキップ'
+
       expect(page).to have_current_path(play_path(routine))
-      expect(page).to have_selector('h1', text: routine.title)
-      expect(page).not_to have_selector('p',  text: task1.title)
-      expect(page).to have_selector('p',  text: task2.title)
-      expect(page).to have_selector('#countdown-zone')
+
+      expect(page).not_to have_selector('h1',  text: task1.title)
+      expect(page).to     have_selector('h1',  text: task2.title)
+      expect(page).to     have_selector('#countdown-field')
     end
 
     it '[x]でマイページに遷移できる' do
-      click_on 'x'
+      click_on '×'
       expect(page).to have_current_path(my_pages_path)
     end
 

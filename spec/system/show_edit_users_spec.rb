@@ -17,11 +17,11 @@ RSpec.describe "ShowEditUsers", type: :system do
         visit user_path(user)
       end
 
-      it '自分のプロフィール画面にアクセスできる' do
+      it 'プロフィール画面にアクセスできる' do
         expect(page).to have_current_path(user_path(user))
         expect(page).to have_content(user.name)
         expect(page).to have_content(user.email)
-        expect(page).to have_selector("#preview")
+        expect(page).to have_selector("#avatar-#{user.id}")
       end
 
       it '他のユーザーのプロフィール画面にアクセスできない' do
@@ -34,11 +34,6 @@ RSpec.describe "ShowEditUsers", type: :system do
         click_on 'プロフィールを編集'
         expect(page).to have_current_path(edit_user_path(user))
         expect(find('#user_email').value).to eq user.email
-      end
-
-      it '「戻る」でマイページに遷移できる' do
-        click_on "←マイページ"
-        expect(page).to have_current_path(my_pages_path)
       end
     end
   end

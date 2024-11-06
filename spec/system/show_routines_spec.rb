@@ -38,16 +38,6 @@ RSpec.describe "ShowRoutines", type: :system do
       expect(page).to have_content("#{routine.title}を削除しました")
     end
 
-    it 'ルーティン一覧画面に遷移できる' do
-      click_on "←ルーティン一覧"
-      expect(page).to have_current_path(routines_path)
-    end
-
-    it 'マイページに遷移できる' do
-      click_on "←マイページ"
-      expect(page).to have_current_path(my_pages_path)
-    end
-
     describe 'Taskの作成処理', js: true do
       before do
         click_on 'タスクを追加'
@@ -120,21 +110,27 @@ RSpec.describe "ShowRoutines", type: :system do
         it 'タスク情報を更新できる' do
           title_form.set('タスク2')
           hour_form.set('02')
-          minute_form.set('02')
-          second_form.set('02')
+          minute_form.set('03')
+          second_form.set('04')
           find("input[id='task_tag_ids_#{tag1.id}']").click
           find("input[id='task_tag_ids_#{tag2.id}']").click
           click_on '更新する'
           sleep 0.1
 
           expect(page).to have_current_path(routine_path(routine))
-          expect(page).to have_selector("#task_#{task.id}")
-          expect(page).to have_content(tag1.name)
-          expect(page).to have_content(tag2.name)
-          expect(page).to have_selector('h1', text: 'タスク2')
-          expect(page).not_to have_content(task.title)
-          expect(page).to have_content('02 h')
 
+          expect(page).to have_selector("#task_#{task.id}")
+          task_zone = find("#task_#{task.id}")
+          
+          expect(task_zone).to have_selector('h1', text: 'タスク2')
+          expect(task_zone).not_to have_content(task.title)
+
+          expect(task_zone).to have_content(tag1.name)
+          expect(task_zone).to have_content(tag2.name)
+          
+          expect(task_zone).to have_content('02h')
+          expect(task_zone).to have_content('03m')
+          expect(task_zone).to have_content('04s')
         end
       end
     end

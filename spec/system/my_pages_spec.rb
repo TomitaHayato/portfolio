@@ -88,13 +88,6 @@ RSpec.describe "MyPages", type: :system, js:true do
           expect(page).to have_content("#{user.name}さん")
         end
 
-        it '各ページへのリンクが表示される' do
-          expect(page).to have_selector('a', text: 'ルーティン作成')
-          expect(page).to have_selector('a', text: 'My ルーティン')
-          expect(page).to have_selector('a', text: '投稿を見る')
-          expect(page).to have_selector('a', text: '称号一覧')
-        end
-
         context '実践中のルーティンがある場合' do
           it 'ルーティン情報が表示される' do
             expect(page).to have_selector('#routine-field')
@@ -171,30 +164,6 @@ RSpec.describe "MyPages", type: :system, js:true do
       end
 
       describe 'メインコンテンツからのページ遷移' do
-        it 'ルーティン新規作成ページに遷移' do
-          btn = find('a', text: 'ルーティン作成')
-          btn.click
-          expect(page).to have_current_path(new_routine_path)
-        end
-
-        it 'ルーティン一覧に遷移' do
-          btn = find('a', text: 'My ルーティン')
-          btn.click
-          expect(page).to have_current_path(routines_path)
-        end
-
-        it '投稿一覧に遷移' do
-          btn = find('a', text: '投稿を見る')
-          btn.click
-          expect(page).to have_current_path(routines_posts_path)
-        end
-
-        it '称号一覧に遷移' do
-          btn = find('a', text: '称号一覧')
-          btn.click
-          expect(page).to have_current_path(rewards_path)
-        end
-
         it 'ルーティン編集ページに遷移' do
           btn = find('a', text: '編集')
           btn.click

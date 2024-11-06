@@ -8,29 +8,37 @@ RSpec.describe "Rewards", type: :system, js: true do
   end
 
   context 'ログイン後' do
+
+    # 称号データを作成(画像は適当)
     before do
+      image_obj = File.open(Rails.root.join('public', 'image_for_test.png'))
+
       Reward.create!(
-        name: "はじまりの一歩！",
-        condition: "completed_routine_1?",
-        description: "ルーティンを1回クリアする"
+        name:        "はじまりの一歩！",
+        condition:   "completed_routine_1?",
+        description: "ルーティンを1回クリアする",
+        image:       image_obj
       )
     
       Reward.create!(
-        name: "小さな達成者",
-        condition: "completed_routines_3?",
-        description: "ルーティンを3回クリアする"
+        name:        "小さな達成者",
+        condition:   "completed_routines_3?",
+        description: "ルーティンを3回クリアする",
+        image:       image_obj
       )
     
       Reward.create!(
-        name: "若葉の成長",
-        condition: "get_experiences_10?",
-        description: "経験値を10獲得する"
+        name:        "若葉の成長",
+        condition:   "get_experiences_10?",
+        description: "経験値を10獲得する",
+        image:       image_obj
       )
     
       Reward.create!(
-        name: "朝の森の案内人",
-        condition: "post_routine_1?",
-        description: "ルーティンを1つ投稿する"
+        name:        "朝の森の案内人",
+        condition:   "post_routine_1?",
+        description: "ルーティンを1つ投稿する",
+        image:       image_obj
       )
     end
 
@@ -41,6 +49,7 @@ RSpec.describe "Rewards", type: :system, js: true do
     let!(:task_tag) { create(:task_tag, task: task, tag: tag) }
     let!(:rewards)  { Reward.all }
 
+    # ログイン => rewardsページに遷移
     before do
       login_as(user)
       visit rewards_path
@@ -57,7 +66,6 @@ RSpec.describe "Rewards", type: :system, js: true do
       it 'はじまりの一歩！' do
         user.update!(complete_routines_count: 1)
         sleep 0.5
-        p rewards.size
 
         visit my_pages_path
         expect(page).to have_content('新たな称号を獲得しました！')
