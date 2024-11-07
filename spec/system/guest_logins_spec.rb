@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "GuestLogins", type: :system do
+
+  # ゲストログインを行う
+  # @userにゲストユーザーをセット
   before do
     visit root_path
     click_on 'お試し'
@@ -12,6 +15,16 @@ RSpec.describe "GuestLogins", type: :system do
   it 'ゲストログインできる' do
     expect(page).to have_current_path(my_pages_path)
     expect(page).to have_content('ゲストログインしました。')
+  end
+
+  describe '生成されたユーザーのカラム' do
+    it 'nameがゲストユーザー' do
+      expect(@user.name).to eq 'ゲストユーザー'
+    end
+
+    it 'roleがguest' do
+      expect(@user.role).to eq 'guest'
+    end
   end
 
   describe 'guest_blockメソッド' do
