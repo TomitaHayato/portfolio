@@ -51,8 +51,8 @@ RSpec.describe "EditRoutines", type: :system do
       end
     end
 
-    it '「戻る」でルーティン一覧画面に遷移する' do
-      click_on '戻る'
+    it '「ルーティン一覧へ」でルーティン一覧画面に遷移する' do
+      click_on 'ルーティン一覧へ'
       expect(page).to have_current_path(routines_path)
     end
   end
