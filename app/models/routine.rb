@@ -4,7 +4,7 @@ class Routine < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
 
-  validates :title, presence: true, length: { maximum: 50 }
+  validates :title, presence: true, length: { maximum: 25 }
   validates :description, length: { maximum: 500 }
 
   enum notification: { no: 0, line: 1 }
