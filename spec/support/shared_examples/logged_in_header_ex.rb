@@ -1,8 +1,8 @@
 # 外部で必要な処理
-  # ログイン
-  # ページに遷移
-  # 以下の変数を定義
-    # user: ログインしたユーザー
+    # ログイン
+    # ページに遷移
+    # 以下の変数を定義
+        # user:  ログインしたユーザーと一致させる
 RSpec.shared_examples 'Logged in Header/Footer Test' do
   
   describe 'ヘッダー' do
