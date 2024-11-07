@@ -1,10 +1,13 @@
 module FooterSupport
+  def footer_check
+    expect(page).to have_selector('footer')
+  end
 
-  def check_policy_path
+  def check_footer_policy_path
     footer_page_trans_test('プライバシーポリシー', policy_path)
   end
 
-  def check_terms_path
+  def check_footer_terms_path
     footer_page_trans_test('利用規約', terms_path)
   end
 
