@@ -1,9 +1,13 @@
 # 外部で必要な処理
-    # ログイン
-    # ページに遷移
     # 以下の変数を定義
         # user:  ログインしたユーザーと一致させる
+        # path:  テストを行うpath
 RSpec.shared_examples 'Logged in Header/Footer Test' do
+
+  before do
+    login_as(user)
+    visit path
+  end
   
   describe 'ヘッダー' do
     it 'headerが表示されている' do

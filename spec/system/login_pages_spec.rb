@@ -5,24 +5,17 @@ RSpec.describe "LoginPages", type: :system, js: true do
   
   it 'ログインページに遷移できる' do
     visit login_path
-    expect(current_path).to eq login_path
+    expect(page).to have_current_path(login_path)
   end
 
   describe 'header/footerのテスト' do
-    context 'ログイン前' do
-      before do
-        visit login_path
-      end
+    let!(:path) { login_path }
 
+    context 'ログイン前' do
       it_behaves_like 'ログイン前Header/Footerのテスト'
     end
 
     context 'ログイン後' do
-      before do
-        login_as(user)
-        visit login_path
-      end
-
       it_behaves_like 'Logged in Header/Footer Test'
     end
   end
