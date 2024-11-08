@@ -12,7 +12,7 @@ RSpec.describe "EditRoutines", type: :system do
 
   context 'ログイン後' do
     describe 'header/footerのテスト' do
-      let!(:path) { rewards_path }
+      let!(:path) { edit_routine_path(routine) }
   
       context 'ログイン後' do
         it_behaves_like 'ログイン後Header/Footerテスト'
