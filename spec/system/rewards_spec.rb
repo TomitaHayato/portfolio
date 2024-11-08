@@ -1,18 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Rewards", type: :system, js: true do
-  describe 'header/footerのテスト' do
-    let!(:path) { rewards_path }
-
-    context 'ログイン前' do
-      it_behaves_like 'ログイン前Header/Footerテスト'
-    end
-
-    context 'ログイン後' do
-      it_behaves_like 'ログイン後Header/Footerテスト'
-    end
-  end
-  
+RSpec.describe "Rewards", type: :system, js: true do  
   context 'ログイン前' do
     it 'トップページに遷移' do
       login_failed_check(rewards_path)
@@ -61,6 +49,14 @@ RSpec.describe "Rewards", type: :system, js: true do
     let!(:rewards)  { Reward.all }
 
     # ログイン => rewardsページに遷移
+    describe 'header/footerのテスト' do
+      let!(:path) { rewards_path }
+  
+      context 'ログイン後' do
+        it_behaves_like 'ログイン後Header/Footerテスト'
+      end
+    end
+    
     before do
       login_as(user)
       visit rewards_path
@@ -71,7 +67,7 @@ RSpec.describe "Rewards", type: :system, js: true do
     end
 
     describe 'パンくず' do
-      let!(breadcrumb_container) { find('.breadcrumbs-container-custom') }
+      let!(:breadcrumb_container) { find('.breadcrumbs-container-custom') }
 
       it '正しく表示される' do
         expect(breadcrumb_container).to have_selector "a[href='#{my_pages_path}']"
@@ -95,7 +91,7 @@ RSpec.describe "Rewards", type: :system, js: true do
     end
 
     describe '各称号の獲得後' do
-      it 'はじまりの一歩！' 
+      it 'はじまりの一歩！' do
         # 獲得条件をクリア
         user.update!(complete_routines_count: 1)
         sleep 0.5
