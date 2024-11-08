@@ -74,7 +74,7 @@ RSpec.describe "MyPages", type: :system, js:true do
         expect(routine_field).to have_selector 'a', text: 'タスク追加画面へ'
       end
 
-      it 'ルーティン詳細画面に遷移できる' <do></do>
+      it 'ルーティン詳細画面に遷移できる' do
         click_on 'タスク追加画面へ'
         expect(page).to have_current_path routine_path(routine)
       end
