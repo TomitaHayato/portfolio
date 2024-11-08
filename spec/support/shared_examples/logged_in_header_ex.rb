@@ -2,7 +2,7 @@
     # 以下の変数を定義
         # user:  ログインしたユーザーと一致させる
         # path:  テストを行うpath
-RSpec.shared_examples 'Logged in Header/Footer Test' do
+RSpec.shared_examples 'ログイン後Header/Footerテスト' do
 
   before do
     login_as(user)

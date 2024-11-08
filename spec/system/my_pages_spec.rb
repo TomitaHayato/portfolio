@@ -14,6 +14,12 @@ RSpec.describe "MyPages", type: :system, js:true do
       login_as(user)
     end
 
+    describe 'Header/Footerのテスト' do
+      let!(:path) { my_pages_path }
+
+      it_behaves_like('ログイン後Header/Footerテスト')
+    end
+
     context '実践中のルーティンがない場合' do
       before do
         visit my_pages_path

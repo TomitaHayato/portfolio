@@ -6,7 +6,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :routine do
-    title { Faker::Lorem.characters(number: 50) }
+    title { Faker::Lorem.characters(number: 25) }
     description { Faker::Lorem.characters(number: 500) }
     association :user
 
@@ -15,7 +15,7 @@ FactoryBot.define do
     end
 
     trait :over_length do
-      title { Faker::Lorem.characters(number: 51) }
+      title { Faker::Lorem.characters(number: 26) }
       description { Faker::Lorem.characters(number: 501) }
     end
 

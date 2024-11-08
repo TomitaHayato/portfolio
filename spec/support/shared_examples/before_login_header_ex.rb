@@ -1,6 +1,6 @@
 # 外部で必要な処理
   # 変数pathにテストを行うpathを定義
-RSpec.shared_examples 'ログイン前Header/Footerのテスト' do
+RSpec.shared_examples 'ログイン前Header/Footerテスト' do
 
   before do
     visit path

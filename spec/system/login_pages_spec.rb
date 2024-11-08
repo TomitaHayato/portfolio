@@ -12,11 +12,11 @@ RSpec.describe "LoginPages", type: :system, js: true do
     let!(:path) { login_path }
 
     context 'ログイン前' do
-      it_behaves_like 'ログイン前Header/Footerのテスト'
+      it_behaves_like 'ログイン前Header/Footerテスト'
     end
 
     context 'ログイン後' do
-      it_behaves_like 'Logged in Header/Footer Test'
+      it_behaves_like 'ログイン後Header/Footerテスト'
     end
   end
 
@@ -78,7 +78,7 @@ RSpec.describe "LoginPages", type: :system, js: true do
 
       it 'パスワードリセットフォームへ遷移できる' do
         click_on 'パスワードをお忘れの方はこちら'
-        
+
         expect(page).to have_current_path(new_password_reset_path)
         expect(page).to have_content('パスワードリセット申請')
       end
