@@ -34,7 +34,7 @@ RSpec.describe "LoginPages", type: :system, js: true do
     it 'フォームが正しく表示される' do
       expect(page).to have_selector('input[id="email"]')
       expect(page).to have_selector('input[id="password"]')
-      expect(page).to have_selector('input[type="submit"]', text: 'ログイン')
+      expect(page).to have_selector('input[type="submit"][value="ログイン"]')
     end
 
     context 'フォームに正常値を入力' do

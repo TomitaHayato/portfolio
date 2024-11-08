@@ -43,14 +43,15 @@ RSpec.describe "GuestLogins", type: :system do
       visit routines_path
       expect(page).to have_current_path(routines_path)
 
-      click_on "routine-post-btn-#{routine.id}"
+      click_on "post-btn-#{routine.id}"
       expect(page).to have_current_path(routines_path)
       expect(page).to have_content('ゲストユーザー様はご利用できません')
-      expect(page).to have_selector("#routine-post-btn-#{routine.id}")
+      expect(page).to have_selector("#post-btn-#{routine.id}")
     end
 
     it '投稿をコピーできない' do
-      posted_routine = create(:routine, is_posted: true)
+      user_other     = create(:user, :for_system_spec)
+      posted_routine = create(:routine, user: user_other, is_posted: true)
 
       visit routines_posts_path
       expect(page).to have_current_path(routines_posts_path)
