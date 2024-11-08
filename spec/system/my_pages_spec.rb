@@ -20,22 +20,30 @@ RSpec.describe "MyPages", type: :system, js:true do
       it_behaves_like('ログイン後Header/Footerテスト')
     end
 
+    it '正常に遷移できる' do
+      visit my_pages_path
+
+      expect(page).to have_current_path(my_pages_path)
+      expect(page).to have_selector('#logged-in-header')
+    end
+
+    it '「おはようございます！〜さん」と表示される' do
+      expect(page).to have_content("おはようございます！")
+      expect(page).to have_content("#{user.name}さん")
+    end
+
     context '実践中のルーティンがない場合' do
       before do
         visit my_pages_path
       end
 
-      it '正常に遷移できる' do
-        expect(page).to have_current_path(my_pages_path)
-        expect(page).to have_selector('#logged-in-header')
+      it '「ルーティンを実践中にしましょう！！」リンクが表示' do
+        expect(page).to have_content 'ルーティンを実践中にしましょう！！'
       end
 
-      it '「ルーティンを実践中にしましょう！！」と表示' do
-        expect(page).to have_content('ルーティンを実践中にしましょう！！')
-      end
-
-      it 'ルーティン一覧に遷移' do
+      it 'リンクを押す=>ルーティン一覧に遷移' do
         click_on 'ルーティンを実践中にしましょう！！'
+        expect(page).to have_current_path routines_path
       end
     end
 
@@ -46,14 +54,29 @@ RSpec.describe "MyPages", type: :system, js:true do
         visit my_pages_path
       end
 
-      it 'タスクを追加しましょう！と表示される' do
-        expect(page).to have_content('タスクを追加しましょう！')
-        expect(page).to have_selector('a', text: 'タスク追加画面へ')
+      it 'ルーティン情報が表示される' do
+        routine_field = find('#routine-field')
+        # リンク
+        expect(routine_field).to have_selector "a[href='#{edit_routine_path(routine)}']"
+        expect(routine_field).to have_selector "a[href='#{routine_path(routine)     }']"
+        # routineの情報
+        expect(routine_field).to have_content routine.title
+        expect(routine_field).to have_content routine.start_time.strftime('%H:%M')
+        expect(routine_field).to have_content routine.completed_count
+        expect(routine_field).to have_content '00h'
+        expect(routine_field).to have_content '00m'
+        expect(routine_field).to have_content '00s'
       end
 
-      it 'ルーティン詳細画面に遷移できる' do
+      it 'タスクを追加しましょう！リンクが表示' do
+        routine_field = find('#routine-field')
+        expect(routine_field).to have_content             'タスクを追加しましょう！'
+        expect(routine_field).to have_selector 'a', text: 'タスク追加画面へ'
+      end
+
+      it 'ルーティン詳細画面に遷移できる' <do></do>
         click_on 'タスク追加画面へ'
-        expect(page).to have_current_path(routine_path(routine))
+        expect(page).to have_current_path routine_path(routine)
       end
     end
 
@@ -66,61 +89,51 @@ RSpec.describe "MyPages", type: :system, js:true do
       let!(:tag2)      { create(:tag, name: '運動') }
 
       before do
+        # Tagをtaskに結びつける
         create(:task_tag, task: task1, tag: tag1)
         create(:task_tag, task: task2, tag: tag2)
 
-        create(:user_tag_experience, user: user, tag: tag2)
-        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.weeks.ago + 1.minute))
-
-        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago + 1.minute))
-        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago - 1.minute))
+        # 経験値を取得させる（取得したタイミングを分ける）
+        create(:user_tag_experience, user: user, tag: tag2)                                      # 今
+        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.weeks.ago + 1.minute))# 1週間以内
+        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago + 1.minute))# 1ヶ月以内
+        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago - 1.minute))# 1ヶ月以降
         
         visit my_pages_path
       end
 
-      it '正常に遷移できる' do
-        expect(page).to have_current_path(my_pages_path)
-        expect(page).to have_selector('#logged-in-header')
-      end
-
-      it 'root_pathでマイページに遷移する' do
-        visit root_path
-        expect(page).to have_current_path(my_pages_path)
-      end
-
       describe 'ページ内容' do
-        it '「おはようございます！〜さん」と表示される' do
-          expect(page).to have_content("おはようございます！")
-          expect(page).to have_content("#{user.name}さん")
-        end
-
-        context '実践中のルーティンがある場合' do
+        describe 'ルーティン表示部分' do
           it 'ルーティン情報が表示される' do
             expect(page).to have_selector('#routine-field')
-
-            expect(page).to have_content(routine.title)
-            expect(page).to have_content(routine.start_time.strftime("%H:%M"))
-            expect(page).to have_content(routine.completed_count)
-
-            expect(page).to have_selector('a'      , text: 'スタート')
-            expect(page).to have_selector('summary', text: 'タスク一覧')
+            routine_field = find('#routine-field')
+            # ルーティン情報
+            expect(routine_field).to have_content(routine.title)
+            expect(routine_field).to have_content(routine.start_time.strftime("%H:%M"))
+            expect(routine_field).to have_content(routine.completed_count)
+            # リンク
+            expect(routine_field).to have_selector "a[href='#{edit_routine_path(routine)}']"
+            expect(routine_field).to have_selector "a[href='#{routine_path(routine)     }']"
+            expect(routine_field).to have_selector 'a'      , text: 'スタート'
+            expect(routine_field).to have_selector 'summary', text: 'タスク一覧'
           end
 
           it 'タスク情報が表示される' do
             find("#tasks-display-btn-#{routine.id}").click
-
-            expect(page).to have_selector("#task-field-#{task1.id}")
-            expect(page).to have_selector("#task-field-#{task2.id}")
+            #各taskの要素
+            tasks_container = find('#tasks-container')
+            expect(tasks_container).to have_selector "#task-field-#{task1.id}"
+            expect(tasks_container).to have_selector "#task-field-#{task2.id}"
 
             task1_field = find("#task-field-#{task1.id}")
             task2_field = find("#task-field-#{task2.id}")
-
+            # task1のタスク情報
             expect(task1_field).to have_content(task1.title)
             expect(task1_field).to have_content(tag1.name)
             expect(task1_field).to have_content('00 h')
             expect(task1_field).to have_content('01 m')
             expect(task1_field).to have_content('00 s')
-            
+            # task2のタスク情報
             expect(task2_field).to have_content(task2.title)
             expect(task2_field).to have_content(tag2.name)
             expect(task2_field).to have_content('00 h')
@@ -186,58 +199,6 @@ RSpec.describe "MyPages", type: :system, js:true do
           btn = find('a', text: 'スタート')
           btn.click
           expect(page).to have_current_path(play_path(routine))
-        end
-      end
-
-      describe 'ヘッダーからのページ遷移' do
-        it 'ロゴからマイページに遷移' do
-          click_on 'logo-btn'
-          expect(page).to have_current_path(my_pages_path)
-        end
-
-        it 'プロフィール詳細ページに遷移' do
-          btn = find('#user-icon-btn')
-          btn.click
-          expect(page).to have_current_path(user_path(user))
-        end
-
-        describe 'Drawerメニュー' do
-          # HeaderSupportモジュールのメソッドを使用
-          it 'ルーティン作成ページに遷移' do
-            check_new_routine_path
-          end
-
-          it 'ルーティン一覧に遷移' do
-            check_routines_path
-          end
-
-          it '投稿一覧に遷移' do
-            check_routines_posts_path
-          end
-
-          it 'マイページに遷移' do
-            check_my_pages_path
-          end
-
-          it '称号一覧に遷移' do
-            check_rewards_path
-          end
-
-          it 'ログアウト処理 => トップページに遷移' do
-            check_logout
-          end
-        end
-      end
-
-      describe 'フッターからのページ遷移' do
-        it '利用規約ページに遷移できる' do
-          click_on '利用規約'
-          expect(page).to have_current_path(terms_path)
-        end
-
-        it 'プライバシーポリシーページに遷移できる' do
-          click_on 'プライバシーポリシー'
-          expect(page).to have_current_path(policy_path)
         end
       end
     end
