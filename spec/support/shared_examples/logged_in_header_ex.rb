@@ -3,11 +3,6 @@
         # user:  ログインしたユーザーと一致させる
         # path:  テストを行うpath
 RSpec.shared_examples 'ログイン後Header/Footerテスト' do
-
-  before do
-    login_as(user)
-    visit path
-  end
   
   describe 'ヘッダー' do
     it 'headerが表示されている' do

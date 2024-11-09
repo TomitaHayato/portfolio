@@ -12,11 +12,10 @@ RSpec.describe "MyPages", type: :system, js:true do
   context 'ログイン後' do
     before do
       login_as(user)
+      visit my_pages_path
     end
 
     describe 'Header/Footerのテスト' do
-      let!(:path) { my_pages_path }
-
       it_behaves_like('ログイン後Header/Footerテスト')
     end
 

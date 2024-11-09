@@ -48,22 +48,20 @@ RSpec.describe "Rewards", type: :system, js: true do
     let!(:task_tag) { create(:task_tag                  , task: task, tag: tag      ) }
     let!(:rewards)  { Reward.all }
 
-    # ログイン => rewardsページに遷移
-    describe 'header/footerのテスト' do
-      let!(:path) { rewards_path }
-  
-      context 'ログイン後' do
-        it_behaves_like 'ログイン後Header/Footerテスト'
-      end
-    end
-    
     before do
+      # ログイン => rewardsページに遷移
       login_as(user)
       visit rewards_path
     end
 
     it 'ページにアクセスできる' do
       expect(page).to have_current_path(rewards_path)
+    end
+
+    describe 'header/footerのテスト' do  
+      context 'ログイン後' do
+        it_behaves_like 'ログイン後Header/Footerテスト'
+      end
     end
 
     describe 'パンくず' do

@@ -11,14 +11,6 @@ RSpec.describe "EditRoutines", type: :system do
   end
 
   context 'ログイン後' do
-    describe 'header/footerのテスト' do
-      let!(:path) { edit_routine_path(routine) }
-  
-      context 'ログイン後' do
-        it_behaves_like 'ログイン後Header/Footerテスト'
-      end
-    end
-
     before do
       login_as(user)
       visit edit_routine_path(routine)
@@ -26,6 +18,12 @@ RSpec.describe "EditRoutines", type: :system do
 
     it 'ページに遷移できる' do
       expect(page).to have_current_path(edit_routine_path(routine))
+    end
+
+    describe 'header/footerのテスト' do
+      context 'ログイン後' do
+        it_behaves_like 'ログイン後Header/Footerテスト'
+      end
     end
 
     describe 'パンくず' do

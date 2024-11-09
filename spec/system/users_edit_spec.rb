@@ -11,14 +11,6 @@ RSpec.describe "EditUsers", type: :system, js: true do
     end
 
     context 'ログイン後' do
-      describe 'header/footerのテスト' do
-        let!(:path) { edit_user_path(user) }
-    
-        context 'ログイン後' do
-          it_behaves_like 'ログイン後Header/Footerテスト'
-        end
-      end
-
       before do
         login_as(user)
         visit edit_user_path(user)
@@ -26,6 +18,12 @@ RSpec.describe "EditUsers", type: :system, js: true do
 
       it 'アクセスできる' do
         expect(page).to have_current_path edit_user_path(user)
+      end
+
+      describe 'header/footerのテスト' do
+        context 'ログイン後' do
+          it_behaves_like 'ログイン後Header/Footerテスト'
+        end
       end
 
       describe 'パンくず' do

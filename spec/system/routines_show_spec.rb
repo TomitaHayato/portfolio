@@ -14,14 +14,6 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
   end
 
   context 'ログイン後' do
-    describe 'header/footerのテスト' do
-      let!(:path) { routine_path(routine) }
-  
-      context 'ログイン後' do
-        it_behaves_like 'ログイン後Header/Footerテスト'
-      end
-    end
-
     before do
       # taskにtag1をセット
       create(:task_tag, task: task, tag: tag1)
@@ -33,6 +25,12 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
     it 'ページに遷移できる' do
       expect(page).to have_current_path(routine_path(routine))
       expect(page).to have_selector('h1', text: routine.title)
+    end
+
+    describe 'header/footerのテスト' do
+      context 'ログイン後' do
+        it_behaves_like 'ログイン後Header/Footerテスト'
+      end
     end
 
     describe 'パンくず' do

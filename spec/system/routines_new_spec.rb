@@ -10,14 +10,6 @@ RSpec.describe "NewRoutinesPaths", type: :system do
   context 'ログイン後' do
     let!(:user) { create(:user, :for_system_spec) }
 
-    describe 'header/footerのテスト' do
-      let!(:path) { new_routine_path }
-  
-      context 'ログイン後' do
-        it_behaves_like 'ログイン後Header/Footerテスト'
-      end
-    end
-
     before do
       login_as(user)
       visit new_routine_path
@@ -25,6 +17,12 @@ RSpec.describe "NewRoutinesPaths", type: :system do
 
     it 'アクセスできる' do
       expect(page).to have_current_path(new_routine_path)
+    end
+
+    describe 'header/footerのテスト' do
+      context 'ログイン後' do
+        it_behaves_like 'ログイン後Header/Footerテスト'
+      end
     end
 
     it ' ページが正しく表示される' do

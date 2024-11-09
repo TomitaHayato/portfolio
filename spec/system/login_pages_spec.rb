@@ -9,13 +9,20 @@ RSpec.describe "LoginPages", type: :system, js: true do
   end
 
   describe 'header/footerのテスト' do
-    let!(:path) { login_path }
-
     context 'ログイン前' do
+      before do
+        visit login_path
+      end
+
       it_behaves_like 'ログイン前Header/Footerテスト'
     end
 
     context 'ログイン後' do
+      before do
+        login_as(user)
+        visit login_path
+      end
+
       it_behaves_like 'ログイン後Header/Footerテスト'
     end
   end

@@ -12,28 +12,22 @@ RSpec.describe "Routines#index", type: :system, js: true do
 
   context 'ログイン後' do
 
+    before do
+      login_as(user)
+      visit routines_path
+    end
+
+    it 'ページに遷移できる' do
+      expect(page).to have_current_path(routines_path)
+    end
+
     describe 'header/footerのテスト' do
-      let!(:path) { routines_path }
-  
       context 'ログイン後' do
         it_behaves_like 'ログイン後Header/Footerテスト'
       end
     end
 
-    before do
-      login_as(user)
-    end
-
-    it 'ページに遷移できる' do
-      visit routines_path
-      expect(page).to have_current_path(routines_path)
-    end
-
     describe 'パンくず' do
-      before do
-        visit routines_path
-      end
-
       let!(:breadcrumb_container) { find('.breadcrumbs-container-custom') }
 
       it '正しく表示される' do
@@ -50,7 +44,6 @@ RSpec.describe "Routines#index", type: :system, js: true do
 
     context 'user.routinesがない' do
       before do
-        visit routines_path
         @routines_container = find('#routine-index-page')
       end
 

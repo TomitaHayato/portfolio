@@ -15,14 +15,22 @@ RSpec.describe "NewUserPath", type: :system do
   end
 
   describe 'header/footerのテスト' do
-    let(:user)  { create(:user, :for_system_spec) }
-    let!(:path) { new_user_path }
-
     context 'ログイン前' do
+      before do
+        visit new_user_path
+      end
+
       it_behaves_like 'ログイン前Header/Footerテスト'
     end
 
     context 'ログイン後' do
+      let(:user)  { create(:user, :for_system_spec) }
+
+      before do
+        login_as(user)
+        visit new_user_path
+      end
+
       it_behaves_like 'ログイン後Header/Footerテスト'
     end
   end

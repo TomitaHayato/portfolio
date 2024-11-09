@@ -1,11 +1,7 @@
 # 外部で必要な処理
   # 変数pathにテストを行うpathを定義
 RSpec.shared_examples 'ログイン前Header/Footerテスト' do
-
-  before do
-    visit path
-  end
-
+  
   describe 'ヘッダー' do
     it 'before-login-headerが表示されている' do
       before_login_header_check

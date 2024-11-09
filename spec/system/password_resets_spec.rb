@@ -58,13 +58,20 @@ RSpec.describe "PasswordResets", type: :system do
   end
 
   describe 'header/footerのテスト' do
-    let!(:path) { new_password_reset_path }
-
     context 'ログイン前' do
+      before do
+        visit new_password_reset_path
+      end
+
       it_behaves_like 'ログイン前Header/Footerテスト'
     end
 
     context 'ログイン後' do
+      before do
+        login_as(user)
+        visit new_password_reset_path
+      end
+
       it_behaves_like 'ログイン後Header/Footerテスト'
     end
   end
