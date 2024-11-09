@@ -10,14 +10,46 @@ RSpec.describe "NewRoutinesPaths", type: :system do
   context 'ログイン後' do
     let!(:user) { create(:user, :for_system_spec) }
 
+    describe 'header/footerのテスト' do
+      let!(:path) { new_routine_path }
+  
+      context 'ログイン後' do
+        it_behaves_like 'ログイン後Header/Footerテスト'
+      end
+    end
+
     before do
       login_as(user)
       visit new_routine_path
     end
 
-    it ' ページが正しく表示される' do
+    it 'アクセスできる' do
       expect(page).to have_current_path(new_routine_path)
-      expect(page).to have_selector('h1', text: 'ルーティン新規作成')
+    end
+
+    it ' ページが正しく表示される' do
+      expect(page).to have_selector 'h1', text: 'ルーティン新規作成'
+
+      expect(page).to have_selector '#routine_title'
+      expect(page).to have_selector '#routine_description'
+      expect(page).to have_selector '#routine_start_time'
+      expect(page).to have_selector '#routine_notification_no[checked="checked"]'
+      expect(page).to have_selector '#routine_notification_line'
+    end
+
+    describe 'パンくず' do
+      let!(:breadcrumb_container) { find('.breadcrumbs-container-custom') }
+
+      it '正しく表示される' do
+        expect(breadcrumb_container).to have_selector "a[href='#{my_pages_path}']"
+        expect(breadcrumb_container).to have_content  '新規作成'
+      end
+
+      it 'マイページに遷移できる' do
+        breadcrumb_container.find("a[href='#{my_pages_path}']").click
+
+        expect(page).to have_current_path my_pages_path
+      end
     end
 
     describe 'フォームに関するテスト' do
@@ -27,16 +59,25 @@ RSpec.describe "NewRoutinesPaths", type: :system do
       let!(:submit_btn)       { find('input[type="submit"]') }
 
       context '正しい値を入力' do
-        it 'ルーティンを作成できる => ルーティン詳細ページに遷移' do
+        it 'ルーティンを作成できる+詳細ページに遷移' do
           title_form.set('タイトル1')
           description_form.set('説明文1')
           start_time_form.set('07:00')
+          choose('routine_notification_line')
+
           submit_btn.click
           sleep 0.1
-
+          # ページの確認
           expect(page).to have_current_path(routine_path(user.routines.last))
           expect(page).to have_content('作成したルーティンにタスクを追加しましょう！')
           expect(page).to have_selector('h1', text: 'タイトル1')
+          # DBの確認
+          expect(user.routines.size).to eq 1
+          new_routine = user.routines.last
+          expect(new_routine.title).to                        eq 'タイトル1'
+          expect(new_routine.description).to                  eq '説明文1'
+          expect(new_routine.start_time.strftime('%H:%M')).to eq '07:00'
+          expect(new_routine.notification).to                 eq 'line'
         end
       end
 
@@ -44,11 +85,13 @@ RSpec.describe "NewRoutinesPaths", type: :system do
         it '作成に失敗 => ルーティン作成ページに遷移' do
           submit_btn.click
           sleep 0.1
-
+          # ページの確認
           expect(page).to have_current_path(new_routine_path)
           expect(page).to have_selector('h1', text: 'ルーティン新規作成')
           expect(page).to have_content('入力エラー')
           expect(page).to have_content('タイトルを入力してください')
+          # DBの確認
+          expect(user.routines.size).to eq 0
         end
       end
     end
