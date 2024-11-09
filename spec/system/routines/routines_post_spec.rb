@@ -23,27 +23,29 @@ RSpec.describe "Routines::PostPaths", type: :system, js: true do
 
     before do
       login_as(user)
+      visit routines_posts_path
+    end
+
+    it 'アクセスできる' do
+      expect(page).to     have_current_path routines_posts_path
+    end
+
+    describe 'Header/Footerのテスト' do
+      it_behaves_like('ログイン後Header/Footerテスト')
     end
 
     it '正常にページが表示される' do
-      visit routines_posts_path
-
-      expect(page).to have_current_path(routines_posts_path)
-      expect(page).to have_selector('#user_words')
-      expect(page).to have_selector('h1', text: routine.title)
-      expect(page).not_to have_selector('h1', text: routine2.title)
-      expect(page).to have_selector('h1', text: routineB.title)
+      expect(page).to     have_selector     '#user_words'
+      expect(page).to     have_selector     'h1', text: routine.title
+      expect(page).not_to have_selector     'h1', text: routine2.title
+      expect(page).to     have_selector     'h1', text: routineB.title
 
       find("#tasks-display-btn-#{routine.id}").click
-      expect(page).to have_content(task.title)
-      expect(page).to have_content(tag.name)
+      expect(page).to have_content task.title
+      expect(page).to have_content tag.name
     end
 
     describe '投稿処理のテスト' do
-      before do
-        visit routines_path
-      end
-
       it '投稿できる' do
         click_on "routine-post-btn-#{routine2.id}"
         expect(page).to have_content('ルーティンを投稿しました')
@@ -62,10 +64,6 @@ RSpec.describe "Routines::PostPaths", type: :system, js: true do
     end
 
     describe 'コピー機能のテスト' do
-      before do
-        visit routines_posts_path
-      end
-
       it 'コピーできる' do
         click_on "copy-btn-#{routineB.id}"
         expect(page).to have_content("コピーしました。（#{routineB.title}")
@@ -115,10 +113,6 @@ RSpec.describe "Routines::PostPaths", type: :system, js: true do
     end
 
     describe 'お気に入り機能のテスト' do
-      before do
-        visit routines_posts_path
-      end
-
       it 'お気に入り登録できる' do
         click_on "like-btn-off-#{routine.id}"
         sleep 0.1

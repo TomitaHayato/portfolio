@@ -67,8 +67,8 @@ RSpec.describe "EditUsers", type: :system, js: true do
 
       context 'フォームに正しい値を入力' do
         it 'ユーザー情報の更新に成功 => プロフィール画面に遷移' do
-          name_form.set  'new name')
-          email_form.set 'new@email.com')
+          name_form.set  'new name'
+          email_form.set 'new@email.com'
           submit_btn.click
           # ページ
           expect(page).to           have_current_path user_path(user)
@@ -114,16 +114,16 @@ RSpec.describe "EditUsers", type: :system, js: true do
           expect(user.avatar).not_to eq user_avatar_prev
         end
 
-        it 'プレビュー機能'
+        it 'プレビュー機能' do
           img_container = find('#img-zone')
           #ファイルを添付する前のimg要素
-          img_src_prev = img_container.find('img["src"]')
+          img_src_prev = img_container.find('img')
           #ファイルを添付
           attach_file('user_avatar', Rails.root.join('public', 'image_for_test.png'))
           sleep 0.1
           # img要素が変化しているか
-          img_src_now = img_container.find('img["src"]')
-          expect(img_src_now).not_to eq img_src_prev
+          img_src_now = img_container.find('img')
+          expect(img_src_now['src']).not_to eq img_src_prev['src']
         end
       end
     end
