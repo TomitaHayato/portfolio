@@ -18,7 +18,7 @@ class User < ApplicationRecord
   validates :password,              confirmation: true    , if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true        , if: -> { new_record? || changes[:crypted_password] }
   validates :email,                 presence: true        , uniqueness: true
-  validates :name,                  presence: true        , length: { maximum: 25 }
+  validates :name,                  presence: true        , length:     { maximum: 25 }
   validates :reset_password_token,  uniqueness: true      , allow_nil: true
 
   enum role: { admin: 0, general: 1, guest: 2 }
@@ -29,8 +29,7 @@ class User < ApplicationRecord
     locked_rewards      = Reward.not_for_user(self) # レシーバが取得していない報酬データを取得
     # 条件達成? => 獲得
     locked_rewards.each do |reward|
-      reward_condition = reward.condition
-      if self.send(reward_condition.to_sym)
+      if reward_achieve?
         rewards << reward
         rewards_change_flag = true
       end
@@ -40,6 +39,11 @@ class User < ApplicationRecord
   end
 
   private
+
+  def reward_achieve?(reward)
+    condition = reward.condition
+    send(condition.to_sym)
+  end
 
   # 称号の条件
   def completed_routine_1?

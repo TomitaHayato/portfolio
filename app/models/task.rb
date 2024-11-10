@@ -13,7 +13,7 @@ class Task < ApplicationRecord
             numericality: {
               only_integer: true,
               greater_than_or_equal_to: 1,
-              message: 'は1以上の整数を入力してください'
+              message: 'は1秒以上で設定してください'
             }
 
   def estimated_time
