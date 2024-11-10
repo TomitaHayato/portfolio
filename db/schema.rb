@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_25_074609) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_070039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_25_074609) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "title", limit: 50, null: false
+    t.string "title", limit: 25, null: false
     t.integer "estimated_time_in_second", default: 60, null: false
     t.bigint "routine_id"
     t.integer "position"
