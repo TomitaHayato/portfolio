@@ -19,6 +19,10 @@ FactoryBot.define do
       password_confirmation { nil }
     end
 
+    trait :over_name do
+      name { Faker::Lorem.characters(number: 26) }
+    end
+
     trait :for_system_spec do
       password              { 'password' }
       password_confirmation { password }

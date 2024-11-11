@@ -29,7 +29,7 @@ class User < ApplicationRecord
     locked_rewards      = Reward.not_for_user(self) # レシーバが取得していない報酬データを取得
     # 条件達成? => 獲得
     locked_rewards.each do |reward|
-      if reward_achieve?
+      if reward_achieve?(reward)
         rewards << reward
         rewards_change_flag = true
       end
