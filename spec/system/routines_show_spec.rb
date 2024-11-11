@@ -185,7 +185,7 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
           task_form_new = find('#task-form-for-new') #ページ更新後の要素を再取得
           expect(task_form_new).to have_content      '入力エラー'
           expect(task_form_new).to have_content      'タイトルを入力してください'
-          expect(task_form_new).to have_content      '目安時間は1以上の整数を入力してください'
+          expect(task_form_new).to have_content      'は1秒以上で設定してください'
           #フォーム
           minute_form = find('#task_minute') #ページ更新後の要素を再取得
           expect(minute_form.value).to eq                 '00'

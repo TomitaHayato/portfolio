@@ -43,7 +43,7 @@ RSpec.describe "EditUsers", type: :system do
     it 'プロフィール画面にアクセスできる' do
       expect(page).to have_content  user.name
       expect(page).to have_content  user.email
-      expect(page).to have_content  user.completed_routine_count
+      expect(page).to have_content  user.complete_routines_count
       expect(page).to have_selector "#avatar-#{user.id}"
     end
 
