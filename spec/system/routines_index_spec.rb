@@ -332,7 +332,7 @@ RSpec.describe "Routines#index", type: :system, js: true do
           it '達成数で並べ替えれる' do
             select   '達成数', from: 'column'
             click_on '検索'
-
+            sleep 0.25
             routine_containers = all('.routine-field-class-for-test')
             sorted_routine     = user.routines.order(completed_count: :desc)
 
