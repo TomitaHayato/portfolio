@@ -306,7 +306,7 @@ RSpec.describe "Routines#index", type: :system, js: true do
           it 'デフォルトで「作成日」の「降順」' do
             select   '降順', from: 'direction'
             click_on '検索'
-
+            sleep 0.25
             routine_containers = all('.routine-field-class-for-test')
             sorted_routine     = user.routines.order(created_at: :desc)
 
@@ -319,7 +319,7 @@ RSpec.describe "Routines#index", type: :system, js: true do
           it '昇順にできる' do
             select   '昇順', from: 'direction'
             click_on '検索'
-
+            sleep 0.25
             routine_containers = all('.routine-field-class-for-test')
             sorted_routine     = user.routines.order(created_at: :asc)
 
