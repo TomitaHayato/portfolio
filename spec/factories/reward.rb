@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :reward do
-    image { File.open(Rails.root.join('public', 'image_for_test.png')) }
+    name        { 'はじまりの一歩！' }
+    condition   { 'completed_routine_1?' }
+    description { 'ルーティンを1回クリアする' }
+    image       { File.open(Rails.root.join('public', 'image_for_test.png')) }
 
     trait :hajimarinoippo do
       name        { 'はじまりの一歩！' }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Routine, type: :model do
-  describe 'バリデーションチェック' do
+  describe 'バリデーション' do
     context '正常な値' do
       it 'ルーティンを作成できる' do
         routine = create(:routine)
