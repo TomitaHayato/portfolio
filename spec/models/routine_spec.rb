@@ -56,6 +56,24 @@ RSpec.describe Routine, type: :model do
         end
       end
     end
+
+    describe 'Routine:Task' do
+      context '1:N' do
+        let!(:routine) { create(:routine) }
+        let!(:task)    { create(:task, routine: routine) }
+
+        it 'アソシエーションが適切' do
+          expect(routine.tasks).to include task
+        end
+
+        it 'dependent: :destroy' do
+          task_id = task.id
+          routine.destroy!
+          sleep 0.1
+          expect(Task.find_by(id: task_id)).to eq nil
+        end
+      end
+    end
   end
 
   describe 'DB制約' do
