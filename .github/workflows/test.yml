@@ -3,6 +3,8 @@ on: push
 jobs:
   rspec-test:
     runs-on: ubuntu-latest
+      env:
+        TZ: Asia/Tokyo 
     timeout-minutes: 10
     services:
       postgres:
