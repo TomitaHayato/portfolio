@@ -42,6 +42,28 @@ RSpec.describe Tag, type: :model do
         end
       end
     end
+
+    describe 'User:Tag' do
+      context 'N:M(user_tag_experience)' do
+        let!(:user)                { create(:user) }
+        let!(:tag)                 { create(:tag)  }
+        let!(:user_tag_experience) { create(:user_tag_experience, user: user, tag: tag) }
+
+        it 'アソシエーションが適切' do
+          expect(tag.user_tag_experiences).to include user_tag_experience
+          expect(tag.users).to                include user
+        end
+
+        it '中間テーブルdependent: :destroy' do
+          user_tag_experience_id = user_tag_experience.id
+          user_id                = user.id
+          tag.destroy!
+          sleep 0.1
+          expect(UserTagExperience.find_by(id: user_tag_experience_id)).to eq nil
+          expect(User.find_by(id: user_id)).to                             eq user
+        end
+      end
+    end
   end
 
   describe 'DB制約' do
