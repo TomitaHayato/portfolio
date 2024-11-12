@@ -32,14 +32,4 @@ class OauthsController < ApplicationController
   def auth_params
     params.permit(:code, :provider, :error, :state, :friendship_status_changed)
   end
-
-  # 引数に渡した文字列からハッシュ値を生成する
-  def generate_digest_hash(letter)
-    Digest::SHA256.hexdigest(letter)
-  end
-
-  # 渡されたメールアドレスから、一意のメールアドレスを生成する
-  def generate_unique_email_address(email_address)
-    generate_digest_hash(email_address) + SecureRandom.uuid
-  end
 end
