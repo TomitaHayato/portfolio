@@ -13,13 +13,13 @@ Rails.application.config.sorcery.configure do |config|
   config.external_providers = %i[line]
 
   # credentials.ymlの環境変数からLINEログイン用のチャネルのIDとシークレットを取得
-  config.line.key = Rails.application.credentials.dig(:line, :login_channel_id)
+  config.line.key    = Rails.application.credentials.dig(:line, :login_channel_id)
   config.line.secret = Rails.application.credentials.dig(:line, :login_channel_secret)
   # コールバックIDを設定
-  config.line.callback_url = Settings.sorcery[:line_callback_url]
-  config.line.scope = 'profile'
-  config.line.bot_prompt = 'aggressive' # LINEログイン時に公式アカウントを友だち追加
-  config.line.user_info_mapping = {name: 'displayName', email: 'userId'}
+  config.line.callback_url      = Settings.sorcery[:line_callback_url]
+  config.line.scope             = 'profile openid email'
+  config.line.bot_prompt        = 'aggressive' # LINEログイン時に公式アカウントを友だち追加
+  config.line.user_info_mapping = { name: 'displayName', email: 'email' }
 
   # -- core --
   # What controller action to call for non-authenticated users. You can also
