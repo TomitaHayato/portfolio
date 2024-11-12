@@ -1,8 +1,8 @@
 <li id="task_<%= task.id %>" class="list-group-item <%= task_arrange_class %>">
-  <div class="border border-green-300 p-1 mb-3">
-    <div class="flex justify-between items-center mb-5">
+  <div class="task-zone-custom mb-3">
+    <div class="flex justify-between items-center mb-1">
 
-      <h1 class="text-xs border-b border-cyan-300 font-semibold sm:text-sm md:text-base lg:text-lg">
+      <h1 class="text-plane-custom font-semibold">
         <%= task.title %>
       </h1>
 
@@ -34,37 +34,39 @@
 
     </div>
 
-    <div class="text-xs items-center sm:text-sm sm:flex sm:justify-between md:text-md lg:text-lg">
-      <div class="flex justify-start">
-        <p class="mr-1">目安時間：</p>
-        <p class="mx-1">
-          <%= task.estimated_time[:hour] %> h
+    <div class="flex flex-wrap items-center gap-1 mb-2 md:gap-3">
+      <% task.tags.each do |tag| %>
+        <p class="flex-none tag-zone-custom text-sm-custom">
+          <%= tag.name %>
         </p>
-        <p class="mx-1">
-          <%= task.estimated_time[:minute] %> m
+      <% end %>
+    </div>
+
+    <div class="items-center flex justify-between">
+      <div class="flex justify-start gap-1 text-sm-custom">
+        <p>
+          <%= task.estimated_time[:hour] %>h
         </p>
-        <p class="mx-1">
-          <%= task.estimated_time[:second] %> s
+        <p>
+          <%= task.estimated_time[:minute] %>m
+        </p>
+        <p>
+          <%= task.estimated_time[:second] %>s
         </p>
       </div>
 
       <% unless request.path == routines_path %>
-        <span class="flex justify-end mt-3 gap-1 sm:mt-0 sm:gap-3">
-          <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-blue-300 to-blue-100 btn-sm sm:min-w-12 lg:btn-md lg:text-lg", id: "move-higher-btn-#{task.id}" %>
-          <%= link_to "↓", tasks_move_lower_path(task), data: { turbo_method: :patch }, class:"btn bg-gradient-to-tl from-blue-300 to-blue-100 btn-sm sm:min-w-12 lg:btn-md lg:text-lg", id: "move-lower-btn-#{task.id}" %>
+        <span class="flex justify-end gap-1 sm:gap-3">
+          <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class:"btn-sm-custom btn-show-custom ", id: "move-higher-btn-#{task.id}" %>
+          <%= link_to "↓", tasks_move_lower_path(task), data: { turbo_method: :patch }, class:"btn-sm-custom btn-show-custom", id: "move-lower-btn-#{task.id}" %>
         </span>
       <% end %>
     
     </div>
-
-    <div class="flex flex-wrap items-center gap-1 my-1 md:gap-3">
-      <% task.tags.each do |tag| %>
-        <p class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1 flex-none text-xs md:text-sm"><%= tag.name %></p>
-      <% end %>
-    </div>
   </div>
 
   <div class="hidden task-id"><%= task.id %></div>
+
   <%= form_with url: tasks_sort_path(task), method: "patch" do |f| %>
     <%= f.hidden_field :new_index, value: "", id: "form-new-index-#{task.id}" %>
     <%= f.submit nil, class: "hidden", id: "sort-btn-#{task.id}" %>

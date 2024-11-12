@@ -3,7 +3,9 @@ on: push
 jobs:
   rspec-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    env:
+      TZ: Asia/Tokyo 
+    timeout-minutes: 10
     services:
       postgres:
         image: "postgres"

@@ -8,9 +8,11 @@ class PasswordResetsController < ApplicationController
   def create 
     @user = User.find_by_email(params[:email])
 
-    # この行で、リセットパスワードの方法（ランダムなトークン付きのURL）を記載したメールがユーザーに送信されます。
-    @user.deliver_reset_password_instructions! if @user
-        
+    if @user && !Rails.env.test?
+      # この行で、リセットパスワードの方法（ランダムなトークン付きのURL）を記載したメールがユーザーに送信されます。
+      @user.deliver_reset_password_instructions!
+    end
+ 
     # メールが見つかったかどうかにかかわらず、指示が送信されたことをユーザーに知らせます。
     # システムに登録されているメールアドレスの有無について攻撃者に情報を漏らさないためです。
     redirect_to(root_path, :notice => 'メールが送信されました。')

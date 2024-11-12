@@ -16,13 +16,10 @@ module ApplicationHelper
   # 背景画像のデザインに関するクラス
   def shallow_bg_class
     case request.path
-    when root_path
-      'pb-16 mt-12 sm:mt-14 md:mt-16'
-    when policy_path, terms_path
-      'mt-12 sm:mt-14 md:mt-16'
+    when root_path, policy_path, terms_path
+      return ''
     else
-      'pb-16 mt-12 sm:mt-14 md:mt-16 h-full mx-auto bg-green-50/90 min-h-screen
-      w-11/12 sm:w-4/5'
+      return 'pb-16 pt-1 h-full mx-auto bg-green-50/90 min-h-screen w-11/12 sm:w-4/5'
     end
   end
 

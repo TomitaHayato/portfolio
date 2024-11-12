@@ -2,13 +2,6 @@
   <h1 class="text-center text-lg my-5 sm:text-xl md:text-2xl xl:test-3xl">おはようございます！<br class="md:hidden"><span class="font-semibold text-orange-400"><%= current_user.name %></span>さん</h1>
 </div>
 
-<div class="flex justify-center gap-1 sm:gap-2 sm:gap-4">
-  <%= link_to 'ルーティン作成',  new_routine_path,      class: "btn bg-gradient-to-tl from-green-400 to-green-200  btn-sm text-[12px] leading-tight w-3/12 min-w-20 min-h-10 sm:w-32 sm:btn-md sm:text-sm md:text-base md:leading-none lg:min-h-14 lg:p-1 hover:shadow-md hover:from-green-200 hover:to-green-200 hover:text-gray-600 flex items-center justify-center" %>
-  <%= link_to 'My ルーティン',  routines_path,         class: "btn bg-gradient-to-tl from-green-400  to-green-200  btn-sm  text-[12px] leading-tight w-3/12 min-w-20 min-h-10 sm:w-32 sm:btn-md sm:text-sm md:text-base                 lg:min-h-14 lg:p-1 hover:shadow-md hover:from-green-200 hover:to-green-200 hover:text-gray-600 flex items-center justify-center" %>
-  <%= link_to '投稿を見る',     routines_posts_path,   class: "btn bg-gradient-to-tl from-green-400  to-green-200  btn-sm  text-[12px] leading-tight w-3/12 min-w-20 min-h-10 sm:w-32 sm:btn-md sm:text-sm md:text-base                 lg:min-h-14 lg:p-1 hover:shadow-md hover:from-green-200 hover:to-green-200 hover:text-gray-600      items-center justify-center" %>
-  <%= link_to '称号一覧',       rewards_path,          class: "btn bg-gradient-to-tl from-pink-200   to-yellow-100  btn-sm  text-[12px] leading-tight w-3/12 min-w-20 min-h-10 sm:w-32 sm:btn-md sm:text-sm md:text-base                 lg:min-h-14 lg:p-1 hover:shadow-md hover:from-pink-100 hover:to-yellow-100 hover:text-gray-600      items-center justify-center hidden lg:flex" %>
-</div>
-
 <!-- 実践中のルーティン表示 -->
 <div class="my-3">
   <% if @routine %>

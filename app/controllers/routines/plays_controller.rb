@@ -1,11 +1,15 @@
 class Routines::PlaysController < ApplicationController
-  before_action :block_if_no_session, only: %i[show update]
-  before_action :set_routine
-  before_action :arrange_tasks_by_position, only: %i[show update]
+  before_action      :block_if_no_session       , only: %i[show update]
+  before_action      :set_routine
+  before_action      :set_tasks                 , only: %i[show update]
   skip_before_action :playing_task_sesison_reset
 
   def show
     @task = @tasks[session[:playing_task_num]]
+    
+    # 最後のタスクの場合、turbo-frameリクエストを無効化
+    @turbo_setting = { turbo_method: :patch }
+    @turbo_setting[:turbo_frame] = '_top' if session[:playing_task_num] == (@tasks.count - 1)
   end
 
   def create
@@ -17,6 +21,7 @@ class Routines::PlaysController < ApplicationController
   def update
     session[:playing_task_num] += 1
     session[:experience_log] = set_experience_log(session[:experience_log], params[:tag_ids]) if params[:tag_ids]
+
     if session[:playing_task_num] >= @tasks.count
       @routine.completed_count += 1
       @routine.save!
@@ -32,8 +37,8 @@ class Routines::PlaysController < ApplicationController
     @routine = current_user.routines.find(params[:routine_id])
   end
 
-  def arrange_tasks_by_position
-    @tasks = @routine.tasks.order(position: :asc)
+  def set_tasks
+    @tasks = @routine.tasks
   end
 
   # createアクションを介さないアクセスを拒否

@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "GuestLogins", type: :system do
+
+  # ゲストログインを行う
+  # @userにゲストユーザーをセット
   before do
     visit root_path
     click_on 'お試し'
@@ -12,6 +15,16 @@ RSpec.describe "GuestLogins", type: :system do
   it 'ゲストログインできる' do
     expect(page).to have_current_path(my_pages_path)
     expect(page).to have_content('ゲストログインしました。')
+  end
+
+  describe '生成されたユーザーのカラム' do
+    it 'nameがゲストユーザー' do
+      expect(@user.name).to eq 'ゲストユーザー'
+    end
+
+    it 'roleがguest' do
+      expect(@user.role).to eq 'guest'
+    end
   end
 
   describe 'guest_blockメソッド' do
@@ -30,14 +43,15 @@ RSpec.describe "GuestLogins", type: :system do
       visit routines_path
       expect(page).to have_current_path(routines_path)
 
-      click_on "routine-post-btn-#{routine.id}"
+      click_on "post-btn-#{routine.id}"
       expect(page).to have_current_path(routines_path)
       expect(page).to have_content('ゲストユーザー様はご利用できません')
-      expect(page).to have_selector("#routine-post-btn-#{routine.id}")
+      expect(page).to have_selector("#post-btn-#{routine.id}")
     end
 
     it '投稿をコピーできない' do
-      posted_routine = create(:routine, is_posted: true)
+      user_other     = create(:user, :for_system_spec)
+      posted_routine = create(:routine, user: user_other, is_posted: true)
 
       visit routines_posts_path
       expect(page).to have_current_path(routines_posts_path)

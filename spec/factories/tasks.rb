@@ -18,7 +18,7 @@ FactoryBot.define do
     association :routine
 
     trait :nil_title_estimated_time do
-      title { nil }
+      title                    { nil }
       estimated_time_in_second { nil }
     end
 

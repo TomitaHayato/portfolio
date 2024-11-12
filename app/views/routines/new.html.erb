@@ -1,7 +1,23 @@
-<h1 class="text-base my-3 text-center font-semibold sm:text-lg md:my-5 md:text-xl lg:text-3xl">ルーティン新規作成</h1>
-
-<div class="text-center">
-  <%= render "form", routine: @routine %>
-  <%= link_to "キャンセル", my_pages_path, class: "my-3 btn bg-gradient-to-tl from-gray-300 to-gray-100 w-4/12 text-xs btn-sm min-h-10 sm:btn-md sm:text-sm lg:text-base hover:from-gray-100 hover:to-gray-100 hover:text-gray-600" %> <br>
-  <%= link_to "Myルーティン一覧へ", routines_path, class: "link text-blue-600 mx-auto text-base sm:text-lg lg:text-xl" %>
+<!-- パンくず -->
+<div class="">
+  <div class="breadcrumbs-container-custom">
+    <ul>
+      <li class="link-text-custom">
+        <%= link_to 'マイページ', my_pages_path %>
+      </li>
+  
+      <li>
+        <span class="current-page-text-custom">新規作成</span>
+      </li>
+    </ul>
+  </div>
+  
+  <h1 class="page-title-custom">ルーティン新規作成</h1>
+  
+  <div class="text-center">
+    <%= render "form", routine: @routine %>
+    <%= link_to "キャンセル", my_pages_path, class: "mb-3 btn-xl-custom btn-cansel-custom" %> <br>
+    <%= link_to "Myルーティン一覧へ", routines_path, class: "link block text-blue-600 mx-auto text-lg-custom hover:scale-105" %>
+  </div>
 </div>
+

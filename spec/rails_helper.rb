@@ -105,4 +105,6 @@ RSpec.configure do |config|
   config.include LoginSupport
   config.include RequireLoginSupport
   config.include HeaderSupport
+  config.include FooterSupport
+  config.include BeforeLoginHeaderSupport
 end

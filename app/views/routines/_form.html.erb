@@ -2,24 +2,47 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="my-3">
-    <p class="font-semibold text-xs sm:text-sm md:text-base">タイトル（必須）</p>
-    <%= f.text_field :title, class:"input input-bordered h-8 p-1 w-8/12 text-xs sm:text-sm lg:p-2 lg:text-base lg:min-h-12", placeholder: "タイトル（必須）" %>
+    <p class="font-semibold text-plane-custom">
+      <span class="asterisk-custom">*</span>
+      タイトル
+    </p>
+    <%= f.text_field :title, class:"text-form-md-custom input-form-custom", placeholder: "タイトル（必須）" %>
   </div>
 
   <div class="my-3">
-    <p class="font-semibold text-xs sm:text-sm md:text-base">説明文</p>
-    <%= f.text_area :description, class:"mx-auto textarea textarea-bordered w-8/12 text-xs min-h-16 p-1 sm:text-sm sm:min-h-32 lg:p-2 lg:text-base", placeholder: "説明文（任意）" %>
+    <p class="font-semibold text-plane-custom">説明文</p>
+    <%= f.text_area :description, class:"text-form-md-custom textarea-custom py-2", placeholder: "説明文を入力してください（任意）" %>
   </div>
 
   <div class="my-3">
-    <p class="font-semibold text-xs sm:text-sm md:text-base">開始時間</p>
-    <%= f.time_field :start_time, class: "mx-auto input input-bordered w-8/12 h-8 text-sm text-center lg:text-lg lg:min-h-12 lg:p-2", min: "00:00", max: "23:59" %>
+    <p class="font-semibold text-plane-custom">開始時間</p>
+    <%= f.time_field :start_time, class: "time-form-md-custom text-sm lg:text-lg", min: "00:00", max: "23:59" %>
   </div>
 
   <div class="my-3">
-    <p class="font-semibold text-xs sm:text-sm md:text-base">通知</p>
-    <%= f.select :notification, [['通知オフ', 'no'], ['LINE (LINEログインした方のみ有効)', 'line']], { selected: routine.notification }, class: "mx-auto select select-bordered w-8/12 text-sm text-center min-h-6 h-8 lg:text-lg lg:p-2 lg:min-h-12" %>
+    <p class="font-semibold text-plane-custom mb-1">通知設定</p>
+
+    <!-- ラジオボタンフィールド -->
+    <div class="w-6/12 sm:w-5/12 lg:w-4/12 mx-auto flex flex-col gap-2">
+      <div class="form-control">
+        <%= f.label :notification_no, class: "flex gap-2 lg:gap-5" do %>
+          <%= f.radio_button :notification, 'no', class: "radio-btn-md-custom" %>
+          <span class="radio-text-md-custom">通知オフ</span>
+        <% end %>
+      </div>
+
+      <div class="form-control">
+        <%= f.label :notification_line, class: "flex gap-2 lg:gap-5" do %>
+          <%= f.radio_button :notification, 'line', class: "radio-btn-md-custom" %>
+          <span class="radio-text-md-custom">
+            LINE
+            <span class="text-sm-custom">(LINEログインした方)</span>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
-  <%= f.submit nil, class:"btn bg-gradient-to-tl from-cyan-300 to-cyan-100 my-3 w-4/12 text-xs btn-sm min-h-10 sm:btn-md sm:text-sm lg:text-base hover:from-cyan-100 hover:to-cyan-100 hover:text-gray-600" %>
+  <%= f.submit nil, class:"my-5 btn-xl-custom btn-create-custom w-4/12" %>
 <% end %>

@@ -10,6 +10,21 @@
          hover:scale-105;
 }
 
+.btn-xl-custom {
+  @apply  btn text-md-custom shadow-md
+          hover:scale-105;
+}
+
+.btn-cansel-custom {
+  @apply  bg-gradient-to-tl from-gray-300 to-gray-100
+          hover:from-gray-300 hover:to-gray-300;
+}
+
+.btn-create-custom {
+  @apply  bg-gradient-to-tl from-cyan-300 to-cyan-100
+          hover:from-cyan-300 hover:to-cyan-300;
+}
+
 .btn-edit-custom {
   @apply bg-gradient-to-tl from-green-300 to-green-100
          hover:from-green-300 hover:to-green-300;
@@ -25,12 +40,48 @@
          hover:from-blue-300 hover:to-blue-300;
 }
 
+.btn-next-custom{
+  @apply  bg-gradient-to-tl from-pink-300 to-pink-100
+          hover:from-pink-300 hover:to-pink-300
+          rounded-xl;
+}
+
+.btn-skip-custom{
+  @apply  bg-gradient-to-tl from-blue-200 to-blue-50
+          hover:from-blue-200 hover:to-blue-200
+          rounded-xl;
+}
+
+.text-xl-custom {
+  @apply text-lg sm:text-xl lg:text-2xl font-semibold;
+}
+
 .text-title-custom {
-  @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg lg:text-xl;
+  @apply border-b border-gray-400 font-semibold text-sm sm:text-base md:text-lg;
+}
+
+.text-lg-custom {
+  @apply  text-xs sm:text-sm md:text-base lg:text-lg font-semibold;
+}
+
+.text-reward-custom {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-green-500;
 }
 
 .text-plane-custom {
-  @apply text-xs md:text-sm;
+  @apply text-xs md:text-sm text-gray-800;
+}
+
+.text-md-custom {
+  @apply text-gray-800 text-xs sm:text-sm md:text-base;
+}
+
+.text-sm-custom {
+  @apply text-[0.5rem] md:text-xs;
+}
+
+.routine-description-custom {
+  @apply border-gray-500 rounded-xl py-2 px-3;
 }
 
 .scroll-container-custom {
@@ -38,14 +89,108 @@
 }
 
 .tasks-collapse-custom {
-  @apply shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50
-         hover:to-teal-100;
+  @apply shadow-md border border-gray-300 bg-gradient-to-tl from-teal-100 to-teal-50;
 }
 
 .tasks-collapse-title-custom {
   @apply collapse-title font-semibold min-h-1 p-[0.8rem];
 }
 
-.routine-zone-custom {
-  @apply border border-green-400 bg-green-100 rounded-lg;
+.task-zone-custom {
+  @apply border border-inherit shadow-md rounded-lg p-1 px-3;
 }
+
+.routine-zone-custom {
+  @apply border border-green-400 bg-green-50 rounded-lg;
+}
+
+.posted-routine-zone-custom {
+  @apply border border-sky-400 bg-green-50 rounded-lg;
+}
+
+.tag-zone-custom {
+  @apply  bg-gradient-to-tl from-amber-300 to-amber-100 rounded-lg
+          font-[550] text-blue-500
+          py-0.5 px-1 md:px-2;
+}
+
+.tag-zone-lg-custom {
+  @apply  bg-gradient-to-tl from-amber-300 to-amber-100 rounded-xl
+          text-xs md:text-sm font-[550] text-blue-500
+          p-1 md:px-2;
+}
+
+.nav-menu-custom {
+  @apply py-1 grow text-center hover:font-semibold hover:border active:scale-90
+         text-sm lg:text-base text-green-500;
+}
+
+.link-text-custom {
+  @apply text-blue-500;
+}
+
+.breadcrumbs-container-custom {
+  @apply breadcrumbs w-10/12 mx-auto text-xs sm:text-sm;
+}
+
+.current-page-text-custom {
+  @apply font-semibold;
+}
+
+.page-title-custom {
+  @apply text-base text-center font-semibold sm:text-lg md:text-xl lg:text-2xl mb-3 md:mb-5;
+}
+
+.icon-size-custom {
+  @apply size-4 sm:size-5;
+}
+
+/* フォーム */
+.input-form-custom {
+  @apply  input input-sm input-bordered
+          lg:min-h-10;
+}
+
+.textarea-custom {
+  @apply  textarea textarea-bordered
+          min-h-16 sm:min-h-20;
+}
+
+.text-form-md-custom {
+  @apply  w-8/12 lg:w-7/12
+          py-1 px-2 lg:px-4
+          text-plane-custom;
+}
+
+.time-form-md-custom {
+  @apply  input input-bordered text-center
+          w-5/12 sm:w-3/12 h-8 lg:min-h-10;
+}
+
+.asterisk-custom {
+  @apply text-red-500;
+}
+
+.radio-text-md-custom {
+  @apply text-plane-custom font-[550];
+}
+
+.radio-btn-md-custom {
+  @apply radio radio-success radio-xs sm:radio-sm; 
+}
+
+.sort-box-custom {
+  @apply select select-bordered select-xs md:select-sm;
+}
+
+.countdown-custom{
+  @apply text-blue-600;
+}
+
+.countdown-circle-custom {
+  @apply  bg-gradient-to-tl from-yellow-400/60 to-yellow-100/60
+          flex justify-center items-center
+          rounded-full mb-3 mx-auto
+          w-40 h-40 sm:w-44 sm:h-44 lg:w-48 lg:h-48;
+}
+

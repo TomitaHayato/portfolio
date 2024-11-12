@@ -1,29 +1,58 @@
 require 'rails_helper'
 
-RSpec.describe "LoginPages", type: :system do
+RSpec.describe "LoginPages", type: :system, js: true do
   let!(:user) { create(:user, :for_system_spec) }
   
-  it 'ログインページに遷移できる' do
+  it 'ログインなしでアクセスできる' do
     visit login_path
     expect(page).to have_current_path(login_path)
   end
 
-  describe 'ログインページに関するテスト' do
+  describe 'header/footerのテスト' do
+    context 'ログイン前' do
+      before do
+        visit login_path
+      end
+
+      it_behaves_like 'ログイン前Header/Footerテスト'
+    end
+
+    context 'ログイン後' do
+      before do
+        login_as(user)
+        visit login_path
+      end
+
+      it_behaves_like 'ログイン後Header/Footerテスト'
+    end
+  end
+
+  describe 'ログインページ メインコンテンツに関するテスト' do
     before do
       visit login_path
     end
 
-    let(:email_form) { find('#email') }
-    let(:password_form) { find('#password') }
-    let(:submit_btn) { find('input[type="submit"]') }
+    let(:email_form)      { find('#email') }
+    let(:password_form)   { find('#password') }
+    let(:submit_btn)      { find('input[type="submit"]') }
+
+    let(:flash_container) { find('#flash') }
+
+    it 'フォームが正しく表示される' do
+      expect(page).to have_selector('input[id="email"]')
+      expect(page).to have_selector('input[id="password"]')
+      expect(page).to have_selector('input[type="submit"][value="ログイン"]')
+    end
 
     context 'フォームに正常値を入力' do
       it 'ログインできる' do
         email_form.fill_in with: user.email
         password_form.fill_in with: 'password'
         submit_btn.click
-        expect(page).to have_current_path(my_pages_path)
-        expect(page).to have_content(user.name)
+
+        expect(page).to            have_current_path(my_pages_path)
+        expect(page).to            have_content(user.name)
+        expect(flash_container).to have_content('ログインしました！')
       end
     end
 
@@ -33,15 +62,12 @@ RSpec.describe "LoginPages", type: :system do
         password_form.fill_in with: 'password'
         submit_btn.click
 
-        expect(page).to have_current_path(login_path)
-        expect(page).to have_content('ログインできませんでした。')
+        expect(page).to            have_current_path(login_path)
+        expect(flash_container).to have_content('ログインできませんでした。')
       end
     end
 
     describe 'ログインフォーム以外の要素' do
-      it 'ヘッダーが表示されている' do
-        expect(page).to have_selector('#before-login-header')
-      end
 
       it 'LINEログインボタンが表示されている' do
         expect(page).to have_selector('#line-login-btn')
@@ -59,6 +85,7 @@ RSpec.describe "LoginPages", type: :system do
 
       it 'パスワードリセットフォームへ遷移できる' do
         click_on 'パスワードをお忘れの方はこちら'
+
         expect(page).to have_current_path(new_password_reset_path)
         expect(page).to have_content('パスワードリセット申請')
       end

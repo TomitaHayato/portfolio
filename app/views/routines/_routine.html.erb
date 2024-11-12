@@ -1,4 +1,4 @@
-<div id="routine-<%= routine.id %>">
+<div id="routine-<%= routine.id %>" class="routine-field-class-for-test">
   <div class="routine-zone-custom p-3 my-5 mx-auto w-11/12 md:w-9/12">
 
     <div class="items-center mb-3 sm:flex sm:justify-between sm:flex-wrap-reverse">
@@ -16,14 +16,15 @@
 
     <!-- 説明文 (あれば表示) -->
     <% if routine.description.present? %>
-      <div class="mb-3 border-gray-500 rounded-xl py-2 px-3 text-plane-custom">
+      <div class="mb-3 routine-description-custom text-plane-custom">
         <p><%= routine.description %></p>
       </div>
     <% end %>
 
     <div class="flex justify-between mb-3">
+
       <!-- 開始時間など -->
-      <div class="flex flex-col gap-2 sm:gap-1 text-plane-custom">
+      <div class="flex flex-col gap-1 text-plane-custom">
         <p>
           <span class="font-semibold">開始時間：</span><%= routine.start_time.strftime("%H:%M") if routine.start_time %>
         </p>

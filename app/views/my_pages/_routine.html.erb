@@ -11,12 +11,12 @@
 
   <!-- 説明文 (あれば表示) -->
   <% if routine.description.present? %>
-    <div class="mb-3 border-gray-500 rounded-xl py-2 px-3 text-plane-custom">
+    <div class="mb-3 py-2 px-3 text-plane-custom">
       <p><%= routine.description %></p>
     </div>
   <% end %>
   
-  <div class="mb-5 text-xs text-gray-600 sm:flex sm:flex-row sm:justify-start sm:text-sm sm:gap-5 md:text-base lg:gap-10">
+  <div class="mb-5 text-md-custom sm:flex sm:flex-row sm:justify-start sm:gap-5 lg:gap-10">
     <p class="">
       <span class="font-semibold">開始: </span>
       <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
@@ -44,6 +44,7 @@
 
   <div class="text-center mb-16">
     <div class="text-center">
+
       <% if routine.tasks.empty? %>
         <div class="p-3 mx-auto bg-green-50/60 w-11/12 rounded-lg sm:p-5 lg:w-9/12 lg:p-10">
           <p class="mb-3 font-medium text-sm sm:text-base md:text-lg lg:text-xl">タスクを追加しましょう！</p>
@@ -59,7 +60,7 @@
                   sm:w-36 sm:h-20 sm:text-lg md:w-40 md:h-24 md:text-xl lg:w-44 lg:h-28"
         %>
 
-        <details class="tasks-collapse-custom collapse collapse-plus">
+        <details class="tasks-collapse-custom collapse collapse-plus" id="tasks-container">
           <summary class="tasks-collapse-title-custom text-plane-custom" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
           <div class="collapse-content">
             <%= render partial: "task", collection: routine.tasks.includes(:tags).order(position: :asc), locals: { routine: routine } %>

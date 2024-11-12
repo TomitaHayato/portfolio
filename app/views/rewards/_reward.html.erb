@@ -1,4 +1,4 @@
-<div class="m-1 sm:m-3" id="reward-zone-<%= reward.id %>">
+<div id="reward-zone-<%= reward.id %>">
   <% if reward.users.include?(current_user) %>
     <%= render 'rewards/reward_card', reward: reward %>
   <% else %>
