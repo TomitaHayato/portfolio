@@ -90,6 +90,7 @@ group :development, :test do
   gem "selenium-webdriver"
   # テスト用のダミーデータを作成
   gem 'faker'
+  gem 'simplecov', require: false
 end
 
 group :development do

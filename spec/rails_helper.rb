@@ -8,6 +8,9 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
 require 'selenium-webdriver'
+# カバレッジ起動
+require 'simplecov'
+SimpleCov.start
 
 # spec/support/配下のファイルを読み込み
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
