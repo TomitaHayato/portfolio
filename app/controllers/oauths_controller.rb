@@ -70,12 +70,12 @@ class OauthsController < ApplicationController
   end
 
   def update_user_email(email = nil)
-    if email
-      @user.email = email
-    else
+    if email == nil || User.find_by(email: email)
       @user.email = "morning-#{@user.id}@email.com"
+    else
+      @user.email = email
     end
-
+    
     @user.save!
   end
 end
