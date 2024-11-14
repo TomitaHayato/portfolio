@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "NewRoutinesPaths", type: :system do
+RSpec.describe "NewRoutinesPaths", type: :system, js: true do
   context 'ログイン前' do
     it 'アクセスできない' do
       login_failed_check(new_routine_path)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "EditRoutines", type: :system do
+RSpec.describe "EditRoutines", type: :system, js: true do
   let!(:user)     { create(:user, :for_system_spec) }
   let!(:routine)  { create(:routine, user: user) }
 
