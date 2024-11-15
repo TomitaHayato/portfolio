@@ -38,6 +38,19 @@ class User < ApplicationRecord
     rewards_change_flag
   end
 
+  # 経験値に応じて、レベルアップを行う
+  def level_up_check
+    level_up_flag = false # レベルアップしたかどうかを管理
+    total_exp     = user_tag_experiences.total_experience_points
+
+    while require_level_up(total_exp) do
+      level_up
+      level_up_flag = true
+    end
+
+    level_up_flag
+  end
+
   private
 
   def reward_achieve?(reward)
@@ -45,7 +58,7 @@ class User < ApplicationRecord
     send(condition.to_sym)
   end
 
-  # 称号の条件
+# --- 称号の条件 ---
   def completed_routine_1?
     complete_routines_count >= 1
   end
@@ -60,5 +73,18 @@ class User < ApplicationRecord
 
   def post_routine_1?
     routines.posted.size >= 1
+  end
+
+# --- Level UP ---
+  # レベルアップするかどうかを判定
+  def require_level_up?(total_exp)
+    level_up_exp = level * 10
+    
+    total_exp >= level_up_exp
+  end
+
+  def level_up
+    self.level += 1
+    save!
   end
 end
