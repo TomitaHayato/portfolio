@@ -32,7 +32,7 @@ document.addEventListener('turbo:load', function(event) {
     optionsZone.addEventListener('click', function(event) {
       if (event.target.classList.contains('search-option')) {
         let optionWord = event.target.textContent;
-        searchForm.value = optionWord;
+        searchForm.value = optionWord.replace(/\n/g, ' ');
         optionsZone.innerHTML = '';
       }
     });
