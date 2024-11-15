@@ -43,7 +43,7 @@ class User < ApplicationRecord
     level_up_flag = false # レベルアップしたかどうかを管理
     total_exp     = user_tag_experiences.total_experience_points
 
-    while require_level_up(total_exp) do
+    while require_level_up?(total_exp) do
       level_up
       level_up_flag = true
     end

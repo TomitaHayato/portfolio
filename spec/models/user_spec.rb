@@ -152,12 +152,22 @@ RSpec.describe User, type: :model do
         user = build(:user, role: nil)
         expect{ user.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
       end
+
+      it 'level' do
+        user = build(:user, level: nil)
+        expect{ user.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
+      end
     end
 
     describe 'デフォルト値' do
       it 'roleカラム default: 1' do
         user = create(:user)
         expect(user.role_before_type_cast).to eq 1
+      end
+
+      it 'levelカラム default: 1' do
+        user = create(:user)
+        expect(user.level).to eq 1
       end
 
       it 'completed_routine_countカラム default: 0' do
@@ -217,6 +227,29 @@ RSpec.describe User, type: :model do
         expect(user.rewards).not_to include reward3
         expect(user.rewards).to     include reward4
         expect(is_reward_get).to      eq true
+      end
+    end
+
+    describe 'level_up_check' do
+      let!(:tag) { create(:tag) }
+
+      it '経験値が足りない場合、レベルは変わらない' do
+        user_level_prev = user.level
+        is_level_up     = user.level_up_check
+        sleep 0.25
+        expect(is_level_up).to eq false
+        expect(user.level).to  eq user_level_prev
+      end
+
+      it '経験値によってレベルアップする' do
+        user_tag_experience = create(:user_tag_experience, user: user, tag: tag, experience_point: 30)
+        sleep 0.1
+        user_level_prev = user.level
+        is_level_up     = user.level_up_check
+        sleep 0.1
+        expect(is_level_up).to    eq true
+        expect(user.level).not_to eq user_level_prev
+        expect(user.level).to     eq 4
       end
     end
   end
