@@ -16,12 +16,17 @@ class User < ApplicationRecord
 
   validates :password,              length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password,              confirmation: true    , if: -> { new_record? || changes[:crypted_password] }
-  validates :password_confirmation, presence: true        , if: -> { new_record? || changes[:crypted_password] }
-  validates :email,                 presence: true        , uniqueness: true
-  validates :name,                  presence: true        , length:     { maximum: 25 }
-  validates :reset_password_token,  uniqueness: true      , allow_nil: true
+  validates :password_confirmation, presence:     true    , if: -> { new_record? || changes[:crypted_password] }
+  validates :name,                  presence:     true    , length:     { maximum: 25 }
+  validates :email,                 presence:     true    , uniqueness: true
+  validates :reset_password_token,  uniqueness:   true    , allow_nil:  true
 
   enum role: { admin: 0, general: 1, guest: 2 }
+
+  def add_complete_routines_count
+    self.complete_routines_count += 1
+    save!
+  end
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
   def reward_get_check
@@ -78,9 +83,17 @@ class User < ApplicationRecord
 # --- Level UP ---
   # レベルアップするかどうかを判定
   def require_level_up?(total_exp)
-    level_up_exp = level * 10
+    exp_to_level_up = cal_exp_to_level_up
+
+    total_exp >= exp_to_level_up
+  end
+
+  #次のレベルアップまでに必要な経験値を計算
+  #式: 現在のレベルまでに必要だった経験値 + 現在のレベルx5
+  def cal_exp_to_level_up
+    exp_to_now_level = (1..level).sum { |level_prev| (level_prev - 1) * 5 } #現在のレベルになるまでに獲得してきた経験値
     
-    total_exp >= level_up_exp
+    exp_to_now_level + level * 5
   end
 
   def level_up

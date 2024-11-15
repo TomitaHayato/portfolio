@@ -192,6 +192,15 @@ RSpec.describe User, type: :model do
     let!(:reward3) { create(:reward, :chiisanatasseisha) }
     let!(:reward4) { create(:reward, :asanomorinoannnaininn) }
 
+    describe 'add_complete_routines_count' do
+      it 'complete_routines_countが1加算される' do
+        count_prev = user.complete_routines_count
+        user.add_complete_routines_count
+        sleep 0.1
+        expect(user.complete_routines_count).to eq count_prev + 1
+      end
+    end
+
     describe 'reward_get_check' do
       it '初期状態では称号を未獲得' do
         expect(user.rewards.size).to eq 0
@@ -242,14 +251,14 @@ RSpec.describe User, type: :model do
       end
 
       it '経験値によってレベルアップする' do
-        user_tag_experience = create(:user_tag_experience, user: user, tag: tag, experience_point: 30)
+        user_tag_experience = create(:user_tag_experience, user: user, tag: tag, experience_point: 15)
         sleep 0.1
         user_level_prev = user.level
         is_level_up     = user.level_up_check
         sleep 0.1
         expect(is_level_up).to    eq true
         expect(user.level).not_to eq user_level_prev
-        expect(user.level).to     eq 4
+        expect(user.level).to     eq 3
       end
     end
   end
