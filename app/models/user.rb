@@ -56,6 +56,11 @@ class User < ApplicationRecord
     level_up_flag
   end
 
+  # 次のレベルまでに必要な経験値
+  def exp_to_next_level
+    cal_exp_to_level_up - self.user_tag_experiences.total_experience_points
+  end
+
   private
 
   def reward_achieve?(reward)
@@ -88,12 +93,17 @@ class User < ApplicationRecord
     total_exp >= exp_to_level_up
   end
 
-  #次のレベルアップまでに必要な経験値を計算
-  #式: 現在のレベルまでに必要だった経験値 + 現在のレベルx5
+  #次のレベルアップまでに必要なtotal経験値を計算
+  #式: 現在のレベルまでに必要だった経験値 + (現在レベル×5)
   def cal_exp_to_level_up
-    exp_to_now_level = (1..level).sum { |level_prev| (level_prev - 1) * 5 } #現在のレベルになるまでに獲得してきた経験値
-    
+    exp_to_now_level  = cal_exp_to_now_level
+
     exp_to_now_level + level * 5
+  end
+
+  #レベル1から現在のレベルに達するまでに必要だった経験値
+  def cal_exp_to_now_level
+    level * (level - 1) * 5 / 2 #(1..level).sum { |level_now| (level_now - 1) * 5 }を数列の和の公式で展開
   end
 
   def level_up

@@ -16,7 +16,34 @@
 </div>
 
 <!-- 経験値表示 -->
-<div class="p-3 mt-20 mx-auto bg-gradient-to-tl from-green-200/60 to-green-100/60 sm:w-11/12 md:w-9/12">
+<div class="p-3 mt-3 mx-auto bg-gradient-to-tl from-green-200/60 to-green-100/60 sm:w-11/12 md:w-9/12">
+  <!-- ユーザーのレベルを表示 -->
+  <div class="flex justify-center">
+    <div class="stats shadow bg-green-50">
+      <div class="stat place-items-center">
+
+        <!-- アバター表示 -->
+        <div class="stat-figure">
+          <div class="avatar">
+            <div class="w-16 rounded-full lg:w-24">
+              <%= image_tag current_user.avatar.url %>
+            </div>
+          </div>
+        </div>
+
+        <!-- レベル表示 -->
+        <div class="stat-title font-bold text-green-600 text-xl">Level</div>
+        <div class="stat-value text-emerald-600"><%= current_user.level %></div>
+        <div class="stat-desc">
+          次のレベルまであと
+          <span class="font-semibold text-md-custom text-green-600"><%= @exp_to_next_level %></span>
+          exp
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
   <h2 class="my-3 font-bold lg:text-xl">獲得した経験値</h2>
 
   <!-- 全期間の経験値表示 -->
