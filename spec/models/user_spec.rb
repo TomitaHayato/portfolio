@@ -261,6 +261,32 @@ RSpec.describe User, type: :model do
         expect(user.level).to     eq 3
       end
     end
+
+    describe 'exp_to_next_level' do
+      let!(:tag)                 { create(:tag) }
+      let!(:user_tag_experience) { create(:user_tag_experience, user: user, tag: tag, experience_point: 30) }
+
+      before do
+        user.level_up_check
+      end
+
+      it '次のレベルまでに必要な経験値が出力される' do
+        # レベルが適切かどうか
+        expect(user.level).to eq 4
+        # 出力のテスト
+        expect_val = 20
+        actual_val = user.exp_to_next_level
+        expect(actual_val).to eq expect_val
+        # 経験値を10追加
+        create(:user_tag_experience, user: user, tag: tag, experience_point: 10)
+        sleep 0.1
+        # 出力のテスト2
+        expect_val = 10
+        actual_val = user.exp_to_next_level
+        expect(actual_val).to eq expect_val
+      end
+
+    end
   end
 
   describe 'enum' do
