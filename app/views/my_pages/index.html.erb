@@ -47,24 +47,25 @@
   
   <h2 class="my-3 font-bold lg:text-xl">獲得経験値</h2>
   <!-- 経験値詳細 -->
-  <div role="tablist" class="tabs tabs-lifted">
-    <input type="radio" name="exp-tab" role="tab" class="tab" aria-label="全期間" checked="checked" />
-    <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-      <div class="p-3 border border-gray-400" id="user-xp-total">
+  <div role="tablist" class="tabs tabs-lifted rounded-lg lg:tabs-lg">
+    <input type="radio" name="exp-tab" role="tab" class="tab text-xs sm:text-base" aria-label="全期間" checked="checked" />
+
+    <div role="tabpanel" class="tab-content bg-base-100 rounded-box sm:p-6">
+      <div class="px-1.5 py-3 sm:p-3 sm:border sm:rounded-lg" id="user-xp-total">
         <%= render 'exp_display', tag_exp_hash: @experience_data_all %>
       </div>
     </div>
 
-    <input type="radio" name="exp-tab" role="tab" class="tab" aria-label="1ヶ月間" />
-    <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-      <div class="p-3 border border-gray-400" id="user-xp-monthly">
+    <input type="radio" name="exp-tab" role="tab" class="tab text-xs sm:text-base" aria-label="1ヶ月" />
+    <div role="tabpanel" class="tab-content bg-base-100 rounded-box sm:p-6">
+      <div class="px-1.5 py-3 sm:p-3 sm:border sm:rounded-lg" id="user-xp-monthly">
         <%= render 'exp_display', tag_exp_hash: @experience_data_month %>
       </div>
     </div>
 
-    <input type="radio" name="exp-tab" role="tab" class="tab" aria-label="1週間" />
-    <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-      <div class="p-3 border border-gray-400" id="user-xp-weekly">
+    <input type="radio" name="exp-tab" role="tab" class="tab text-xs sm:text-base" aria-label="1週間" />
+    <div role="tabpanel" class="tab-content bg-base-100 rounded-box sm:p-6">
+      <div class="px-1.5 py-3 sm:p-3 sm:border sm:rounded-lg" id="user-xp-weekly">
         <%= render 'exp_display', tag_exp_hash: @experience_data_week %>
       </div>
     </div>
