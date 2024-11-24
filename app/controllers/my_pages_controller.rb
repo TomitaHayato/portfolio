@@ -2,7 +2,7 @@ class MyPagesController < ApplicationController
   def index
     @routine               = current_user.routines.includes(:tasks).find_by(is_active: true)
     # 獲得経験値
-    @experience_data_all   = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag))
+    @experience_data_all   = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag)) #{ タグ: exp }形式のハッシュ
     @experience_data_month = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag).recent_one_month)
     @experience_data_week  = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag).recent_one_week)
     #   p "all:#{@experience_data_all} month#{@experience_data_month} week#{@experience_data_week}"
@@ -13,13 +13,13 @@ class MyPagesController < ApplicationController
 
   private
 
-  def make_tag_point_hash(experience_collection)
+  def make_tag_point_hash(exp_collection)
     tag_point_hash = Hash.new
-    experience_collection.each do |experience|
+    exp_collection.each do |experience|
       tag = experience.tag
       tag_point_hash[tag.name] ||= 0
       tag_point_hash[tag.name] += experience.experience_point
     end
-    tag_point_hash
+    tag_point_hash.sort_by{ |k, v| -v }.to_h
   end
 end

@@ -19,20 +19,21 @@
 <div class="p-3 mt-3 mx-auto bg-gradient-to-tl from-green-200/60 to-green-100/60 sm:w-11/12 md:w-9/12">
   <!-- ユーザーのレベルを表示 -->
   <div class="flex justify-center">
-    <div class="stats shadow bg-green-50">
+    <div class="stats shadow">
       <div class="stat place-items-center">
 
         <!-- アバター表示 -->
-        <div class="stat-figure">
+        <div class="stat-figure text-center">
           <div class="avatar">
             <div class="w-16 rounded-full lg:w-24">
               <%= image_tag current_user.avatar.url %>
             </div>
           </div>
+          <div class="text-sm-custom max-w-20 lg:max-w-32"><%= current_user.name %></div>
         </div>
 
         <!-- レベル表示 -->
-        <div class="stat-title font-bold text-green-600 text-xl">Level</div>
+        <div class="stat-title font-bold text-2xl">Level</div>
         <div class="stat-value text-emerald-600"><%= current_user.level %></div>
         <div class="stat-desc">
           次のレベルまであと
@@ -44,36 +45,28 @@
   </div>
 
   
-  <h2 class="my-3 font-bold lg:text-xl">獲得した経験値</h2>
+  <h2 class="my-3 font-bold lg:text-xl">獲得経験値</h2>
+  <!-- 経験値詳細 -->
+  <div role="tablist" class="tabs tabs-lifted">
+    <input type="radio" name="exp-tab" role="tab" class="tab" aria-label="全期間" checked="checked" />
+    <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+      <div class="p-3 border border-gray-400" id="user-xp-total">
+        <%= render 'exp_display', tag_exp_hash: @experience_data_all %>
+      </div>
+    </div>
 
-  <!-- 全期間の経験値表示 -->
-  <div class="p-3 border border-gray-400" id="user-xp-total">
-    <h3 class="my-1 lg:text-lg">全期間</h3>
-    <% @experience_data_all.each do |tag_name, experience_point| %>
-      <li class="items-center my-2" id="tag-total-xp-<%= tag_name %>">
-        <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
-        <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
-      </li>
-    <% end %>
-  </div>
+    <input type="radio" name="exp-tab" role="tab" class="tab" aria-label="1ヶ月間" />
+    <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+      <div class="p-3 border border-gray-400" id="user-xp-monthly">
+        <%= render 'exp_display', tag_exp_hash: @experience_data_month %>
+      </div>
+    </div>
 
-  <div class="p-3 border border-gray-400" id="user-xp-monthly">
-    <h3 class="my-1 lg:text-lg">1ヶ月間</h3>
-    <% @experience_data_month.each do |tag_name, experience_point| %>
-      <li class="items-center my-2" id="tag-monthly-xp-<%= tag_name %>">
-        <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
-        <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
-      </li>
-    <% end %>
-  </div>
-
-  <div class="p-3 border border-gray-400" id="user-xp-weekly">
-    <h3 class="my-1 lg:text-lg">1週間</h3>
-    <% @experience_data_week.each do |tag_name, experience_point| %>
-      <li class="items-center my-2" id="tag-weekly-xp-<%= tag_name %>">
-        <span class="bg-gradient-to-tl from-amber-300 to-amber-50 rounded-lg p-1"><%= tag_name %></span>: 
-        <span class="text-blue-500 font-semibold lg:text-lg"><%= experience_point %></span>
-      </li>
-    <% end %>
+    <input type="radio" name="exp-tab" role="tab" class="tab" aria-label="1週間" />
+    <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+      <div class="p-3 border border-gray-400" id="user-xp-weekly">
+        <%= render 'exp_display', tag_exp_hash: @experience_data_week %>
+      </div>
+    </div>
   </div>
 </div>

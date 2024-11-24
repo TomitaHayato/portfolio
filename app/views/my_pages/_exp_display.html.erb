@@ -1,0 +1,31 @@
+<div class="">
+  <h3>
+    Total:
+    <span class="text-xl-custom text-blue-700"><%= tag_exp_hash.values.sum %></span>
+    exp
+  </h3>
+
+  <table class="table table-zebra">  
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Exp</th>
+        <th>%</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% tag_exp_hash.each do |tag_name, exp| %>
+        <tr>
+          <td class="font-semibold text-blue-500"><%= tag_name %></p></td>
+          <td class="font-semibold"><%= exp %></td>
+          <td class="font-semibold">
+            <%= (100 * exp.to_f / tag_exp_hash.values.sum).round(1) %> %
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+</div>
