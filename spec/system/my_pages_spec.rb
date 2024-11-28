@@ -91,12 +91,6 @@ RSpec.describe "MyPages", type: :system, js:true do
         # Tagをtaskに結びつける
         create(:task_tag, task: task1, tag: tag1)
         create(:task_tag, task: task2, tag: tag2)
-
-        # 経験値を取得させる（取得したタイミングを分ける）
-        create(:user_tag_experience, user: user, tag: tag2)                                      # 今
-        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.weeks.ago + 1.minute))# 1週間以内
-        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago + 1.minute))# 1ヶ月以内
-        create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago - 1.minute))# 1ヶ月以降
         
         visit my_pages_path
       end
@@ -141,43 +135,80 @@ RSpec.describe "MyPages", type: :system, js:true do
           end
         end
 
-        describe '経験値表示' do
-          it 'ユーザーの経験値が表示される' do
-            expect(page).to have_content('獲得した経験値')
-            expect(page).to have_selector('#user-xp-total')
-            expect(page).to have_selector('#user-xp-monthly')
-            expect(page).to have_selector('#user-xp-weekly')
+        describe 'ステータス表示' do
+          before do
+            # 経験値を取得させる
+            create(:user_tag_experience, user: user, tag: tag2)                                       # 今       (tag2: 1 exp)
+            create(:user_tag_experience, user: user, tag: tag1, created_at: (1.weeks.ago + 1.minute)) # 1週間以内 (tag1: 1 exp)
+            create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago + 1.minute)) # 1ヶ月以内 (tag1: 1 exp)
+            create(:user_tag_experience, user: user, tag: tag1, created_at: (1.month.ago - 1.minute)) # 1ヶ月以降 (tag1: 1 exp)
+            
+            visit my_pages_path
           end
 
-          it '経験値が各期間ごとに表示される' do
-            # 獲得経験値は以下の通り
-            # tag1: 1週間前、1ヶ月前、1ヶ月以上前にそれぞれ「1」ずつ
-            # tag2: 直近1週間で「1」
-            total_xp_zone   = find('#user-xp-total')
-            monthly_xp_zone = find('#user-xp-monthly')
-            weekly_xp_zone  = find('#user-xp-weekly')
+          it 'ユーザーのステータスが表示される' do
+            expect(page).to have_selector('#user-status')
+            expect(page).to have_selector('#user-level-stat')
+            expect(page).to have_selector('#exp-tablist')
+          end
 
-            # 全期間
-            expect(total_xp_zone).to   have_selector("#tag-total-xp-#{tag1.name} span",   text: tag1.name)
-            expect(total_xp_zone).to   have_selector("#tag-total-xp-#{tag1.name} span",   text: "3")
+          let!(:user_status)     { find('#user-status') }
+          let!(:user_level_stat) { find('#user-level-stat') }
+          let!(:exp_tablist)     { find('#exp-tablist') }
+
+          it 'ユーザーのレベルが表示される' do
+            expect(user_level_stat).to have_content user.level
+            expect(user_level_stat).to have_content "次のレベルまであと #{user.exp_to_next_level} exp"
+            expect(user_level_stat).to have_content user.name
+          end
+
+          it '全期間の経験値が表示される' do
+            exp_tablist.find('input[aria-label="全期間"]').click
+            sleep 0.1
+
+            expect(exp_tablist).to have_selector '#user-xp-total'        
+            user_xp_total = find('#user-xp-total')
             
-            expect(total_xp_zone).to   have_selector("#tag-total-xp-#{tag2.name} span",   text: tag2.name)
-            expect(total_xp_zone).to   have_selector("#tag-total-xp-#{tag2.name} span",   text: "1")
+            expect(user_xp_total).to have_content  "Total: 4 exp"
+            expect(user_xp_total).to have_selector 'td', text: tag1.name
+            expect(user_xp_total).to have_selector 'td', text: tag2.name
+            expect(user_xp_total).to have_selector 'td', text: '3'
+            expect(user_xp_total).to have_selector 'td', text: '1'
+            expect(user_xp_total).to have_selector 'td', text: '75.0 %'
+            expect(user_xp_total).to have_selector 'td', text: '25.0 %'
+          end
 
-            # 1ヶ月間
-            expect(monthly_xp_zone).to have_selector("#tag-monthly-xp-#{tag1.name} span", text: tag1.name)
-            expect(monthly_xp_zone).to have_selector("#tag-monthly-xp-#{tag1.name} span", text: "2")
-          
-            expect(monthly_xp_zone).to have_selector("#tag-monthly-xp-#{tag2.name} span", text: tag2.name)
-            expect(monthly_xp_zone).to have_selector("#tag-monthly-xp-#{tag2.name} span", text: "1")
+          it '1ヶ月の経験値が表示される' do
+            exp_tablist.find('input[aria-label="1ヶ月"]').click
+            sleep 0.1
+
+            expect(exp_tablist).to have_selector '#user-xp-monthly'        
+            user_xp_monthly = find('#user-xp-monthly')
             
-            # 1週間
-            expect(weekly_xp_zone).to  have_selector("#tag-weekly-xp-#{tag1.name} span",  text: tag1.name)
-            expect(weekly_xp_zone).to  have_selector("#tag-weekly-xp-#{tag1.name} span",  text: "1")
+            expect(user_xp_monthly).to have_content  "Total: 3 exp"
+            expect(user_xp_monthly).to have_selector 'td', text: tag1.name
+            expect(user_xp_monthly).to have_selector 'td', text: tag2.name
+            expect(user_xp_monthly).to have_selector 'td', text: '2'
+            expect(user_xp_monthly).to have_selector 'td', text: '1'
+            expect(user_xp_monthly).to have_selector 'td', text: '66.7 %'
+            expect(user_xp_monthly).to have_selector 'td', text: '33.3 %'
+          end
 
-            expect(weekly_xp_zone).to  have_selector("#tag-weekly-xp-#{tag2.name} span",  text: tag2.name)
-            expect(weekly_xp_zone).to  have_selector("#tag-weekly-xp-#{tag2.name} span",  text: "1")
-          end          
+          it '1週間の経験値が表示される' do
+            exp_tablist.find('input[aria-label="1週間"]').click
+            sleep 0.1
+
+            expect(exp_tablist).to have_selector '#user-xp-weekly'        
+            user_xp_weekly = find('#user-xp-weekly')
+            
+            expect(user_xp_weekly).to have_content  "Total: 2 exp"
+            expect(user_xp_weekly).to have_selector 'td', text: tag1.name
+            expect(user_xp_weekly).to have_selector 'td', text: tag2.name
+            expect(user_xp_weekly).to have_selector 'td', text: '1'
+            expect(user_xp_weekly).to have_selector 'td', text: '1'
+            expect(user_xp_weekly).to have_selector 'td', text: '50.0 %'
+            expect(user_xp_weekly).to have_selector 'td', text: '50.0 %'
+          end        
         end
       end
 
@@ -198,6 +229,31 @@ RSpec.describe "MyPages", type: :system, js:true do
           btn = find('a', text: 'スタート')
           btn.click
           expect(page).to have_current_path(play_path(routine))
+        end
+      end
+
+      describe '通知設定を変更できる' do
+        let!(:routine_field) { find('#routine-field') }
+
+        it '通知設定をメールに変更できる' do
+          find('#notification-btn button').click
+          sleep 0.1
+          user.reload
+          expect(user.notification).to eq 'email'
+        end
+
+        it '通知設定をオフにできる' do
+          #通知設定をメールにする
+          user.notification = 'email'
+          user.save!
+          sleep 0.1
+          
+          visit my_pages_path
+          # ボタンを押す
+          find('#notification-btn button').click
+          sleep 0.1
+          user.reload
+          expect(user.notification).to eq 'off'
         end
       end
     end

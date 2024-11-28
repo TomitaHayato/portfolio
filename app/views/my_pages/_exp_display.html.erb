@@ -18,7 +18,7 @@
     <tbody>
       <% tag_exp_hash.each do |tag_name, exp| %>
         <tr>
-          <td class="font-semibold text-blue-500"><%= tag_name %></p></td>
+          <td class="font-semibold text-blue-500"><%= tag_name %></td>
           <td class="font-semibold"><%= exp %></td>
           <td class="font-semibold">
             <%= (100 * exp.to_f / tag_exp_hash.values.sum).round(1) %> %
