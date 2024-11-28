@@ -17,9 +17,6 @@ ja:
         start_time: 開始時間
         completed_count: 達成回数
         copied_count: コピー数
-      routine/notification:
-        line: LINE通知
-        "no": 通知オフ
       task:
         title: タイトル
         estimated_time_in_second: 目安時間

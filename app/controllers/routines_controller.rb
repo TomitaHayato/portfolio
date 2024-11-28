@@ -65,7 +65,7 @@ class RoutinesController < ApplicationController
   end
 
   def routine_params
-    params.require(:routine).permit(:title, :description, :start_time, :notification)
+    params.require(:routine).permit(:title, :description, :start_time)
   end
 
   def set_routine

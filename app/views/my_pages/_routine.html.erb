@@ -20,7 +20,6 @@
     <p class="">
       <span class="font-semibold">開始: </span>
       <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
-      （<%= I18n.t("activerecord.attributes.routine/notification.#{@routine.notification}") %>）
     </p>
 
     <p class="">

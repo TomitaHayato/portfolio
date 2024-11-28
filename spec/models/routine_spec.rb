@@ -102,10 +102,6 @@ RSpec.describe Routine, type: :model do
       it 'copied_countが0' do
         expect(routine.copied_count).to eq 0
       end
-
-      it 'notificationが0' do
-        expect(routine.notification).to eq 'no'
-      end
     end
   end
 

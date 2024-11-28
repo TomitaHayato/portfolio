@@ -7,8 +7,6 @@ class Routine < ApplicationRecord
   validates :title      , length: { maximum: 25  }, presence: true
   validates :description, length: { maximum: 500 }
 
-  enum notification: { no: 0, line: 1 }
-
   scope :posted,   ->           { where(is_posted: true)  }
   scope :unposted, ->           { where(is_posted: false) }
   scope :my_post,  ->(user_id)  { where(user_id:   user_id) }
@@ -22,7 +20,6 @@ class Routine < ApplicationRecord
     self.is_posted       = false
     self.copied_count    = 0
     self.completed_count = 0
-    self.notification    = 'no'
     self
   end
 

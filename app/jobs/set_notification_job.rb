@@ -7,15 +7,16 @@ class SetNotificationJob < ApplicationJob
     time_now = Time.current
     
     User.includes(:routines, :authentications).each do |user|
+      # Line通知
       user_line_authentication = user.authentications.find_by(provider: 'line', user_id: user.id)
       next unless user_line_authentication # UserがLineを介して登録していない場合はスキップ
 
-      uid = user_line_authentication.uid
+      uid            = user_line_authentication.uid
       active_routine = user.routines.find_by(is_active: true)
       next unless active_routine
 
       # 「ユーザーが実践中のルーティンの通知設定がline」の場合 => メソッド呼び出し
-      perform_line_notification_job(active_routine, uid, time_now) if active_routine.notification == "line"
+      perform_line_notification_job(active_routine, uid, time_now) if active_routine.notification == "line" #TODO: DB変更に合わせて修正
     end
   end
 

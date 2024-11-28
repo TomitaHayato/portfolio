@@ -34,7 +34,6 @@
     <p>
       <span class="font-semibold">開始時間：</span>
       <%= @routine.start_time.strftime("%H:%M") if @routine.start_time %>
-      （<%= I18n.t("activerecord.attributes.routine/notification.#{@routine.notification}") %>）
     </p>
     
     <p id="total-estimated-time-for-routine-<%= @routine.id %>">
