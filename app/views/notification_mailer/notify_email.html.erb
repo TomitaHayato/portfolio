@@ -1,0 +1,16 @@
+<h2 class="text-lg">
+  <%= @user.name %>さん、おはようございます！！
+</h2>
+
+<p>今日もモーニングルーティンを実践しましょう！</p>
+
+
+<p><%= link_to 'アプリを開く', @url %></p>
+
+<p>
+  <%= @user.name %>さんのルーティン達成数: <%= @user.complete_routines_count %>
+</p>
+
+<p class="text-sm">リマインダーの停止は、アプリのマイページから可能です</p>
+
+
