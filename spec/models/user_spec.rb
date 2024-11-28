@@ -174,6 +174,11 @@ RSpec.describe User, type: :model do
         user = create(:user)
         expect(user.complete_routines_count).to eq 0
       end
+
+      it 'notificationカラム default:0' do
+        user = create(:user)
+        expect(user.notification_before_type_cast).to eq 0
+      end
     end
 
     describe 'ユニーク' do
@@ -290,23 +295,46 @@ RSpec.describe User, type: :model do
   end
 
   describe 'enum' do
-    it 'admin: 0 が定義されている' do
-      user = create(:user, role: 0)
-      expect(user.role).to eq 'admin'
+    describe 'roleカラム' do
+      it 'admin: 0 が定義されている' do
+        user = create(:user, role: 0)
+        expect(user.role).to eq 'admin'
+      end
+
+      it 'general: 1 が定義されている' do
+        user = create(:user, role: 1)
+        expect(user.role).to eq 'general'
+      end
+
+      it 'guest: 2 が定義されている' do
+        user = create(:user, role: 2)
+        expect(user.role).to eq 'guest'
+      end
+
+      it '定義してない値を設定できない' do
+        expect{ create(:user, role: 3) }.to raise_error ArgumentError
+      end
     end
 
-    it 'general: 1 が定義されている' do
-      user = create(:user, role: 1)
-      expect(user.role).to eq 'general'
-    end
+    describe 'notificationカラム' do
+      it 'off: 0' do
+        user = create(:user)
+        expect(user.notification).to eq 'off'
+      end
 
-    it 'guest: 2 が定義されている' do
-      user = create(:user, role: 2)
-      expect(user.role).to eq 'guest'
-    end
+      it 'line: 1' do
+        user = create(:user, notification: 1)
+        expect(user.notification).to eq 'line'
+      end
 
-    it '定義してない値を設定できない' do
-      expect{ create(:user, role: 3) }.to raise_error ArgumentError
+      it 'email: 2' do
+        user = create(:user, notification: 2)
+        expect(user.notification).to eq 'email'
+      end
+
+      it '定義してない値を設定できない' do
+        expect{ create(:user, notification: 3) }.to raise_error ArgumentError
+      end
     end
   end
 end
