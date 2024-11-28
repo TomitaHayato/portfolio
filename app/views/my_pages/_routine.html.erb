@@ -1,5 +1,9 @@
 <div class="routine-zone-custom p-3 my-3 mx-auto rounded-xl sm:w-11/12 md:w-9/12" id="routine-field">
 
+  <div id="notification-btn">
+    <%= render "notification_btn" %>
+  </div>
+
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
     <div class="flex justify-end gap-3 flex-none sm:order-last sm:ml-auto">
       <%= link_to "編集", edit_routine_path(routine), class: "btn-edit-custom btn-md-custom mb-1" %>

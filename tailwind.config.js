@@ -4,7 +4,7 @@ module.exports = {
   plugins: [
     require("daisyui"),
     iconsPlugin({
-      collections: getIconCollections(["uiw"]),
+      collections: getIconCollections(["uiw", "codicon"]),
     })
   ],
   content: [

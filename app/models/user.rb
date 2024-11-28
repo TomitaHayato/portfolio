@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :reset_password_token,  uniqueness:   true    , allow_nil:  true
 
   enum role:         { admin: 0, general: 1, guest: 2 }
-  enum notification: { off:   0, line   : 1, email: 2  }
+  enum notification: { off:   0, line:    1, email: 2  }
 
   def add_complete_routines_count
     self.complete_routines_count += 1
@@ -60,6 +60,11 @@ class User < ApplicationRecord
   # 次のレベルまでに必要な経験値
   def exp_to_next_level
     cal_exp_to_level_up - self.user_tag_experiences.total_experience_points
+  end
+
+  # lineアカウントと連携しているか
+  def link_line?
+    authentications.where(provider: 'line').size > 0
   end
 
   private

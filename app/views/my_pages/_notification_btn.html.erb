@@ -1,0 +1,8 @@
+<% case current_user.notification %>
+<% when 'off' %>
+  <%= render 'my_pages/bell_off' %>
+<% when 'line' %>
+  <%= render 'my_pages/bell_line' %>
+<% when 'email' %>
+  <%= render 'my_pages/bell_email' %>
+<% end %>

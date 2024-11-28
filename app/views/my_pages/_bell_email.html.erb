@@ -1,0 +1,6 @@
+<%= button_to users_notification_path(current_user), { method: :patch, params: { user: { notification: 'off' } } } do %>
+  <div class="flex justify-start items-center">
+    <i class="i-codicon-bell size-6"></i>
+    <span class="text-xs">(メール)</span>
+  </div>
+<% end %>
