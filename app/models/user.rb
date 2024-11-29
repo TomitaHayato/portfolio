@@ -3,14 +3,15 @@ class User < ApplicationRecord
   
   authenticates_with_sorcery!
 
-  has_many :routines            , dependent: :destroy
-  has_many :user_tag_experiences, dependent: :destroy
-  has_many :tags                , through:   :user_tag_experiences
-  has_many :likes               , dependent: :destroy
-  has_many :liked_routines      , through:   :likes, source: :routine
-  has_many :authentications     , dependent: :destroy
-  has_many :user_rewards        , dependent: :destroy
-  has_many :rewards             , through:   :user_rewards
+  has_many   :routines            , dependent: :destroy
+  has_many   :user_tag_experiences, dependent: :destroy
+  has_many   :tags                , through:   :user_tag_experiences
+  has_many   :likes               , dependent: :destroy
+  has_many   :liked_routines      , through:   :likes, source: :routine
+  has_many   :authentications     , dependent: :destroy
+  has_many   :user_rewards        , dependent: :destroy
+  has_many   :rewards             , through:   :user_rewards
+  belongs_to :feature_reward      , class_name: 'Reward', foreign_key: 'feature_reward_id'
   
   accepts_nested_attributes_for :authentications
 
