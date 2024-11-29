@@ -38,7 +38,8 @@ Rails.application.routes.draw do
   end
 
   namespace :users, path: 'user' do
-    resources :notifications, only: %i[update], param: :user_id
+    resources :notifications  , only: %i[update], param: :user_id
+    resources :feature_rewards, only: %i[update], param: :user_id
   end
 
   post 'oauth/callback' => 'oauths#callback'

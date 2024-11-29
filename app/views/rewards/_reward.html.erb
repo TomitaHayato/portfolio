@@ -1,6 +1,6 @@
 <div id="reward-zone-<%= reward.id %>">
   <% if reward.users.include?(current_user) %>
-    <%= render 'rewards/reward_card', reward: reward %>
+    <%= render 'rewards/reward_card', reward: reward, feature_reward: feature_reward %>
   <% else %>
     <%= render 'rewards/description', reward: reward %>
   <% end %>

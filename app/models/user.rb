@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many   :authentications     , dependent: :destroy
   has_many   :user_rewards        , dependent: :destroy
   has_many   :rewards             , through:   :user_rewards
-  belongs_to :feature_reward      , class_name: 'Reward', foreign_key: 'feature_reward_id'
+  belongs_to :feature_reward      , class_name: 'Reward', foreign_key: 'feature_reward_id', optional: true
   
   accepts_nested_attributes_for :authentications
 
