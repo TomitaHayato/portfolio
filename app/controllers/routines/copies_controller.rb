@@ -1,9 +1,9 @@
 class Routines::CopiesController < ApplicationController
   before_action :guest_block, only: %i[create]
-  
+
   def create
     # コピーされた数を+1する
-    routine_origin = Routine.includes(:tasks).find(params[:routine_id])
+    routine_origin = Routine.includes(tasks: :tags).find(params[:routine_id])
     copy_counting(routine_origin)
     # ルーティン内容をコピーする
     routine_dup = copy_routine(routine_origin)
@@ -28,7 +28,7 @@ class Routines::CopiesController < ApplicationController
   end
 
   def copy_tasks(routine_origin, routine_dup)
-    routine_origin.tasks.includes(:tags).each do |task_origin|
+    routine_origin.tasks.each do |task_origin|
       task_dup = task_origin.dup
       task_dup.update!(routine_id: routine_dup.id)
       task_dup.insert_at(task_origin.position)

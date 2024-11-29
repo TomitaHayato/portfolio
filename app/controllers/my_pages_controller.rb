@@ -1,10 +1,11 @@
 class MyPagesController < ApplicationController
   def index
-    @routine               = current_user.routines.includes(:tasks).find_by(is_active: true)
+    @routine               = current_user.routines.includes(tasks: :tags).find_by(is_active: true)
     # 獲得経験値
-    @experience_data_all   = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag)) #{ タグ: exp }形式のハッシュ
-    @experience_data_month = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag).recent_one_month)
-    @experience_data_week  = make_tag_point_hash(current_user.user_tag_experiences.includes(:tag).recent_one_week)
+    user_tag_experiences    = current_user.user_tag_experiences.includes(:tag)
+    @experience_data_all   = make_tag_point_hash(user_tag_experiences) #{ タグ: exp }形式のハッシュ
+    @experience_data_month = make_tag_point_hash(user_tag_experiences.recent_one_month)
+    @experience_data_week  = make_tag_point_hash(user_tag_experiences.recent_one_week)
     #   p "all:#{@experience_data_all} month#{@experience_data_month} week#{@experience_data_week}"
     @exp_to_next_level     = current_user.exp_to_next_level
 
