@@ -4,9 +4,9 @@ class Routines::PostsController < ApplicationController
   before_action :guest_block, only: %i[update]
 
   def index
-    @user_words = params[:user_words]
-    @routines = Routine.search(@user_words).custom_filter(@filter_target, current_user.id).includes({ tasks: :tags }, :user).posted.sort_posted(@column, @direction).page(params[:page])
-    @liked_routine_ids = current_user.liked_routine_ids
+    @user_words         = params[:user_words]
+    @routines           = Routine.search(@user_words).custom_filter(@filter_target, current_user.id).includes({ tasks: :tags, user: :feature_reward }, :user).posted.sort_posted(@column, @direction).page(params[:page])
+    @liked_routine_ids  = current_user.liked_routine_ids
     @auto_complete_list = (Routine.posted.pluck(:title) + Routine.posted.pluck(:description).reject(&:blank?)).uniq
   end
 

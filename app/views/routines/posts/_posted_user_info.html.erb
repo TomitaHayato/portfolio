@@ -15,23 +15,25 @@
 <dialog id="user-icon-<%=routine.id%>" class="modal">
   <div class="modal-box">
     <!-- 称号 -->
-    <div class="flex justify-center">
-      <div class="stats shadow">
-        <div class="stat place-items-center pb-0">
-          <div class="card">
-            <figure class="rounded-sm">
-              <%= image_tag routine.user.avatar.url, class: "w-60" %>
-            </figure>
-            <div class="card-body items-center text-center px-3 py-1">
-              <h2 class="card-title">Shoes!</h2>
+    <% if routine.user.feature_reward %>
+      <div class="flex justify-center">
+        <div class="stats shadow">
+          <div class="stat place-items-center pb-0">
+            <div class="card">
+              <figure class="rounded-sm">
+                <%= image_tag routine.user.feature_reward.image.url, class: "w-60" %>
+              </figure>
+              <div class="card-body items-center text-center px-3 py-1">
+                <h2 class="card-title"><%= routine.user.feature_reward.name %></h2>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <!-- Lvなどのデータ -->
-    <div class="flex justify-center">
+    <div class="flex justify-center mt-2">
       <div class="stats shadow">
         <div class="stat place-items-center">
 
