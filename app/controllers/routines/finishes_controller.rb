@@ -14,6 +14,7 @@ class Routines::FinishesController < ApplicationController
 
   private
 
+  # routines_playsコントローラを介さずにアクセスできない
   def block_if_no_session
     redirect_to my_pages_path, alert: 'ページに遷移できませんでした' if session[:playing_task_num].nil?
   end

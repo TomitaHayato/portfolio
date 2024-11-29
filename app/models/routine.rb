@@ -14,6 +14,13 @@ class Routine < ApplicationRecord
   scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
   scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: user_id }) }
 
+  def copy(user)
+    routine_dup = dup.reset_status
+    routine_dup.user = user
+    routine_dup.save!
+    routine_dup
+  end
+
   # ルーティンをコピーする際、ルーティン情報をリセットする処理
   def reset_status
     self.is_active       = false
@@ -64,6 +71,16 @@ class Routine < ApplicationRecord
     when 'unposted'
       unposted
     end
+  end
+
+  def copy_count
+    self.copied_count += 1
+    save!
+  end
+
+  def complete_count
+    self.completed_count += 1
+    save!
   end
   
   # 投稿の並べ替え処理

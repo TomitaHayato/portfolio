@@ -4,9 +4,9 @@ class Routines::CopiesController < ApplicationController
   def create
     # コピーされた数を+1する
     routine_origin = Routine.includes(tasks: :tags).find(params[:routine_id])
-    copy_counting(routine_origin)
+    routine_origin.copy_count
     # ルーティン内容をコピーする
-    routine_dup = copy_routine(routine_origin)
+    routine_dup = routine_origin.copy(user)
     # タスクをコピーする
     copy_tasks(routine_origin, routine_dup)
 
@@ -15,17 +15,6 @@ class Routines::CopiesController < ApplicationController
   end
 
   private
-
-  def copy_counting(routine_origin)
-    routine_origin.copied_count += 1
-    routine_origin.save!
-  end
-
-  def copy_routine(routine_origin)
-    routine_dup = routine_origin.dup.reset_status
-    routine_dup.update!(user_id: current_user.id)
-    routine_dup
-  end
 
   def copy_tasks(routine_origin, routine_dup)
     routine_origin.tasks.each do |task_origin|

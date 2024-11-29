@@ -24,13 +24,13 @@ class Routines::PostsController < ApplicationController
   private
 
   def set_order_query
-    @column = params[:column]
-    @direction = params[:direction]
+    @column     = params[:column]
+    @direction  = params[:direction]
     @order_list = [['投稿日', nil], ['コピー数', 'copied_count']]
   end
 
   def set_filter_target
-    @filter_target = params[:filter_target]
+    @filter_target  = params[:filter_target]
     @filter_options = [['すべて', nil], ['自分の投稿', 'my_post'], ['お気に入り', 'liked'], ['公式の投稿', 'official'], ['ユーザーの投稿', 'general']]
   end
 end
