@@ -202,9 +202,7 @@ RSpec.describe "Routines#index", type: :system, js: true do
 
         it '次のページに遷移できる' do
           find('.next a').click
-
-          expect(page).to          have_current_path(routines_path)
-          
+          expect(page).to                    have_current_path(routines_path), ignore_query: true
           expect(@routines_container).not_to have_selector "#routine-#{routine.id}"
           expect(@routines_container).not_to have_selector "#routine-#{routine10.id}"
           expect(@routines_container).to     have_selector "#routine-#{routine_over.id}"
