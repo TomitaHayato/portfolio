@@ -2,8 +2,10 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="mb-3 text-center">
-    <div id="img-zone">
-      <%= image_tag user.avatar.url, class: 'rounded-circle mb-3 mx-auto size-[150px]', id: "preview" %>
+    <div class="avatar flex justify-center mb-3">
+      <div class="w-48 rounded-full" id="img-zone">
+        <%= image_tag user.avatar.url, id: "preview" %>
+      </div>
     </div>
 
     <%= f.label :avatar, "アイコン", class: "mb-2 text-plane-custom font-semibold" %>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "PasswordResets", type: :system do
+RSpec.describe "PasswordResets", type: :system, js: true do
   let!(:user) { create(:user, :for_system_spec) }
 
   it 'ユーザー新規登録ページからパスワードリセット申請画面に遷移できる' do

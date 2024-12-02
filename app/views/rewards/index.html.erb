@@ -12,6 +12,6 @@
 
 <h1 class="page-title-custom">称号一覧</h1>
 
-<div class="px-4 grid grid-cols-2 lg:grid-cols-3 gap-3">
-  <%= render @rewards %>
+<div class="px-4 grid grid-cols-2 lg:grid-cols-3 gap-3" id="reward-index">
+  <%= render @rewards, feature_reward: @feature_reward %>
 </div>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "ShowUsers", type: :system do
+RSpec.describe "ShowUsers", type: :system, js: true do
   let!(:user) { create(:user, :for_system_spec) }
   let!(:user_other) { create(:user, :for_system_spec) }
 

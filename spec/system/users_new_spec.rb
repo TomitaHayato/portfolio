@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "NewUserPath", type: :system do
+RSpec.describe "NewUserPath", type: :system, js: true do
   before do
     visit new_user_path
   end

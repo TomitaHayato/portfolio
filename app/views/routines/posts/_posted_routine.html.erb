@@ -56,7 +56,7 @@
     </summary>
     
     <div class="collapse-content">
-      <%= render partial: "routines/posts/task", collection: routine.tasks.includes(:tags), locals: { routine: routine } %>
+      <%= render partial: "routines/posts/task", collection: routine.tasks, locals: { routine: routine } %>
     </div>
   </details>
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "GuestLogins", type: :system do
+RSpec.describe "GuestLogins", type: :system, js: true do
 
   # ゲストログインを行う
   # @userにゲストユーザーをセット

@@ -1,8 +1,9 @@
 class Reward < ApplicationRecord
   mount_uploader :image, RewardImageUploader
 
-  has_many :user_rewards, dependent: :destroy
-  has_many :users       , through:   :user_rewards
+  has_many :user_rewards   , dependent: :destroy
+  has_many :users          , through:   :user_rewards
+  has_many :featuring_users, class_name: 'User', foreign_key: 'feature_reward_id'
 
   validates :name     , presence: true
   validates :condition, presence: true

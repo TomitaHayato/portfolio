@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "TopPages", type: :system do
+RSpec.describe "TopPages", type: :system, js: true do
 
   describe 'トップページ（root_path）に関するテスト' do
     context 'ユーザーログイン前' do

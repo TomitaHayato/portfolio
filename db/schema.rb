@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_10_070039) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_28_203942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,7 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_10_070039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "posted_at"
-    t.integer "notification", default: 0
     t.index ["user_id"], name: "index_routines_on_user_id"
   end
 
@@ -118,7 +117,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_10_070039) do
     t.datetime "reset_password_email_sent_at"
     t.integer "access_count_to_reset_password_page", default: 0
     t.string "avatar"
+    t.integer "level", default: 1, null: false
+    t.integer "notification", default: 0
+    t.bigint "feature_reward_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["feature_reward_id"], name: "index_users_on_feature_reward_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -132,4 +135,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_10_070039) do
   add_foreign_key "user_rewards", "users"
   add_foreign_key "user_tag_experiences", "tags"
   add_foreign_key "user_tag_experiences", "users"
+  add_foreign_key "users", "rewards", column: "feature_reward_id"
 end

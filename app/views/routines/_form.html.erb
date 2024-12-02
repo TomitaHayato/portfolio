@@ -19,30 +19,5 @@
     <%= f.time_field :start_time, class: "time-form-md-custom text-sm lg:text-lg", min: "00:00", max: "23:59" %>
   </div>
 
-  <div class="my-3">
-    <p class="font-semibold text-plane-custom mb-1">通知設定</p>
-
-    <!-- ラジオボタンフィールド -->
-    <div class="w-6/12 sm:w-5/12 lg:w-4/12 mx-auto flex flex-col gap-2">
-      <div class="form-control">
-        <%= f.label :notification_no, class: "flex gap-2 lg:gap-5" do %>
-          <%= f.radio_button :notification, 'no', class: "radio-btn-md-custom" %>
-          <span class="radio-text-md-custom">通知オフ</span>
-        <% end %>
-      </div>
-
-      <div class="form-control">
-        <%= f.label :notification_line, class: "flex gap-2 lg:gap-5" do %>
-          <%= f.radio_button :notification, 'line', class: "radio-btn-md-custom" %>
-          <span class="radio-text-md-custom">
-            LINE
-            <span class="text-sm-custom">(LINEログインした方)</span>
-          </span>
-        <% end %>
-      </div>
-    </div>
-
-  </div>
-
   <%= f.submit nil, class:"my-5 btn-xl-custom btn-create-custom w-4/12" %>
 <% end %>

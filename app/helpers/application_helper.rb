@@ -26,6 +26,12 @@ module ApplicationHelper
   def task_arrange_class
     request.path == routines_path ? '' : 'hover:bg-amber-100'
   end
+
+  def feature_icon_class(reward, feature_reward)
+    return 'i-uiw-star-off text-gray-500' if feature_reward.nil?
+
+    reward.id == feature_reward.id ? 'i-uiw-star-on text-red-500' : 'i-uiw-star-off text-gray-500'
+  end
   # --------------------------------------------------------
 
   def task_form_id(task)

@@ -7,8 +7,6 @@ class Routine < ApplicationRecord
   validates :title      , length: { maximum: 25  }, presence: true
   validates :description, length: { maximum: 500 }
 
-  enum notification: { no: 0, line: 1 }
-
   scope :posted,   ->           { where(is_posted: true)  }
   scope :unposted, ->           { where(is_posted: false) }
   scope :my_post,  ->(user_id)  { where(user_id:   user_id) }
@@ -16,13 +14,19 @@ class Routine < ApplicationRecord
   scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
   scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: user_id }) }
 
+  def copy(user)
+    routine_dup = dup.reset_status
+    routine_dup.user = user
+    routine_dup.save!
+    routine_dup
+  end
+
   # ルーティンをコピーする際、ルーティン情報をリセットする処理
   def reset_status
     self.is_active       = false
     self.is_posted       = false
     self.copied_count    = 0
     self.completed_count = 0
-    self.notification    = 'no'
     self
   end
 
@@ -67,6 +71,16 @@ class Routine < ApplicationRecord
     when 'unposted'
       unposted
     end
+  end
+
+  def copy_count
+    self.copied_count += 1
+    save!
+  end
+
+  def complete_count
+    self.completed_count += 1
+    save!
   end
   
   # 投稿の並べ替え処理

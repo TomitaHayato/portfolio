@@ -152,6 +152,11 @@ RSpec.describe User, type: :model do
         user = build(:user, role: nil)
         expect{ user.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
       end
+
+      it 'level' do
+        user = build(:user, level: nil)
+        expect{ user.save(validate: false) }.to raise_error(ActiveRecord::NotNullViolation)
+      end
     end
 
     describe 'デフォルト値' do
@@ -160,9 +165,19 @@ RSpec.describe User, type: :model do
         expect(user.role_before_type_cast).to eq 1
       end
 
+      it 'levelカラム default: 1' do
+        user = create(:user)
+        expect(user.level).to eq 1
+      end
+
       it 'completed_routine_countカラム default: 0' do
         user = create(:user)
         expect(user.complete_routines_count).to eq 0
+      end
+
+      it 'notificationカラム default:0' do
+        user = create(:user)
+        expect(user.notification_before_type_cast).to eq 0
       end
     end
 
@@ -181,6 +196,15 @@ RSpec.describe User, type: :model do
     let!(:reward2) { create(:reward, :wakamenoseichou) }
     let!(:reward3) { create(:reward, :chiisanatasseisha) }
     let!(:reward4) { create(:reward, :asanomorinoannnaininn) }
+
+    describe 'add_complete_routines_count' do
+      it 'complete_routines_countが1加算される' do
+        count_prev = user.complete_routines_count
+        user.add_complete_routines_count
+        sleep 0.1
+        expect(user.complete_routines_count).to eq count_prev + 1
+      end
+    end
 
     describe 'reward_get_check' do
       it '初期状態では称号を未獲得' do
@@ -219,26 +243,98 @@ RSpec.describe User, type: :model do
         expect(is_reward_get).to      eq true
       end
     end
+
+    describe 'level_up_check' do
+      let!(:tag) { create(:tag) }
+
+      it '経験値が足りない場合、レベルは変わらない' do
+        user_level_prev = user.level
+        is_level_up     = user.level_up_check
+        sleep 0.25
+        expect(is_level_up).to eq false
+        expect(user.level).to  eq user_level_prev
+      end
+
+      it '経験値によってレベルアップする' do
+        user_tag_experience = create(:user_tag_experience, user: user, tag: tag, experience_point: 15)
+        sleep 0.1
+        user_level_prev = user.level
+        is_level_up     = user.level_up_check
+        sleep 0.1
+        expect(is_level_up).to    eq true
+        expect(user.level).not_to eq user_level_prev
+        expect(user.level).to     eq 3
+      end
+    end
+
+    describe 'exp_to_next_level' do
+      let!(:tag)                 { create(:tag) }
+      let!(:user_tag_experience) { create(:user_tag_experience, user: user, tag: tag, experience_point: 30) }
+
+      before do
+        user.level_up_check
+      end
+
+      it '次のレベルまでに必要な経験値が出力される' do
+        # レベルが適切かどうか
+        expect(user.level).to eq 4
+        # 出力のテスト
+        expect_val = 20
+        actual_val = user.exp_to_next_level
+        expect(actual_val).to eq expect_val
+        # 経験値を10追加
+        create(:user_tag_experience, user: user, tag: tag, experience_point: 10)
+        sleep 0.1
+        # 出力のテスト2
+        expect_val = 10
+        actual_val = user.exp_to_next_level
+        expect(actual_val).to eq expect_val
+      end
+
+    end
   end
 
   describe 'enum' do
-    it 'admin: 0 が定義されている' do
-      user = create(:user, role: 0)
-      expect(user.role).to eq 'admin'
+    describe 'roleカラム' do
+      it 'admin: 0 が定義されている' do
+        user = create(:user, role: 0)
+        expect(user.role).to eq 'admin'
+      end
+
+      it 'general: 1 が定義されている' do
+        user = create(:user, role: 1)
+        expect(user.role).to eq 'general'
+      end
+
+      it 'guest: 2 が定義されている' do
+        user = create(:user, role: 2)
+        expect(user.role).to eq 'guest'
+      end
+
+      it '定義してない値を設定できない' do
+        expect{ create(:user, role: 3) }.to raise_error ArgumentError
+      end
     end
 
-    it 'general: 1 が定義されている' do
-      user = create(:user, role: 1)
-      expect(user.role).to eq 'general'
-    end
+    describe 'notificationカラム' do
+      it 'off: 0' do
+        user = create(:user)
+        expect(user.notification).to eq 'off'
+      end
 
-    it 'guest: 2 が定義されている' do
-      user = create(:user, role: 2)
-      expect(user.role).to eq 'guest'
-    end
+      it 'line: 1' do
+        user = create(:user, notification: 1)
+        expect(user.notification).to eq 'line'
+      end
 
-    it '定義してない値を設定できない' do
-      expect{ create(:user, role: 3) }.to raise_error ArgumentError
+      it 'email: 2' do
+        user = create(:user, notification: 2)
+        expect(user.notification).to eq 'email'
+      end
+
+      it '定義してない値を設定できない' do
+        expect{ create(:user, notification: 3) }.to raise_error ArgumentError
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "NewRoutinesPaths", type: :system do
+RSpec.describe "NewRoutinesPaths", type: :system, js: true do
   context 'ログイン前' do
     it 'アクセスできない' do
       login_failed_check(new_routine_path)
@@ -31,8 +31,6 @@ RSpec.describe "NewRoutinesPaths", type: :system do
       expect(page).to have_selector '#routine_title'
       expect(page).to have_selector '#routine_description'
       expect(page).to have_selector '#routine_start_time'
-      expect(page).to have_selector '#routine_notification_no[checked="checked"]'
-      expect(page).to have_selector '#routine_notification_line'
     end
 
     describe 'パンくず' do
@@ -61,8 +59,6 @@ RSpec.describe "NewRoutinesPaths", type: :system do
           title_form.set('タイトル1')
           description_form.set('説明文1')
           start_time_form.set('07:00')
-          choose('routine_notification_line')
-
           submit_btn.click
           sleep 0.1
           # ページの確認
@@ -75,7 +71,6 @@ RSpec.describe "NewRoutinesPaths", type: :system do
           expect(new_routine.title).to                        eq 'タイトル1'
           expect(new_routine.description).to                  eq '説明文1'
           expect(new_routine.start_time.strftime('%H:%M')).to eq '07:00'
-          expect(new_routine.notification).to                 eq 'line'
         end
       end
 

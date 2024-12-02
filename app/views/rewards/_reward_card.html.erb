@@ -1,4 +1,5 @@
 <div class="card bg-base-100 shadow-md" id="reward-card-<%= reward.id %>">
+  <!-- 称号画像 -->
   <figure class="px-1 pt-1">
     <% if reward.image.url %>
       <button onclick="document.getElementById('reward-image-<%=reward.id%>').showModal()">
@@ -6,19 +7,27 @@
       </button>
     <% end %> 
   </figure>
-
+  
+  <!-- 称号タイトル -->
   <div class="card-body items-center text-center p-2">
-    <h2 class="text-reward-custom text-lg-custom"><%= reward.name %></h2>
+    <div class="tooltip tooltip-primary" data-tip="clickでプロフィールに設定">
+      <%= button_to users_feature_reward_path(current_user), { method: :patch, params: { user: { feature_reward_id: reward.id } } } do %>
+        <h2 class="text-reward-custom text-lg-custom flex items-center">
+          <i class="<%= feature_icon_class(reward, feature_reward) %>"></i>
+          <%= reward.name %>
+        </h2>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- 画像クリックで表示されるモーダル -->
+<dialog id="reward-image-<%=reward.id%>" class="modal w-10/12 mx-auto">
+  <div class="modal-box flex justify-center">
+    <%= image_tag reward.image.url, class: "w-10/12" %>
   </div>
 
-  <!-- 画像クリックで表示されるモーダル -->
-  <dialog id="reward-image-<%=reward.id%>" class="modal w-10/12 mx-auto">
-    <div class="modal-box flex justify-center">
-      <%= image_tag reward.image.url, class: "w-10/12" %>
-    </div>
-
-    <form method="dialog" class="modal-backdrop">
-      <button>close</button>
-    </form>
-  </dialog>
-</div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

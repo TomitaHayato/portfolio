@@ -54,7 +54,7 @@
     <details class="tasks-collapse-custom collapse collapse-plus">
       <summary class="tasks-collapse-title-custom text-plane-custom" id="tasks-display-btn-<%= routine.id %>">タスク一覧</summary>
       <ul class="collapse-content">
-        <%= render partial: "routines/task", collection: routine.tasks.includes(:tags), locals: { routine: routine, tags: tags } %>
+        <%= render partial: "routines/task", collection: routine.tasks, locals: { routine: routine, tags: tags } %>
       </ul>
     </details>
 

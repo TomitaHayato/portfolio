@@ -13,9 +13,48 @@
 </div>
 
 <dialog id="user-icon-<%=routine.id%>" class="modal">
-  <div class="modal-box flex justify-center">
-    <%= image_tag routine.user.avatar.url, class: "size-8/12"%>
+  <div class="modal-box">
+    <!-- 称号 -->
+    <% if routine.user.feature_reward %>
+      <div class="flex justify-center">
+        <div class="stats shadow">
+          <div class="stat place-items-center pb-0">
+            <div class="card">
+              <figure class="rounded-sm">
+                <%= image_tag routine.user.feature_reward.image.url, class: "w-60" %>
+              </figure>
+              <div class="card-body items-center text-center px-3 py-1">
+                <h2 class="card-title text-reward-custom"><%= routine.user.feature_reward.name %></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Lvなどのデータ -->
+    <div class="flex justify-center mt-2">
+      <div class="stats shadow">
+        <div class="stat place-items-center">
+
+          <!-- アバター表示 -->
+          <div class="stat-figure text-center">
+            <div class="avatar">
+              <div class="w-16 rounded-full lg:w-24">
+                <%= image_tag routine.user.avatar.url %>
+              </div>
+            </div>
+          </div>
+
+          <!-- レベル表示 -->
+          <div class="stat-title font-bold text-xl-custom"><%= routine.user.name %></div>
+          <div class="stat-value text-emerald-600 text-xl-custom">Lv. <%= routine.user.level %></div>
+          <div class="stat-desc"></div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <form method="dialog" class="modal-backdrop">
     <button>close</button>
   </form>
