@@ -6,7 +6,7 @@ class Routines::CopiesController < ApplicationController
     routine_origin = Routine.includes(tasks: :tags).find(params[:routine_id])
     routine_origin.copy_count
     # ルーティン内容をコピーする
-    routine_dup = routine_origin.copy(user)
+    routine_dup = routine_origin.copy(current_user)
     # タスクをコピーする
     copy_tasks(routine_origin, routine_dup)
 
