@@ -1,5 +1,5 @@
 class RoutinesController < ApplicationController
-  before_action :set_routine      , only: %i[show edit update destroy]
+  before_action :set_routine      , only: %i[show update destroy]
   before_action :set_order_query  , only: %i[index]
   before_action :set_filter_target, only: %i[index]
   
@@ -19,9 +19,6 @@ class RoutinesController < ApplicationController
 
   def new
     @routine = Routine.new
-  end
-
-  def edit
   end
 
   def create
