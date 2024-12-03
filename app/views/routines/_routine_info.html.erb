@@ -1,12 +1,12 @@
 <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
   <div class="flex justify-end gap-3 mb-3 sm:order-last sm:ml-auto md:gap-5">
-    <div class="tooltip" data-tip="ルーティンを編集">
+    <div class="tooltip tooltip-success" data-tip="ルーティンを編集">
       <%= button_tag id: "edit-icon-btn" do %>
         <i class="i-codicon-edit text-gray-700 size-6 hover:text-cyan-500"></i>
       <% end %>
     </div>
     
-    <div class="tooltip" data-tip="ルーティンを削除">
+    <div class="tooltip tooltip-success" data-tip="ルーティンを削除">
       <%= link_to routine_path(@routine, from_path: request.path), data: { turbo_frame: '_top', turbo_method: :delete, turbo_confirm: "#{@routine.title}を削除してもよろしいですか？" }, id: "routine-delete-btn-#{@routine.id}" do %>
         <i class="i-codicon-trash text-gray-700 size-6 hover:text-red-500"></i>
       <% end %>
