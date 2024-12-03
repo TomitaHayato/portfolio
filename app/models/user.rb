@@ -30,6 +30,16 @@ class User < ApplicationRecord
     save!
   end
 
+  # 登録時に簡単なルーティンを作成する
+  def make_first_routine
+    routine_data = { 
+                     title:       "#{name}さんのルーティン",
+                     description: '「詳細」からタスクの追加や編集をしましょう！',
+                     is_active:   true
+                    }
+    new_routine = routines.create!(routine_data)
+  end
+
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
   def reward_get_check
     rewards_change_flag = false
