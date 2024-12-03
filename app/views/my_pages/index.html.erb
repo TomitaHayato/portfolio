@@ -25,11 +25,11 @@
         <!-- アバター表示 -->
         <div class="stat-figure text-center">
           <div class="avatar">
-            <div class="w-16 rounded-full lg:w-24">
-              <%= image_tag current_user.avatar.url %>
+            <div class="w-16 rounded lg:w-24">
+              <%= image_tag current_user.feature_reward.image.url %>
             </div>
           </div>
-          <div class="text-sm-custom max-w-20 lg:max-w-32"><%= current_user.name %></div>
+          <div class="text-reward-custom text-sm-custom font-semibold max-w-20 lg:max-w-32"><%= current_user.feature_reward.name %></div>
         </div>
 
         <!-- レベル表示 -->
