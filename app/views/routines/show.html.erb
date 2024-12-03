@@ -15,51 +15,32 @@
   </ul>
 </div>
 
-<div class="p-3 mx-auto bg-green-50 rounded-lg w-11/12 md:w-9/12">
-  
-  <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
-    <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3 md:gap-5">
-      <%= link_to "ルーティン編集", edit_routine_path(@routine), class: "btn-md-custom btn-edit-custom", id: "routine-edit-btn-#{@routine.id}" %>
-      <%= link_to "ルーティン削除", routine_path(@routine, from_path: request.path), data: { turbo_method: :delete, turbo_confirm: "#{@routine.title}を削除してもよろしいですか？" }, class: "btn-md-custom btn-delete-custom", id: "routine-delete-btn-#{@routine.id}" %>
+<div class="p-3 mx-auto bg-green-50 rounded-lg w-11/12 md:w-9/12" id="routine-show-page">
+  <!-- ルーティン情報/フォーム -->
+  <div>
+    <div id="routine-edit-form" class="hidden">
+      <%= render 'routines/edit_form', routine: @routine %>
     </div>
 
-    <h1 class="my-2 text-title-custom"><%= @routine.title %></h1>
-  </div>
-
-  <div class="mb-5 mx-auto py-2 px-3 text-plane-custom sm:mx-5">
-    <p><%= @routine.description %></p>
-  </div>
-
-  <div class="mb-5 text-md-custom sm:mx-5">
-    <p>
-      <span class="font-semibold">開始時間：</span>
-      <%= @routine.start_time.strftime("%H:%M") if @routine.start_time %>
-    </p>
-    
-    <p id="total-estimated-time-for-routine-<%= @routine.id %>">
-      <%= render "routines/routine_total_estimated_time", routine: @routine %>
-    </p>
-
-    <div>
-      <span class="font-semibold">達成回数：</span>
-      <%= @routine.completed_count %>
+    <div id="routine-info" class="">
+      <%= render 'routines/routine_info', routine: @routine %>
     </div>
   </div>
   
   <div class="text-center p-5 bg-inherit">
-
-    <!-- タスク オートコンプリート -->
+    <!-- オートコンプリート用の隠し要素 -->
     <%= select_tag 'auto_complete',
       options_for_select(@all_task_names),
       class: "hidden",
       id: "all-task-names" 
     %>
     
-    <!-- タスク一覧を表示 -->
+    <!-- タスク一覧 -->
     <ul class="list-group" id="task-index">
       <%= render partial: "routines/task", collection: @tasks, locals: { routine: @routine, tags: @tags } %>
     </ul>
-    <!-- タスク追加ボタンを表示 -->
+
+    <!-- タスク追加ボタン -->
     <div id="add_task_btn">
       <%= render partial: 'routines/add_task_btn', locals: { routine: @routine, task: @task, tags: @tags } %>
     </div>

@@ -151,6 +151,11 @@
           lg:min-h-10;
 }
 
+.textarea-sm-custom {
+  @apply  textarea textarea-bordered
+          min-h-16;
+}
+
 .textarea-custom {
   @apply  textarea textarea-bordered
           min-h-16 sm:min-h-20;
@@ -160,6 +165,11 @@
   @apply  w-8/12 lg:w-7/12
           py-1 px-2 lg:px-4
           text-plane-custom;
+}
+
+.time-form-sm-custom {
+  @apply  input input-sm input-bordered text-center
+          w-5/12 sm:w-3/12;
 }
 
 .time-form-md-custom {

@@ -1,0 +1,37 @@
+<div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
+  <div class="flex justify-end gap-3 mb-3 sm:order-last sm:ml-auto md:gap-5">
+    <div class="tooltip" data-tip="ルーティンを編集">
+      <%= button_tag id: "edit-icon-btn" do %>
+        <i class="i-codicon-edit text-gray-700 size-6 hover:text-cyan-500"></i>
+      <% end %>
+    </div>
+    
+    <div class="tooltip" data-tip="ルーティンを削除">
+      <%= link_to routine_path(@routine, from_path: request.path), data: { turbo_frame: '_top', turbo_method: :delete, turbo_confirm: "#{@routine.title}を削除してもよろしいですか？" }, id: "routine-delete-btn-#{@routine.id}" do %>
+        <i class="i-codicon-trash text-gray-700 size-6 hover:text-red-500"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <h1 class="my-2 text-title-custom"><%= routine.title %></h1>
+</div>
+
+<div class="mb-5 mx-auto py-2 px-3 text-plane-custom sm:mx-5">
+  <p><%= routine.description %></p>
+</div>
+
+<div class="mb-5 text-md-custom sm:mx-5">
+  <p>
+    <span class="font-semibold">開始時間：</span>
+    <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
+  </p>
+  
+  <p id="total-estimated-time-for-routine-<%= @routine.id %>">
+    <%= render "routines/routine_total_estimated_time", routine: routine %>
+  </p>
+
+  <div>
+    <span class="font-semibold">達成回数：</span>
+    <%= routine.completed_count %>
+  </div>
+</div>

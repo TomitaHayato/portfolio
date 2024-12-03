@@ -21,7 +21,8 @@ class RoutinesController < ApplicationController
     @routine = Routine.new
   end
 
-  def edit; end
+  def edit
+  end
 
   def create
     @routine           = current_user.routines.new(routine_params)
