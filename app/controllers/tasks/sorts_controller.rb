@@ -3,6 +3,7 @@ class Tasks::SortsController < ApplicationController
     @task    = Task.find(params[:task_id])
     @routine = @task.routine
     @tasks   = @routine.tasks.includes(:tags)
+    @tags    = Tag.includes(:tasks)
 
     @task.insert_at(params[:new_index].to_i + 1)
   end
