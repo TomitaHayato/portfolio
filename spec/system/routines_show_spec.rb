@@ -39,7 +39,7 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
       it '正しく表示される' do
         expect(breadcrumb_container).to have_selector "a[href='#{my_pages_path}']"
         expect(breadcrumb_container).to have_selector "a[href='#{routines_path}']"
-        expect(breadcrumb_container).to have_content  '詳細'
+        expect(breadcrumb_container).to have_content  '編集'
       end
 
       it 'my_pages_pathに遷移できる' do
@@ -60,7 +60,7 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
       expect(page).to have_content routine.start_time.strftime('%H:%M')
       expect(page).to have_content routine.completed_count
       # リンク
-      expect(page).to have_selector "#routine-edit-btn-#{routine.id}"
+      expect(page).to have_selector '#edit-icon-btn'
       expect(page).to have_selector "#routine-delete-btn-#{routine.id}"
     end
 
@@ -81,12 +81,6 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
       expect(task_field).to have_selector "#move-lower-btn-#{task.id}"
     end
 
-    it 'ルーティン編集画面に遷移できる' do
-      click_on "routine-edit-btn-#{routine.id}"
-      expect(page).to have_current_path(edit_routine_path(routine))
-      expect(find('#routine_title').value).to eq routine.title
-    end
-
     it 'ルーティンを削除できる' do
       # 削除前のDB
       routine_size_prev = user.routines.size
@@ -100,6 +94,62 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
       #DB
       expect(user.routines.size).to            eq routine_size_prev - 1
       expect(Task.where(id: task.id).count).to eq 0
+    end
+
+    describe 'ルーティンの編集機能' do
+      before do
+        find('#edit-icon-btn').click
+      end
+
+      let!(:routine_edit_form) { find('#routine-edit-form') }
+      let!(:title_prev)        { routine.title }
+      let!(:description_prev)  { routine.description }
+
+      it '編集フォームが表示される' do
+        expect(routine_edit_form).to have_selector '#routine_title'
+        expect(routine_edit_form).to have_selector '#routine_description'
+        expect(routine_edit_form).to have_selector '#routine_start_time'
+        expect(routine_edit_form).to have_selector '#routine-update-btn'
+        expect(routine_edit_form).to have_selector '#edit-form-cancel-btn'
+      end
+
+      it 'ルーティン情報が非表示になる' do
+        expect(page).not_to have_selector '#routine-info'
+      end
+
+      context '不正な値' do
+        before do
+          routine_edit_form.find('#routine_title').set('')
+          routine_edit_form.find('#routine-update-btn').click
+        end
+
+        it 'エラーが表示される' do
+          #ページ
+          expect(page).to have_current_path routine_path(routine)
+          expect(page).to have_content      '入力エラー'
+          expect(page).to have_content      'タイトルを入力してください'
+          #DB
+          expect(routine.title).to eq title_prev
+        end
+      end
+
+      context '正しい値を入力' do
+        before do
+          routine_edit_form.find('#routine_title').set       'Updated Title'
+          routine_edit_form.find('#routine_description').set 'Updated Description'
+          routine_edit_form.find('#routine-update-btn').click
+        end
+
+        it 'DBのデータが更新される' do
+          #ページ
+          expect(page).to have_current_path routine_path(routine)
+          expect(page).to have_selector     '#routine-info'
+          #DB
+          routine.reload
+          expect(routine.title).to       eq 'Updated Title'
+          expect(routine.description).to eq 'Updated Description'
+        end
+      end
     end
 
     describe 'Taskの作成処理' do

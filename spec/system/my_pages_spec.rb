@@ -46,7 +46,7 @@ RSpec.describe "MyPages", type: :system, js:true do
       end
     end
 
-    context '実践中のルーティンにtaskがない場合' do
+    context '実践中のルーティンはあるが、taskがない場合' do
       let!(:routine)   { create(:routine, user: user, is_active: true) }
 
       before do
@@ -56,15 +56,15 @@ RSpec.describe "MyPages", type: :system, js:true do
       it 'ルーティン情報が表示される' do
         routine_field = find('#routine-field')
         # リンク
-        expect(routine_field).to have_selector "a[href='#{edit_routine_path(routine)}']"
-        expect(routine_field).to have_selector "a[href='#{routine_path(routine)     }']"
+        expect(routine_field).to have_selector "a[href='#{routine_path(routine)}']"
         # routineの情報
-        expect(routine_field).to have_content routine.title
-        expect(routine_field).to have_content routine.start_time.strftime('%H:%M')
-        expect(routine_field).to have_content routine.completed_count
-        expect(routine_field).to have_content '00h'
-        expect(routine_field).to have_content '00m'
-        expect(routine_field).to have_content '00s'
+        expect(routine_field).to have_content  routine.title
+        expect(routine_field).to have_content  routine.start_time.strftime('%H:%M')
+        expect(routine_field).to have_content  routine.completed_count
+        expect(routine_field).to have_content  '00h'
+        expect(routine_field).to have_content  '00m'
+        expect(routine_field).to have_content  '00s'
+        expect(routine_field).to have_selector '#notification-btn'
       end
 
       it 'タスクを追加しましょう！リンクが表示' do
@@ -79,7 +79,7 @@ RSpec.describe "MyPages", type: :system, js:true do
       end
     end
 
-    context '実践中のルーティンがある場合' do
+    context '実践中のルーティンがあり、taskもある場合' do
       let!(:routine)   { create(:routine, user: user, is_active: true) }
       let!(:task1)     { create(:task, routine: routine) }
       let!(:task2)     { create(:task, routine: routine) }
@@ -105,8 +105,8 @@ RSpec.describe "MyPages", type: :system, js:true do
             expect(routine_field).to have_content(routine.start_time.strftime("%H:%M"))
             expect(routine_field).to have_content(routine.completed_count)
             # リンク
-            expect(routine_field).to have_selector "a[href='#{edit_routine_path(routine)}']"
-            expect(routine_field).to have_selector "a[href='#{routine_path(routine)     }']"
+            expect(routine_field).to have_selector "a[href='#{routine_path(routine)}']"
+            expect(routine_field).to have_selector '#notification-btn'
             expect(routine_field).to have_selector 'a'      , text: 'スタート'
             expect(routine_field).to have_selector 'summary', text: 'タスク一覧'
           end
@@ -136,6 +136,8 @@ RSpec.describe "MyPages", type: :system, js:true do
         end
 
         describe 'ステータス表示' do
+          let(:reward) { create(:reward, :hajimarinoippo) }
+
           before do
             # 経験値を取得させる
             create(:user_tag_experience, user: user, tag: tag2)                                       # 今       (tag2: 1 exp)
@@ -156,10 +158,21 @@ RSpec.describe "MyPages", type: :system, js:true do
           let!(:user_level_stat) { find('#user-level-stat') }
           let!(:exp_tablist)     { find('#exp-tablist') }
 
-          it 'ユーザーのレベルが表示される' do
+          it 'statにユーザーのレベルが表示される' do
             expect(user_level_stat).to have_content user.level
             expect(user_level_stat).to have_content "次のレベルまであと #{user.exp_to_next_level} exp"
-            expect(user_level_stat).to have_content user.name
+          end
+
+          it '称号がある場合、statに表示される' do
+            # 称号獲得 >> 称号をプロフに設定
+            user.rewards << reward
+            sleep 0.1
+            reward.featuring_users << user
+            sleep 0.1
+            visit my_pages_path
+
+            user_level_stat = find('#user-level-stat')
+            expect(user_level_stat).to have_content reward.name
           end
 
           it '全期間の経験値が表示される' do
@@ -213,14 +226,8 @@ RSpec.describe "MyPages", type: :system, js:true do
       end
 
       describe 'メインコンテンツからのページ遷移' do
-        it 'ルーティン編集ページに遷移' do
-          btn = find('a', text: '編集')
-          btn.click
-          expect(page).to have_current_path(edit_routine_path(routine))
-        end
-
         it 'ルーティン詳細ページに遷移' do
-          btn = find('a', text: '詳細')
+          btn = find("a[href='#{routine_path(routine)}']", text: '編集')
           btn.click
           expect(page).to have_current_path(routine_path(routine))
         end

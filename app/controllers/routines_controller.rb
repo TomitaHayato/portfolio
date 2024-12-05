@@ -36,6 +36,7 @@ class RoutinesController < ApplicationController
     if @routine.update(routine_params)
       redirect_to routine_path(@routine), notice: 'ルーティンを更新しました'
     else
+      #TODO turbo化
       render :edit, status: :unprocessable_entity
     end
   end
