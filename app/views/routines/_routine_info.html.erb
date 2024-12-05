@@ -26,9 +26,9 @@
     <%= routine.start_time.strftime("%H:%M") if routine.start_time %>
   </p>
   
-  <p id="total-estimated-time-for-routine-<%= @routine.id %>">
+  <div id="total-estimated-time-for-routine-<%= @routine.id %>">
     <%= render "routines/routine_total_estimated_time", routine: routine %>
-  </p>
+  </div>
 
   <div>
     <span class="font-semibold">達成回数：</span>

@@ -5,9 +5,9 @@ class TasksController < ApplicationController
   before_action :set_task_and_routine, only: %i[update destroy]
 
   def create
-    @routine = current_user.routines.find(params[:routine_id])
-    @task = @routine.tasks.new(task_params)
-    @tags = Tag.includes(:tasks)
+    @routine = current_user.routines.includes(:tasks).find(params[:routine_id])
+    @task    = @routine.tasks.new(task_params)
+    @tags    = Tag.includes(:tasks)
     if @task.save
       set_tags_on_task(@task, task_params[:tag_ids])
       flash.now[:notice] = 'タスクを追加しました'
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   private
 
   def set_task_and_routine
-    @task = Task.includes(:tags).find(params[:id])
+    @task    = Task.includes(:tags).find(params[:id])
     @routine = @task.routine
   end
 
