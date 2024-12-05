@@ -17,9 +17,11 @@
 
       <div class="flex items-center gap-3">
         <!-- ユーザーアイコン -->
-        <%= link_to user_path(current_user), class: "hover:opacity-50 flex-none", id: "user-icon-btn" do %>
-          <%= image_tag "user_icon.jpg", class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9" %>
-        <% end %>
+          <div class="tooltip tooltip-bottom flex-none" data-tip="プロフィール">
+            <%= link_to user_path(current_user), class: "hover:scale-105 block", id: "user-icon-btn" do %>
+              <%= image_tag "user_icon.jpg", class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9" %>
+            <% end %>
+          </div>          
 
         <div class="drawer drawer-end mx-3 lg:mx-5">
           <input id="my-drawer" type="checkbox" class="drawer-toggle" />

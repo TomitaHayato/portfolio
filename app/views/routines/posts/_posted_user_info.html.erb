@@ -1,7 +1,7 @@
 <div class="flex items-center">
   <!-- アイコン画像： クリックで拡大表示 -->
   <button onclick="document.getElementById('user-icon-<%=routine.id%>').showModal()">
-    <div class="avatar">
+    <div class="avatar tooltip tooltip-success" data-tip="プロフィール">
       <div class="rounded-full size-[20px] sm:size-[25px] lg:size-[35px]">
         <%= image_tag routine.user.avatar.url %>
       </div>
