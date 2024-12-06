@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
-  before_action :guest_block, only: %i[edit update]
+  skip_before_action :require_login, only: %i[new  create]
+  before_action      :guest_block  , only: %i[edit update]
 
   def show; end
 
