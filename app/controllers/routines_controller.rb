@@ -34,10 +34,19 @@ class RoutinesController < ApplicationController
 
   def update
     if @routine.update(routine_params)
-      redirect_to routine_path(@routine), notice: 'ルーティンを更新しました'
+      respond_to do |format|
+        format.html { redirect_to routine_path(@routine) }
+        format.turbo_stream 
+      end
     else
-      #TODO turbo化
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html         { render :show, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.update('routine-edit-form',
+                                                                        partial: 'routines/edit_form',
+                                                                        locals:  { routine: @routine }
+                                                                      )
+        }
+      end
     end
   end
 

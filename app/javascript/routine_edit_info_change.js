@@ -36,9 +36,10 @@ document.addEventListener('turbo:load', function(event) {
   changeInfoEdit();
 });
 
-document.addEventListener('turbo:frame-load', function(event) {
+//turbo_streamによる更新後にchangeInfoEditを実行。
+document.addEventListener('turbo:before-stream-render', function(event) {
   const routineShowPageId = document.querySelector('#routine-show-page');
   if(!routineShowPageId) return;
 
-  changeInfoEdit();
+  setTimeout(changeInfoEdit, 1000);
 });
