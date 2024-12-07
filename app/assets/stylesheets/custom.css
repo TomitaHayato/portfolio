@@ -69,7 +69,7 @@
 }
 
 .text-plane-custom {
-  @apply text-xs md:text-sm text-gray-800;
+  @apply text-xs md:text-sm;
 }
 
 .text-md-custom {
