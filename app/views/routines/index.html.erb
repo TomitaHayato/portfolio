@@ -14,7 +14,7 @@
 
   <%= render 'routines/search_form', user_words: @user_words %>
   
-  <%= turbo_frame_tag "routine-index-field" do %>
+  <%= turbo_frame_tag "routine-index-field", autoscroll: true do %>
     <% if @routines.empty? %>
       <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">
         <%= @user_words.nil? ? "ルーティンがありません\nルーティンを作成しましょう！！" : "一致するルーティンはありません" %>
