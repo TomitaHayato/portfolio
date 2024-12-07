@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def task_arrange_class
-    request.path == routines_path ? '' : 'hover:bg-amber-100'
+    request.path == routines_path ? '' : 'hover:bg-amber-100 tooltip tooltip-success'
   end
 
   def feature_icon_class(reward, feature_reward)
