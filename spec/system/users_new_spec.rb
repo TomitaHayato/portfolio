@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "NewUserPath", type: :system, js: true do
   before do
+    create(:tag, name: "日課") #ユーザー登録成功時の処理で使用
+
     visit new_user_path
   end
 

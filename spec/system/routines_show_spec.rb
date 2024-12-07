@@ -322,7 +322,7 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
         click_on "task-delete-btn-#{task.id}"
         # ページ
         expect(page).to     have_current_path routine_path(routine)
-        expect(page).to     have_content      "タスクを削除しました。(タスク名：#{task.title})"
+        expect(page).to     have_content      "#{task.title}を削除しました。"
         expect(page).not_to have_selector     "#task_#{task.id}"
         # DB
         expect(routine.tasks.size).to eq   task_size_prev - 1

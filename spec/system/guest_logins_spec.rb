@@ -5,6 +5,8 @@ RSpec.describe "GuestLogins", type: :system, js: true do
   # ゲストログインを行う
   # @userにゲストユーザーをセット
   before do
+    create(:tag, name: "日課") #ゲストログイン時の処理で使用
+
     visit root_path
     click_on 'お試し'
     sleep 0.25
