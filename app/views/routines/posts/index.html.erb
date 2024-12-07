@@ -12,10 +12,12 @@
 
 <%= render 'routines/search_form', user_words: @user_words %>
 
-<% if @routines.empty? %>
-  <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">投稿はありません</p>
-<% else %>
-  <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine, locals:{ liked_routine_ids: @liked_routine_ids } %>
-<% end %>
+<%= turbo_frame_tag 'routine-index-field' do %>
+  <% if @routines.empty? %>
+    <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">投稿はありません</p>
+  <% else %>
+    <%= render partial: "routines/posts/posted_routine", collection: @routines, as: :routine, locals:{ liked_routine_ids: @liked_routine_ids } %>
+  <% end %>
 
-<div class="mx-auto"><%= paginate @routines %></div>
+  <div class="mx-auto"><%= paginate @routines %></div>
+<% end %>
