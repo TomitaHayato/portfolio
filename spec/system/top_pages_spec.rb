@@ -28,6 +28,9 @@ RSpec.describe "TopPages", type: :system, js: true do
         end
 
         it 'トップページのヘッダーにお試しログインボタンが表示される' do
+          create(:tag, name: "日課") #ゲストログイン時の処理で使用
+          sleep 0.1
+          
           expect(page).to have_link('お試し')
           click_link 'お試し'
           expect(page).to have_current_path(my_pages_path)
