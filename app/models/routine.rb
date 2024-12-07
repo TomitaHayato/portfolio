@@ -14,6 +14,14 @@ class Routine < ApplicationRecord
   scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
   scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: user_id }) }
 
+  def make_first_task
+    task = tasks.create!(title: '水を飲む')
+    tag  = Tag.find_by(name: "日課")
+    task.tags << tag
+    
+    task
+  end
+
   def copy(user)
     routine_dup = dup.reset_status
     routine_dup.user = user

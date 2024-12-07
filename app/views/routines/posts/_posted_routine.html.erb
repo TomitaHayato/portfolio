@@ -12,7 +12,9 @@
         <%= render "routines/posts/routine_like_btn", routine: routine, liked_routine_ids: liked_routine_ids %>
       </span>
 
-      <%= link_to "コピー", routine_copies_path(routine), data: { turbo_method: :post }, class: "btn-sm-custom btn-show-custom", id: "copy-btn-#{routine.id}" %>
+      <div class="tooltip tooltip-info" data-tip="Myルーティンにコピー">
+        <%= link_to "コピー", routine_copies_path(routine), data: { turbo_method: :post }, class: "btn-sm-custom btn-show-custom", id: "copy-btn-#{routine.id}" %>
+      </div>
     </div>
   </div>
 

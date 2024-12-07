@@ -91,7 +91,6 @@ RSpec.describe "Routines#index", type: :system, js: true do
         expect(routine_container).to have_content routine.start_time.strftime('%H:%M')
         expect(routine_container).to have_content routine.completed_count
         # routineのリンク
-        expect(routine_container).to have_selector "#edit-routine-btn-#{routine.id}"
         expect(routine_container).to have_selector "#show-routine-btn-#{routine.id}"
         expect(routine_container).to have_selector "#delete-routine-btn-#{routine.id}"
         expect(routine_container).to have_selector "#post-btn-#{routine.id}"
@@ -109,12 +108,6 @@ RSpec.describe "Routines#index", type: :system, js: true do
       end
 
       describe '各リンクの遷移テスト' do
-        it 'ルーティン編集画面に遷移できる' do
-          find("#routine-#{routine.id}").find("#edit-routine-btn-#{routine.id}").click
-
-          expect(page).to have_current_path(edit_routine_path(routine))
-        end
-
         it 'ルーティン詳細画面に遷移できる' do
           find("#routine-#{routine.id}").find("#show-routine-btn-#{routine.id}").click
 

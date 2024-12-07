@@ -10,17 +10,19 @@
   </ul>
 </div>
 
-<div id="routine-index-page" class="mt-5">
+<div id="routine-index-page" class="">
 
   <%= render 'routines/search_form', user_words: @user_words %>
   
-  <% if @routines.empty? %>
-    <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">
-      <%= @user_words.nil? ? "ルーティンがありません\nルーティンを作成しましょう！！" : "一致するルーティンはありません" %>
-    </p>
-  <% else %>
-    <%= render @routines, tags: @tags %>
+  <%= turbo_frame_tag "routine-index-field", autoscroll: true do %>
+    <% if @routines.empty? %>
+      <p class="my-10 text-center font-semibold sm:text-lg md:text-xl lg:text-2xl">
+        <%= @user_words.nil? ? "ルーティンがありません\nルーティンを作成しましょう！！" : "一致するルーティンはありません" %>
+      </p>
+    <% else %>
+      <%= render @routines, tags: @tags %>
+    <% end %>
+    
+    <%= paginate @routines %>
   <% end %>
-  
-  <%= paginate @routines %>
 </div>

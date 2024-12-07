@@ -1,18 +1,18 @@
 <%= form_with model:user, class:"text-center" do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="mx-auto my-8">
+  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="ユーザー名（２５文字以内）">
     <%= f.text_field :name, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "ユーザー名" %>
   </div>
 
-  <div class="mx-auto my-8">
+  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="メールアドレス">
     <%= f.email_field :email, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "メールアドレス" %>
   </div>
 
-  <div class="mx-auto my-8">
-    <%= f.password_field :password, class:"block input input-bordered text-lg mx-auto w-8/12 md:text-xl lg:w-1/2", placeholder: "パスワード（4文字以上）" %>
+  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="パスワード（8文字以上）">
+    <%= f.password_field :password, class:"block input input-bordered text-lg mx-auto w-8/12 md:text-xl lg:w-1/2", placeholder: "パスワード（8文字以上）" %>
   </div>
 
-  <div class="mx-auto my-8">
+  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="パスワード確認">
     <%= f.password_field :password_confirmation, class:"block input input-bordered text-lg mx-auto w-8/12 md:text-xl lg:w-1/2", placeholder: "パスワード確認" %>
   </div>
 

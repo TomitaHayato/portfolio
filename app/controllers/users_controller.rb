@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
-  before_action :guest_block, only: %i[edit update]
+  skip_before_action :require_login, only: %i[new  create]
+  before_action      :guest_block  , only: %i[edit update]
 
   def show; end
 
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_new_params)
     if @user.save
       auto_login(@user)
+      @user.make_first_routine.make_first_task
       flash[:notice] = 'ユーザーを新しく追加しました'
       redirect_to my_pages_path
     else

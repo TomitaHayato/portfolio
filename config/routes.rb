@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   post   'guest_login',      to: 'guest_logins#create'
   post   'linebot/callback', to: 'linebots#callback'
 
-  resources :routines do
+  resources :routines, only: %i[index new show create update destroy] do
     resources :tasks, only: %i[create update destroy], shallow: true
     resources :copies, only: %i[create], module: :routines
     resources :plays, only: %i[create update show], param: :routine_id, module: :routines, shallow: true

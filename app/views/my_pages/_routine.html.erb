@@ -1,13 +1,14 @@
 <div class="routine-zone-custom p-3 my-3 mx-auto rounded-xl sm:w-11/12 md:w-9/12" id="routine-field">
 
-  <div id="notification-btn">
+  <div id="notification-btn" class="tooltip tooltip-success" data-tip="通知方法">
     <%= render "notification_btn" %>
   </div>
 
   <div class="items-center mb-5 sm:flex sm:justify-between sm:flex-wrap-reverse">
     <div class="flex justify-end gap-3 flex-none sm:order-last sm:ml-auto">
-      <%= link_to "編集", edit_routine_path(routine), class: "btn-edit-custom btn-md-custom mb-1" %>
-      <%= link_to "詳細", routine_path(routine),      class: "btn-show-custom btn-md-custom mb-1" %>
+      <div class="tooltip tooltip-success" data-tip="ルーティン編集画面へ">
+        <%= link_to '編集', routine_path(routine), class: "btn-md-custom btn-edit-custom mb-1 mr-1" %>
+      </div>
     </div>
 
     <h1 class="text-title-custom"><%= routine.title %></h1>

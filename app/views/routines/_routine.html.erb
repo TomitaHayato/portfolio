@@ -3,8 +3,7 @@
 
     <div class="items-center mb-3 sm:flex sm:justify-between sm:flex-wrap-reverse">
       <div class="flex justify-end gap-1 mb-3 sm:order-last sm:ml-auto sm:gap-3">
-        <%= link_to "編集", edit_routine_path(routine), class: "btn-sm-custom btn-edit-custom",   id: "edit-routine-btn-#{routine.id}" %>
-        <%= link_to "詳細", routine_path(routine),      class: "btn-sm-custom btn-show-custom",   id: "show-routine-btn-#{routine.id}" %>
+        <%= link_to "編集", routine_path(routine),      class: "btn-sm-custom btn-show-custom",   id: "show-routine-btn-#{routine.id}", data: {turbo_frame: '_top'} %>
         <%= link_to "削除", routine_path(routine),      class: "btn-sm-custom btn-delete-custom", id: "delete-routine-btn-#{routine.id}",
                                                         data: { turbo_method: :delete, turbo_confirm: "#{routine.title}を削除してもよろしいですか？" }
         %>

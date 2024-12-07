@@ -1,6 +1,8 @@
 <div class="my-3" id="search-container">
   <%= form_with url: request.path, method: :get do |f| %>
     <div class="w-3/4 mx-auto">
+
+      <!-- 検索フォーム -->
       <div class="flex justify-center">
         <label class="input input-sm input-bordered flex items-center gap-2 text-sm px-1.5 grow sm:px-2 sm:input-md lg:px-3 lg:text-base">
           <%= f.text_field :user_words, placeholder: '検索ワード', value: user_words, class:"form-input grow" %>
@@ -8,7 +10,9 @@
             <i class="i-uiw-circle-close-o w-5 h-5 block text-gray-500 hover:p-1 active:w-[20px] active:h-[20px]"></i>
           </button>
         </label>
-        <%= f.submit '検索', id: "search-btn", class: "btn btn-sm bg-gradient-to-tl from-blue-500 to-blue-100  text-sm block sm:btn-md hover:opacity-80 hover:border hover:border-gray-600" %>
+        
+        <!-- 検索ボタン(turbo_frameでroutine一覧を指定) --> 
+        <%= f.submit '検索', id: "search-btn", class: "btn btn-sm bg-gradient-to-tl from-blue-500 to-blue-100  text-sm block sm:btn-md hover:opacity-80 hover:border hover:border-gray-600", data: { turbo_frame: "routine-index-field" } %>
       </div>
 
       <%= select_tag 'auto_complete', options_for_select(@auto_complete_list), class: "hidden", id: "selectable-options" %>
@@ -16,14 +20,17 @@
       </div>
 
       <div class="flex justify-start gap-2 my-2">
+
+        <!-- 並べ替え -->
         <div class="text-plane-custom">
           <p>並び替え</p>
           <div class="flex flex-wrap gap-1">
             <%= f.select :column, @order_list, { selected: @column }, class: "sort-select-box sort-box-custom" %>
             <%= f.select :direction, [['降順', nil], ['昇順', 'asc']], { selected: @direction }, class: "sort-select-box sort-box-custom" %>
           </div>
-
         </div>
+
+        <!-- 絞り込む -->
         <div class="text-plane-custom">
           <p>絞り込み</p>
           <%= f.select :filter_target, @filter_options, { selected: @filter_target }, class: "sort-select-box sort-box-custom" %>

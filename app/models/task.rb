@@ -24,6 +24,22 @@ class Task < ApplicationRecord
     result
   end
 
+  # 元々セットされていたが、フォームで選択されなかったタグを削除
+  def delete_tags_from_task(tag_ids_param)
+    tag_ids_param = [] if tag_ids_param.nil?
+    tag_ids_param = tag_ids_param.map{ |tag_id| tag_id.to_i }
+
+    tags.each{ |tag| tags.destroy(tag) unless tag_ids.include?(tag) }
+  end
+
+  # フォームで新しく指定されたタグをタスクに追加する
+  def set_tags_on_task(tag_ids_param)
+    return if tag_ids_param.nil?
+    tag_ids_param = tag_ids_param.map{ |tag_id| tag_id.to_i }
+
+    tag_ids_param.each{ |tag_id| tags << Tag.find(tag_id) unless tag_ids.include?(tag_id) }
+  end
+
   private
 
   def second_to_time_string(time_in_second)

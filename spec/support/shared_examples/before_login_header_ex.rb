@@ -20,6 +20,9 @@ RSpec.shared_examples 'ログイン前Header/Footerテスト' do
     end
 
     it 'お試しログインできる' do
+      create(:tag, name: "日課") #ゲストログイン時の処理で使用
+      sleep 0.1
+      
       check_bl_header_guest_login_path
     end
   end

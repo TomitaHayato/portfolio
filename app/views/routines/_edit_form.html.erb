@@ -1,0 +1,37 @@
+<div class="border border-green-500 rounded-lg shadow-lg p-5">
+  <%= form_with model: routine do |f| %>
+    <div class="flex justify-end gap-3">
+      <div class="tooltip tooltip-success" data-tip="更新">
+        <%= button_tag class: "block hover:scale-110 active:scale-95", id: "routine-update-btn" do %>
+          <i class="i-codicon-check text-gray-700 size-6 hover:text-cyan-500"></i>
+        <% end %>
+      </div>
+
+      <div class="tooltip tooltip-success" data-tip="キャンセル">
+        <%= button_tag type: "button", id: "edit-form-cancel-btn", class: "block hover:scale-110 active:scale-95" do %>
+          <i class="i-codicon-chrome-close text-gray-700 size-6 hover:text-red-500"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <!-- タイトルフォーム -->
+    <div class="mb-3">
+      <%= f.label      :title, 'タイトル：' %>
+      <%= f.text_field :title, placeholder: 'タイトル(必須)', class: "input-form-custom w-full text-plane-custom" %>
+    </div>
+
+    <!-- descriptionフォーム -->
+    <div class="mb-3">
+      <%= f.label :description, '説明文：' %>
+      <%= f.text_area :description, placeholder: "説明文（任意）", class: "textarea-sm-custom w-full text-title-custom" %>
+    </div>
+
+    <!-- start_time -->
+    <div class="mb-3">
+      <%= f.label      :start_time, '開始時間：' %>
+      <%= f.time_field :start_time, class: "time-form-sm-custom text-md-custom", min: "00:00", max: "23:59" %>
+    </div>
+  <% end %>
+</div>

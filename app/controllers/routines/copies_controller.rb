@@ -10,8 +10,7 @@ class Routines::CopiesController < ApplicationController
     # タスクをコピーする
     copy_tasks(routine_origin, routine_dup)
 
-    flash[:notice] = "コピーしました。（#{routine_origin.title}）"
-    redirect_to routines_posts_path
+    flash.now[:notice] = "コピーしました。（#{routine_origin.title}）"
   end
 
   private
