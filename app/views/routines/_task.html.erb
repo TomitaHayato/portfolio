@@ -18,9 +18,8 @@
           
           <dialog id="edit_task_form_<%= task.id %>" class="modal">
             <div class="modal-box">
-              <h1 class="text-center text-xl mb-10">タスク編集</h1>
               <%= render partial: "routines/task_form", locals: { task: task, routine: routine, tags: tags } %>
-              <div class="modal-action">
+              <div class="modal-action mt-0">
                 <form method="dialog">
                   <button class="btn">キャンセル</button>
                 </form>

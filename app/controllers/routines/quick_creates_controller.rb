@@ -1,10 +1,6 @@
 class Routines::QuickCreatesController < ApplicationController
   def create
-    if current_user.quick_routine_template.nil?
-      current_user.create_quick_routine_template!
-    end
-
-    routine_template = current_user.quick_routine_template
+    routine_template = current_user.quick_routine_template || current_user.create_quick_routine_template!
     new_routine      = current_user.routines.quick_build(routine_template)
 
     if new_routine.save

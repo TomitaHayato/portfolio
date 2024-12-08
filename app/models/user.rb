@@ -35,7 +35,7 @@ class User < ApplicationRecord
   def make_first_routine
     routine_data = { 
                      title:       "#{name}さんのルーティン",
-                     description: '「詳細」からタスクの追加や編集をしましょう！',
+                     description: '「編集」からタスクの追加・編集をしましょう！',
                      is_active:   true
                     }
     new_routine = routines.create!(routine_data)

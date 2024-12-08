@@ -1,9 +1,8 @@
 <button class="btn bg-gradient-to-tl from-emerald-200 to-emerald-50 w-full text-center" onclick="task_form.showModal()"><span class="text-blue-500">＋</span>タスクを追加</button>
 <dialog id="task_form" class="modal">
   <div class="modal-box">
-    <h1 class="text-center text-xl mb-10">タスク新規作成</h1>
     <%= render "routines/task_form", task: task, routine: routine, tags: tags %>
-    <div class="modal-action">
+    <div class="modal-action mt-0">
       <form method="dialog">
         <button class="btn bg-gradient-to-tl from-gray-300 to-gray-100 btn-md">閉じる</button>
       </form>
