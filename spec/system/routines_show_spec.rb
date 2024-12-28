@@ -163,8 +163,8 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
       let!(:hour_form)       { find('#task_hour') }
       let!(:minute_form)     { find('#task_minute') }
       let!(:second_form)     { find('#task_second') }
-      let!(:tag1_check_box) { find("input[id='task_tag_ids_#{tag1.id}']") }
-      let!(:tag2_check_box) { find("input[id='task_tag_ids_#{tag2.id}']") }
+      let!(:tag1_check_box) { find("input[id='task_tag_checkbox_#{tag1.id}_new']") }
+      let!(:tag2_check_box) { find("input[id='task_tag_checkbox_#{tag2.id}_new']") }
 
       it 'フォームが表示されている' do
         #各フォーム
@@ -178,8 +178,8 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
         expect(second_form.value).to eq '00'
         # タグのセレクトボックス
         Tag.all.each do |tag|
-          tag_cont = find("label[for='task_tag_ids_#{tag.id}']")
-          expect(tag_cont).to have_selector "input[id='task_tag_ids_#{tag.id}']"
+          tag_cont = find("label[for='task_tag_checkbox_#{tag.id}_new']")
+          expect(tag_cont).to have_selector "input[id='task_tag_checkbox_#{tag.id}_new']"
           expect(tag_cont).to have_content  tag.name
         end
       end
@@ -239,7 +239,7 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
           #フォーム
           minute_form = find('#task_minute') #ページ更新後の要素を再取得
           expect(minute_form.value).to eq                 '00'
-          expect(task_form_new).to     have_checked_field "task_tag_ids_#{tag1.id}"
+          expect(task_form_new).to     have_checked_field "task_tag_checkbox_#{tag1.id}_new"
           #DB
           expect(task_size_prev).to eq routine.tasks.size
           expect(task_tags_prev).to eq TaskTag.all.size
@@ -257,8 +257,8 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
       let!(:hour_form)      { find('#task_hour')                          }
       let!(:minute_form)    { find('#task_minute')                        }
       let!(:second_form)    { find('#task_second')                        }
-      let!(:tag1_check_box) { find("input[id='task_tag_ids_#{tag1.id}']") }
-      let!(:tag2_check_box) { find("input[id='task_tag_ids_#{tag2.id}']") }
+      let!(:tag1_check_box) { find("input[id='task_tag_checkbox_#{tag1.id}_#{task.id}']") }
+      let!(:tag2_check_box) { find("input[id='task_tag_checkbox_#{tag2.id}_#{task.id}']") }
 
       context '正しい値を入力' do
         # 前提: task.tagsは tag1のみ
@@ -304,7 +304,7 @@ RSpec.describe "ShowRoutines", type: :system, js: true do
           title_form = find("#task_title")
           expect(task_form).to        have_content       'タイトルを入力してください'
           expect(title_form.value).to eq                 ''
-          expect(task_form).to        have_checked_field "task_tag_ids_#{tag2.id}"
+          expect(task_form).to        have_checked_field "task_tag_checkbox_#{tag2.id}_#{task.id}"
           # DB
           task.reload
           expect(task.title).not_to eq      ''
