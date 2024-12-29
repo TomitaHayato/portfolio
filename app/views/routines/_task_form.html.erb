@@ -2,17 +2,20 @@
   <%= form_with model: task, url: task.new_record? ? routine_tasks_path(routine) : task_path(task), class: "text-center" do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <div class="mb-5 md:mb-10" id="<%= task_form_id(task) %>">
+    <div class="my-5 md:mb-10" id="<%= task_form_id(task) %>">
       <%= f.label :title,
                   "タイトル:",
                   class: "mb-2 font-medium text-lg sm:text-xl md:font-semibold"
       %>
       <br>
 
-      <%= f.text_field :title,
-          class: "min-h-10 w-10/12 p-2 mx-auto border border-gray-300 rounded-lg
-                  md:text-xl hover:border-gray-500"
-      %>
+      <div class="tooltip tooltip-info block" data-tip="タイトル（25 文字以内）">
+        <%= f.text_field :title,
+            class: "min-h-10 w-10/12 p-2 mx-auto border border-gray-300 rounded-lg
+                    md:text-xl hover:border-gray-500"
+        %>
+      </div>
+      
 
       <!-- オートコンプリート -->
       <div class="w-10/12 mx-auto max-h-40 overflow-y-auto" id="task-title-options-zone-<%= task_form_id(task) %>">
@@ -31,17 +34,17 @@
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-4">
+    <div class="flex flex-wrap gap-4 mb-5">
       <% tags.each do |tag| %>
-        <div class="flex-none">
-          <%= f.label "tag_ids_#{tag.id}" do %>
-            <%= f.check_box :tag_ids, { multiple: true, include_hidden: false }, tag.id, tag.is_on_task?(task) %>
-            <%= tag.name %>
+        <div class="flex-none form-control">
+          <%= f.label "tag_checkbox_#{tag.id}_#{task_form_id(task)}", class: "label cursor-pointer" do %>
+            <%= f.check_box :tag_ids, { multiple: true, include_hidden: false, class: "checkbox checkbox-accent", id: "task_tag_checkbox_#{tag.id}_#{task_form_id(task)}" }, tag.id, tag.is_on_task?(task) %>
+            <span class="label-text"><%= tag.name %></span>
           <% end %>
         </div>
       <% end %>
     </div>
 
-    <%= f.submit nil, class:"btn bg-gradient-to-tl from-green-300 to-green-100 mb-5 btn-md min-w-28 mx-auto sm:btn-lg sm:text-lg lg:min-w-64 lg-text-xl" %>
+    <%= f.submit nil, class:"btn-xl-custom btn-create-custom px-10 mb-5 min-w-28 mx-auto" %>
   <% end %>
 </div>

@@ -17,21 +17,21 @@
     <%= render 'shared/error_messages', object: f.object %>
 
     <!-- タイトルフォーム -->
-    <div class="mb-3">
+    <div class="mb-3 text-plane-custom">
       <%= f.label      :title, 'タイトル：' %>
-      <%= f.text_field :title, placeholder: 'タイトル(必須)', class: "input-form-custom w-full text-plane-custom" %>
+      <%= f.text_field :title, placeholder: 'タイトル(必須)', class: "input-form-custom w-full text-[10px] sm:text-sm" %>
     </div>
 
     <!-- descriptionフォーム -->
-    <div class="mb-3">
+    <div class="mb-3 text-plane-custom">
       <%= f.label :description, '説明文：' %>
-      <%= f.text_area :description, placeholder: "説明文（任意）", class: "textarea-sm-custom w-full text-title-custom" %>
+      <%= f.text_area :description, placeholder: "説明文（任意）", class: "textarea-sm-custom w-full text-[10px] sm:text-sm" %>
     </div>
 
     <!-- start_time -->
-    <div class="mb-3">
+    <div class="mb-3 text-plane-custom">
       <%= f.label      :start_time, '開始時間：' %>
-      <%= f.time_field :start_time, class: "time-form-sm-custom text-md-custom", min: "00:00", max: "23:59" %>
+      <%= f.time_field :start_time, class: "time-form-sm-custom w-7/12 sm:w-3/12", min: "00:00", max: "23:59" %>
     </div>
   <% end %>
 </div>

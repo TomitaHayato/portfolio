@@ -15,10 +15,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_new_params)
     if @user.save
-      auto_login(@user)
+      # ユーザーの初期設定を行う
       @user.make_first_routine.make_first_task
-      flash[:notice] = 'ユーザーを新しく追加しました'
-      redirect_to my_pages_path
+      @user.create_quick_routine_template!
+
+      auto_login(@user)
+      redirect_to my_pages_path, notice: 'ユーザーを新しく追加しました'
     else
       flash.now[:alert] = 'ユーザーの作成に失敗しました'
       render :new, status: :unprocessable_entity

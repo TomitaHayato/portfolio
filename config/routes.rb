@@ -24,11 +24,13 @@ Rails.application.routes.draw do
     resources :plays, only: %i[create update show], param: :routine_id, module: :routines, shallow: true
   end
 
+  # URLが"routines/**"の形式では、RoutinesコントローラのshowアクションのURLとして認識されてしまうため、pathオプションを"routine"に指定
   namespace :routines, path: 'routine' do
-    resources :actives, only: %i[update], param: :routine_id
-    resources :posts, only: %i[index update], param: :routine_id
-    resources :finishes, only: %i[index]
-    resources :likes, only: %i[create destroy], param: :routine_id
+    resources :actives      , only: %i[update]        , param: :routine_id
+    resources :posts        , only: %i[index update]  , param: :routine_id
+    resources :finishes     , only: %i[index]
+    resources :likes        , only: %i[create destroy], param: :routine_id
+    resources :quick_creates, only: %i[create]
   end
 
   namespace :tasks do

@@ -3,15 +3,16 @@ class User < ApplicationRecord
   
   authenticates_with_sorcery!
 
-  has_many   :routines            , dependent: :destroy
-  has_many   :user_tag_experiences, dependent: :destroy
-  has_many   :tags                , through:   :user_tag_experiences
-  has_many   :likes               , dependent: :destroy
-  has_many   :liked_routines      , through:   :likes, source: :routine
-  has_many   :authentications     , dependent: :destroy
-  has_many   :user_rewards        , dependent: :destroy
-  has_many   :rewards             , through:   :user_rewards
-  belongs_to :feature_reward      , class_name: 'Reward', foreign_key: 'feature_reward_id', optional: true
+  has_many   :routines               , dependent: :destroy
+  has_many   :user_tag_experiences   , dependent: :destroy
+  has_many   :tags                   , through:   :user_tag_experiences
+  has_many   :likes                  , dependent: :destroy
+  has_many   :liked_routines         , through:   :likes, source: :routine
+  has_many   :authentications        , dependent: :destroy
+  has_many   :user_rewards           , dependent: :destroy
+  has_many   :rewards                , through:   :user_rewards
+  has_one    :quick_routine_template , dependent: :destroy
+  belongs_to :feature_reward         , class_name: 'Reward', foreign_key: 'feature_reward_id', optional: true
   
   accepts_nested_attributes_for :authentications
 
@@ -34,10 +35,10 @@ class User < ApplicationRecord
   def make_first_routine
     routine_data = { 
                      title:       "#{name}さんのルーティン",
-                     description: '「詳細」からタスクの追加や編集をしましょう！',
+                     description: '「編集」からタスクの追加・編集をしましょう！',
                      is_active:   true
                     }
-    new_routine = routines.create!(routine_data)
+    routines.create!(routine_data)
   end
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理

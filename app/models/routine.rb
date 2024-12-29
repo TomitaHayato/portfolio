@@ -38,6 +38,16 @@ class Routine < ApplicationRecord
     self
   end
 
+  # クイック作成
+  def self.quick_build(template)
+    new_routine = self.new(
+                            title:       template.title,
+                            description: template.description,
+                            start_time:  template.start_time
+                          )
+    new_routine
+  end
+
   def total_estimated_time
     result          = second_to_time_string(all_task_estimated_time)
     result[:hour]   = "0#{result[:hour]}"   if result[:hour]   < 10

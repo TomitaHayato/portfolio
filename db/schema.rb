@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_28_203942) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_07_183706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_203942) do
     t.index ["routine_id"], name: "index_likes_on_routine_id"
     t.index ["user_id", "routine_id"], name: "index_likes_on_user_id_and_routine_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "quick_routine_templates", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", default: "new ルーティン", null: false
+    t.string "description"
+    t.time "start_time", default: "2000-01-01 07:00:00"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_quick_routine_templates_on_user_id"
   end
 
   create_table "rewards", force: :cascade do |t|
@@ -127,6 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_203942) do
 
   add_foreign_key "likes", "routines"
   add_foreign_key "likes", "users"
+  add_foreign_key "quick_routine_templates", "users"
   add_foreign_key "routines", "users"
   add_foreign_key "task_tags", "tags"
   add_foreign_key "task_tags", "tasks"
