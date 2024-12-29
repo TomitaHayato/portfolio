@@ -2,19 +2,18 @@
   <%= form_with model: task, url: task.new_record? ? routine_tasks_path(routine) : task_path(task), class: "text-center" do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <div class="my-5 md:mb-10" id="<%= task_form_id(task) %>">
+    <div class="my-5 md:mb-10 tooltip tooltip-success block" id="<%= task_form_id(task) %>" data-tip="25文字以内">
       <%= f.label :title,
                   "タイトル:",
                   class: "mb-2 font-medium text-lg sm:text-xl md:font-semibold"
       %>
+      
       <br>
 
-      <div class="tooltip tooltip-info block" data-tip="タイトル（25 文字以内）">
-        <%= f.text_field :title,
-            class: "min-h-10 w-10/12 p-2 mx-auto border border-gray-300 rounded-lg
-                    md:text-xl hover:border-gray-500"
-        %>
-      </div>
+      <%= f.text_field :title,
+          class: "min-h-10 w-10/12 p-2 mx-auto border border-gray-300 rounded-lg
+                  md:text-xl hover:border-gray-500"
+      %>
       
 
       <!-- オートコンプリート -->

@@ -32,13 +32,13 @@ function isFormsChanged(titleForms) {
 function taskTitleAutoComplete(titleForms) {
   const titleOptions = document.querySelectorAll('#all-task-names option');    // セレクトボックス内のoption要素をすべて取得
 
-  if (titleOptions.length === 0) return;
+  if (titleOptions?.length === 0) return;
 
   // 各タイトルフォームに対してイベントリスナーを設定
   for (let titleForm of titleForms) {
     let formParent = titleForm.parentElement;
     
-    // バリデーションエラーの場合、祖父母要素を取得する
+    // バリデーションエラーの場合、'field_with_errors'クラスのdivに囲まれるので、その親要素を取得する
     if (formParent.classList.contains('field_with_errors')) {
       formParent = formParent.parentElement;
     }
