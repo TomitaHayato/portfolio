@@ -80,31 +80,8 @@ class User < ApplicationRecord
   end
 
   private
-
-  def reward_achieve?(reward)
-    condition = reward.condition
-    send(condition.to_sym)
-  end
-
-# --- 称号の条件 ---
-  def completed_routine_1?
-    complete_routines_count >= 1
-  end
-
-  def completed_routines_3?
-    complete_routines_count >= 3
-  end
-
-  def get_experiences_10?
-    user_tag_experiences.total_experience_points >= 10
-  end
-
-  def post_routine_1?
-    routines.posted.size >= 1
-  end
-
-# --- Level UP ---
-  # レベルアップするかどうかを判定
+  # --- Level UP ---
+  #レベルアップするかどうかを判定
   def require_level_up?(total_exp)
     exp_to_level_up = cal_exp_to_level_up
 
@@ -127,5 +104,47 @@ class User < ApplicationRecord
   def level_up
     self.level += 1
     save!
+  end
+
+  # 称号獲得処理
+  def reward_achieve?(reward)
+    condition = reward.condition
+    send(condition.to_sym)
+  end
+# --- 称号の条件 ---
+  def completed_routine_1?
+    complete_routines_count >= 1
+  end
+
+  def completed_routines_3?
+    complete_routines_count >= 3
+  end
+
+  def completed_routines_10?
+    complete_routines_count >= 10
+  end
+
+  def completed_routines_30?
+    complete_routines_count >= 30
+  end
+
+  def get_experiences_10?
+    user_tag_experiences.total_experience_points >= 10
+  end
+
+  def better_myself_exp_10?
+    Tag.find_by(name: "自己投資").user_tag_experiences.where(user_id: id).total_experience_points >= 10
+  end
+
+  def post_routine_1?
+    routines.posted.size >= 1
+  end
+
+  def level_5?
+    level >= 5
+  end
+
+  def level_10?
+    level >= 10
   end
 end
