@@ -15,7 +15,12 @@
   <%= render 'routines/search_form', user_words: @user_words %>
 
   <div class="w-9/12 mx-auto flex justify-end">
-    <%= link_to '1 clickで作成', routines_quick_creates_path, data: {turbo_method: :post, tip: "ルーティンを作成できます"}, class: "btn-md-custom btn-create-custom tooltip tooltip-accent" %>
+    <%= link_to '1 clickで作成',
+      routines_quick_creates_path,
+      data: {turbo_method: :post, tip: "ルーティンを作成できます"},
+      class: "btn-md-custom btn-create-custom tooltip tooltip-accent",
+      id: "quick-create-routine-btn"
+    %>
   </div>
   
   

@@ -11,7 +11,6 @@ RSpec.describe "Routines#index", type: :system, js: true do
   end
 
   context 'ログイン後' do
-
     before do
       login_as(user)
       visit routines_path
@@ -51,12 +50,36 @@ RSpec.describe "Routines#index", type: :system, js: true do
         expect(@routines_container).to have_content 'ルーティンがありません ルーティンを作成しましょう！！'
       end
 
-      it '検索フォームが表示' do
+      it '検索フォームとクイック作成ボタンが表示' do
         expect(@routines_container).to have_selector '#user_words'
         expect(@routines_container).to have_selector '#search-btn'
         expect(@routines_container).to have_selector '#column'
         expect(@routines_container).to have_selector '#direction'
         expect(@routines_container).to have_selector '#filter_target'
+        expect(@routines_container).to have_selector '#quick-create-routine-btn'
+      end
+
+      describe '1clickでルーティンを作成する機能' do
+        let!(:quick_routine_template) { create(:quick_routine_template, user: user) }
+
+        it 'ルーティンを1clickで作成できる' do
+          routine_size_prev = user.routines.count
+          find('#quick-create-routine-btn').click
+          sleep 0.1
+          routine_size_new = user.routines.count
+          new_routine      = user.routines.last
+          new_routine_id   = new_routine.id
+          #View
+          expect(page).to have_current_path routine_path(new_routine_id)
+          expect(page).to have_content 'ルーティンを作成しました'
+          #DB
+          expect(routine_size_new).to eq routine_size_prev + 1
+          expect(new_routine).to have_attributes(
+                                                  title:        quick_routine_template.title,
+                                                  description:  quick_routine_template.description,
+                                                  start_time:   quick_routine_template.start_time
+                                                )
+        end
       end
     end
 
