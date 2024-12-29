@@ -38,7 +38,7 @@ class User < ApplicationRecord
                      description: '「編集」からタスクの追加・編集をしましょう！',
                      is_active:   true
                     }
-    new_routine = routines.create!(routine_data)
+    routines.create!(routine_data)
   end
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
