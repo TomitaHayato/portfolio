@@ -85,7 +85,7 @@ class RoutinesController < ApplicationController
     all_task_names = []
 
     current_user.routines.includes(:tasks).each do |routine|
-      all_task_names.concat routine.tasks.pluck(:title)
+      all_task_names.concat(routine.tasks.pluck(:title))
     end
 
     all_task_names.uniq

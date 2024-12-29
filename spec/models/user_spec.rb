@@ -192,10 +192,6 @@ RSpec.describe User, type: :model do
 
   describe 'インスタンスメソッド' do
     let!(:user)    { create(:user) }
-    let!(:reward1) { create(:reward, :hajimarinoippo) }
-    let!(:reward2) { create(:reward, :wakamenoseichou) }
-    let!(:reward3) { create(:reward, :chiisanatasseisha) }
-    let!(:reward4) { create(:reward, :asanomorinoannnaininn) }
 
     describe 'add_complete_routines_count' do
       it 'complete_routines_countが1加算される' do
@@ -207,6 +203,11 @@ RSpec.describe User, type: :model do
     end
 
     describe 'reward_get_check' do
+      let!(:reward1) { create(:reward, :hajimarinoippo) }
+      let!(:reward2) { create(:reward, :wakamenoseichou) }
+      let!(:reward3) { create(:reward, :chiisanatasseisha) }
+      let!(:reward4) { create(:reward, :asanomorinoannnaininn) }
+
       it '初期状態では称号を未獲得' do
         expect(user.rewards.size).to eq 0
       end
@@ -240,7 +241,78 @@ RSpec.describe User, type: :model do
         expect(user.rewards).not_to include reward2
         expect(user.rewards).not_to include reward3
         expect(user.rewards).to     include reward4
-        expect(is_reward_get).to      eq true
+        expect(is_reward_get).to         eq true
+      end
+    end
+
+    describe '称号獲得条件の処理' do
+      it 'completed_routine_1?' do
+        expect(user.send("completed_routine_1?")).to eq false
+
+        user.update!(complete_routines_count: 1)
+        expect(user.send("completed_routine_1?")).to eq true
+      end
+
+      it 'completed_routines_3?' do
+        user.update!(complete_routines_count: 2)
+        expect(user.send("completed_routines_3?")).to eq false
+
+        user.update!(complete_routines_count: 3)
+        expect(user.send("completed_routines_3?")).to eq true
+      end
+
+      it 'completed_routines_10?' do
+        user.update!(complete_routines_count: 9)
+        expect(user.send("completed_routines_10?")).to eq false
+
+        user.update!(complete_routines_count: 10)
+        expect(user.send("completed_routines_10?")).to eq true
+      end
+
+      it 'completed_routines_30?' do
+        user.update!(complete_routines_count: 29)
+        expect(user.send("completed_routines_30?")).to eq false
+
+        user.update!(complete_routines_count: 30)
+        expect(user.send("completed_routines_30?")).to eq true
+      end
+
+      it 'get_experiences_10?' do
+        create(:user_tag_experience, experience_point: 9, user: user)
+        expect(user.send("get_experiences_10?")).to eq false
+
+        create(:user_tag_experience, experience_point: 1, user: user)
+        expect(user.send("get_experiences_10?")).to eq true
+      end
+
+      it 'better_myself_exp_10?' do
+        tag = create(:tag, name: "自己投資")
+        create(:user_tag_experience, experience_point: 9, tag: tag, user: user)
+        expect(user.send("better_myself_exp_10?")).to eq false
+
+        create(:user_tag_experience, experience_point: 1, tag: tag, user: user)
+        expect(user.send("better_myself_exp_10?")).to eq true
+      end
+
+      it 'post_routine_1?' do
+        expect(user.send('post_routine_1?')).to eq false
+
+        create(:routine, is_posted: true, user: user)
+        expect(user.send('post_routine_1?')).to eq true
+      end
+
+      it 'level_5?' do
+        user.update!(level: 4)
+        expect(user.send('level_5?')).to eq false
+        user.update!(level: 5)
+        expect(user.send('level_5?')).to eq true
+      end
+
+      it 'level_10?' do
+        user.update!(level: 9)
+        expect(user.send('level_10?')).to eq false
+        user.update!(level: 10)
+        expect(user.send('level_10?')).to eq true
       end
     end
 
@@ -250,7 +322,7 @@ RSpec.describe User, type: :model do
       it '経験値が足りない場合、レベルは変わらない' do
         user_level_prev = user.level
         is_level_up     = user.level_up_check
-        sleep 0.25
+        sleep 0.1
         expect(is_level_up).to eq false
         expect(user.level).to  eq user_level_prev
       end
