@@ -7,7 +7,7 @@ class Routines::PostsController < ApplicationController
     @user_words         = params[:user_words]
     @routines           = Routine.search(@user_words).custom_filter(@filter_target, current_user.id).includes({ tasks: :tags, user: :feature_reward }, :user).posted.sort_posted(@column, @direction).page(params[:page])
     @liked_routine_ids  = current_user.liked_routine_ids
-    @auto_complete_list = (Routine.posted.pluck(:title) + Routine.posted.pluck(:description).reject(&:blank?)).uniq
+    @auto_complete_list = (Routine.posted.pluck(:title) + Routine.posted.pluck(:description).compact_blank).uniq
   end
 
   def update
@@ -23,6 +23,7 @@ class Routines::PostsController < ApplicationController
 
   private
 
+  # rubocop:disable Style/WordArray
   def set_order_query
     @column     = params[:column]
     @direction  = params[:direction]
@@ -33,4 +34,5 @@ class Routines::PostsController < ApplicationController
     @filter_target  = params[:filter_target]
     @filter_options = [['すべて', nil], ['自分の投稿', 'my_post'], ['お気に入り', 'liked'], ['公式の投稿', 'official'], ['ユーザーの投稿', 'general']]
   end
+  # rubocop:enable Style/WordArray
 end

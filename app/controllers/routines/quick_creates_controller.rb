@@ -4,10 +4,10 @@ class Routines::QuickCreatesController < ApplicationController
     new_routine      = current_user.routines.quick_build(routine_template)
 
     if new_routine.save
-      redirect_to routine_path(new_routine), notice: "ルーティンを作成しました"
+      redirect_to routine_path(new_routine), notice: 'ルーティンを作成しました'
     else
-      flash.now[:alert] = "ルーティンの作成に失敗しました"
-      render turbo_stream: turbo_stream.update('flash', partial: "shared/flash")
+      flash.now[:alert] = 'ルーティンの作成に失敗しました'
+      render turbo_stream: turbo_stream.update('flash', partial: 'shared/flash')
     end
   end
 end

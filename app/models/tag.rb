@@ -7,7 +7,7 @@ class Tag < ApplicationRecord
   validates :name, presence: true
 
   # タグがタスクに設定されているかどうか
-  def is_on_task?(task)
-    return self.tasks.include?(task)
+  def on_task?(task)
+    tasks.include?(task)
   end
 end

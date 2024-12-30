@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     @tags    = Tag.includes(:tasks)
 
     if @task.save
-      @task.set_tags_on_task(task_params[:tag_ids])
+      @task.put_tags_on_task(task_params[:tag_ids])
 
       flash.now[:notice] = 'タスクを追加しました'
     else
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
 
     if @task.update(task_params)
       @task.delete_tags_from_task(task_params[:tag_ids])
-      @task.set_tags_on_task(task_params[:tag_ids])
+      @task.put_tags_on_task(task_params[:tag_ids])
 
       flash.now[:notice] = 'タスクを更新しました'
     else
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     @task.destroy!
     @tags = Tag.includes(:tasks)
 
-    flash[:notice] = "#{@task.title}を削除しました。"
+    flash.now[:notice] = "#{@task.title}を削除しました。"
   end
 
   private

@@ -3,28 +3,22 @@ class SetNotificationJob < ApplicationJob
   queue_as :default
 
   # 全てのLINE登録済みユーザーに対し、ルーティンの開始時間にLINE Push通知を送信するJobを呼び出す
-  def perform()
+  def perform
     time_now = Time.current
-    
-    User.includes(:authentications).each do |user|
+
+    User.includes(:authentications).find_each do |user|
       active_routine = user.routines.find_by(is_active: true)
-      next unless active_routine
+
+      next if active_routine.nil? || user.notification.off? || !start_time?(active_routine.start_time, time_now)
 
       case user.notification
-      when 'off'
-        next
       when 'line'
         next unless user.link_line? # UserがLineを介して登録していない場合はスキップ
 
-        user_line_authentication = user.authentications.find_by(provider: 'line', user_id: user.id)
-        uid                      = user_line_authentication.uid
-
-        # 開始時間なら、Line通知ジョブを呼び出し
-        LineNotificationJob.perform_later(uid) if start_time?(active_routine.start_time, time_now)
+        uid = user.authentications.find_by(provider: 'line', user_id: user.id).uid
+        LineNotificationJob.perform_later(uid)
       when 'email'
-        if start_time?(active_routine.start_time, time_now)
-          NotificationMailer.with(user: user).notify_email.deliver_later
-        end
+        NotificationMailer.with(user:).notify_email.deliver_later
       end
     end
   end

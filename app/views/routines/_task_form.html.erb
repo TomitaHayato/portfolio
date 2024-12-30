@@ -37,7 +37,7 @@
       <% tags.each do |tag| %>
         <div class="flex-none form-control">
           <%= f.label "tag_checkbox_#{tag.id}_#{task_form_id(task)}", class: "label cursor-pointer" do %>
-            <%= f.check_box :tag_ids, { multiple: true, include_hidden: false, class: "checkbox checkbox-accent", id: "task_tag_checkbox_#{tag.id}_#{task_form_id(task)}" }, tag.id, tag.is_on_task?(task) %>
+            <%= f.check_box :tag_ids, { multiple: true, include_hidden: false, class: "checkbox checkbox-accent", id: "task_tag_checkbox_#{tag.id}_#{task_form_id(task)}" }, tag.id, tag.on_task?(task) %>
             <span class="label-text"><%= tag.name %></span>
           <% end %>
         </div>

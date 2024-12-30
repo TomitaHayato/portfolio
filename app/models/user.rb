@@ -1,6 +1,8 @@
+# rubocop:disable Metrics/ClassLength:
+
 class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
-  
+
   authenticates_with_sorcery!
 
   has_many   :routines               , dependent: :destroy
@@ -12,8 +14,8 @@ class User < ApplicationRecord
   has_many   :user_rewards           , dependent: :destroy
   has_many   :rewards                , through:   :user_rewards
   has_one    :quick_routine_template , dependent: :destroy
-  belongs_to :feature_reward         , class_name: 'Reward', foreign_key: 'feature_reward_id', optional: true
-  
+  belongs_to :feature_reward         , class_name: 'Reward', optional: true, inverse_of: 'featuring_users'
+
   accepts_nested_attributes_for :authentications
 
   validates :password,              length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
@@ -33,11 +35,11 @@ class User < ApplicationRecord
 
   # 登録時に簡単なルーティンを作成する
   def make_first_routine
-    routine_data = { 
-                     title:       "#{name}さんのルーティン",
-                     description: '「編集」からタスクの追加・編集をしましょう！',
-                     is_active:   true
-                    }
+    routine_data = {
+      title:       "#{name}さんのルーティン",
+      description: '「編集」からタスクの追加・編集をしましょう！',
+      is_active:   true
+    }
     routines.create!(routine_data)
   end
 
@@ -61,7 +63,7 @@ class User < ApplicationRecord
     level_up_flag = false # レベルアップしたかどうかを管理
     total_exp     = user_tag_experiences.total_experience_points
 
-    while require_level_up?(total_exp) do
+    while require_level_up?(total_exp)
       level_up
       level_up_flag = true
     end
@@ -71,34 +73,35 @@ class User < ApplicationRecord
 
   # 次のレベルまでに必要な経験値
   def exp_to_next_level
-    cal_exp_to_level_up - self.user_tag_experiences.total_experience_points
+    cal_exp_to_level_up - user_tag_experiences.total_experience_points
   end
 
   # lineアカウントと連携しているか
   def link_line?
-    authentications.where(provider: 'line').size > 0
+    !authentications.where(provider: 'line').empty?
   end
 
   private
-  # --- Level UP ---
-  #レベルアップするかどうかを判定
+
+  #  --- Level UP ---
+  # レベルアップするかどうかを判定
   def require_level_up?(total_exp)
     exp_to_level_up = cal_exp_to_level_up
 
     total_exp >= exp_to_level_up
   end
 
-  #次のレベルアップまでに必要なtotal経験値を計算
-  #式: 現在のレベルまでに必要だった経験値 + (現在レベル×5)
+  # 次のレベルアップまでに必要なtotal経験値を計算
+  # 式: 現在のレベルまでに必要だった経験値 + (現在レベル×5)
   def cal_exp_to_level_up
     exp_to_now_level  = cal_exp_to_now_level
 
-    exp_to_now_level + level * 5
+    exp_to_now_level + (level * 5)
   end
 
-  #レベル1から現在のレベルに達するまでに必要だった経験値
+  # レベル1から現在のレベルに達するまでに必要だった経験値
   def cal_exp_to_now_level
-    level * (level - 1) * 5 / 2 #(1..level).sum { |level_now| (level_now - 1) * 5 }を数列の和の公式で展開
+    level * (level - 1) * 5 / 2 # (1..level).sum { |level_now| (level_now - 1) * 5 }を数列の和の公式で展開
   end
 
   def level_up
@@ -111,7 +114,8 @@ class User < ApplicationRecord
     condition = reward.condition
     send(condition.to_sym)
   end
-# --- 称号の条件 ---
+
+  # --- 称号の条件 ---
   def completed_routine_1?
     complete_routines_count >= 1
   end
@@ -128,12 +132,14 @@ class User < ApplicationRecord
     complete_routines_count >= 30
   end
 
+  # rubocop:disable Naming/AccessorMethodName:
   def get_experiences_10?
     user_tag_experiences.total_experience_points >= 10
   end
 
+  # rubocop:enable Naming/AccessorMethodName:
   def better_myself_exp_10?
-    Tag.find_by(name: "自己投資").user_tag_experiences.where(user_id: id).total_experience_points >= 10
+    Tag.find_by(name: '自己投資').user_tag_experiences.where(user_id: id).total_experience_points >= 10
   end
 
   def post_routine_1?
@@ -148,3 +154,5 @@ class User < ApplicationRecord
     level >= 10
   end
 end
+
+# rubocop:enable Metrics/ClassLength:

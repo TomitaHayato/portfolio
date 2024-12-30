@@ -7,9 +7,7 @@ class Users::NotificationsController < ApplicationController
 
   def user_params
     # userがLine連携していない場合は、line通知に設定できないようにする
-    if params[:user][:notification] == 'line' && !current_user.link_line?
-      params[:user][:notification] = 'email'
-    end
+    params[:user][:notification] = 'email' if params[:user][:notification] == 'line' && !current_user.link_line?
 
     params.require(:user).permit(:notification)
   end
