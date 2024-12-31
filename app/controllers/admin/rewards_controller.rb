@@ -10,7 +10,7 @@ class Admin::RewardsController < Admin::BaseController
   def update
     @reward = Reward.find(params[:id])
     if @reward.update(reward_params)
-      flash[:notice] = "更新しました"
+      flash[:notice] = '更新しました'
       redirect_to admin_rewards_path
     else
       render :edit

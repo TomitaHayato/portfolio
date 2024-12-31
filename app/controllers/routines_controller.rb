@@ -2,19 +2,19 @@ class RoutinesController < ApplicationController
   before_action :set_routine      , only: %i[show update destroy]
   before_action :set_order_query  , only: %i[index]
   before_action :set_filter_target, only: %i[index]
-  
+
   def index
     @tags               = Tag.includes(:tasks).all
     @routines           = current_user.routines.search(params[:user_words]).custom_filter(@filter_target, current_user.id).includes(tasks: :tags).sort_routine(@column, @direction).page(params[:page])
     @user_words         = params[:user_words]
-    @auto_complete_list = (current_user.routines.pluck(:title) + current_user.routines.pluck(:description).reject(&:blank?)).uniq
+    @auto_complete_list = make_autocomplete_list
   end
 
   def show
     @task           = Task.new
     @tasks          = @routine.tasks.includes(:tags).order(position: :asc)
     @tags           = Tag.includes(:tasks)
-    @all_task_names = set_all_tasks_names
+    @all_task_names = make_all_tasks_names
   end
 
   def new
@@ -36,16 +36,18 @@ class RoutinesController < ApplicationController
     if @routine.update(routine_params)
       respond_to do |format|
         format.html { redirect_to routine_path(@routine) }
-        format.turbo_stream 
+        format.turbo_stream
       end
     else
       respond_to do |format|
         format.html         { render :show, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.update('routine-edit-form',
-                                                                        partial: 'routines/edit_form',
-                                                                        locals:  { routine: @routine }
-                                                                      )
-        }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            'routine-edit-form',
+            partial: 'routines/edit_form',
+            locals:  { routine: @routine }
+          )
+        end
       end
     end
   end
@@ -61,6 +63,7 @@ class RoutinesController < ApplicationController
 
   private
 
+  # rubocop:disable Style/WordArray
   def set_order_query
     @column     = params[:column]
     @direction  = params[:direction]
@@ -71,6 +74,7 @@ class RoutinesController < ApplicationController
     @filter_target  = params[:filter_target]
     @filter_options = [['すべて', nil], ['投稿済み', 'posted'], ['未投稿', 'unposted']]
   end
+  # rubocop:enable Style/WordArray
 
   def routine_params
     params.require(:routine).permit(:title, :description, :start_time)
@@ -80,11 +84,18 @@ class RoutinesController < ApplicationController
     @routine = current_user.routines.find(params[:id])
   end
 
+  def make_autocomplete_list
+    all_title_array       = current_user.routines.pluck(:title)
+    all_description_array = current_user.routines.pluck(:description).compact_blank
+
+    all_title_array.concat(all_description_array).uniq
+  end
+
   # ユーザーが作成した全タスクのtitle一覧を取得
-  def set_all_tasks_names
+  def make_all_tasks_names
     all_task_names = []
 
-    current_user.routines.includes(:tasks).each do |routine|
+    current_user.routines.includes(:tasks).find_each do |routine|
       all_task_names.concat(routine.tasks.pluck(:title))
     end
 

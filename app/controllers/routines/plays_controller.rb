@@ -6,15 +6,15 @@ class Routines::PlaysController < ApplicationController
 
   def show
     @task = @tasks[session[:playing_task_num]]
-    
+
     # 最後のタスクの場合は完了ページに遷移するため、turbo-frameリクエストを無効化
     @turbo_setting               = { turbo_method: :patch }
     @turbo_setting[:turbo_frame] = '_top' if session[:playing_task_num] == (@tasks.count - 1)
   end
 
   def create
-    session[:playing_task_num] = 0        # 次に実行するtaskの順番を管理
-    session[:experience_log]   = Hash.new # どのタグの経験値をどのくらい獲得したのかを管理: {tag_id: exp}
+    session[:playing_task_num] = 0  # 次に実行するtaskの順番を管理
+    session[:experience_log]   = {} # どのタグの経験値をどのくらい獲得したのかを管理: {tag_id: exp}
 
     redirect_to play_path(@routine)
   end
@@ -22,9 +22,7 @@ class Routines::PlaysController < ApplicationController
   def update
     session[:playing_task_num] += 1
 
-    if params[:tag_ids]
-      session[:experience_log] = set_experience_log(session[:experience_log], params[:tag_ids])
-    end
+    session[:experience_log] = set_experience_log(session[:experience_log], params[:tag_ids]) if params[:tag_ids]
 
     if session[:playing_task_num] >= @tasks.count
       @routine.complete_count

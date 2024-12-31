@@ -76,7 +76,7 @@ RSpec.describe Tag, type: :model do
   end
 
   describe 'インスタンスメソッド' do
-    it 'is_on_task?(task)' do
+    it 'on_task?(task)' do
       task1 = create(:task)
       task2 = create(:task)
       tag   = create(:tag)
@@ -84,8 +84,8 @@ RSpec.describe Tag, type: :model do
       tag.tasks << task1
       sleep 0.1
 
-      expect(tag.is_on_task?(task1)).to eq true
-      expect(tag.is_on_task?(task2)).to eq false
+      expect(tag.on_task?(task1)).to eq true
+      expect(tag.on_task?(task2)).to eq false
     end
   end
 end

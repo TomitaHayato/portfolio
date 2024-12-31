@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  include ApplicationHelper
+  include ApplicationHelper # task_form_id(task)メソッド
 
   before_action :params_time_to_second, only: %i[create update]
   before_action :set_task_and_routine , only: %i[update destroy]
@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     @tags    = Tag.includes(:tasks)
 
     if @task.save
-      @task.set_tags_on_task(task_params[:tag_ids])
+      @task.put_tags_on_task(task_params[:tag_ids])
 
       flash.now[:notice] = 'タスクを追加しました'
     else
@@ -23,8 +23,9 @@ class TasksController < ApplicationController
     @tags = Tag.includes(:tasks)
 
     if @task.update(task_params)
-      @task.delete_tags_from_task(task_params[:tag_ids])
-      @task.set_tags_on_task(task_params[:tag_ids])
+      selected_tag_ids = task_params[:tag_ids]
+      @task.delete_tags_from_task(selected_tag_ids) # 元々指定されていたタグのうち、今回指定されていない=外されたタグを削除
+      @task.put_tags_on_task(selected_tag_ids)      # 新しく指定されたタグを追加
 
       flash.now[:notice] = 'タスクを更新しました'
     else
@@ -37,7 +38,7 @@ class TasksController < ApplicationController
     @task.destroy!
     @tags = Tag.includes(:tasks)
 
-    flash[:notice] = "#{@task.title}を削除しました。"
+    flash.now[:notice] = "#{@task.title}を削除しました。"
   end
 
   private

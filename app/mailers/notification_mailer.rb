@@ -1,4 +1,3 @@
-#TODO: メールのViewを追加
 class NotificationMailer < ApplicationMailer
   # 呼び出し：NotifcationMailer.with(user: user).notify_start.deliver_later
   def notify_email
@@ -6,7 +5,6 @@ class NotificationMailer < ApplicationMailer
     @user = params[:user]
     @url  = my_pages_url
     mail(to:      @user.email,
-         subject: "[Morning Forest] ルーティン開始通知"    
-    )
+         subject: '[Morning Forest] ルーティン開始通知')
   end
 end

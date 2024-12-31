@@ -1,6 +1,8 @@
+# rubocop:disable Metrics/ClassLength:
+
 class Routine < ApplicationRecord
   belongs_to :user
-  has_many   :tasks, -> { order(position: :asc) }, dependent: :destroy
+  has_many   :tasks, -> { order(position: :asc) }, dependent: :destroy, inverse_of: 'routine'
   has_many   :likes                              , dependent: :destroy
   has_many   :liked_users                        , through:   :likes  , source: :user
 
@@ -9,16 +11,16 @@ class Routine < ApplicationRecord
 
   scope :posted,   ->           { where(is_posted: true)  }
   scope :unposted, ->           { where(is_posted: false) }
-  scope :my_post,  ->(user_id)  { where(user_id:   user_id) }
+  scope :my_post,  ->(user_id)  { where(user_id:) }
   scope :official, ->           { joins(:user).where(users: { role: 'admin' }) }
   scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
-  scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: user_id }) }
+  scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: }) }
 
   def make_first_task
     task = tasks.create!(title: '水を飲む')
-    tag  = Tag.find_by(name: "日課")
+    tag  = Tag.find_by(name: '日課')
     task.tags << tag
-    
+
     task
   end
 
@@ -40,12 +42,11 @@ class Routine < ApplicationRecord
 
   # クイック作成
   def self.quick_build(template)
-    new_routine = self.new(
-                            title:       template.title,
-                            description: template.description,
-                            start_time:  template.start_time
-                          )
-    new_routine
+    new(
+      title:       template.title,
+      description: template.description,
+      start_time:  template.start_time
+    )
   end
 
   def total_estimated_time
@@ -60,13 +61,13 @@ class Routine < ApplicationRecord
   def self.search(user_word)
     return all unless user_word
 
-    user_words   = user_word.split(' ')
-    search_query = user_words.map{ '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ')
+    user_words   = user_word.split
+    search_query = user_words.map { '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ')
     like_values  = []
     user_words.each do |word|
-      2.times{ like_values << "%#{word}%" }
+      2.times { like_values << "%#{word}%" }
     end
-    
+
     where(search_query, *like_values)
   end
 
@@ -74,20 +75,16 @@ class Routine < ApplicationRecord
   # 公式のみ、一般のみ、お気に入りのみ
   def self.custom_filter(filter_target, login_user_id)
     return all if filter_target.blank?
-    
+
     case filter_target
-    when 'liked'
-      liked(login_user_id)
-    when 'official'
-      official
-    when 'general'
-      general
-    when 'my_post'
-      my_post(login_user_id)
-    when 'posted'
-      posted
-    when 'unposted'
-      unposted
+    when 'liked'    then liked(login_user_id)
+    when 'my_post'  then my_post(login_user_id)
+    when 'official' then official
+    when 'general'  then general
+    when 'posted'   then posted
+    when 'unposted' then unposted
+    else
+      all
     end
   end
 
@@ -100,21 +97,28 @@ class Routine < ApplicationRecord
     self.completed_count += 1
     save!
   end
-  
+
   # 投稿の並べ替え処理
   def self.sort_posted(column, direction)
-    column    = "posted_at" if column.blank? 
-    direction = "desc"      if direction.blank? 
-    
+    column    = 'posted_at' if column.blank?
+    direction = 'desc'      if direction.blank?
+
     order_by(column, direction)
   end
 
   # ルーティン一覧の並べ替え
   def self.sort_routine(column, direction)
-    column    = "created_at" if column.blank? 
-    direction = "desc"       if direction.blank? 
+    column    = 'created_at' if column.blank?
+    direction = 'desc'       if direction.blank?
 
     order_by(column, direction)
+  end
+
+  def self.order_by(column, direction)
+    column_sym    = column.to_sym
+    direction_sym = direction.to_sym
+
+    order(column_sym => direction_sym)
   end
 
   private
@@ -140,11 +144,6 @@ class Routine < ApplicationRecord
     end
     total_estimated_time_in_second
   end
-
-  def self.order_by(column, direction)
-    column_sym    = column.to_sym
-    direction_sym = direction.to_sym
-
-    order(column_sym => direction_sym)
-  end
 end
+
+# rubocop:enable Metrics/ClassLength:

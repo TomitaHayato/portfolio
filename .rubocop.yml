@@ -4,6 +4,15 @@ require:
 # 1行の文字数に関する指摘
 Layout/LineLength:
   Enabled: false
+# スペースを複数入れるなという指摘
+Layout/SpaceBeforeComma:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
+Layout/ExtraSpacing:
+  Enabled: false
+Layout/SpaceInsideArrayPercentLiteral:
+  Enabled: false
 # マジックコメント必須の指摘
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -19,9 +28,13 @@ Rails/EnumSyntax:
 # i18nを使用していない日本語表記チェック
 Rails/I18nLocaleTexts:
   Enabled: false
-# メソッドの複雑さの許容範囲
+# メソッドの複雑さ/行数の許容範囲
 Metrics/AbcSize:
+  Max: 30
+Metrics/MethodLength:
   Max: 25
+Metrics/CyclomaticComplexity:
+  Max: 8
 # モジュールのネストした形式
 Style/ClassAndModuleChildren:
   Enabled: false

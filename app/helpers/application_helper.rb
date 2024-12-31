@@ -17,9 +17,9 @@ module ApplicationHelper
   def shallow_bg_class
     case request.path
     when root_path, policy_path, terms_path
-      return ''
+      ''
     else
-      return 'pb-16 pt-1 h-full mx-auto bg-green-100/75 min-h-screen w-11/12 sm:w-4/5'
+      'pb-16 pt-1 h-full mx-auto bg-green-100/75 min-h-screen w-11/12 sm:w-4/5'
     end
   end
 
@@ -35,7 +35,7 @@ module ApplicationHelper
   # --------------------------------------------------------
 
   def task_form_id(task)
-    task.id.nil? ? 'new' : "#{task.id}"
+    task.id.nil? ? 'new' : task.id.to_s
   end
 
   # ログインしているか否かでルートページへのパスを返す

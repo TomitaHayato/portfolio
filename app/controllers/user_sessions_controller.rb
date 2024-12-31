@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
   def destroy
     user = current_user
     logout
-    user.destroy! if user.role == "guest"
+    user.destroy! if user.role == 'guest'
 
     flash[:notice] = 'ログアウトしました。'
     redirect_to root_path

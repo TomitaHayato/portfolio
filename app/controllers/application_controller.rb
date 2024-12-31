@@ -16,19 +16,19 @@ class ApplicationController < ActionController::Base
   end
 
   def guest_block
-    if current_user.guest?
-      respond_to do |format|
-        format.html { 
-          flash[:danger] = 'ゲストユーザー様はご利用できません'
-          redirect_to request.referer || my_pages_path 
-        }
+    return unless current_user.guest?
 
-        format.turbo_stream {
-          flash.now[:danger] = 'ゲストユーザー様はご利用できません'
-          render turbo_stream: [
-            turbo_stream.update('flash', partial: 'shared/flash')
-          ]
-        }
+    respond_to do |format|
+      format.html do
+        flash[:danger] = 'ゲストユーザー様はご利用できません'
+        redirect_to request.referer || my_pages_path
+      end
+
+      format.turbo_stream do
+        flash.now[:danger] = 'ゲストユーザー様はご利用できません'
+        render turbo_stream: [
+          turbo_stream.update('flash', partial: 'shared/flash')
+        ]
       end
     end
   end

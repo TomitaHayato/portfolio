@@ -5,7 +5,7 @@ class Admin::BaseController < ApplicationController
   private
 
   def not_authenticated
-    flash[:alert] = "ログインしてください"
+    flash[:alert] = 'ログインしてください'
     redirect_to admin_login_path
   end
 

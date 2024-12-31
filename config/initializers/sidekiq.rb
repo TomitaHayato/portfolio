@@ -1,3 +1,5 @@
+# rubocop:disable Style/FetchEnvVar
+
 Sidekiq.configure_server do |config|
   config.redis = {
     url: ENV['REDIS_URL'],
@@ -11,3 +13,5 @@ Sidekiq.configure_client do |config|
     ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
   }
 end
+
+# rubocop:enable Style/FetchEnvVar

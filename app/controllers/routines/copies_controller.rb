@@ -26,16 +26,18 @@ class Routines::CopiesController < ApplicationController
 
   # コピー元のTaskについたtagをコピー先にも紐付ける
   # task_dupはDBに保存されている必要がある
+  # rubocop:disable Rails/SkipsModelValidations
   def copy_tags(task_origin, task_dup)
     TaskTag.insert_all(copy_task_tag_info(task_origin, task_dup)) unless task_origin.tags.empty?
     task_dup
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   # TaskTagsテーブルに保存する情報をもつ配列を作成する
   def copy_task_tag_info(task_origin, task_dup)
-    copied_task_tag_info = task_origin.tag_ids.map do |tag_id|
+    task_origin.tag_ids.map do |tag_id|
       {
-        tag_id: tag_id,
+        tag_id:,
         task_id: task_dup.id
       }
     end
