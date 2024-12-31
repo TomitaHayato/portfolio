@@ -16,6 +16,28 @@ class Task < ApplicationRecord
               message: 'は1秒以上で設定してください'
             }
 
+  # TODO: テスト追加
+  # レシーバに紐づいたtagをtask_dupにも紐付ける
+  # task_dupはDBに保存されている必要がある
+  def copy_tags(task_dup)
+    return if tags.empty?
+
+    # rubocop:disable Rails/SkipsModelValidations
+    TaskTag.insert_all(make_tasktag_copies_array(task_dup))
+    # rubocop:enable Rails/SkipsModelValidations
+  end
+
+  # TODO: テスト追加
+  # TaskTagsテーブルに保存する情報をもつ配列を作成する
+  def make_tasktag_copies_array(task_dup)
+    tag_ids.map do |tag_id|
+      {
+        tag_id:,
+        task_id: task_dup.id
+      }
+    end
+  end
+
   def estimated_time
     result          = second_to_time_string(estimated_time_in_second)
     result[:hour]   = "0#{result[:hour]}"   if result[:hour]   < 10

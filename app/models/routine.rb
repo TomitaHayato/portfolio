@@ -31,6 +31,18 @@ class Routine < ApplicationRecord
     routine_dup
   end
 
+  # TODO: テスト追加
+  # レシーバに属するタスクのコピーをroutine_dupに保存
+  def copy_tasks(routine_dup)
+    tasks.each do |task_origin|
+      # Taskのコピーを作成
+      task_dup = task_origin.dup
+      task_dup.update!(routine_id: routine_dup.id)
+      # task_originに紐づいたtagをtask_dupにも紐付ける
+      task_origin.copy_tags(task_dup)
+    end
+  end
+
   # ルーティンをコピーする際、ルーティン情報をリセットする処理
   def reset_status
     self.is_active       = false
