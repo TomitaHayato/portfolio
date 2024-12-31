@@ -40,7 +40,7 @@ class RoutinesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html         { render :show, status: :unprocessable_entity }
+        format.html { render :show, status: :unprocessable_entity }
         format.turbo_stream do
           render turbo_stream: turbo_stream.update(
             'routine-edit-form',
