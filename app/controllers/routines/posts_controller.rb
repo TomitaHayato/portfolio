@@ -7,7 +7,7 @@ class Routines::PostsController < ApplicationController
     @user_words         = params[:user_words]
     @routines           = Routine.search(@user_words).custom_filter(@filter_target, current_user.id).includes({ tasks: :tags, user: :feature_reward }, :user).posted.sort_posted(@column, @direction).page(params[:page])
     @liked_routine_ids  = current_user.liked_routine_ids # お気に入りボタンの表示切り替えに使用
-    @auto_complete_list = (Routine.posted.pluck(:title) + Routine.posted.pluck(:description).compact_blank).uniq
+    @auto_complete_list = Routine.posted.make_routine_autocomplete_list
   end
 
   def update

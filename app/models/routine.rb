@@ -133,6 +133,25 @@ class Routine < ApplicationRecord
     order(column_sym => direction_sym)
   end
 
+  # TODO: テスト
+  # オートコンプリート用の配列を作成
+  def self.make_routine_autocomplete_list
+    all_title_array       = self.pluck(:title)
+    all_description_array = self.pluck(:description).compact_blank
+
+    all_title_array.concat(all_description_array).uniq
+  end
+
+  # TODO:テスト
+  # ユーザーが作成した全タスクのtitle一覧を取得
+  def self.make_task_autocomplete_list
+    all_task_titles = []
+
+    self.find_each { |routine| all_task_titles.concat(routine.tasks.pluck(:title)) }
+
+    all_task_titles.uniq
+  end
+
   private
 
   def second_to_time_string(time_in_second)
