@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # タグ追加
-tag_names_list = %w[運動・健康 美容 趣味 学習 仕事・タスク 自己投資 日課]
+tag_names_list = %w[運動・健康 美容 趣味 仕事・課題 自己投資 日課]
 
 tag_names_list.each do |tag_name|
   Tag.find_or_create_by!(
