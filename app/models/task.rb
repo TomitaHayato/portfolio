@@ -27,6 +27,7 @@ class Task < ApplicationRecord
   # 元々セットされていたが、フォームで選択されなかったタグを削除
   def delete_tags_from_task(tag_ids_param)
     tag_ids_param = [] if tag_ids_param.nil?
+
     tag_ids_param.map(&:to_i)
 
     tags.each { |tag| tags.destroy(tag) unless tag_ids.include?(tag) }
@@ -34,10 +35,14 @@ class Task < ApplicationRecord
 
   # フォームで新しく指定されたタグをタスクに追加する
   def put_tags_on_task(tag_ids_param)
-    return if tag_ids_param.nil?
+    # フォームで指定されたタグがない => '日課'タグを設定してreturn
+    if tag_ids_param.nil?
+      daily_work_tag = Tag.find_by(name: '日課')
+      tags << daily_work_tag unless tags.include?(daily_work_tag)
+      return
+    end
 
     tag_ids_param = tag_ids_param.map(&:to_i)
-
     tag_ids_param.each { |tag_id| tags << Tag.find(tag_id) unless tag_ids.include?(tag_id) }
   end
 
