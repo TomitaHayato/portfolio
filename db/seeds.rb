@@ -6,15 +6,16 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-tag_names_list = ['運動・健康', '美容', '趣味', '学習', '仕事・タスク', '自己投資', '日課']
-if Tag.all.size == 0
-  tag_names_list.each do |tag_name|
-    Tag.create!(
-      name: tag_name
-    )
-  end
+# タグ追加
+tag_names_list = %w[運動・健康 美容 趣味 学習 仕事・タスク 自己投資 日課]
+
+tag_names_list.each do |tag_name|
+  Tag.find_or_create_by!(
+    name: tag_name
+  )
 end
 
+# 称号追加
 Reward.find_or_create_by!(
   name: "はじまりの一歩！",
   condition: "completed_routine_1?",
