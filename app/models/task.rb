@@ -17,15 +17,14 @@ class Task < ApplicationRecord
             }
 
   # TODO: テスト追加
+  # rubocop:disable Rails/SkipsModelValidations
   # レシーバに紐づいたtagをtask_dupにも紐付ける
-  # task_dupはDBに保存されている必要がある
   def copy_tags(task_dup)
     return if tags.empty?
 
-    # rubocop:disable Rails/SkipsModelValidations
     TaskTag.insert_all(make_tasktag_copies_array(task_dup))
-    # rubocop:enable Rails/SkipsModelValidations
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   # TODO: テスト追加
   # TaskTagsテーブルに保存する情報をもつ配列を作成する

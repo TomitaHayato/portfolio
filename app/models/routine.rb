@@ -24,18 +24,29 @@ class Routine < ApplicationRecord
     task
   end
 
+  # Routineのコピー
   def copy(user)
-    routine_dup = dup.reset_status
-    routine_dup.user = user
-    routine_dup.save!
-    routine_dup
+    self.class.transaction do
+      copy_count
+
+      routine_dup = dup.reset_status
+      routine_dup.user = user
+      routine_dup.save!
+
+      copy_tasks(routine_dup) unless tasks.empty?
+    end
+  end
+
+  def copy_count
+    self.copied_count += 1
+    save!
   end
 
   # TODO: テスト追加
   # レシーバに属するタスクのコピーをroutine_dupに保存
   def copy_tasks(routine_dup)
     tasks.each do |task_origin|
-      # Taskのコピーを作成
+      # Taskのコピーを作成・保存
       task_dup = task_origin.dup
       task_dup.update!(routine_id: routine_dup.id)
       # task_originに紐づいたtagをtask_dupにも紐付ける
@@ -99,11 +110,6 @@ class Routine < ApplicationRecord
     else
       all
     end
-  end
-
-  def copy_count
-    self.copied_count += 1
-    save!
   end
 
   def complete_count
