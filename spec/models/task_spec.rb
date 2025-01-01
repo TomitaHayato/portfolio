@@ -138,8 +138,8 @@ RSpec.describe Task, type: :model do
 
     describe 'delete_tags_from_task' do
       before do
-        task1 << tag1
-        task1 << tag2
+        task1.tags << tag1
+        task1.tags << tag2
       end
 
       it '指定されたidを持つTagをTaskから切り離す' do

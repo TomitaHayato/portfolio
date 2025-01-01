@@ -146,7 +146,7 @@ class Routine < ApplicationRecord
     self.copied_count += 1
     save!
   end
- 
+
   # レシーバに属するタスクのコピーをroutine_dupに保存
   def copy_tasks(routine_dup)
     tasks.each do |task_origin|

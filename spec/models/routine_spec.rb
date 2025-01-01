@@ -238,14 +238,14 @@ RSpec.describe Routine, type: :model do
       let!(:user1)    { create(:user) }
       let!(:user2)    { create(:user) }
       let!(:routine1) { create(:routine, :active_posted_counted, user: user1) }
-      let!(:task1)    { create(:task   , routine: routine) }
-      let!(:task2)    { create(:task   , routine: routine) }
+      let!(:task1)    { create(:task   , routine: routine1) }
+      let!(:task2)    { create(:task   , routine: routine1) }
       let!(:tag1)     { create(:tag) }
       let!(:tag2)     { create(:tag) }
 
       before do
-        task1 << tag1
-        task2 << tag2
+        task1.tags << tag1
+        task2.tags << tag2
       end
 
       it 'Routine, Task, TaskTagレコードがコピーされる' do
