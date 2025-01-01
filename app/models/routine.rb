@@ -62,7 +62,7 @@ class Routine < ApplicationRecord
     save!
   end
 
-  # クイック作成(保存はしない)
+  # クイック作成(Userモデルに移すべき？)
   def self.quick_build(template)
     new(
       title:       template.title,

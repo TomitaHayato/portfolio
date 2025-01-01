@@ -289,13 +289,13 @@ RSpec.describe Routine, type: :model do
   end
 
   describe 'クラスメソッド' do
-    let!(:user)      { create(:user) }
-    let!(:routineA1) { create(:routine, title: 'ルーティンA' , description: '説明文A') }
-    let!(:routineA2) { create(:routine, title: 'ルーティンAA', description: '説明文A2') }
-    let!(:routineB1) { create(:routine, title: 'ルーティンB' , description: '説明文B') }
-    let!(:routineB2) { create(:routine, title: 'ルーティンBB', description: '説明文B2') }
-
     describe 'self.search(user_word)' do
+      let!(:user)      { create(:user) }
+      let!(:routineA1) { create(:routine, title: 'ルーティンA' , description: '説明文A') }
+      let!(:routineA2) { create(:routine, title: 'ルーティンAA', description: '説明文A2') }
+      let!(:routineB1) { create(:routine, title: 'ルーティンB' , description: '説明文B') }
+      let!(:routineB2) { create(:routine, title: 'ルーティンBB', description: '説明文B2') }
+
       context 'user_wordがnil' do
         it 'すべてのルーティンを取得' do
           expect_val = Routine.all
