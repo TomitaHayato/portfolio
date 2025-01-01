@@ -16,10 +16,13 @@ class Routine < ApplicationRecord
   scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
   scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: }) }
 
+  # TODO: make_first_routineメソッド内で処理を行うように変更
   def make_first_task
-    task = tasks.create!(title: '水を飲む')
-    tag  = Tag.find_by(name: '日課')
-    task.tags << tag
+    self.class.transaction do
+      task = tasks.create!(title: '水を飲む')
+      tag  = Tag.find_by(name: '日課')
+      task.tags << tag
+    end
 
     task
   end
@@ -37,23 +40,6 @@ class Routine < ApplicationRecord
     end
   end
 
-  def copy_count
-    self.copied_count += 1
-    save!
-  end
-
-  # TODO: テスト追加
-  # レシーバに属するタスクのコピーをroutine_dupに保存
-  def copy_tasks(routine_dup)
-    tasks.each do |task_origin|
-      # Taskのコピーを作成・保存
-      task_dup = task_origin.dup
-      task_dup.update!(routine_id: routine_dup.id)
-      # task_originに紐づいたtagをtask_dupにも紐付ける
-      task_origin.copy_tags(task_dup)
-    end
-  end
-
   # ルーティンをコピーする際、ルーティン情報をリセットする処理
   def reset_status
     self.is_active       = false
@@ -63,6 +49,19 @@ class Routine < ApplicationRecord
     self
   end
 
+  def total_estimated_time
+    result          = second_to_time_string(all_task_estimated_time)
+    result[:hour]   = "0#{result[:hour]}"   if result[:hour]   < 10
+    result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
+    result[:second] = "0#{result[:second]}" if result[:second] < 10
+    result
+  end
+
+  def complete_count
+    self.completed_count += 1
+    save!
+  end
+
   # クイック作成(保存はしない)
   def self.quick_build(template)
     new(
@@ -70,14 +69,6 @@ class Routine < ApplicationRecord
       description: template.description,
       start_time:  template.start_time
     )
-  end
-
-  def total_estimated_time
-    result          = second_to_time_string(all_task_estimated_time)
-    result[:hour]   = "0#{result[:hour]}"   if result[:hour]   < 10
-    result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
-    result[:second] = "0#{result[:second]}" if result[:second] < 10
-    result
   end
 
   # 検索処理：routineタイトルと説明文で部分検索
@@ -110,11 +101,6 @@ class Routine < ApplicationRecord
     else
       all
     end
-  end
-
-  def complete_count
-    self.completed_count += 1
-    save!
   end
 
   # 投稿の並べ替え処理
@@ -160,6 +146,22 @@ class Routine < ApplicationRecord
   end
 
   private
+
+  def copy_count
+    self.copied_count += 1
+    save!
+  end
+ 
+  # レシーバに属するタスクのコピーをroutine_dupに保存
+  def copy_tasks(routine_dup)
+    tasks.each do |task_origin|
+      # Taskのコピーを作成・保存
+      task_dup = task_origin.dup
+      task_dup.update!(routine_id: routine_dup.id)
+      # task_originに紐づいたtagをtask_dupにも紐付ける
+      task_origin.copy_tags(task_dup)
+    end
+  end
 
   def second_to_time_string(time_in_second)
     hour            = time_in_second / 3600

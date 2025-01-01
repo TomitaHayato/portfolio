@@ -96,24 +96,74 @@ RSpec.describe Task, type: :model do
   end
 
   describe 'インスタンスメソッド' do
+    let(:task1) { create(:task) }
+    let(:task2) { create(:task) }
+    let(:tag1)  { create(:tag) }
+    let(:tag2)  { create(:tag) }
+
     describe 'estimated_time' do
       context '時間数・分数・秒数が１桁' do
         it '返り値が、HH:MM:SS表記のハッシュ' do
           task = build(:task, estimated_time_in_second: 3661)
           return_estimated_time = task.estimated_time
+
           expect(return_estimated_time[:hour]).to   eq '01'
           expect(return_estimated_time[:minute]).to eq '01'
           expect(return_estimated_time[:second]).to eq '01'
         end
       end
+
       context '時間数・分数・秒数が2桁' do
         it '返り値が、HH:MM:SS表記のハッシュ' do
           task = build(:task, estimated_time_in_second: 36610)
           return_estimated_time = task.estimated_time
+
           expect(return_estimated_time[:hour]).to   eq 10
           expect(return_estimated_time[:minute]).to eq 10
           expect(return_estimated_time[:second]).to eq 10
         end
+      end
+    end
+
+    describe 'copy_tags' do
+      it 'タスクに紐づいたTagをコピーできる' do
+        task1.tags << tag1
+        task1.tags << tag2
+
+        task1.copy_tags(task2)
+        expect(task2.tags).to include tag1
+        expect(task2.tags).to include tag2
+      end
+    end
+
+    describe 'delete_tags_from_task' do
+      before do
+        task1 << tag1
+        task1 << tag2
+      end
+
+      it '指定されたidを持つTagをTaskから切り離す' do
+        expect(task1.tags).to include tag1
+        expect(task1.tags).to include tag2
+
+        tag_ids_params = [tag1.id, tag2.id]
+        task1.delete_tags_from_task(tag_ids_params)
+
+        expect(task1.tags).not_to include tag1
+        expect(task1.tags).not_to include tag2
+      end
+    end
+
+    describe 'put_tags_on_task' do
+      it '指定されたidを持つTagをTaskに紐づける' do
+        expect(task1.tags).not_to include tag1
+        expect(task1.tags).not_to include tag2
+
+        tag_ids_params = [tag1.id, tag2.id]
+        task1.put_tags_on_task(tag_ids_params)
+
+        expect(task1.tags).to include tag1
+        expect(task1.tags).to include tag2
       end
     end
   end

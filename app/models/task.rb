@@ -16,7 +16,6 @@ class Task < ApplicationRecord
               message: 'は1秒以上で設定してください'
             }
 
-  # TODO: テスト追加
   # rubocop:disable Rails/SkipsModelValidations
   # レシーバに紐づいたtagをtask_dupにも紐付ける
   def copy_tags(task_dup)
@@ -25,17 +24,6 @@ class Task < ApplicationRecord
     TaskTag.insert_all(make_tasktag_copies_array(task_dup))
   end
   # rubocop:enable Rails/SkipsModelValidations
-
-  # TODO: テスト追加
-  # TaskTagsテーブルに保存する情報をもつ配列を作成する
-  def make_tasktag_copies_array(task_dup)
-    tag_ids.map do |tag_id|
-      {
-        tag_id:,
-        task_id: task_dup.id
-      }
-    end
-  end
 
   def estimated_time
     result          = second_to_time_string(estimated_time_in_second)
@@ -46,25 +34,25 @@ class Task < ApplicationRecord
   end
 
   # 元々セットされていたが、フォームで選択されなかったタグを削除
-  def delete_tags_from_task(tag_ids_param)
-    tag_ids_param = [] if tag_ids_param.nil?
+  def delete_tags_from_task(tag_ids_params)
+    tag_ids_params = [] if tag_ids_params.nil?
 
-    tag_ids_param.map(&:to_i)
+    tag_ids_params.map(&:to_i)
 
     tags.each { |tag| tags.destroy(tag) unless tag_ids.include?(tag) }
   end
 
   # フォームで新しく指定されたタグをタスクに追加する
-  def put_tags_on_task(tag_ids_param)
+  def put_tags_on_task(tag_ids_params)
     # フォームで指定されたタグがない => '日課'タグを設定してreturn
-    if tag_ids_param.nil?
+    if tag_ids_params.nil?
       daily_work_tag = Tag.find_by(name: '日課')
       tags << daily_work_tag unless tags.include?(daily_work_tag)
       return
     end
 
-    tag_ids_param = tag_ids_param.map(&:to_i)
-    tag_ids_param.each { |tag_id| tags << Tag.find(tag_id) unless tag_ids.include?(tag_id) }
+    tag_ids_params = tag_ids_params.map(&:to_i)
+    tag_ids_params.each { |tag_id| tags << Tag.find(tag_id) unless tag_ids.include?(tag_id) }
   end
 
   private
@@ -79,5 +67,15 @@ class Task < ApplicationRecord
     second          = time_in_second
 
     { hour:, minute:, second: }
+  end
+
+  # TaskTagsテーブルに保存する情報をもつ配列を作成する
+  def make_tasktag_copies_array(task_dup)
+    tag_ids.map do |tag_id|
+      {
+        tag_id:,
+        task_id: task_dup.id
+      }
+    end
   end
 end
