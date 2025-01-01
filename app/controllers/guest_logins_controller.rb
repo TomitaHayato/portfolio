@@ -11,7 +11,7 @@ class GuestLoginsController < ApplicationController
       password_confirmation: random_value.to_s,
       role:                  'guest'
     )
-    user.make_first_routine.make_first_task
+    user.make_first_routine
     user.create_quick_routine_template!
 
     login(user.email, random_value)

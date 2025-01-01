@@ -16,15 +16,10 @@ class Routine < ApplicationRecord
   scope :general,  ->           { joins(:user).where(users: { role: 'general' }) }
   scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: }) }
 
-  # TODO: make_first_routineメソッド内で処理を行うように変更
   def make_first_task
-    self.class.transaction do
-      task = tasks.create!(title: '水を飲む')
-      tag  = Tag.find_by(name: '日課')
-      task.tags << tag
-    end
-
-    task
+    task = tasks.create!(title: '水を飲む')
+    tag  = Tag.find_by(name: '日課')
+    task.tags << tag
   end
 
   # Routineのコピー
