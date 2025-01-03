@@ -33,7 +33,6 @@ ja:
           request: ご意見/改善点
           others: その他
         message: お問い合わせ内容
-        is_need_response: 返信が必要かどうか
         is_need_responses:
-          yes: 必要
-          no: 不要
+          "no": 不要
+          "yes": 必要
