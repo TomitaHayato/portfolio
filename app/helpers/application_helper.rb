@@ -19,7 +19,7 @@ module ApplicationHelper
     when root_path, policy_path, terms_path
       ''
     else
-      'pb-16 pt-1 h-full mx-auto bg-green-100/75 min-h-screen w-11/12 sm:w-4/5'
+      'pb-16 pt-1 h-full mx-auto bg-gradient-to-b from-teal-50 to-emerald-100/90 min-h-screen w-11/12 sm:w-4/5'
     end
   end
 
