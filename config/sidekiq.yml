@@ -1,6 +1,6 @@
 :scheduler:
   :schedule:
     set_notification_job:
-      cron: '*/1 * * * *'  # 1分ごとに実行
+      cron: '0 */1 * * * *'  # 1分ごとに実行
       class: SetNotificationJob
       queue: default
