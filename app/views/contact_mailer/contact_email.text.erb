@@ -1,6 +1,9 @@
 <%= @contact.name %>様からのお問い合わせ
 
+件名：<%= I18n.t("activerecord.attributes.contact.subjects.#{@contact.subject}") %>
+
+
 返信先: <%= @contact.email %>
-返信：  <%= @contact.is_need_response %>
+返信： <%= I18n.t("activerecord.attributes.contact.is_need_responses.#{@contact.is_need_response}") %>
 
 <%= @contact.message %>
