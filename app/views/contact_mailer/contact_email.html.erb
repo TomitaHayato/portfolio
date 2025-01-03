@@ -1,0 +1,10 @@
+<h2><%= @contact.name %>様からのお問い合わせ</h2>
+
+<hr>
+
+<p>返信先： <%= @contact.email %></p>
+<p>返信： <%= @contact.is_need_response %></p>
+
+<p class="text-wrap">
+  <%= @contact.message %>
+</p>
