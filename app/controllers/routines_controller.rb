@@ -7,14 +7,14 @@ class RoutinesController < ApplicationController
     @tags               = Tag.includes(:tasks).all
     @routines           = current_user.routines.search(params[:user_words]).custom_filter(@filter_target, current_user.id).includes(tasks: :tags).sort_routine(@column, @direction).page(params[:page])
     @user_words         = params[:user_words]
-    @auto_complete_list = make_autocomplete_list
+    @auto_complete_list = current_user.routines.make_routine_autocomplete_list
   end
 
   def show
     @task           = Task.new
     @tasks          = @routine.tasks.includes(:tags).order(position: :asc)
     @tags           = Tag.includes(:tasks)
-    @all_task_names = make_all_tasks_names
+    @all_task_names = current_user.routines.includes(:tasks).make_task_autocomplete_list
   end
 
   def new
@@ -40,7 +40,7 @@ class RoutinesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html         { render :show, status: :unprocessable_entity }
+        format.html { render :show, status: :unprocessable_entity }
         format.turbo_stream do
           render turbo_stream: turbo_stream.update(
             'routine-edit-form',
@@ -82,23 +82,5 @@ class RoutinesController < ApplicationController
 
   def set_routine
     @routine = current_user.routines.find(params[:id])
-  end
-
-  def make_autocomplete_list
-    all_title_array       = current_user.routines.pluck(:title)
-    all_description_array = current_user.routines.pluck(:description).compact_blank
-
-    all_title_array.concat(all_description_array).uniq
-  end
-
-  # ユーザーが作成した全タスクのtitle一覧を取得
-  def make_all_tasks_names
-    all_task_names = []
-
-    current_user.routines.includes(:tasks).find_each do |routine|
-      all_task_names.concat(routine.tasks.pluck(:title))
-    end
-
-    all_task_names.uniq
   end
 end

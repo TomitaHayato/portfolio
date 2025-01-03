@@ -1,22 +1,39 @@
 ja:
   activerecord:
     models:
-      user:    ユーザー
+      user: ユーザー
       routine: ルーティン
-      task:    タスク
+      task: タスク
     attributes:
       user:
-        name:                    名前
-        password:                パスワード
-        password_confirmation:   パスワード確認
-        email:                   メールアドレス
+        name: 名前
+        password: パスワード
+        password_confirmation: パスワード確認
+        email: メールアドレス
         complete_routines_count: ルーティン達成回数
+        roles:
+          admin: 管理者
+          general: 一般ユーザー
+          guest: ゲストユーザー
       routine:
-        title:           タイトル
-        description:     説明文
-        start_time:      開始時間
+        title: タイトル
+        description: 説明文
+        start_time: 開始時間
         completed_count: 達成回数
-        copied_count:    コピー数
+        copied_count: コピー数
       task:
-        title:                    タイトル
+        title: タイトル
         estimated_time_in_second: 目安時間
+      contact:
+        name: お名前
+        email: メールアドレス
+        subject: 件名
+        subjects:
+          bug: 不具合/バグの報告
+          request: ご意見/改善点
+          others: その他
+        message: お問い合わせ内容
+        is_need_response: 返信が必要かどうか
+        is_need_responses:
+          yes: 必要
+          no: 不要

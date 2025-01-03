@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_new_params)
     if @user.save
       # ユーザーの初期設定を行う
-      @user.make_first_routine.make_first_task
+      @user.make_first_routine
       @user.create_quick_routine_template!
 
       auto_login(@user)

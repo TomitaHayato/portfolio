@@ -52,18 +52,18 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :estimated_time_in_second, tag_ids: [])
   end
 
-  # フォームから送信された"HH:MM:SS"形式の文字列 => 秒数のintegerに変換
+  # フォームから送信された":hour, :minute, :second"のデータ => 秒数にしてparams[:task][:estimated_time_in_second]にまとめる
   def params_time_to_second
-    params[:task][:estimated_time_in_second] = hour_to_second(params[:task][:hour]) + minute_to_second(params[:task][:minute]) + params[:task][:second].to_i
+    params[:task][:estimated_time_in_second] = time_to_seconds(params[:task])
     delete_time_params
   end
 
-  def hour_to_second(hour)
-    hour.to_i * 3600
-  end
+  def time_to_seconds(params)
+    hours   = params[:hour].to_i
+    minutes = params[:minute].to_i
+    seconds = params[:second].to_i
 
-  def minute_to_second(minute)
-    minute.to_i * 60
+    (hours * 3600) + (minutes * 60) + seconds
   end
 
   # ストロングパラメータに引っかかるデータをparamsから削除

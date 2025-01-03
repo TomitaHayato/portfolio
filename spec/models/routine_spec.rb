@@ -221,16 +221,82 @@ RSpec.describe Routine, type: :model do
         end
       end
     end
+
+    describe 'complete_count' do
+      it 'completed_countカラムが+1される' do
+        routine    = create(:routine)
+        count_prev = routine.completed_count
+
+        routine.complete_count
+        routine.reload
+
+        expect(routine.completed_count).to eq count_prev + 1
+      end
+    end
+
+    describe 'copy' do
+      let!(:user1)    { create(:user) }
+      let!(:user2)    { create(:user) }
+      let!(:routine1) { create(:routine, :active_posted_counted, user: user1) }
+      let!(:task1)    { create(:task   , routine: routine1) }
+      let!(:task2)    { create(:task   , routine: routine1) }
+      let!(:tag1)     { create(:tag) }
+      let!(:tag2)     { create(:tag) }
+
+      before do
+        task1.tags << tag1
+        task2.tags << tag2
+      end
+
+      it 'Routine, Task, TaskTagレコードがコピーされる' do
+        prev_count         = routine1.copied_count
+        prev_routines_size = user2.routines.size
+
+        routine1.copy(user2)
+        routine2 = user2.routines.reload
+
+        expect(user2.routines.size).to   eq prev_routines_size + 1
+        expect(routine1.copied_count).to eq prev_count + 1
+
+        routine2 = user2.routines.last
+        # status_resetされているか
+        expect(routine2).to have_attributes(
+          is_active:   false,
+          is_posted:   false,
+          completed_count: 0,
+          copied_count:    0
+        )
+        # カラムがコピーされているか
+        expect(routine2).to have_attributes(
+          title:       routine1.title,
+          description: routine1.description,
+          start_time:  routine1.start_time
+        )
+        # Taskがコピーされているか
+        expect(routine2.tasks.size).to eq routine1.tasks.size
+        task1_dup = routine2.tasks.first
+        task2_dup = routine2.tasks.last
+
+        expect(task1_dup).to have_attributes(
+          title:                    task1.title,
+          position:                 task1.position,
+          estimated_time_in_second: task1.estimated_time_in_second,
+        )
+        # 紐づいたTagをコピーできているか
+        expect(task1_dup.tags).to include tag1
+        expect(task2_dup.tags).to include tag2
+      end
+    end
   end
 
   describe 'クラスメソッド' do
-    let!(:user)      { create(:user) }
-    let!(:routineA1) { create(:routine, title: 'ルーティンA' , description: '説明文A') }
-    let!(:routineA2) { create(:routine, title: 'ルーティンAA', description: '説明文A2') }
-    let!(:routineB1) { create(:routine, title: 'ルーティンB' , description: '説明文B') }
-    let!(:routineB2) { create(:routine, title: 'ルーティンBB', description: '説明文B2') }
-
     describe 'self.search(user_word)' do
+      let!(:user)      { create(:user) }
+      let!(:routineA1) { create(:routine, title: 'ルーティンA' , description: '説明文A') }
+      let!(:routineA2) { create(:routine, title: 'ルーティンAA', description: '説明文A2') }
+      let!(:routineB1) { create(:routine, title: 'ルーティンB' , description: '説明文B') }
+      let!(:routineB2) { create(:routine, title: 'ルーティンBB', description: '説明文B2') }
+
       context 'user_wordがnil' do
         it 'すべてのルーティンを取得' do
           expect_val = Routine.all

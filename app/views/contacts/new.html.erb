@@ -1,0 +1,68 @@
+<div class="text-center my-5">
+  <div class="mb-8">
+    <h3 class="text-2xl font-medium sm:text-4xl">お問い合わせ</h3>
+  </div>
+
+  <div class="mb-5">
+    <%= form_with model: @contact do |f| %>
+      <div class="mb-5">
+        <%= render 'shared/error_messages', object: @contact %>
+      </div>
+
+      <div class="mb-5">
+        <%= f.label :name, class:"block" do %>
+          <span class="text-red-500">*</span>
+          お名前
+        <% end %>
+        <%= f.text_field :name, value: @user&.name || '', class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
+      </div>
+
+      <div class="mb-5">
+        <%= f.label :email, class:"block" do %>
+          <span class="text-red-500">*</span>
+          メールアドレス
+        <% end %>
+        <%= f.text_field :email, value: @user&.email || '', class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
+      </div>
+
+      <div class="mb-5">
+        <%= f.label :subject, class:"block" do %>
+          <span class="text-red-500">*</span>
+          件名
+        <% end %>
+        <%= f.select :subject, @subjects_array.map { |key| I18n.t("activerecord.attributes.contact.subjects.#{key}") }, {}, { class: "select select-bordered select-sm w-8/12 lg:w-1/2" } %>
+      </div>
+
+      <div class="mb-5">
+        <%= f.label :message, class:"block" do %>
+          <span class="text-red-500">*</span>
+          お問い合わせ内容
+        <% end %>
+        <%= f.text_area :message, class: "textarea textarea-bordered textarea-sm min-h-32 w-8/12 lg:w-1/2" %>
+      </div>
+
+      <div class="mb-5">
+        <%= f.label :message, class:"block mb-2" do %>
+          <span class="text-red-500">*</span>
+          返信を希望しますか？
+        <% end %>
+
+        <div class="flex gap-3 justify-center">
+          <div class="flex items-center gap-1">
+            <%= f.radio_button :is_need_response, 'no', class: "radio radio-sm radio-info" %>
+            <%= f.label :is_need_response_no, 'いいえ' %>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <%= f.radio_button :is_need_response, 'yes', class: "radio radio-sm radio-info" %>
+            <%= f.label :is_need_response_yes, 'はい' %>
+          </div>   
+        </div>     
+      </div>
+
+      <%= f.submit '送信', data: { turbo_confirm: "お問い合わせ内容を送信しますか？" }, class: "btn btn-wide btn-success" %>
+    <% end %>
+  </div>
+
+  <%= link_to 'キャンセル', my_pages_path, class: "btn btn-outline btn-wide" %>
+</div>

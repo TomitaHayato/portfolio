@@ -9,7 +9,7 @@ class Routines::PlaysController < ApplicationController
 
     # 最後のタスクの場合は完了ページに遷移するため、turbo-frameリクエストを無効化
     @turbo_setting               = { turbo_method: :patch }
-    @turbo_setting[:turbo_frame] = '_top' if session[:playing_task_num] == (@tasks.count - 1)
+    @turbo_setting[:turbo_frame] = '_top' if session[:playing_task_num] == (@tasks.size - 1)
   end
 
   def create
@@ -24,7 +24,7 @@ class Routines::PlaysController < ApplicationController
 
     session[:experience_log] = set_experience_log(session[:experience_log], params[:tag_ids]) if params[:tag_ids]
 
-    if session[:playing_task_num] >= @tasks.count
+    if session[:playing_task_num] >= @tasks.size
       @routine.complete_count
       redirect_to routines_finishes_path
     else

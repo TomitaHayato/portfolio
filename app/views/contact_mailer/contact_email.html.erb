@@ -1,0 +1,14 @@
+<h2><%= @contact.name %>様からのお問い合わせ</h2>
+<h2>
+  件名：
+  <%= I18n.t("activerecord.attributes.contact.subjects.#{@contact.subject}") %>
+</h2>
+
+<hr>
+
+<p>返信先： <%= @contact.email %></p>
+<p>返信： <%= I18n.t("activerecord.attributes.contact.is_need_responses.#{@contact.is_need_response}") %></p>
+
+<p class="text-wrap">
+  <%= @contact.message %>
+</p>

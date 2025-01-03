@@ -20,15 +20,19 @@ class Routine < ApplicationRecord
     task = tasks.create!(title: '水を飲む')
     tag  = Tag.find_by(name: '日課')
     task.tags << tag
-
-    task
   end
 
+  # Routineのコピー
   def copy(user)
-    routine_dup = dup.reset_status
-    routine_dup.user = user
-    routine_dup.save!
-    routine_dup
+    self.class.transaction do
+      copy_count
+
+      routine_dup = dup.reset_status
+      routine_dup.user = user
+      routine_dup.save!
+
+      copy_tasks(routine_dup) unless tasks.empty?
+    end
   end
 
   # ルーティンをコピーする際、ルーティン情報をリセットする処理
@@ -40,15 +44,6 @@ class Routine < ApplicationRecord
     self
   end
 
-  # クイック作成
-  def self.quick_build(template)
-    new(
-      title:       template.title,
-      description: template.description,
-      start_time:  template.start_time
-    )
-  end
-
   def total_estimated_time
     result          = second_to_time_string(all_task_estimated_time)
     result[:hour]   = "0#{result[:hour]}"   if result[:hour]   < 10
@@ -57,15 +52,30 @@ class Routine < ApplicationRecord
     result
   end
 
+  def complete_count
+    self.completed_count += 1
+    save!
+  end
+
+  # クイック作成(Userモデルに移すべき？)
+  def self.quick_build(template)
+    new(
+      title:       template.title,
+      description: template.description,
+      start_time:  template.start_time
+    )
+  end
+
   # 検索処理：routineタイトルと説明文で部分検索
+  # 空白で区切られている場合、&検索を実行
   def self.search(user_word)
     return all unless user_word
 
-    user_words   = user_word.split
+    user_words   = user_word.split # 入力値を空白で区切る
     search_query = user_words.map { '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ')
-    like_values  = []
+    like_values  = [] # クエリの?に入れる値の配列
     user_words.each do |word|
-      2.times { like_values << "%#{word}%" }
+      2.times { like_values << "%#{word}%" } # titleとdescriptionの2つ分
     end
 
     where(search_query, *like_values)
@@ -86,16 +96,6 @@ class Routine < ApplicationRecord
     else
       all
     end
-  end
-
-  def copy_count
-    self.copied_count += 1
-    save!
-  end
-
-  def complete_count
-    self.completed_count += 1
-    save!
   end
 
   # 投稿の並べ替え処理
@@ -121,7 +121,42 @@ class Routine < ApplicationRecord
     order(column_sym => direction_sym)
   end
 
+  # TODO: テスト
+  # オートコンプリート用の配列を作成
+  def self.make_routine_autocomplete_list
+    all_title_array       = pluck(:title)
+    all_description_array = pluck(:description).compact_blank
+
+    all_title_array.concat(all_description_array).uniq
+  end
+
+  # TODO: テスト
+  # ユーザーが作成した全タスクのtitle一覧を取得
+  def self.make_task_autocomplete_list
+    all_task_titles = []
+
+    find_each { |routine| all_task_titles.concat(routine.tasks.pluck(:title)) }
+
+    all_task_titles.uniq
+  end
+
   private
+
+  def copy_count
+    self.copied_count += 1
+    save!
+  end
+
+  # レシーバに属するタスクのコピーをroutine_dupに保存
+  def copy_tasks(routine_dup)
+    tasks.each do |task_origin|
+      # Taskのコピーを作成・保存
+      task_dup = task_origin.dup
+      task_dup.update!(routine_id: routine_dup.id)
+      # task_originに紐づいたtagをtask_dupにも紐付ける
+      task_origin.copy_tags(task_dup)
+    end
+  end
 
   def second_to_time_string(time_in_second)
     hour            = time_in_second / 3600

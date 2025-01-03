@@ -1,4 +1,3 @@
-# TODO: メールでも通知できるようにJobを追加
 class SetNotificationJob < ApplicationJob
   queue_as :default
 
