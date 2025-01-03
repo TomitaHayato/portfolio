@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     resources :feature_rewards, only: %i[update], param: :user_id
   end
 
+  resources :contacts, only: %i[show new create]
+
   post 'oauth/callback' => 'oauths#callback'
   get 'oauth/callback'  => 'oauths#callback'
   get 'oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
