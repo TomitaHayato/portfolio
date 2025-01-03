@@ -253,8 +253,9 @@ RSpec.describe Routine, type: :model do
         prev_routines_size = user2.routines.size
 
         routine1.copy(user2)
+        routine2 = user2.routines.reload
 
-        expect(user2.routines.size).to   eq prev_routines_size
+        expect(user2.routines.size).to   eq prev_routines_size + 1
         expect(routine1.copied_count).to eq prev_count + 1
 
         routine2 = user2.routines.last
