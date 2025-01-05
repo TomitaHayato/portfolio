@@ -14,53 +14,112 @@
   </div>
 </div>
 
-<div class="mx-auto bg-blue-100/70 p-10">
+<div class="mx-auto bg-green-50 p-10">
   <div class="max-w-screen flex-col">
-    <h1 class="text-2xl my-5 text-center sm:text-3xl md:text-5xl md:my-16">アプリの使い方</h1>
+    <h1 class="text-2xl my-5 text-center sm:text-2xl md:text-4xl md:my-16">アプリの使い方</h1>
 
-    <div class="text-center mb-5 md:mb-16">
-      <p class="mb-3 font-medium sm:text-xl md:text-2xl md:mb-5">ルーティンを<span class="text-blue-500 font-semibold">作成</span>しましょう！</p>
-      <div class="mockup-phone mb-3 md:mb-8">
-        <div class="camera"></div>
-        <div class="display">
-          <div class="artboard artboard-demo">
-            <%= image_tag 'routine_new_sm.jpg', class: "max-w-40 sm:max-w-60" %>
+    <div class="overflow-auto overscroll-x-none mx-auto md:w-10/12">
+      <div class="md:flex ms:gap-5">
+        <div class="text-center mb-5 shadow-xl md:p-5">
+          <p class="mb-3 font-medium sm:text-xl md:mb-5">
+            ルーティンを<span class="text-sky-500">作成</span>しましょう！
+          </p>
+
+          <div class="mockup-phone mb-3 md:mb-8">
+            <div class="camera max-w-0"></div>
+            <div class="display">
+              <div class="artboard artboard-demo">
+                <%= image_tag 'create.png', class: "max-w-40 sm:max-w-60" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
+            <p>開始時刻や取り組みたいタスクを決めましょう！</p>
+          </div>
+        </div>
+
+        <div class="text-center mb-5 shadow-xl md:p-5">
+          <p class="mb-3 font-medium sm:text-xl md:mb-5">
+            ルーティンを<span class="text-sky-500">開始</span>しましょう！
+          </p>
+
+          <div class="mockup-phone mb-3 md:mb-8">
+            <div class="camera max-w-0"></div>
+            <div class="display">
+              <div class="artboard artboard-demo">
+                <%= image_tag 'my_page.png', class: "max-w-40 sm:max-w-60" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
+            <p>
+              開始時刻になったらルーティンに取り組みましょう！
+              LINEやメールで開始時刻を通知することもできます
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mb-5 shadow-xl md:p-5">
+          <p class="mb-3 font-medium sm:text-xl md:mb-5">
+            タスクに<span class="text-sky-500">取り組み</span>ましょう！
+          </p>
+          <div class="mockup-phone mb-3 md:mb-8">
+            <div class="camera max-w-0"></div>
+            <div class="display">
+              <div class="artboard artboard-demo">
+                <%= image_tag 'playing.png', class: "max-w-40 sm:max-w-60" %>
+              </div>
+            </div>
+          </div>
+          <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
+            <p>
+              ルーティンに設定されたタスクを1つずつこなしていきましょう！
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mb-5 shadow-xl md:p-5">
+          <p class="mb-3 font-medium sm:text-xl md:mb-5">
+            ルーティンを<span class="text-sky-500">投稿</span>しましょう
+          </p>
+          <div class="mockup-phone mb-3 md:mb-8">
+            <div class="camera max-w-0"></div>
+            <div class="display">
+              <div class="artboard artboard-demo">
+                <%= image_tag 'posts.png', class: "max-w-40 sm:max-w-60" %>
+              </div>
+            </div>
+          </div>
+          <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
+            <p>
+              自分のルーティンを他のユーザーと共有しましょう！
+              他のユーザーのルーティンをコピーして取り組むこともできます
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mb-5 shadow-xl md:p-5">
+          <p class="mb-3 font-medium sm:text-xl md:mb-5">
+            <span class="text-sky-500">称号</span>を集めましょう
+          </p>
+          <div class="mockup-phone mb-3 md:mb-8">
+            <div class="camera max-w-0"></div>
+            <div class="display">
+              <div class="artboard artboard-demo">
+                <%= image_tag 'rewards.png', class: "max-w-40 sm:max-w-60" %>
+              </div>
+            </div>
+          </div>
+          <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
+            <p>
+              毎日ルーティンに取り組んで、全ての称号を手に入れましょう♪
+            </p>
           </div>
         </div>
       </div>
-      <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
-        <p class="">開始時刻やタスクの制限時間を決めて毎日実行しましょう。</p>
-      </div>
     </div>
 
-    <div class="text-center mb-5 md:mb-16">
-      <p class="mb-3 font-medium sm:text-xl md:text-2xl md:mb-5">ルーティンに取り組みましょう！</p>
-      <div class="mockup-phone mb-3 md:mb-8">
-        <div class="camera"></div>
-        <div class="display">
-          <div class="artboard artboard-demo">
-            <%= image_tag 'routine_play_sm.jpg', class: "max-w-40 sm:max-w-60" %>
-          </div>
-        </div>
-      </div>
-      <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
-        <p class="">開始時刻になったらルーティンを開始しましょう。タスクを1つずつこなしていきます</p>
-      </div>
-    </div>
-
-    <div class="text-center mb-5 md:mb-16">
-      <p class="mb-3 font-medium sm:text-xl md:text-2xl md:mb-5">ルーティンを<span class="text-amber-500 font-semibold">共有</span>しましょう！</p>
-      <div class="mockup-phone mb-3 md:mb-8">
-        <div class="camera"></div>
-        <div class="display">
-          <div class="artboard artboard-demo">
-            <%= image_tag 'routine_post_sm.jpg', class: "max-w-40 sm:max-w-60" %>
-          </div>
-        </div>
-      </div>
-      <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
-        <p class="">自分のルーティンを他のユーザーと共有しましょう。他のユーザーのルーティンをコピーして取り組むこともできます</p>
-      </div>
-    </div>
   </div>
 </div>

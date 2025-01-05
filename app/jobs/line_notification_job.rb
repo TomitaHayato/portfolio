@@ -4,6 +4,7 @@ require 'json'
 
 class LineNotificationJob < ApplicationJob
   queue_as :default
+  sidekiq_options retry: false # Jobが失敗した際、再試行せず破棄
   include Rails.application.routes.url_helpers
 
   def perform(uid)
