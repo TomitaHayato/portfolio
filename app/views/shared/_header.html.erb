@@ -16,13 +16,23 @@
       <% end %>
 
       <div class="flex items-center gap-3">
-        <!-- ユーザーアイコン -->
-          <div class="tooltip tooltip-bottom flex-none" data-tip="プロフィール">
-            <%= link_to user_path(current_user), class: "hover:scale-105 block", id: "user-icon-btn" do %>
-              <%= image_tag "user_icon.jpg", class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9" %>
-            <% end %>
-          </div>          
+        <!-- ゲストログイン時のみ -->
+        <% if current_user.guest? %>
+          <%= link_to '本会員登録', new_user_path,
+              class: "btn btn-accent btn-xs sm:btn-sm mx-3 lg:mx-5"
+          %>
+        <% end %>
 
+        <!-- ユーザーアイコン -->
+        <div class="tooltip tooltip-bottom flex-none" data-tip="プロフィール">
+          <%= link_to user_path(current_user), class: "hover:scale-105 block", id: "user-icon-btn" do %>
+            <%= image_tag "user_icon.jpg",
+                class:"items-center rounded-lg shadow-md size-7 sm:size-8 lg:size-9"
+            %>
+          <% end %>
+        </div>          
+
+        <!-- ≡メニュー -->
         <div class="drawer drawer-end mx-3 lg:mx-5">
           <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
@@ -35,31 +45,49 @@
             <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu text-base-content w-6/12 bg-green-50 rounded-box z-10 shadow text-black w-40 sm:w-4/12 md:w-48 lg:w-52" id="drawer-menu">
               <li>
-                <%= link_to "マイページへ", my_pages_path,                              class:"p-3 mb-2 bg-gradient-to-tl from-green-300 to-cyan-300 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+                <%= link_to "マイページへ", my_pages_path,
+                    class: "p-3 mb-2 bg-gradient-to-tl from-green-300 to-green-100 text-xs sm:text-sm lg:text-base hover:opacity-50"
+                %>
               </li>
               <li>
-                <%= link_to "ルーティンを作成する", new_routine_path,                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+                <%= link_to "ルーティンを作成する", new_routine_path,
+                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50"
+                %>
               </li>
               <li>
-                <%= link_to "My ルーティン", routines_path,                            class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+                <%= link_to "My ルーティン", routines_path,
+                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50"
+                %>
               </li>
               <li>
-                <%= link_to "投稿一覧を見る", routines_posts_path,                      class:"p-3 mb-2 bg-gradient-to-tl from-amber-300 to-amber-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+                <%= link_to "投稿を見る", routines_posts_path,
+                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50"
+                %>
               </li>
               <li>
-                <%= link_to "称号一覧", rewards_path,                                   class:"p-3 mb-2 bg-gradient-to-tl from-pink-200 to-yellow-100 text-xs sm:text-sm lg:text-base hover:opacity-50" %>
+                <%= link_to "称号一覧", rewards_path,
+                    class:"p-3 mb-2 bg-gradient-to-tl from-cyan-300 to-cyan-100 text-xs sm:text-sm lg:text-base hover:opacity-50"
+                %>
               </li>
               <li>
-                <%= link_to "利用規約", terms_path, class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50" %>
+                <%= link_to "利用規約", terms_path,
+                    class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50"      
+                %>
               </li>
               <li>
-                <%= link_to "プライバシーポリシー", policy_path, class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50" %>
+                <%= link_to "プライバシーポリシー", policy_path,
+                    class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50"
+                %>
               </li>
               <li>
-                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm hover:opacity-50" %>
+              <%= link_to "お問い合わせ", new_contact_path,
+                  class:"p-3 mb-2 bg-gradient-to-tl from-yellow-200 to-yellow-50 text-xs sm:text-sm hover:opacity-50"
+              %>
               </li>
               <li>
-                <%= link_to "退会する", "#", class:"hidden text-red-400 p-3 mb-2 text-xs sm:text-sm lg:text-base" %>
+                <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete },
+                    class:"p-3 mb-2 bg-gradient-to-tl from-gray-300 to-gray-100 text-xs sm:text-sm hover:opacity-50"
+                %>
               </li>
             </ul>
           </div>

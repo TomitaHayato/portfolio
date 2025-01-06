@@ -6,7 +6,7 @@ class SetNotificationJob < ApplicationJob
   def perform
     time_now = Time.current
     begin
-      User.includes(:authentications).find_each do |user|
+      User.where(role: 'general').includes(:authentications).find_each do |user|
         active_routine = user.routines.find_by(is_active: true)
 
         next if active_routine.nil? || user.off? || !start_time?(active_routine.start_time, time_now)
