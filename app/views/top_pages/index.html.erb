@@ -1,17 +1,20 @@
 <div class="hero min-h-screen bg-[url('morning_pc.jpg')]">
   <div class="hero-overlay bg-opacity-20"></div>
-  <div class="hero-content text-center rounded-full bg-gradient-to-tl from-emerald-200/90 to-emerald-50/70 w-full aspect-square sm:w-96 sm:h-96 md:w-[500px] md:h-[500px]">
-    <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-green-500 md:text-6xl">Morning<br>Forest</h1>
-      <p class="text-gray-600 sm:text-lg md:text-xl mx-10 mb-5">モーニングルーティンを作成・共有して、最高の朝を目指しましょう！</p>
-      
-      <div class="mb-2">
-        <%= link_to '登録なしで使ってみる', guest_login_path, data: { turbo_method: :post }, class:"btn bg-pink-300" %>
-        <p class="text-xs text-gray-600">※登録なしでご利用できます</p>
-      </div>
 
+  <!-- Title Circle -->
+  <div class="hero-content text-center rounded-full bg-gradient-to-tl from-emerald-200/90 to-emerald-50/70 w-full max-w-[400px] aspect-square sm:w-96 sm:h-96 sm:max-w-full md:w-[500px] md:h-[500px]">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-green-500 md:text-6xl">Morning<br>Forest</h1>
+      <p class="text-gray-600 mx-8 sm:mx-12 mb-5 text-sm sm:text-base">モーニングルーティンの管理をサポートするアプリです！</p>
+
+      <div class="mb-2">
+        <%= link_to '使ってみる', guest_login_path, data: { turbo_method: :post },
+            class:"btn bg-gradient-to-tl from-pink-300 to-pink-100 btn-wide btn-action-custom" %>
+        <p class="mt-1 text-sm text-gray-600">※登録なしでご利用できます</p>
+      </div>
     </div>
   </div>
+
 </div>
 
 <div class="mx-auto bg-green-50 p-10">
