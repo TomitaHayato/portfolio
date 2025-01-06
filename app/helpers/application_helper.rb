@@ -2,8 +2,15 @@ module ApplicationHelper
   def flash_type_class(type)
     case type.to_s
     when 'notice' then 'bg-green-400'
-    when 'alert' then 'bg-red-400'
-    else 'bg-orange-400'
+    when 'alert'  then 'bg-red-400'
+    else 'bg-sky-400'
+    end
+  end
+
+  def flash_icon(type)
+    case type.to_s
+    when 'notice' then 'i-uiw-circle-check-o'
+    else 'i-uiw-warning'
     end
   end
 

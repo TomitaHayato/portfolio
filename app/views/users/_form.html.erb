@@ -1,20 +1,20 @@
 <%= form_with model:user, class:"text-center" do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="ユーザー名（２５文字以内）">
+  <div class="mx-auto my-5 tooltip tooltip-success block" data-tip="ユーザー名（２５文字以内）">
     <%= f.text_field :name, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "ユーザー名" %>
   </div>
 
-  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="メールアドレス">
+  <div class="mx-auto my-5 tooltip tooltip-success block" data-tip="メールアドレス">
     <%= f.email_field :email, class:"block input input-bordered mx-auto w-8/12 md:text-lg lg:w-1/2", placeholder: "メールアドレス" %>
   </div>
 
-  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="パスワード（8文字以上）">
+  <div class="mx-auto my-5 tooltip tooltip-success block" data-tip="パスワード（8文字以上）">
     <%= f.password_field :password, class:"block input input-bordered text-lg mx-auto w-8/12 md:text-xl lg:w-1/2", placeholder: "パスワード（8文字以上）" %>
   </div>
 
-  <div class="mx-auto my-8 tooltip tooltip-success block" data-tip="パスワード確認">
+  <div class="mx-auto my-5 tooltip tooltip-success block" data-tip="パスワード確認">
     <%= f.password_field :password_confirmation, class:"block input input-bordered text-lg mx-auto w-8/12 md:text-xl lg:w-1/2", placeholder: "パスワード確認" %>
   </div>
 
-  <%= f.submit nil, class:"btn bg-gradient-to-tl from-emerald-400 to-emerald-100 mb-5 btn-md min-w-28 sm:text-lg sm:btn-lg sm:min-w-40 lg:min-w-60" %>
+  <%= f.submit nil, class:"btn-xl-custom btn-create-custom btn-wide mb-5" %>
 <% end %>
