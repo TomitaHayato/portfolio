@@ -90,8 +90,8 @@ RSpec.describe "NewRoutinesPaths", type: :system, js: true do
     end
 
     describe 'フォーム以外の要素' do
-      it '「キャンセル」でマイページに遷移' do
-        click_on 'キャンセル'
+      it 'キャンセルボタンでマイページに遷移' do
+        find('#cancel-btn').click
         expect(page).to have_current_path(my_pages_path)
       end
 

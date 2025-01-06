@@ -1,5 +1,10 @@
 <div>
-  <h1 class="text-center text-lg my-5 sm:text-xl md:text-2xl xl:test-3xl">おはようございます！<br class="md:hidden"><span class="font-semibold text-orange-400"><%= current_user.name %></span>さん</h1>
+  <h1 class="text-center text-lg my-5 sm:text-xl md:text-2xl xl:test-3xl">
+    おはようございます！
+    <br   class="md:hidden">
+    <span class="font-semibold text-sky-400"><%= current_user.name %></span>
+    さん
+  </h1>
 </div>
 
 <!-- 実践中のルーティン表示 -->
@@ -17,12 +22,12 @@
 
 <!-- 経験値表示 -->
 <div class="p-3 mt-3 mx-auto bg-gradient-to-tl from-green-200/60 to-green-100/60 sm:w-11/12 md:w-9/12" id="user-status">
-  <!-- ユーザーのレベルを表示 -->
+  <!-- レベル+称号 Stats -->
   <div class="flex justify-center" id="user-level-stat">
     <div class="stats shadow">
       <div class="stat place-items-center">
 
-        <!-- アバター表示 -->
+        <!-- 称号表示 -->
         <% if current_user.feature_reward %>
           <div class="stat-figure text-center">
             <div class="avatar">

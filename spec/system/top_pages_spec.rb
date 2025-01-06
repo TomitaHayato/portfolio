@@ -44,7 +44,7 @@ RSpec.describe "TopPages", type: :system, js: true do
         end
 
         it 'トップページにアプリの使い方が表示されている' do
-          expect(page).to have_selector('h1', text: 'アプリの使い方')
+          expect(page).to have_selector('h1', text: '使い方')
         end
       end
 

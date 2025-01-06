@@ -1,3 +1,7 @@
+.only-phone-custom {
+  @apply sm:hidden
+}
+
 .btn-sm-custom {
   @apply btn text-xs btn-sm h-8 shadow-sm
          md:text-sm 

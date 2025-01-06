@@ -6,7 +6,7 @@
       <p class="text-gray-600 sm:text-lg md:text-xl mx-10 mb-5">モーニングルーティンを作成・共有して、最高の朝を目指しましょう！</p>
       
       <div class="mb-2">
-        <%= link_to 'いますぐ試してみる', guest_login_path, data: { turbo_method: :post }, class:"btn bg-pink-300" %>
+        <%= link_to '登録なしで使ってみる', guest_login_path, data: { turbo_method: :post }, class:"btn bg-pink-300" %>
         <p class="text-xs text-gray-600">※登録なしでご利用できます</p>
       </div>
 
@@ -14,53 +14,8 @@
   </div>
 </div>
 
-<div class="mx-auto bg-blue-100/70 p-10">
-  <div class="max-w-screen flex-col">
-    <h1 class="text-2xl my-5 text-center sm:text-3xl md:text-5xl md:my-16">アプリの使い方</h1>
+<div class="mx-auto bg-green-50 p-10">
+  <%= render 'how_to_use' %>
 
-    <div class="text-center mb-5 md:mb-16">
-      <p class="mb-3 font-medium sm:text-xl md:text-2xl md:mb-5">ルーティンを<span class="text-blue-500 font-semibold">作成</span>しましょう！</p>
-      <div class="mockup-phone mb-3 md:mb-8">
-        <div class="camera"></div>
-        <div class="display">
-          <div class="artboard artboard-demo">
-            <%= image_tag 'routine_new_sm.jpg', class: "max-w-40 sm:max-w-60" %>
-          </div>
-        </div>
-      </div>
-      <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
-        <p class="">開始時刻やタスクの制限時間を決めて毎日実行しましょう。</p>
-      </div>
-    </div>
-
-    <div class="text-center mb-5 md:mb-16">
-      <p class="mb-3 font-medium sm:text-xl md:text-2xl md:mb-5">ルーティンに取り組みましょう！</p>
-      <div class="mockup-phone mb-3 md:mb-8">
-        <div class="camera"></div>
-        <div class="display">
-          <div class="artboard artboard-demo">
-            <%= image_tag 'routine_play_sm.jpg', class: "max-w-40 sm:max-w-60" %>
-          </div>
-        </div>
-      </div>
-      <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
-        <p class="">開始時刻になったらルーティンを開始しましょう。タスクを1つずつこなしていきます</p>
-      </div>
-    </div>
-
-    <div class="text-center mb-5 md:mb-16">
-      <p class="mb-3 font-medium sm:text-xl md:text-2xl md:mb-5">ルーティンを<span class="text-amber-500 font-semibold">共有</span>しましょう！</p>
-      <div class="mockup-phone mb-3 md:mb-8">
-        <div class="camera"></div>
-        <div class="display">
-          <div class="artboard artboard-demo">
-            <%= image_tag 'routine_post_sm.jpg', class: "max-w-40 sm:max-w-60" %>
-          </div>
-        </div>
-      </div>
-      <div class="text-start w-52 mx-auto text-xs sm:text-base md:text-lg md:w-72">
-        <p class="">自分のルーティンを他のユーザーと共有しましょう。他のユーザーのルーティンをコピーして取り組むこともできます</p>
-      </div>
-    </div>
-  </div>
+  <%= render 'about_routine' %>
 </div>

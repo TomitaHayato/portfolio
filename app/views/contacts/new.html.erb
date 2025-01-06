@@ -22,7 +22,7 @@
           <span class="text-red-500">*</span>
           メールアドレス
         <% end %>
-        <%= f.text_field :email, value: @user&.email || '', class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
+        <%= f.email_field :email, value: @user&.email || '', class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
       </div>
 
       <div class="mb-5">
