@@ -133,6 +133,10 @@
   @apply text-blue-500;
 }
 
+.link-lg-custom {
+  @apply link block link-text-custom text-lg-custom hover:scale-105;
+}
+
 .breadcrumbs-container-custom {
   @apply breadcrumbs w-10/12 mx-auto text-xs sm:text-sm;
 }

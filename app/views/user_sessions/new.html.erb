@@ -1,12 +1,20 @@
 <div class="text-center">
-  <h1 class="text-xl font-semibold mt-5 mb-15 text-center sm:text-3xl lg:text-4xl">ユーザーログイン</h1>
+  <h1 class="text-xl font-semibold mt-5 mb-15 text-center sm:text-2xl">ユーザーログイン</h1>
+
   <%= render "form" %>
-  <%= link_to "キャンセル", root_path, class: "btn bg-gradient-to-tl from-gray-400 to-gray-100 mx-auto mb-5 min-w-20 sm:text-lg sm:btn-lg sm:max-w-36" %>
+
+  <%= link_to "キャンセル", root_path,
+      class: "btn-xl-custom btn-cancel-custom mb-5" %>
+
   <div class="mb-5 flex justify-center">
     <%= link_to auth_at_provider_path(:provider => :line), class:"hover:opacity-90 active:opacity-70", id: "line-login-btn" do %>
       <%= image_tag 'line_login_btn.png'%>
     <% end %>
   </div>
-  <%= link_to "新規登録ページへ", new_user_path, class: "link text-blue-600 mx-auto text-base sm:text-lg lg:text-xl block mb-5" %>
-  <%= link_to "パスワードをお忘れの方はこちら", new_password_reset_path, class: "link text-blue-600 mx-auto text-base sm:text-lg lg:text-xl" %>
+
+  <%= link_to "新規登録ページへ", new_user_path,
+      class: "link-lg-custom mb-5" %>
+
+  <%= link_to "パスワードをお忘れの方はこちら", new_password_reset_path,
+      class: "link-lg-custom mb-5" %>
 </div>
