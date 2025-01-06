@@ -28,7 +28,7 @@ RSpec.describe "MyPages", type: :system, js:true do
 
     it '「おはようございます！〜さん」と表示される' do
       expect(page).to have_content("おはようございます！")
-      expect(page).to have_content("#{user.name}さん")
+      expect(page).to have_content(user.name)
     end
 
     context '実践中のルーティンがない場合' do

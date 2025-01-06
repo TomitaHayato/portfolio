@@ -36,7 +36,7 @@ module HeaderSupport
   end
 
   def check_drawer_routines_posts_path
-    menu_page_trans_test(header_drawer_container, '投稿一覧を見る', routines_posts_path)
+    menu_page_trans_test(header_drawer_container, '投稿を見る', routines_posts_path)
   end
 
   def check_drawer_rewards_path
