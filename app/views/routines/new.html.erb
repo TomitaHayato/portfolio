@@ -13,10 +13,19 @@
   </div>
   
   <h1 class="page-title-custom">ルーティン新規作成</h1>
+
+  <div class="w-8/12 lg:w-7/12 mx-auto flex justify-end">
+    <%= link_to '1 clickで作成',
+      routines_quick_creates_path,
+      data: {turbo_method: :post, tip: "ルーティンを作成できます"},
+      class: "btn-md-custom btn-create-custom tooltip tooltip-accent",
+      id: "quick-create-routine-btn"
+    %>
+  </div>
   
   <div class="text-center">
     <%= render "form", routine: @routine %>
-    <%= link_to "キャンセル", my_pages_path, class: "mb-3 btn-xl-custom btn-cansel-custom" %> <br>
+    <%= link_to "マイページへ", my_pages_path, class: "mb-5 btn-xl-custom btn-cansel-custom" %> <br>
     <%= link_to "Myルーティン一覧へ", routines_path, class: "link block text-blue-600 mx-auto text-lg-custom hover:scale-105" %>
   </div>
 </div>
