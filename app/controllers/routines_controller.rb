@@ -30,6 +30,7 @@ class RoutinesController < ApplicationController
     if @routine.save
       redirect_to routine_path(@routine), notice: '作成したルーティンにタスクを追加しましょう！'
     else
+      @quick_routine_template = current_user.quick_routine_template
       render :new, status: :unprocessable_entity
     end
   end
