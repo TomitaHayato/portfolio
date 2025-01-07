@@ -1,5 +1,5 @@
 <% if object.errors.any? %>
-  <div class="bg-red-400 w-10/12 p-2 mt-3 rounded-lg mx-auto text-xs items-center sm:text-sm md:text-base lg:w-8/12">
+  <div class="bg-red-400 w-10/12 p-2 mt-3 mb-5 rounded-lg mx-auto text-xs items-center sm:text-sm md:text-base lg:w-8/12">
     <p class="font-semibold mb-3">入力エラー</p>
     <ul>
       <% object.errors.full_messages.each do |msg| %>
