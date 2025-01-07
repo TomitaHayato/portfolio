@@ -41,10 +41,8 @@ class User < ApplicationRecord
       is_active:   true
     }
 
-    self.class.transaction do
-      new_routine = routines.create!(routine_params)
-      new_routine.make_first_task
-    end
+    new_routine = routines.create!(routine_params)
+    new_routine.make_first_task
   end
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理

@@ -17,9 +17,11 @@ class Routine < ApplicationRecord
   scope :liked,    ->(user_id)  { joins(:likes).where(likes: { user_id: }) }
 
   def make_first_task
-    task = tasks.create!(title: '水を飲む')
-    tag  = Tag.find_by(name: '日課')
-    task.tags << tag
+    self.class.transaction do
+      task = tasks.create!(title: '水を飲む')
+      tag  = Tag.find_by(name: '日課')
+      task.tags << tag
+    end
   end
 
   # Routineのコピー
