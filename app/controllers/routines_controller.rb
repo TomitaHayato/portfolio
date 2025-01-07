@@ -8,6 +8,7 @@ class RoutinesController < ApplicationController
     @routines           = current_user.routines.search(params[:user_words]).custom_filter(@filter_target, current_user.id).includes(tasks: :tags).sort_routine(@column, @direction).page(params[:page])
     @user_words         = params[:user_words]
     @auto_complete_list = current_user.routines.make_routine_autocomplete_list
+    @quick_routine_template = current_user.quick_routine_template
   end
 
   def show
@@ -18,7 +19,8 @@ class RoutinesController < ApplicationController
   end
 
   def new
-    @routine = Routine.new
+    @routine                = Routine.new
+    @quick_routine_template = current_user.quick_routine_template
   end
 
   def create
