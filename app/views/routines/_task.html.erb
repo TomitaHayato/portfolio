@@ -17,6 +17,10 @@
           </button>
           
           <dialog id="edit_task_form_<%= task.id %>" class="modal">
+            <form method="dialog" class="modal-backdrop">
+              <button>close</button>
+            </form>
+
             <div class="modal-box">
               <%= render partial: "routines/task_form", locals: { task: task, routine: routine, tags: tags } %>
               <div class="modal-action mt-0">
