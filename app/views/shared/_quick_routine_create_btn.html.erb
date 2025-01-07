@@ -1,0 +1,30 @@
+<div class="flex items-center">
+  <%= link_to '1 clickで作成',
+      routines_quick_creates_path,
+      data: {turbo_method: :post, tip: "ルーティンを作成できます"},
+      class: "btn-md-custom btn-create-custom tooltip tooltip-accent",
+      id: "quick-create-routine-btn"
+  %>
+
+  <button class="btn btn-md-custom btn-ghost" onclick="quick_routine_template_form_modal.showModal()">
+    <i class="i-uiw-edit"></i>
+  </button>
+</div>
+
+<!-- Modal 編集フォーム -->
+<dialog id="quick_routine_template_form_modal" class="modal">
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+
+  <div class="modal-box">
+    <%= render 'quick_routine_templates/edit_form',
+        quick_routine_template: quick_routine_template %>
+
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn btn-md-custom btn-cancel-custom">キャンセル</button>
+      </form>
+    </div>
+  </div>
+</dialog>

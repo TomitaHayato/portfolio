@@ -41,10 +41,8 @@ class User < ApplicationRecord
       is_active:   true
     }
 
-    self.class.transaction do
-      new_routine = routines.create!(routine_params)
-      new_routine.make_first_task
-    end
+    new_routine = routines.create!(routine_params)
+    new_routine.make_first_task
   end
 
   # 取得していない称号の条件を1つ1つ確認し、条件を満たしていれば取得する処理
@@ -78,6 +76,16 @@ class User < ApplicationRecord
   # 次のレベルまでに必要な経験値
   def exp_to_next_level
     cal_exp_to_level_up - user_tag_experiences.total_experience_points
+  end
+
+  # exp_log = { "tag_id": exp, ... }
+  def get_experiences(exp_log)
+    exp_log.each do |tag_id, exp|
+      user_tag_experiences.create!(
+        tag_id:           tag_id.to_i,
+        experience_point: exp
+      )
+    end
   end
 
   # lineアカウントと連携しているか

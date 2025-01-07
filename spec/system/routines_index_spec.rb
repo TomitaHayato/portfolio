@@ -61,6 +61,10 @@ RSpec.describe "Routines#index", type: :system, js: true do
 
       describe '1clickでルーティンを作成する機能' do
         let!(:quick_routine_template) { create(:quick_routine_template, user: user) }
+        
+        before do
+          create(:tag, name: "日課")
+        end
 
         it 'ルーティンを1clickで作成できる' do
           routine_size_prev = user.routines.count

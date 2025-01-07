@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update]
   resources :my_pages       , only: %i[index]
   resources :rewards        , only: %i[index]
+  resources :quick_routine_templates, only: %i[update]
 
   get    'login',            to: 'user_sessions#new'
   post   'login',            to: 'user_sessions#create'

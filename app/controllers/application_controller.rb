@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 
   # routines/playsコントローラで生成したsessionを削除
   def playing_task_sesison_reset
-    session[:playing_task_num] = nil if session[:playing_task_num]
-    session[:experiene_log]    = nil if session[:experiene_log]
+    session[:task_index] = nil if session[:task_index]
+    session[:exp_log]    = nil if session[:exp_log]
   end
 
   def guest_block

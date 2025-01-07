@@ -1,5 +1,9 @@
 <button class="btn bg-gradient-to-tl from-emerald-200 to-emerald-50 w-full text-center" onclick="task_form.showModal()"><span class="text-blue-500">＋</span>タスクを追加</button>
 <dialog id="task_form" class="modal">
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+
   <div class="modal-box">
     <%= render "routines/task_form", task: task, routine: routine, tags: tags %>
     <div class="modal-action mt-0">

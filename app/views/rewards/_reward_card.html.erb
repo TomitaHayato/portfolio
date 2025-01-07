@@ -7,17 +7,10 @@
       </button>
     <% end %> 
   </figure>
-  
+
   <!-- 称号タイトル -->
   <div class="card-body items-center text-center p-2">
-    <div class="tooltip tooltip-primary" data-tip="clickでプロフィールに設定">
-      <%= button_to users_feature_reward_path(current_user), { method: :patch, params: { user: { feature_reward_id: reward.id } } } do %>
-        <h2 class="text-reward-custom text-lg-custom flex items-center">
-          <i class="<%= feature_icon_class(reward, feature_reward) %>"></i>
-          <%= reward.name %>
-        </h2>
-      <% end %>
-    </div>
+    <%= render 'rewards/reward_title', reward: reward %>
   </div>
 </div>
 
