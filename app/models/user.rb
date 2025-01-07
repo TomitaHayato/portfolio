@@ -80,6 +80,16 @@ class User < ApplicationRecord
     cal_exp_to_level_up - user_tag_experiences.total_experience_points
   end
 
+  # exp_log = { "tag_id": exp, ... }
+  def get_experiences(exp_log)
+    exp_log.each do |tag_id, exp|
+      user_tag_experiences.create!(
+        tag_id:           tag_id.to_i,
+        experience_point: exp
+      )
+    end
+  end
+
   # lineアカウントと連携しているか
   def link_line?
     !authentications.where(provider: 'line').empty?
