@@ -1,10 +1,6 @@
 class QuickRoutineTemplatesController < ApplicationController
   before_action :is_create_template
 
-  def edit
-    @quick_routine_template = current_user.quick_routine_template
-  end
-
   def update
     @quick_routine_template = current_user.quick_routine_template
 
