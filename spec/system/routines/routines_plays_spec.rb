@@ -102,7 +102,7 @@ RSpec.describe "Routines::Plays", type: :system, js: true do
       end
 
       it 'routine_finishes_pathに遷移' do
-        expect(page).to have_current_path(routine_finishes_path)
+        expect(page).to have_current_path(routine_finishes_path(routine))
       end
 
       describe 'Header/Footerのテスト' do
