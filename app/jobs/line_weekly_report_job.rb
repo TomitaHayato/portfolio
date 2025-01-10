@@ -11,11 +11,11 @@ class LineWeeklyReportJob < ApplicationJob
     achieve_routines_size = achieve_records.size # ルーティン達成数
     routine_titles        = achieve_records.pluck(:routine_title) # 達成したルーティンのタイトル一覧
 
-    text = "今週の週間レポートです！\n\n"
-      + "獲得経験値： #{total_exps}\n\n"
-      + "　　達成数： #{achieve_routines_size}\n"
-      + make_routine_titles_str(routine_titles)
-      + "来週も頑張りましょう！！"
+    text =  "今週の週間レポートです！\n\n"
+    text << "獲得経験値： #{total_exps}\n"
+    text << "　　達成数： #{achieve_routines_size}\n\n"
+    text << make_routine_titles_str(routine_titles)
+    text << "\n来週も頑張りましょう！！"
 
     uid  = user.authentications.find_by(provider: 'line').uid
 

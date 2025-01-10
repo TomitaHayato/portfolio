@@ -139,15 +139,11 @@
  </tr>
  <tr>
   <td>フレームワーク</td>
-  <td>RubyonRails ver7.1</td>
+  <td>RubyonRails ver7.0</td>
  </tr>
  <tr>
   <td>インフラ</td>
-  <td>Heroku, AWS S3, Redis(Heroku addon), PostgresSQL(Heroku addon)</td>
- </tr>
- <tr>
-  <td>その他の使用技術</td>
-  <td>docker git github</td>
+  <td>Heroku, AWS S3, Redis(Heroku addon)</td>
  </tr>
  <tr>
   <td>認証</td>
@@ -157,8 +153,16 @@
   <td>テスト</td>
   <td>rspec, rubocop</td>
  </tr>
+ <tr>
+  <td>バッチ処理</td>
+  <td>sidekiq</td>
+ </tr>
+ <tr>
+  <td>その他の使用技術</td>
+  <td>docker git github</td>
+ </tr>
 </table>
 
-■ ER図(MVP時点)
+■ ER図
 ---
 <img src="https://i.gyazo.com/1df4fe72dc925df221f6b69bb707c86e.png">
