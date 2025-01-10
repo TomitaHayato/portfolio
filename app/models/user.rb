@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :reset_password_token,  uniqueness:   true    , allow_nil:  true
 
   enum role:         { admin: 0, general: 1, guest: 2 }
-  enum notification: { off:   0, line:    1, email: 2  }
+  enum notification: { off:   0, line:    1, email: 2 }
 
   def add_complete_routines_count
     self.complete_routines_count += 1
