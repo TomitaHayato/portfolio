@@ -12,7 +12,7 @@ class WeeklyReportJob < ApplicationJob
 
           LineWeeklyReportJob.perform_later(user, now)
         elsif user.email?
-          # WeeklyReportMailer.with(user:).notify_email.deliver_later
+          WeeklyReportMailer.with(user:, now:).notify_email.deliver_later
         end
       end
     rescue StandardError => e

@@ -5,10 +5,11 @@ class LineWeeklyReportJob < ApplicationJob
   include LineTextPushRequest
 
   def perform(user, now)
-    total_exps            = user.user_tag_experiences.weekly(now).pluck(:experience_point).sum # 獲得経験値の合計, N+1
-    achieve_records       = user.achieve_records
-    achieve_routines_size = achive_records.size # ルーティン達成数
-    routine_titles        = achive_records.pluck(:routine_title) # 達成したルーティンのタイトル一覧
+    # whereで絞り込んでいるため、weeklyの処理でN+1問題
+    total_exps            = user.user_tag_experiences.weekly(now).pluck(:experience_point).sum # 獲得経験値の合計
+    achieve_records       = user.achieve_records.weekly(now)
+    achieve_routines_size = achieve_records.size # ルーティン達成数
+    routine_titles        = achieve_records.pluck(:routine_title) # 達成したルーティンのタイトル一覧
 
     text = "今週の週間レポートです！\n\n"
       + "獲得経験値： #{total_exps}\n\n"
