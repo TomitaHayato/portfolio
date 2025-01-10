@@ -4,6 +4,9 @@ class Routines::FinishesController < ApplicationController
 
   def index
     current_user.add_complete_routines_count
+    # AchievedRecordに追加
+    routine = Routine.find(params[:routine_id])
+    current_user.achieve_records.create!(routine_id: routine.id, routine_title: routine.title)
 
     # 経験値情報をuser_tag_experiencesテーブルに保存
     current_user.get_experiences(session[:exp_log])
