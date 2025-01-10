@@ -15,8 +15,7 @@ class SetNotificationJob < ApplicationJob
         when 'line'
           next unless user.link_line? # UserがLineを介して登録していない場合はスキップ
 
-          uid = user.authentications.find_by(provider: 'line').uid
-          LineNotificationJob.perform_later(uid)
+          LineNotificationJob.perform_later(user)
         when 'email'
           NotificationMailer.with(user:).notify_email.deliver_later
         end
