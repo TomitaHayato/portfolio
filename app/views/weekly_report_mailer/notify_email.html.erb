@@ -1,0 +1,24 @@
+<p><%= @user.name %>さん、お疲れ様です♪</p>
+
+<p>今週の週間レポートをお届けします！</p>
+
+<hr>
+
+<p>
+「獲得経験値の合計： <%= @total_exp %>」
+</p>
+
+<p>
+  「ルーティン達成数： <%= @achieve_routines_size %>」
+</p>
+
+<p>取り組んだルーティン一覧</p>
+<ul>
+  <% @routine_titles.each do |title| %>
+    <li><%= title %></li>
+  <% end %>
+</ul>
+
+<hr>
+
+<p>来週も朝活頑張りましょう！！</p>

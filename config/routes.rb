@@ -23,16 +23,16 @@ Rails.application.routes.draw do
   post   'linebot/callback', to: 'linebots#callback'
 
   resources :routines, only: %i[index new show create update destroy] do
-    resources :tasks , only: %i[create update destroy], shallow: true
-    resources :copies, only: %i[create]               , module: :routines
-    resources :plays , only: %i[create update show]   , param: :routine_id, module: :routines, shallow: true
+    resources :tasks   , only: %i[create update destroy], shallow: true
+    resources :copies  , only: %i[create]               , module: :routines
+    resources :plays   , only: %i[create update show]   , module: :routines, param: :routine_id, shallow: true
+    resources :finishes, only: %i[index]                , module: :routines
   end
 
   # URLが"routines/**"の形式では、RoutinesコントローラのshowアクションのURLとして認識されてしまうため、pathオプションを"routine"に指定
   namespace :routines, path: 'routine' do
     resources :actives      , only: %i[update]        , param: :routine_id
     resources :posts        , only: %i[index update]  , param: :routine_id
-    resources :finishes     , only: %i[index]
     resources :likes        , only: %i[create destroy], param: :routine_id
     resources :quick_creates, only: %i[create]
   end

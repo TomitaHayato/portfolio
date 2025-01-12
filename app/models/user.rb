@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many   :authentications        , dependent: :destroy
   has_many   :user_rewards           , dependent: :destroy
   has_many   :rewards                , through:   :user_rewards
+  has_many   :achieve_records        , dependent: :destroy
   has_one    :quick_routine_template , dependent: :destroy
   belongs_to :feature_reward         , class_name: 'Reward', optional: true, inverse_of: 'featuring_users'
 
@@ -26,7 +27,7 @@ class User < ApplicationRecord
   validates :reset_password_token,  uniqueness:   true    , allow_nil:  true
 
   enum role:         { admin: 0, general: 1, guest: 2 }
-  enum notification: { off:   0, line:    1, email: 2  }
+  enum notification: { off:   0, line:    1, email: 2 }
 
   def add_complete_routines_count
     self.complete_routines_count += 1

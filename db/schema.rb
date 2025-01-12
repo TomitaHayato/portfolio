@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_03_020626) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_10_130856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achieve_records", force: :cascade do |t|
+    t.string "routine_title", null: false
+    t.bigint "user_id", null: false
+    t.bigint "routine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["routine_id"], name: "index_achieve_records_on_routine_id"
+    t.index ["user_id"], name: "index_achieve_records_on_user_id"
+  end
 
   create_table "authentications", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -145,6 +155,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_03_020626) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "achieve_records", "routines"
+  add_foreign_key "achieve_records", "users"
   add_foreign_key "likes", "routines"
   add_foreign_key "likes", "users"
   add_foreign_key "quick_routine_templates", "users"

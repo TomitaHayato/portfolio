@@ -1,6 +1,10 @@
 :scheduler:
   :schedule:
     set_notification_job:
-      cron: '0 * * * * *'  # 1分ごとに実行
+      cron: '* * * * *'  # 1分ごとに実行
       class: SetNotificationJob
+      queue: default
+    weekly_report_job:
+      cron: '0 20 * * 0'  # 毎週日曜日の20時に実行
+      class: WeeklyReportJob
       queue: default

@@ -1,0 +1,14 @@
+<%= @user.name %>さん、お疲れ様です♪
+
+今週の週間レポートをお届けします！
+
+「獲得経験値の合計： <%= @total_exp %>」
+
+「ルーティン達成数： <%= @achieve_routines_size %>」
+
+取り組んだルーティン一覧
+<% @routine_titles.each do |title| %>
+  ・<%= title %>
+<% end %>
+
+来週も朝活頑張りましょう！！

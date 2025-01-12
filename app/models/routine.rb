@@ -5,6 +5,7 @@ class Routine < ApplicationRecord
   has_many   :tasks, -> { order(position: :asc) }, dependent: :destroy, inverse_of: 'routine'
   has_many   :likes                              , dependent: :destroy
   has_many   :liked_users                        , through:   :likes  , source: :user
+  has_many   :achieve_records                    , dependent: :nullify
 
   validates :title      , length: { maximum: 25  }, presence: true
   validates :description, length: { maximum: 500 }

@@ -50,18 +50,6 @@ RSpec.describe "GuestLogins", type: :system, js: true do
       expect(page).to have_content('ゲストユーザー様はご利用できません')
       expect(page).to have_selector("#post-btn-#{routine.id}")
     end
-
-    it '投稿をコピーできない' do
-      user_other     = create(:user, :for_system_spec)
-      posted_routine = create(:routine, user: user_other, is_posted: true)
-
-      visit routines_posts_path
-      expect(page).to have_current_path(routines_posts_path)
-
-      click_on "copy-btn-#{posted_routine.id}"
-      expect(page).to have_current_path(routines_posts_path)
-      expect(page).to have_content('ゲストユーザー様はご利用できません')
-    end
   end
 
   describe 'ログアウト処理' do

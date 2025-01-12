@@ -20,7 +20,7 @@ class Routines::PlaysController < ApplicationController
 
     if session[:task_index] >= @tasks.size
       @routine.complete_count
-      redirect_to routines_finishes_path
+      redirect_to routine_finishes_path
     else
       set_task_and_turbo_options
       render :show
