@@ -15,13 +15,14 @@ class UserTagExperience < ApplicationRecord
   end
 
   # { tag.name: exp }の形式のハッシュを作成
-  def self.make_tag_point_hash
-    tag_point_hash = {}
+  def self.make_tag_point_hash(empty_exp_hash)
+    tag_point_hash = empty_exp_hash.dup # 浅いコピー
+
     find_each do |user_tag_experience|
-      tag_name = user_tag_experience.tag.name
-      tag_point_hash[tag_name] ||= 0
-      tag_point_hash[tag_name] +=  user_tag_experience.experience_point
+      tag_name                  = user_tag_experience.tag.name
+      tag_point_hash[tag_name] += user_tag_experience.experience_point
     end
+
     tag_point_hash.sort_by { |_, val| -val }.to_h
   end
 end
