@@ -15,6 +15,10 @@ ja:
           admin: 管理者
           general: 一般ユーザー
           guest: ゲストユーザー
+        notifications:
+          "off": 通知オフ
+          line:  LINE
+          email: メール
       routine:
         title: タイトル
         description: 説明文

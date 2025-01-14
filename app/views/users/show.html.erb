@@ -34,8 +34,18 @@
     </div>
 
     <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
+      <p class="flex-none font-medium">レベル:</p>
+      <p class="font-semibold"><%= current_user.level %></p>
+    </div>
+    
+    <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
       <p class="flex-none font-medium">ルーティン達成回数:</p>
       <p class="font-semibold"><%= current_user.complete_routines_count %></p>
+    </div>
+
+    <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
+      <p class="flex-none font-medium">通知設定:</p>
+      <p class="font-semibold"><%= I18n.t("activerecord.attributes.user.notifications.#{current_user.notification}") %></p>
     </div>
   </div>
 
