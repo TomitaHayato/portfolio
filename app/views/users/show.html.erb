@@ -12,7 +12,7 @@
 
 <h1 class="page-title-custom">プロフィール</h1>
 
-<div class="bg-white/40 rounded-lg w-11/12 mx-auto px-5 py-1 border border-sky-300 sm:w-9/12 sm:px-10 lg:w-8/12">
+<div class="bg-green-50/40 rounded-lg w-11/12 mx-auto p-5 mb-5 sm:mb-10 border border-sky-300 sm:w-9/12 sm:px-10 lg:w-8/12">
   <div class="mb-3 mx-auto text-center">
     <div class="avatar">
       <div class="w-48 rounded-full">
@@ -37,7 +37,7 @@
       <p class="flex-none font-medium">レベル:</p>
       <p class="font-semibold"><%= current_user.level %></p>
     </div>
-    
+
     <div class="mb-3 flex flex-row gap-2 items-center md:gap-4 sm:justify-center">
       <p class="flex-none font-medium">ルーティン達成回数:</p>
       <p class="font-semibold"><%= current_user.complete_routines_count %></p>
@@ -52,4 +52,10 @@
   <div class="text-center mb-3">
     <%= link_to "プロフィールを編集", edit_user_path(current_user), class: "btn-md-custom btn-edit-custom" %>
   </div>
+</div>
+
+<div class="bg-green-50/40 rounded-lg w-11/12 mx-auto p-5 border border-emerald-300 sm:w-9/12 sm:px-10 lg:w-8/12">
+  <h3 class="text-center text-title-custom border-0 mb-5">週間レポート</h3>
+
+  <%= render 'users/achieve_records', achieve_records: @achieve_records, routine_ids: @routine_ids %>
 </div>

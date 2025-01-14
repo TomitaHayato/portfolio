@@ -1,0 +1,22 @@
+<div id="weekly-report">
+  <div class="mb-3 sm:mb-5">
+    <p>
+      ルーティン達成数
+      <span class="px-1 text-green-600 font-semibold"><%= achieve_records.size %></span>
+      回
+    </p>
+  </div>
+
+  <div>
+    <h3 class="font-medium text-lg-custom mb-2">達成したルーティン一覧</h3>
+    <ul>
+      <% achieve_records.each do |record| %>
+        <li class="mb-1 text-md-custom">
+          <%= routine_ids.include?(record.routine_id) ?
+            link_to(record.routine_title, routine_path(record.routine_id), class: "link-text-custom hover:scale-105") :
+            record.routine_title %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
