@@ -10,20 +10,20 @@
 
     <%= f.label :avatar, "アイコン", class: "mb-2 text-plane-custom font-semibold" %>
     <%= f.file_field :avatar,
-      class: "block file-input file-input-xs md:file-input-sm file-input-bordered file-input-success mx-auto text-sm w-8/12 lg:w-1/2 hover:scale-105",
+      class:  "block file-input file-input-xs md:file-input-sm file-input-bordered file-input-success mx-auto text-sm w-8/12 lg:w-1/2 hover:scale-105",
       accept: "image/jpeg, image/jpg, image/png, image/png"
     %>
     <%= f.hidden_field :avatar_cache %>
   </div>
 
   <div class="mb-3">
-    <%= f.label :name, "ユーザー名", class: "mb-2 text-plane-custom font-semibold" %>
-    <%= f.text_field :name, class: "block input-form-custom mx-auto min-w-60 sm:min-w-80 lg:min-w-[500px]", placeholder: "ユーザー名"%>
+    <%= f.label      :name, "ユーザー名", class: "mb-2 text-plane-custom font-semibold" %>
+    <%= f.text_field :name              , class: "block input-form-custom mx-auto min-w-60 sm:min-w-80 lg:min-w-[500px]", placeholder: "ユーザー名"%>
   </div>
 
   <div class=" mb-5">
-    <%= f.label :email, "メールアドレス", class: "mb-2 text-plane-custom font-semibold" %>
-    <%= f.email_field :email, class:"block input-form-custom mx-auto min-w-60 sm:min-w-80 lg:min-w-[500px]", placeholder: "メールアドレス" %>
+    <%= f.label       :email, "メールアドレス", class: "mb-2 text-plane-custom font-semibold" %>
+    <%= f.email_field :email                  , class: "block input-form-custom mx-auto min-w-60 sm:min-w-80 lg:min-w-[500px]", placeholder: "メールアドレス" %>
   </div>
 
   <%= f.submit nil, class:"btn-xl-custom btn-create-custom w-4/12" %>

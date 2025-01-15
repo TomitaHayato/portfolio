@@ -14,7 +14,9 @@
           <span class="text-red-500">*</span>
           お名前
         <% end %>
-        <%= f.text_field :name, value: @user&.name || '', class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
+        <%= f.text_field :name,
+          value: @user&.name || '',
+          class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
       </div>
 
       <div class="mb-5">
@@ -22,7 +24,9 @@
           <span class="text-red-500">*</span>
           メールアドレス
         <% end %>
-        <%= f.email_field :email, value: @user&.email || '', class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
+        <%= f.email_field :email,
+          value: @user&.email || '',
+          class: "input input-bordered input-sm w-8/12 lg:w-1/2" %>
       </div>
 
       <div class="mb-5">
@@ -30,7 +34,10 @@
           <span class="text-red-500">*</span>
           件名
         <% end %>
-        <%= f.select :subject, @subjects_array.map { |key| [ I18n.t("activerecord.attributes.contact.subjects.#{key}"), key] }, {}, { class: "select select-bordered select-sm w-8/12 lg:w-1/2" } %>
+        <%= f.select :subject,
+          @subjects_array.map { |key| [ I18n.t("activerecord.attributes.contact.subjects.#{key}"), key] },
+          {},
+          { class: "select select-bordered select-sm w-8/12 lg:w-1/2" } %>
       </div>
 
       <div class="mb-5">
@@ -38,7 +45,8 @@
           <span class="text-red-500">*</span>
           お問い合わせ内容
         <% end %>
-        <%= f.text_area :message, class: "textarea textarea-bordered textarea-sm min-h-32 w-8/12 lg:w-1/2" %>
+        <%= f.text_area :message,
+          class: "textarea textarea-bordered textarea-sm min-h-32 w-8/12 lg:w-1/2" %>
       </div>
 
       <div class="mb-5">
@@ -60,7 +68,9 @@
         </div>     
       </div>
 
-      <%= f.submit '送信', data: { turbo_confirm: "お問い合わせ内容を送信しますか？" }, class: "btn btn-wide btn-success" %>
+      <%= f.submit '送信',
+        data: { turbo_confirm: "お問い合わせ内容を送信しますか？" },
+        class: "btn btn-wide btn-success" %>
     <% end %>
   </div>
 

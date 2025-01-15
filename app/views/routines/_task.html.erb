@@ -60,8 +60,8 @@
 
       <% unless request.path == routines_path %>
         <span class="flex justify-end gap-1 sm:gap-3">
-          <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class:"btn-sm-custom btn-show-custom ", id: "move-higher-btn-#{task.id}" %>
-          <%= link_to "↓", tasks_move_lower_path(task), data: { turbo_method: :patch }, class:"btn-sm-custom btn-show-custom", id: "move-lower-btn-#{task.id}" %>
+          <%= link_to "↑", tasks_move_higher_path(task), data: { turbo_method: :patch }, class: "btn-sm-custom btn-show-custom", id: "move-higher-btn-#{task.id}" %>
+          <%= link_to "↓", tasks_move_lower_path(task) , data: { turbo_method: :patch }, class: "btn-sm-custom btn-show-custom", id: "move-lower-btn-#{task.id}" %>
         </span>
       <% end %>
     

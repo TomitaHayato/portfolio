@@ -25,8 +25,8 @@
         <div class="text-plane-custom">
           <p>並び替え</p>
           <div class="flex flex-wrap gap-1">
-            <%= f.select :column, @order_list, { selected: @column }, class: "sort-select-box sort-box-custom" %>
-            <%= f.select :direction, [['降順', nil], ['昇順', 'asc']], { selected: @direction }, class: "sort-select-box sort-box-custom" %>
+            <%= f.select :column   , @order_list                          , { selected: @column }   , class: "sort-select-box sort-box-custom" %>
+            <%= f.select :direction, [['降順', nil], ['昇順', 'asc']]     , { selected: @direction }, class: "sort-select-box sort-box-custom" %>
           </div>
         </div>
 
