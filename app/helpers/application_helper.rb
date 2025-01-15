@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # ----------- CSSクラスに関するヘルパー ---------------------------------------------
   def flash_type_class(type)
     case type.to_s
     when 'notice' then 'bg-green-400'
@@ -14,7 +15,6 @@ module ApplicationHelper
     end
   end
 
-  # ----------- CSSクラスに関するヘルパー ---------------------------------------------
   def bg_image_class
     current_user ? "min-h-screen bg-repeat-y bg-[url('morning_phone.jpg')]  lg:bg-[url('morning_pc.jpg')]" : ''
   end
@@ -35,6 +35,7 @@ module ApplicationHelper
   end
   # --------------------------------------------------------
 
+  # Task作成・編集フォームに割り振るID
   def task_form_id(task)
     task.id.nil? ? 'new' : task.id.to_s
   end
@@ -42,5 +43,18 @@ module ApplicationHelper
   # ログインしているか否かでルートページへのパスを返す
   def root_page
     current_user ? my_pages_path : root_path
+  end
+
+  # 秒数をHH:MM:SS形式に変更
+  def sec_to_hms(sec)
+    hour, sec = sec.divmod(3600)
+    min , sec = sec.divmod(60)
+
+    hms  = []
+    hms << "#{hour}時間" if hour > 0
+    hms << "#{min}分"    if  min > 0
+    hms << "#{sec}秒"
+
+    hms.join(' ')
   end
 end

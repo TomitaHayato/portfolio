@@ -10,6 +10,7 @@ class Routines::PlaysController < ApplicationController
   def create
     session[:task_index] = 0  # 次に実行するtaskの順番を管理
     session[:exp_log]    = {} # どのタグの経験値をどのくらい獲得したのかを管理: {tag_id: exp}
+    session[:start_time] = Time.current
 
     redirect_to play_path(params[:routine_id])
   end
@@ -44,7 +45,7 @@ class Routines::PlaysController < ApplicationController
 
   # createアクションを介さないアクセスを拒否
   def block_if_no_session
-    redirect_to my_pages_path, alert: 'ページに遷移できませんでした' if session[:task_index].nil?
+    redirect_to my_pages_path, alert: 'ページに遷移できませんでした' if session[:task_index].nil? || session[:exp_log].nil? || session[:start_time].nil?
   end
 
   # タグidと達成した回数を経験値管理ハッシュに格納する

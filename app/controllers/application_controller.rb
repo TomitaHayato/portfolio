@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   def playing_task_sesison_reset
     session[:task_index] = nil if session[:task_index]
     session[:exp_log]    = nil if session[:exp_log]
+    session[:start_time] = nil if session[:start_time]
   end
 
   def guest_block

@@ -3,6 +3,9 @@ class Routines::FinishesController < ApplicationController
   before_action      :block_if_no_session
 
   def index
+    # ルーティン完了までの時間（秒）
+    @playing_seconds = (Time.current - session[:start_time]).to_i
+
     current_user.add_complete_routines_count
     # AchievedRecordに追加
     routine = Routine.find(params[:routine_id])
