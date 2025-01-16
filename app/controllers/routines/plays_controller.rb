@@ -10,7 +10,7 @@ class Routines::PlaysController < ApplicationController
   def create
     session[:task_index] = 0  # 次に実行するtaskの順番を管理
     session[:exp_log]    = {} # どのタグの経験値をどのくらい獲得したのかを管理: {tag_id: exp}
-    session[:start_time] = Time.current
+    session[:start_time] = Time.current.to_i
 
     redirect_to play_path(params[:routine_id])
   end

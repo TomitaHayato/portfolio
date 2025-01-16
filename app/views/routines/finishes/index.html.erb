@@ -16,6 +16,12 @@
         <span class="text-blue-500 text-base font-bold sm:text-lg md:text-xl"><%= current_user.complete_routines_count %></span>
       </p>
 
+      <div class="mb-3 text-center">
+        <p class="text-title-custom">取り組み時間: </p>
+        <p><%= sec_to_hms(@playing_seconds) %></p>
+      </div>
+
+
       <p class="text-title-custom">獲得経験値:</p>
       <% @tag_point_hash.each do |name, point| %>
         <p class="my-1 md:my-3" id="experience-<%= name %>">

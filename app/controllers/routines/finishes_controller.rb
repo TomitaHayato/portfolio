@@ -4,7 +4,7 @@ class Routines::FinishesController < ApplicationController
 
   def index
     # ルーティン完了までの時間（秒）
-    @playing_seconds = (Time.current - session[:start_time]).to_i
+    @playing_seconds = (Time.current.to_i - session[:start_time])
 
     current_user.add_complete_routines_count
     # AchievedRecordに追加
