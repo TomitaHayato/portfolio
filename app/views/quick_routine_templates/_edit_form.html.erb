@@ -1,7 +1,7 @@
 <div class="border border-green-500 rounded-lg shadow-lg p-5" id="quick-routine-template-edit-form">
   <div class="text-center mb-5">
     <h3 class="text-lg-custom">ルーティンテンプレート編集</h3>
-    <p class="text-gray-700 text-sm-custom">1clickで作成するルーティンの情報を変更できます</p>
+    <p  class="text-sm-custom text-gray-700">1clickで作成するルーティンの情報を変更できます</p>
   </div>
 
   <%= form_with model: quick_routine_template do |f| %>
@@ -15,7 +15,7 @@
 
     <!-- descriptionフォーム -->
     <div class="mb-3 text-plane-custom">
-      <%= f.label :description, '説明文：' %>
+      <%= f.label     :description, '説明文：' %>
       <%= f.text_area :description, placeholder: "説明文（任意）", class: "textarea-sm-custom w-full text-[10px] sm:text-sm" %>
     </div>
 

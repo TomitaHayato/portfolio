@@ -48,7 +48,7 @@ class Routine < ApplicationRecord
   end
 
   def total_estimated_time
-    result          = second_to_time_string(all_task_estimated_time)
+    result          = second_to_hms(all_task_estimated_time)
     result[:hour]   = "0#{result[:hour]}"   if result[:hour]   < 10
     result[:minute] = "0#{result[:minute]}" if result[:minute] < 10
     result[:second] = "0#{result[:second]}" if result[:second] < 10
@@ -161,14 +161,9 @@ class Routine < ApplicationRecord
     end
   end
 
-  def second_to_time_string(time_in_second)
-    hour            = time_in_second / 3600
-    time_in_second -= hour * 3600
-
-    minute          = time_in_second / 60
-    time_in_second -= minute * 60
-
-    second          = time_in_second
+  def second_to_hms(second)
+    hour  , second = second.divmod(3600)
+    minute, second = second.divmod(60)
 
     { hour:, minute:, second: }
   end

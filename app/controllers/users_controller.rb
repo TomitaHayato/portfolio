@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[new  create]
   before_action      :guest_block  , only: %i[edit update]
 
-  def show; end
+  def show
+    @achieve_records = current_user.achieve_records.weekly(Time.current).includes(routine: :tasks)
+    @routine_ids     = current_user.routine_ids
+  end
 
   def new
     @user = User.new

@@ -1,19 +1,21 @@
 <% flash.each do |message_type, message| %>
-  <div id="flash-container" class="<%= flash_type_class(message_type) %> alert flex justify-between items-center text-white py-2 px-5 w-full text-sm md:text-base">
+  <div id="flash-container-<%= message_type %>" class="<%= flash_type_class(message_type) %> alert flex justify-between items-center text-white py-2 px-5 w-full text-sm md:text-base">
     <div class="flex gap-3 items-center">
       <i class="<%= flash_icon(message_type) %>"></i>
       <%= message %>
     </div>
 
-    <button class="btn btn-ghost btn-xs btn-circle" id="flash-close-btn">
-      <i class="i-uiw-close"></i>
+    <button class="btn btn-ghost btn-xs btn-circle">
+      <i class="i-uiw-close flash-close-btn"></i>
     </button>
   </div>
 <% end %>
 
 <!-- turbostreamで置き換え後も機能するように、scriptタグで記述 -->
 <script>
-  document.querySelector('#flash-close-btn').addEventListener('click', (e) => {
-    e.target.parentElement.parentElement.classList.add("hidden");
+  document.querySelectorAll('.flash-close-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.target.parentElement.parentElement.classList.add("hidden");
+    });
   });
 </script>

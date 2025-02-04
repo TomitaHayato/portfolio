@@ -21,7 +21,7 @@
           <td class="font-semibold text-blue-500"><%= tag_name %></td>
           <td class="font-semibold"><%= exp %></td>
           <td class="font-semibold">
-            <%= (100 * exp.to_f / tag_exp_hash.values.sum).round(1) %> %
+            <%= exp == 0 ? 0 : ((100 * exp).to_f / tag_exp_hash.values.sum).round(1) %> %
           </td>
         </tr>
       <% end %>

@@ -1,7 +1,7 @@
 <div class="p-3 mx-auto w-11/12 sm:w-9/12">
 
   <div class="text-center rounded">
-    <h1 class="mb-3 page-title-custom">ルーティンを達成しました！</h1>
+    <h1 class="page-title-custom mb-3">ルーティンを達成しました！</h1>
     <h1 class="page-title-custom font-medium">素敵な一日を!!</h1>
   </div>
 
@@ -15,6 +15,12 @@
         <span class="text-title-custom">ルーティン達成数</span><br>
         <span class="text-blue-500 text-base font-bold sm:text-lg md:text-xl"><%= current_user.complete_routines_count %></span>
       </p>
+
+      <div class="mb-3 text-center">
+        <p class="text-title-custom">取り組み時間: </p>
+        <p><%= sec_to_hms(@playing_seconds) %></p>
+      </div>
+
 
       <p class="text-title-custom">獲得経験値:</p>
       <% @tag_point_hash.each do |name, point| %>

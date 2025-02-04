@@ -10,9 +10,9 @@
     <%= render "layouts/google_tag_script" %>
 
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= csp_meta_tag   %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag    "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <link rel="manifest" href="/manifest.json">
   </head>
@@ -20,11 +20,7 @@
   <body class="h-full">
 
     <!-- Header -->
-    <% if current_user %>
-      <%= render 'shared/header' %>
-    <% else %>
-      <%= render 'shared/before_login_header' %>
-    <% end %>
+    <%= render current_user ? 'shared/header' : 'shared/before_login_header' %>
 
     <div class="<%= bg_image_class %>">
       <div class="<%= shallow_bg_class %>">
@@ -42,9 +38,7 @@
     <!-- Footer -->
     <%= render 'shared/footer' %>
 
-    <% if current_user %>
-      <%= render 'shared/nav_bottom' %>
-    <% end %>
+    <%= render 'shared/nav_bottom' if current_user %>
   </body>
 
   <script>
