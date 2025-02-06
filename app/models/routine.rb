@@ -75,13 +75,13 @@ class Routine < ApplicationRecord
     return all unless user_word
 
     user_words   = user_word.split # 入力値を空白で区切る
-    search_query = user_words.map { '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ')
-    like_values  = [] # クエリの?に入れる値の配列
+    search_query = user_words.map { '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ') # 位置指定ハンドラでSQLインジェクション対策
+    bind_params  = [] # クエリの?に入れる値の配列
     user_words.each do |word|
-      2.times { like_values << "%#{word}%" } # titleとdescriptionの2つ分
+      bind_params += ["%#{word}%", "%#{word}%"] # titleとdescriptionの2つ分
     end
 
-    where(search_query, *like_values)
+    where(search_query, *bind_params)
   end
 
   # 絞り込み処理
