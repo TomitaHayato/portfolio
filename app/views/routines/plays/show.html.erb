@@ -45,12 +45,12 @@
       <%= button_to "達成", play_path(@routine, tag_ids: @task.tag_ids),
           data: @turbo_options,
           method: :patch,
-          class: "btn-xl-custom btn-next-custom" %>
+          class: "btn-xl-custom btn-next-custom w-full" %>
 
       <%= button_to "スキップ", play_path(@routine),
           data: @turbo_options,
           method: :patch,
-          class: "btn-xl-custom btn-skip-custom" %>
+          class: "btn-xl-custom btn-skip-custom w-full" %>
     </div>
   <% end %>
 </div>
