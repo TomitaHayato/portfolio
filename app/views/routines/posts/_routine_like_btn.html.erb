@@ -1,20 +1,17 @@
 <% if liked_routine_ids.include?(routine.id) %>
   <!-- ON -->
   <div class="tooltip" data-tip="お気に入りを解除">
-    <%= link_to routines_like_path(routine), data: { turbo_method: :delete }, class: "p-2 flex justify-center items-center", id: "like-btn-on-#{routine.id}" do %>
+    <%= button_to routines_like_path(routine), method: "delete", class: "p-2 flex justify-center items-center", id: "like-btn-on-#{routine.id}" do %>
       <span class="i-uiw-heart-on bg-pink-400 icon-size-custom"></span>
     <% end %>
   </div>
-
-
 <% else %>
   <!-- Off -->
   <div class="tooltip tooltip-secondary" data-tip="お気に入りに追加">
-    <%= link_to routines_likes_path(routine_id: routine.id), data:{ turbo_method: :post }, class: "p-2 flex justify-center items-center", id: "like-btn-off-#{routine.id}" do %>
+    <%= button_to routines_likes_path(routine_id: routine.id), method: "post", class: "p-2 flex justify-center items-center", id: "like-btn-off-#{routine.id}" do %>
       <span class="i-uiw-heart-off icon-size-custom"></span>
     <% end %>
   </div>
-  
 <% end %>
 
 
