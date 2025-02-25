@@ -42,15 +42,15 @@
     </div>
 
     <div class="flex justify-center gap-2 mx-auto flex-col w-4/12">
-      <%= link_to "達成", play_path(@routine, tag_ids: @task.tag_ids),
+      <%= button_to "達成", play_path(@routine, tag_ids: @task.tag_ids),
           data: @turbo_options,
-          class: "btn-xl-custom btn-next-custom"
-      %>
+          method: :patch,
+          class: "btn-xl-custom btn-next-custom" %>
 
-      <%= link_to "スキップ", play_path(@routine),
+      <%= button_to "スキップ", play_path(@routine),
           data: @turbo_options,
-          class: "btn-xl-custom btn-skip-custom"
-      %>
+          method: :patch,
+          class: "btn-xl-custom btn-skip-custom" %>
     </div>
   <% end %>
 </div>

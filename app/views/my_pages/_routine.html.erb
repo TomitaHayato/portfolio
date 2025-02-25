@@ -57,8 +57,7 @@
 
       <% else %>
 
-        <%= link_to "スタート", routine_plays_path(routine),
-          data: { turbo_method: :post },
+        <%= button_to "スタート", routine_plays_path(routine),
           class:  "btn rounded-full mb-5 bg-gradient-to-tl from-green-400 to-green-200  shadow-lg
                   hover:from-green-400 hover:to-green-400 hover:shadow-lg w-32 h-16 
                   sm:w-36 sm:h-20 sm:text-lg md:w-40 md:h-24 md:text-xl lg:w-44 lg:h-28"
