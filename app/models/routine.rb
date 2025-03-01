@@ -78,7 +78,7 @@ class Routine < ApplicationRecord
     search_query = user_words.map { '(routines.title LIKE ? OR routines.description LIKE ?)' }.join(' AND ') # 位置指定ハンドラでSQLインジェクション対策
     bind_params  = [] # クエリの?に入れる値の配列
     user_words.each do |word|
-      safety_word = self.sanitize_sql_like(word) # 入力値をLIKE用にエスケープ処理
+      safety_word = sanitize_sql_like(word) # 入力値をLIKE用にエスケープ処理
       bind_params += ["%#{safety_word}%", "%#{safety_word}%"] # titleとdescriptionの2つ分
     end
 

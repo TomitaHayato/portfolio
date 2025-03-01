@@ -51,8 +51,8 @@ module ApplicationHelper
     min , sec = sec.divmod(60)
 
     hms  = []
-    hms << "#{hour}時間" if hour > 0
-    hms << "#{min}分"    if  min > 0
+    hms << "#{hour}時間" if hour.positive?
+    hms << "#{min}分"    if  min.positive?
     hms << "#{sec}秒"
 
     hms.join(' ')

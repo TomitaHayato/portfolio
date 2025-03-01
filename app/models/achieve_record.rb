@@ -5,5 +5,5 @@ class AchieveRecord < ApplicationRecord
   validates :routine_title, presence: true
 
   # 指定した週のデータのみを取得
-  scope :weekly, ->(now) { where(created_at: now.beginning_of_week..now.end_of_week) }
+  scope :weekly, ->(now) { where(created_at: now.all_week) }
 end

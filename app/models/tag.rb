@@ -15,7 +15,7 @@ class Tag < ApplicationRecord
   def self.make_empty_exp_hash
     empty_exp_hash = {}
 
-    all.find_each { |tag| empty_exp_hash[tag.name] = 0 }
+    find_each { |tag| empty_exp_hash[tag.name] = 0 }
 
     empty_exp_hash
   end

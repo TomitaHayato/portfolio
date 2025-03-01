@@ -38,7 +38,7 @@ class Routines::PlaysController < ApplicationController
   def set_task_and_turbo_options
     # 連打によるsession[:task_index]の肥大化に対応するため、比較は>=を使用
     @task = session[:task_index] >= @tasks.size ? @tasks.last : @tasks[session[:task_index]]
-    @turbo_options =  {}
+    @turbo_options = {}
 
     # 最後のタスクの場合は完了ページに遷移するため、turbo-frameリクエストを無効化
     @turbo_options[:turbo_frame] = '_top' if session[:task_index] >= (@tasks.size - 1)
