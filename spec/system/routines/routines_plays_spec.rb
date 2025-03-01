@@ -53,7 +53,7 @@ RSpec.describe "Routines::Plays", type: :system, js: true do
       expect(main_container).to     have_selector 'button',  text: '達成'
       expect(main_container).to     have_selector 'p'     ,  text: tag1.name
       expect(main_container).to     have_selector 'p'     ,  text: tag2.name
-      expect(main_container).to     have_selector 'a'     ,  text: 'スキップ'
+      expect(main_container).to     have_selector 'button'     ,  text: 'スキップ'
     end
 
     it '「達成」を押すと次のタスクに遷移する' do
