@@ -1,5 +1,5 @@
 class QuickRoutineTemplatesController < ApplicationController
-  before_action :is_create_template
+  before_action :create_template?
 
   def update
     @quick_routine_template = current_user.quick_routine_template
@@ -14,8 +14,8 @@ class QuickRoutineTemplatesController < ApplicationController
   end
 
   # Routineテンプレートがない場合作成
-  def is_create_template
-    return if current_user.quick_routine_template
+  def create_template?
+    return false if current_user.quick_routine_template
 
     current_user.create_quick_routine_template!
   end

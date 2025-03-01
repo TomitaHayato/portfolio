@@ -107,7 +107,7 @@ RSpec.describe "MyPages", type: :system, js:true do
             # リンク
             expect(routine_field).to have_selector "a[href='#{routine_path(routine)}']"
             expect(routine_field).to have_selector '#notification-btn'
-            expect(routine_field).to have_selector 'a'      , text: 'スタート'
+            expect(routine_field).to have_selector 'button' , text: 'スタート'
             expect(routine_field).to have_selector 'summary', text: 'タスク一覧'
           end
 
@@ -233,7 +233,7 @@ RSpec.describe "MyPages", type: :system, js:true do
         end
         
         it 'タスク遂行画面に遷移' do
-          btn = find('a', text: 'スタート')
+          btn = find('button', text: 'スタート')
           btn.click
           expect(page).to have_current_path(play_path(routine))
         end

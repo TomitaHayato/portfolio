@@ -1,7 +1,7 @@
 name: RspecTest
 on: push
 jobs:
-  rspec-test:
+  rails_CI:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Tokyo 
@@ -74,3 +74,5 @@ jobs:
       - name: Run Rspec
         run:  RAILS_ENV=test bundle exec rspec
 
+      - name: Run Rubocop
+        run:  RAILS_ENV=test bundle exec rubocop

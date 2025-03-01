@@ -50,10 +50,10 @@ RSpec.describe "Routines::Plays", type: :system, js: true do
       expect(main_container).to     have_selector 'h1',  text: task1.title
       expect(main_container).not_to have_selector 'h1',  text: task2.title
       expect(main_container).to     have_selector '#countdown-field'
-      expect(main_container).to     have_selector 'a',  text: '達成'
-      expect(main_container).to     have_selector 'p',  text: tag1.name
-      expect(main_container).to     have_selector 'p',  text: tag2.name
-      expect(main_container).to     have_selector 'a',  text: 'スキップ'
+      expect(main_container).to     have_selector 'button',  text: '達成'
+      expect(main_container).to     have_selector 'p'     ,  text: tag1.name
+      expect(main_container).to     have_selector 'p'     ,  text: tag2.name
+      expect(main_container).to     have_selector 'button'     ,  text: 'スキップ'
     end
 
     it '「達成」を押すと次のタスクに遷移する' do
@@ -63,8 +63,8 @@ RSpec.describe "Routines::Plays", type: :system, js: true do
       main_container = find('#routine-plays-view')
       expect(main_container).not_to have_selector 'h1',  text: task1.title
       expect(main_container).to     have_selector 'h1',  text: task2.title
-      expect(main_container).to     have_selector 'a',   text: '達成'
-      expect(main_container).to     have_selector 'a',   text: 'スキップ'
+      expect(main_container).to     have_selector 'button',   text: '達成'
+      expect(main_container).to     have_selector 'button',   text: 'スキップ'
       expect(main_container).to     have_selector '#countdown-field'
     end
 
@@ -75,8 +75,8 @@ RSpec.describe "Routines::Plays", type: :system, js: true do
       main_container = find('#routine-plays-view')
       expect(main_container).not_to have_selector 'h1',  text: task1.title
       expect(main_container).to     have_selector 'h1',  text: task2.title
-      expect(main_container).to     have_selector 'a',   text: '達成'
-      expect(main_container).to     have_selector 'a',   text: 'スキップ'
+      expect(main_container).to     have_selector 'button',   text: '達成'
+      expect(main_container).to     have_selector 'button',   text: 'スキップ'
       expect(main_container).to     have_selector '#countdown-field'
     end
 

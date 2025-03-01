@@ -27,9 +27,9 @@ module LineTextPushRequest
   # リクエストボディの情報を作成
   def make_request_body_json(uid, text)
     body_hash = {
-                  to:       uid,
-                  messages: [type: 'text', text: text]
-                }
+      to: uid,
+      messages: [type: 'text', text:]
+    }
 
     JSON.generate(body_hash)
   end

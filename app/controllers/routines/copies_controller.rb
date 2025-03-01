@@ -1,5 +1,4 @@
 class Routines::CopiesController < ApplicationController
-
   def create
     routine_origin = Routine.includes(tasks: :tags).find(params[:routine_id])
 
